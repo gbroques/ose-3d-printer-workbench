@@ -1,2 +1,2 @@
 """Commands for Workbench"""
-from .Registry import registry
+from .Registry import command_registry

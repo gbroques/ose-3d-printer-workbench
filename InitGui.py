@@ -19,11 +19,9 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         Executed when FreeCAD starts
         """
-        from command import registry
+        from command import command_registry
 
-        command_names = registry.get_command_names()
-
-        self.appendToolbar('3D Printer', command_names)
+        self.appendToolbar('3D Printer', command_registry.keys)
 
     def Activated(self):
         """

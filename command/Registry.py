@@ -16,19 +16,22 @@ def register():
 class CommandRegistry:
 
     def __init__(self):
-        self.commandByName = {}
+        self.commandByKey = {}
 
     def register(self, name, command):
-        """Register a command.
+        """Register a command prepending each name with a "OSE3DP" namespace.
 
         :param name: Name of command. Must be unique.
         :param command: Command instance (e.g. MyCommand())
         """
-        self.commandByName[name] = command
-        Gui.addCommand(name, command)
+        namespace = 'OSE3DP'
+        key = '{}_{}'.format(namespace, name)
+        self.commandByKey[key] = command
+        Gui.addCommand(key, command)
 
-    def get_command_names(self):
-        return self.commandByName.keys()
+    @property
+    def keys(self):
+        return self.commandByKey.keys()
 
 
-registry = register()
+command_registry = register()
