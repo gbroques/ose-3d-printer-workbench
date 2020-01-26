@@ -1,6 +1,7 @@
 import FreeCAD as App
-from init_workbench import get_resource_path
-from frame import create_frame
+
+from .frame import create_frame
+from .resources import get_resource_path
 
 
 class AddFrame:

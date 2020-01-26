@@ -37,4 +37,5 @@ class BaseCommandRegistry:
         return self.command_by_key.keys()
 
 
+# Singleton base registry
 base_registry = BaseCommandRegistry()

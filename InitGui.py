@@ -1,5 +1,5 @@
-import FreeCADGui as Gui
 import FreeCAD as App
+import FreeCADGui as Gui
 
 
 class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
@@ -8,7 +8,7 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
     """
 
     def __init__(self):
-        from init_workbench import get_resource_path
+        from ose3dprinter_workbench import get_resource_path
 
         self.__class__.MenuText = 'OSE 3D Printer'
         self.__class__.ToolTip = \
@@ -19,9 +19,9 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         Executed when FreeCAD starts
         """
-        from command import main_toolbar
+        from ose3dprinter_workbench import main_toolbar
 
-        self.appendToolbar('OSE 3D Printer', main_toolbar.keys)
+        self.appendToolbar(main_toolbar.name, main_toolbar.keys)
 
     def Activated(self):
         """

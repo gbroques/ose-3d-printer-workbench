@@ -1,6 +1,7 @@
 import FreeCAD as App
-from init_workbench import get_resource_path
-from universal_axis import create_universal_axis
+
+from .resources import get_resource_path
+from .universal_axis import create_universal_axis
 
 
 class AddUniversalAxis:
