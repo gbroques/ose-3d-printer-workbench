@@ -1,3 +1,5 @@
 import os
 
-ICON_PATH = os.path.join(os.path.dirname(__file__), 'Resources')
+
+def get_resource_path(resource_name):
+    return os.path.join(os.path.dirname(__file__), 'Resources', resource_name)

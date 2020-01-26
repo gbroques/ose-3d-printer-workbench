@@ -8,19 +8,21 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
     """
 
     def __init__(self):
-        import os
-        from InitWorkbench import ICON_PATH
+        from InitWorkbench import get_resource_path
 
         self.__class__.MenuText = 'OSE 3D Printer'
         self.__class__.ToolTip = \
             'A workbench for designing 3D printers by Open Source Ecology'
-        self.__class__.Icon = os.path.join(ICON_PATH, 'Frame.svg')
+        self.__class__.Icon = get_resource_path('Frame.svg')
 
     def Initialize(self):
         """
         Executed when FreeCAD starts
         """
-        pass
+        from AddUniversalAxis import AddUniversalAxis
+        Gui.addCommand(AddUniversalAxis.NAME, AddUniversalAxis())
+        self.commands = [AddUniversalAxis.NAME]
+        self.appendToolbar('3D Printer', self.commands)
 
     def Activated(self):
         """
