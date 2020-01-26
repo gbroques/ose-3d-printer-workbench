@@ -1,2 +1,2 @@
 """Commands for Workbench"""
-from .Registry import command_registry
+from .registries import main_toolbar

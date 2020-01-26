@@ -1,18 +1,18 @@
 import FreeCAD as App
-from InitWorkbench import get_resource_path
-from frame import create_frame
+from init_workbench import get_resource_path
+from universal_axis import create_universal_axis
 
 
-class AddFrame:
+class AddUniversalAxis:
     """
-    Command to add Frame object.
+    Command to add Universal Axis object.
     """
 
     def GetResources(self):
         return {
-            'Pixmap': get_resource_path('Frame.svg'),
-            'MenuText': 'Add Frame',
-            'ToolTip': 'Add Frame'
+            'Pixmap': get_resource_path('UniversalAxis.svg'),
+            'MenuText': 'Add Universal Axis',
+            'ToolTip': 'Add Universal Axis'
         }
 
     def Activated(self):
@@ -20,7 +20,7 @@ class AddFrame:
         if not(document):
             document = App.newDocument()
 
-        frame = create_frame(document, 'Frame')
+        universal_axis = create_universal_axis(document, 'UniversalAxis')
         document.recompute()
 
     def IsActive(self):
