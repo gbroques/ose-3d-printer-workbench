@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import FreeCADGui as Gui
 
 from .AddFrame import AddFrame
@@ -16,7 +18,7 @@ def register():
 class CommandRegistry:
 
     def __init__(self):
-        self.commandByKey = {}
+        self.commandByKey = OrderedDict()
 
     def register(self, name, command):
         """Register a command prepending each name with a "OSE3DP" namespace.
