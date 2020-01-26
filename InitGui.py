@@ -19,10 +19,11 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         Executed when FreeCAD starts
         """
-        from AddUniversalAxis import AddUniversalAxis
-        Gui.addCommand(AddUniversalAxis.NAME, AddUniversalAxis())
-        self.commands = [AddUniversalAxis.NAME]
-        self.appendToolbar('3D Printer', self.commands)
+        from command import registry
+
+        command_names = registry.get_command_names()
+
+        self.appendToolbar('3D Printer', command_names)
 
     def Activated(self):
         """

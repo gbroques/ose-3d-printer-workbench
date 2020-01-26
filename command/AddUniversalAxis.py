@@ -8,8 +8,6 @@ class AddUniversalAxis:
     Command to add Universal Axis object.
     """
 
-    NAME = 'AddUniversalAxis'
-
     def GetResources(self):
         return {
             'Pixmap': get_resource_path('UniversalAxis.svg'),
