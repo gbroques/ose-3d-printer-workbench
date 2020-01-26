@@ -8,7 +8,7 @@ base_registry = ose_3d_printer.base_registry
 
 class CommandRegistry:
     """
-    Creates new registries of commands for toolbars, menus, and context menu.
+    Registry of commands for toolbars, menus, and context menu.
     """
 
     def __init__(self, registry_name):

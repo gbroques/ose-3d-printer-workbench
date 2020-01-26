@@ -10,10 +10,11 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
     def __init__(self):
         from ose3dprinter_workbench import get_resource_path
 
-        self.__class__.MenuText = 'OSE 3D Printer'
-        self.__class__.ToolTip = \
+        cls = self.__class__
+        cls.MenuText = 'OSE 3D Printer'
+        cls.ToolTip = \
             'A workbench for designing 3D printers by Open Source Ecology'
-        self.__class__.Icon = get_resource_path('Frame.svg')
+        cls.Icon = get_resource_path('Frame.svg')
 
     def Initialize(self):
         """
