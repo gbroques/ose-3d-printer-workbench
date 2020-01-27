@@ -9,6 +9,8 @@ class AddFrame:
     Command to add Frame object.
     """
 
+    NAME = 'AddFrame'
+
     def Activated(self):
         document = App.ActiveDocument
         create_frame(document, 'Frame')

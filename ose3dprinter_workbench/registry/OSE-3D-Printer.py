@@ -2,16 +2,13 @@
 The filename where Gui.addCommand is executed,
 is used to group commands together.
 """
-
-from collections import OrderedDict
-
 import FreeCADGui as Gui
 
 
-class BaseCommandRegistry:
+class CommandRegistry:
 
     def __init__(self):
-        self.command_by_key = OrderedDict()
+        self.command_keys = []
 
     def register(self, name, command):
         """Registers command by prepending each name with a unique namespace.
@@ -20,12 +17,14 @@ class BaseCommandRegistry:
         :param command: Command instance (e.g. MyCommand())
         """
         key = self.prepend_namespace(name)
-        self.command_by_key[key] = command
+        if key in self.command_keys:
+            raise ValueError('{} is already registered.'.format(name))
+        self.command_keys.append(key)
         Gui.addCommand(key, command)
 
-    def has_name(self, name):
+    def has(self, name):
         key = self.prepend_namespace(name)
-        return key in self.command_by_key
+        return key in self.command_keys
 
     @classmethod
     def prepend_namespace(cls, name):
@@ -34,8 +33,8 @@ class BaseCommandRegistry:
 
     @property
     def keys(self):
-        return self.command_by_key.keys()
+        return self.command_keys
 
 
-# Singleton base registry
-base_registry = BaseCommandRegistry()
+# Singleton registry for commands.
+registry = CommandRegistry()

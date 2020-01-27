@@ -9,6 +9,8 @@ class AddUniversalAxis:
     Command to add Universal Axis object.
     """
 
+    NAME = 'AddUniversalAxis'
+
     def Activated(self):
         document = App.ActiveDocument
         create_universal_axis(document, 'UniversalAxis')

@@ -22,7 +22,7 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         from ose3dprinter_workbench import main_toolbar
 
-        self.appendToolbar(main_toolbar.name, main_toolbar.keys)
+        self.appendToolbar(main_toolbar.name, main_toolbar.commands)
 
     def Activated(self):
         """
