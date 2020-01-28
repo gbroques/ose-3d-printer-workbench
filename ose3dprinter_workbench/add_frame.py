@@ -13,6 +13,8 @@ class AddFrame:
 
     def Activated(self):
         document = App.ActiveDocument
+        if not document:
+            document = App.newDocument()
         create_frame(document, 'Frame')
         document.recompute()
 

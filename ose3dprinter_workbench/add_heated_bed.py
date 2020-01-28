@@ -13,6 +13,8 @@ class AddHeatedBed:
 
     def Activated(self):
         document = App.ActiveDocument
+        if not document:
+            document = App.newDocument()
         create_heated_bed(document, 'HeatedBed')
         document.recompute()
 

@@ -13,6 +13,8 @@ class AddUniversalAxis:
 
     def Activated(self):
         document = App.ActiveDocument
+        if not document:
+            document = App.newDocument()
         create_universal_axis(document, 'UniversalAxis')
         document.recompute()
 
