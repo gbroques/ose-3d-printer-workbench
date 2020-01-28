@@ -12,7 +12,7 @@ class FrameModel:
         self.Type = 'OSEFrame'
 
         # Size property
-        size_tooltip = 'Size or dimension or cubic frame.'
+        size_tooltip = 'Size or dimension of cubic frame.'
         obj.addProperty('App::PropertyLength', 'Size', 'Base', size_tooltip)
         obj.Size = 406.4
 
