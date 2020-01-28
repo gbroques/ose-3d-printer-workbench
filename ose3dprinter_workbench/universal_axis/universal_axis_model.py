@@ -69,6 +69,17 @@ class UniversalAxisModel:
         vertical_edges = list(filter(is_cube_edge_oriented_in_z_plane, motor.Edges))
         chamfered_motor = motor.makeChamfer(5, vertical_edges)
 
+        # Define dimensions of carriage box
+        carriage_box_width = 52
+        carriage_box_length = 74
+        carriage_box_dimensions = (carriage_box_width, carriage_box_length, box_height)
+
+        # Make carriage
+        carriage_box = Part.makeBox(*carriage_box_dimensions)
+        carriage_box_x = (rod_length - carriage_box_width) / 2
+        carriage_box_y = -(carriage_box_length - motor_box_length) / 2
+        carriage_box.translate(Base.Vector(carriage_box_x, carriage_box_y, 0))
+
         # Define dimensions of idler side box
         idler_box_width = 55
         idler_box_length = 66
@@ -95,6 +106,7 @@ class UniversalAxisModel:
         obj.Shape = Part.makeCompound([
             motor_side_box,
             chamfered_motor,
+            carriage_box,
             idler_side_box,
             rod1,
             rod2
