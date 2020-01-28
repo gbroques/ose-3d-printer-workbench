@@ -1,8 +1,9 @@
 from importlib import import_module
 
-package = 'ose3dprinter_workbench.registry'
-ose_3d_printer = import_module('.OSE-3D-Printer', package=package)
-registry = ose_3d_printer.registry
+command_registry = import_module(
+    '.OSE-3D-Printer',
+    package='ose3dprinter_workbench.command_registry'
+).command_registry
 
 
 class CommandCollection:
@@ -12,7 +13,7 @@ class CommandCollection:
 
     def __init__(self, collection_name):
         """
-        :param collection_name: Name of toolbar, menu, sub-menu, or context menu.
+        :param collection_name: Name of toolbar, menu, or context menu.
         """
         self.name = collection_name
         self.command_names = []
@@ -20,12 +21,10 @@ class CommandCollection:
     def add(self, name):
         if name in self.command_names:
             raise ValueError('{} already added to {}.'.format(name, self.name))
-        if not registry.has(name):
-            raise ValueError('{} must be registered first.'.format(name))
         self.command_names.append(name)
 
     @property
-    def commands(self):
+    def command_keys(self):
         names = self.command_names
-        prepend_namespace = registry.prepend_namespace
-        return list(map(prepend_namespace, names))
+        to_key = command_registry.from_command_name_to_key
+        return list(map(to_key, names))

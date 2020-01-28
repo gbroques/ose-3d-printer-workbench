@@ -23,7 +23,7 @@ class FrameModel:
         Called on document recompute
         """
         side = obj.Size.Value
-        width = 50.8
+        width = 50.8  # Width of 12" (304.8 mm) frame is 25.4 mm
         sheet_thickness = 3
 
         sheet = Part.makeBox(side, side, sheet_thickness)

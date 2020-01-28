@@ -3,7 +3,7 @@ from importlib import import_module
 
 from .command_collection import CommandCollection
 
-registry = import_module(
+command_registry = import_module(
     '.OSE-3D-Printer',
-    package='ose3dprinter_workbench.registry'
-).registry
+    package='ose3dprinter_workbench.command_registry'
+).command_registry
