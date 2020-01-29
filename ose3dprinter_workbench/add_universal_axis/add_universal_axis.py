@@ -1,7 +1,8 @@
 import FreeCAD as App
+from ose3dprinter_workbench.resources import get_resource_path
+from ose3dprinter_workbench.universal_axis import create_universal_axis
 
-from .resources import get_resource_path
-from .universal_axis import create_universal_axis
+from .attach_universal_axis_to_frame import attach_universal_axis_to_frame
 
 
 class AddUniversalAxis:
@@ -15,7 +16,8 @@ class AddUniversalAxis:
         document = App.ActiveDocument
         if not document:
             document = App.newDocument()
-        create_universal_axis(document, 'UniversalAxis')
+        kwargs = attach_universal_axis_to_frame()
+        create_universal_axis(document, 'UniversalAxis', **kwargs)
         document.recompute()
 
     def IsActive(self):

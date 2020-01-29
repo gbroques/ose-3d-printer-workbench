@@ -39,24 +39,31 @@ class FrameModel:
 
         left_wall = bottom_frame.copy()
         left_wall.rotate(Base.Vector(0, 0, 0), Base.Vector(0, -1, 0), 90)
+        left_wall.translate(Base.Vector(sheet_thickness, 0, 0))
 
         right_wall = left_wall.copy()
-        right_wall.translate(Base.Vector(side, 0, 0))
+        right_wall.translate(Base.Vector(side - sheet_thickness, 0, 0))
 
         front_wall = bottom_frame.copy()
         front_wall.rotate(Base.Vector(0, 0, 0), Base.Vector(1, 0, 0), 90)
+        front_wall.translate(Base.Vector(0, sheet_thickness, 0))
 
         rear_wall = front_wall.copy()
-        rear_wall.translate(Base.Vector(0, side, 0))
+        rear_wall.translate(Base.Vector(0, side - sheet_thickness, 0))
 
-        obj.Shape = Part.makeCompound([
+        parts = [
             bottom_frame,
-            top_frame,
             left_wall,
             right_wall,
             front_wall,
-            rear_wall
-        ])
+            rear_wall,
+            top_frame
+        ]
+
+        frame = reduce(lambda union, part: union.fuse(part), parts)
+
+        # removeSplitter() refines shape
+        obj.Shape = frame.removeSplitter()
 
     def __getstate__(self):
         return self.Type
