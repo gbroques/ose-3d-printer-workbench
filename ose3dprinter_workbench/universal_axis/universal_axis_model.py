@@ -114,30 +114,6 @@ class UniversalAxisModel:
         rod2.rotate(Vector(0, 0, 0), Vector(0, 1, 0), 90)
         rod2.translate(Vector(0, rod2_y_position, half_box_height))
 
-        # Multiply width, length, and height based orientation
-        # Need to know orientation of Universal Axis
-        motor_box_copy = motor_side_box.copy()
-        rotation = self.placement.Rotation
-        motor_box_copy.rotate(Vector(0, 0, 0), rotation.Axis, degrees(rotation.Angle))
-        first_vertex = motor_box_copy.Vertexes[0]
-        first_vertex_edges = get_vertex_edges(first_vertex, motor_box_copy.Edges)
-        num_edges = len(first_vertex_edges)
-        if num_edges != 3:
-            Console.PrintWarning('Found {} edges connected to cube vertex instead of 3.\n'.format(num_edges));
-        x = y = z = 1.0
-        for e in first_vertex_edges:
-            if is_edge_parallel_to_x_axis(e):
-                x = e.Length
-            elif is_edge_parallel_to_y_axis(e):
-                y = e.Length
-            elif is_edge_parallel_to_z_axis(e):
-                z = e.Length
-            else:
-                Console.PrintWarning('{} not parallel to x, y, or z axes\n'.format(e));
-
-        rp = self.translation_reference_point
-        reference_point_translation = Vector(x * rp.x, y * rp.y, z * rp.z)
-
         parts = [
             motor_side_box,
             chamfered_motor,
@@ -148,11 +124,14 @@ class UniversalAxisModel:
         ]
 
         base = self.placement.Base
-        reference_vector = base - reference_point_translation
+        rotation = self.placement.Rotation
+
+        translation_offset = get_translation_offset(
+            motor_side_box, rotation, self.translation_reference_point)
+        reference_vector = base - translation_offset
         for part in parts:
             part.translate(reference_vector)
             part.rotate(reference_vector, rotation.Axis, degrees(rotation.Angle))
-
         compound = Part.makeCompound(parts)
         obj.Shape = compound
 
@@ -199,3 +178,34 @@ def get_vertex_edges(vertex, edges):
             if v.isSame(vertex):
                 vertex_edges.append(e)
     return vertex_edges
+
+
+def get_translation_offset(motor_side_box,
+                           rotation,
+                           translation_reference_point):
+    motor_box_copy = motor_side_box.copy()
+    motor_box_copy.rotate(Vector(0, 0, 0), rotation.Axis,
+                          degrees(rotation.Angle))
+    first_vertex = motor_box_copy.Vertexes[0]
+    first_vertex_edges = get_vertex_edges(first_vertex, motor_box_copy.Edges)
+    num_edges = len(first_vertex_edges)
+    if num_edges != 3:
+        Console.PrintWarning(
+            'Found {} edges connected to cube vertex instead of 3.\n'.format(num_edges))
+    x = y = z = 1.0
+    for e in first_vertex_edges:
+        if is_edge_parallel_to_x_axis(e):
+            x = e.Length
+        elif is_edge_parallel_to_y_axis(e):
+            y = e.Length
+        elif is_edge_parallel_to_z_axis(e):
+            z = e.Length
+        else:
+            Console.PrintWarning(
+                '{} not parallel to x, y, or z axes\n'.format(e))
+
+    return Vector(
+        x * translation_reference_point.x,
+        y * translation_reference_point.y,
+        z * translation_reference_point.z
+    )
