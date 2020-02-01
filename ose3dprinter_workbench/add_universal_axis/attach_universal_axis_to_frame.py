@@ -1,7 +1,8 @@
-import FreeCAD as App
 import FreeCADGui as Gui
-from FreeCAD import Console, Placement, Rotation, Vector
+from FreeCAD import Console, Vector
 from Part import Face
+
+from .get_placement_strategy import get_placement_strategy
 
 
 def attach_universal_axis_to_frame():
@@ -10,7 +11,8 @@ def attach_universal_axis_to_frame():
     if frame is None and face is None:
         return {}
     if is_frame_rotated(frame):
-        Console.PrintWarning('Attaching axis to rotated frame is not supported.\n')
+        Console.PrintWarning(
+            'Attaching axis to rotated frame is not supported.\n')
         return {}
     return get_kwargs(frame, face)
 
@@ -37,7 +39,8 @@ def validate_potential_frame_face_selection(selection):
             'Selected element is not a face. Skipping attachment.\n')
         return none_tuple
     if first_selection.Object.Proxy.Type != 'OSEFrame':
-        Console.PrintMessage('Must select face on frame. Skipping attachment.\n')
+        Console.PrintMessage(
+            'Must select face on frame. Skipping attachment.\n')
         return none_tuple
     return first_selection.Object, first_sub_object
 
@@ -77,14 +80,6 @@ def get_kwargs(frame, face):
     else:
         placement_kwargs = upper(frame, face)
     return dict(length=frame.Size, **placement_kwargs)
-
-
-def get_placement_strategy(orientation):
-    return {
-        'x': (get_placement_for_left_face, get_placement_for_right_face),
-        'y': (get_placement_for_front_face, get_placement_for_rear_face),
-        'z': (get_placement_for_bottom_face, get_placement_for_top_face),
-    }[orientation]
 
 
 def get_face_closest_to_origin(frame, orientation):
@@ -133,71 +128,6 @@ def get_face_orientation(face):
         return 'z'
     Console.PrintWarning('Face not parallel to YZ, XZ, or XY plane.\n')
     return None
-
-
-def get_placement_for_left_face(frame, face):
-    x = face.Placement.Base.x
-    y = frame.Shape.BoundBox.YMax
-    z = frame.Shape.BoundBox.ZMax
-    placement = Placement(
-        Vector(x, y, z), Rotation(-90, 0, 90), Vector(0, 0, 0))
-    return {
-        'placement': placement,
-        'translation_reference_point': Vector(0, 0, 1)
-    }
-
-
-def get_placement_for_right_face(frame, face):
-    x = frame.Shape.BoundBox.XMax
-    y = frame.Shape.BoundBox.YMax
-    z = frame.Shape.BoundBox.ZMax
-    placement = Placement(
-        Vector(x, y, z), Rotation(-90, 0, -90), Vector(0, 0, 0))
-    return {
-        'placement': placement,
-        'translation_reference_point': Vector(0, 0, 0)
-    }
-
-
-def get_placement_for_front_face(frame, face):
-    x = face.CenterOfMass.x
-    y = face.Placement.Base.y
-    z = frame.Shape.BoundBox.ZMax
-    placement = Placement(
-        Vector(x, y, z), Rotation(0, 90, 90), Vector(0, 0, 0))
-    return {
-        'placement': placement,
-        'translation_reference_point': Vector(0.5, 0, 0)
-    }
-
-
-def get_placement_for_rear_face(frame, face):
-    x = face.CenterOfMass.x
-    y = frame.Shape.BoundBox.YMax
-    z = frame.Shape.BoundBox.ZMax
-    placement = Placement(
-        Vector(x, y, z), Rotation(0, 90, -90), Vector(0, 0, 0))
-    return {
-        'placement': placement,
-        'translation_reference_point': Vector(-0.5, 0, 0)
-    }
-
-
-def get_placement_for_bottom_face(frame, face):
-    Console.PrintMessage('Attaching axis to bottom face is not supported.\n')
-    return {}
-
-
-def get_placement_for_top_face(frame, face):
-    x = face.Placement.Base.x
-    y = face.CenterOfMass.y
-    z = frame.Shape.BoundBox.ZMax
-    placement = App.Placement(
-                Vector(x, y, z), frame.Placement.Rotation, Vector(0, 0, 0))
-    return {
-        'placement': placement,
-        'translation_reference_point': Vector(0, 0.5, 0)
-    }
 
 
 def is_frame_rotated(frame):
