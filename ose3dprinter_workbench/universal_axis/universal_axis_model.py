@@ -10,7 +10,7 @@ class UniversalAxisModel:
     and is separate from the "view" or GUI representation.
     """
 
-    def __init__(self, obj, length, placement, reference_point):
+    def __init__(self, obj, length, placement, translation_reference_point):
         """
         Constructor
 
@@ -20,7 +20,7 @@ class UniversalAxisModel:
         """
         self.Type = 'OSEUniversalAxis'
         self.placement = placement
-        self.reference_point = reference_point
+        self.translation_reference_point = translation_reference_point
 
         obj.Proxy = self
 
@@ -135,7 +135,7 @@ class UniversalAxisModel:
             else:
                 Console.PrintWarning('{} not parallel to x, y, or z axes\n'.format(e));
 
-        rp = self.reference_point
+        rp = self.translation_reference_point
         reference_point_translation = Vector(x * rp.x, y * rp.y, z * rp.z)
 
         parts = [

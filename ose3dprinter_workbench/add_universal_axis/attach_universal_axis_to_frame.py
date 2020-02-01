@@ -143,7 +143,7 @@ def get_placement_for_left_face(frame, face):
         Vector(x, y, z), Rotation(-90, 0, 90), Vector(0, 0, 0))
     return {
         'placement': placement,
-        'reference_point': Vector(0, 0, 1)
+        'translation_reference_point': Vector(0, 0, 1)
     }
 
 
@@ -155,7 +155,7 @@ def get_placement_for_right_face(frame, face):
         Vector(x, y, z), Rotation(-90, 0, -90), Vector(0, 0, 0))
     return {
         'placement': placement,
-        'reference_point': Vector(0, 0, 0)
+        'translation_reference_point': Vector(0, 0, 0)
     }
 
 
@@ -167,7 +167,7 @@ def get_placement_for_front_face(frame, face):
         Vector(x, y, z), Rotation(0, 90, 90), Vector(0, 0, 0))
     return {
         'placement': placement,
-        'reference_point': Vector(0.5, 0, 0)
+        'translation_reference_point': Vector(0.5, 0, 0)
     }
 
 
@@ -179,7 +179,7 @@ def get_placement_for_rear_face(frame, face):
         Vector(x, y, z), Rotation(0, 90, -90), Vector(0, 0, 0))
     return {
         'placement': placement,
-        'reference_point': Vector(-0.5, 0, 0)
+        'translation_reference_point': Vector(-0.5, 0, 0)
     }
 
 
@@ -196,7 +196,7 @@ def get_placement_for_top_face(frame, face):
                 Vector(x, y, z), frame.Placement.Rotation, Vector(0, 0, 0))
     return {
         'placement': placement,
-        'reference_point': Vector(0, 0.5, 0)
+        'translation_reference_point': Vector(0, 0.5, 0)
     }
 
 
