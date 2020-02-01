@@ -83,10 +83,10 @@ def get_kwargs(frame, face):
 
 
 def get_face_closest_to_origin(frame, orientation):
-    """Get the face closest to the origin based on origin.
+    """Get the face closest to the origin based on orientation.
 
-    For example, if the orientation is Z,
-    hen the face closest to the origin is the bottom face.
+    For example, if the orientation is z,
+    then the face closest to the origin is the bottom face.
     """
     predicate_by_orientation = {
         'x': is_face_parallel_to_yz_plane,
