@@ -31,7 +31,7 @@ def validate_potential_frame_face_selection(selection):
     first_selection = selection[0]
     if len(first_selection.SubObjects) != 1:
         Console.PrintMessage(
-            'Selected object doesn\'t have one sub object. Skipping attachment.\n')
+            'Selected object doesn\'t have a single sub object. Skipping attachment.\n')
         return none_tuple
     first_sub_object = first_selection.SubObjects[0]
     if not isinstance(first_sub_object, Face):
