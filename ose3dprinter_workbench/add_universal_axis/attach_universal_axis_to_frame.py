@@ -49,45 +49,27 @@ def validate_potential_frame_face_selection(selection):
     return frame, first_sub_object
 
 
-def is_face_parallel_to_yz_plane(face):
-    x_axis = Vector(1, 0, 0)
-    return is_face_parallel_to_plane(face, x_axis)
-
-
-def is_face_parallel_to_xz_plane(face):
-    y_axis = Vector(0, 1, 0)
-    return is_face_parallel_to_plane(face, y_axis)
-
-
-def is_face_parallel_to_xy_plane(face):
-    z_axis = Vector(0, 0, 1)
-    return is_face_parallel_to_plane(face, z_axis)
-
-
-def is_face_parallel_to_plane(face, axis_vector):
-    return axis_vector == Vector(
-        abs(round(face.Surface.Axis.x)),
-        abs(round(face.Surface.Axis.y)),
-        abs(round(face.Surface.Axis.z))
-    )
-
-
 def get_kwargs(frame, face):
     orientation = get_face_orientation(face)
     if orientation is None:
         return {}
     face_closest_to_origin = get_face_closest_to_origin(frame, orientation)
     lower, upper = get_placement_strategy(orientation)
-    placement_kwargs = None
+    placement = translation_reference_point = None
     if face.isEqual(face_closest_to_origin):
-        placement_kwargs = lower(frame, face)
+        placement, translation_reference_point = lower(frame, face)
     else:
-        placement_kwargs = upper(frame, face)
-    return dict(length=frame.Size, **placement_kwargs)
+        placement, translation_reference_point = upper(frame, face)
+    return {
+        'length': frame.Size,
+        'placement': placement,
+        'translation_reference_point': translation_reference_point
+    }
 
 
 def get_face_closest_to_origin(frame, orientation):
-    """Get the face closest to the origin based on orientation.
+    """Get the face closest to the origin based on orientation,
+    where the origin is defined as the point (0, 0, 0).
 
     For example, if the orientation is z,
     then the face closest to the origin is the bottom face.
@@ -137,3 +119,26 @@ def get_face_orientation(face):
 def is_frame_rotated(frame):
     rotation = frame.Placement.Rotation
     return rotation.Axis != Vector(0, 0, 1) or rotation.Angle != 0
+
+
+def is_face_parallel_to_yz_plane(face):
+    x_axis = Vector(1, 0, 0)
+    return is_face_parallel_to_plane(face, x_axis)
+
+
+def is_face_parallel_to_xz_plane(face):
+    y_axis = Vector(0, 1, 0)
+    return is_face_parallel_to_plane(face, y_axis)
+
+
+def is_face_parallel_to_xy_plane(face):
+    z_axis = Vector(0, 0, 1)
+    return is_face_parallel_to_plane(face, z_axis)
+
+
+def is_face_parallel_to_plane(face, axis_vector):
+    return axis_vector == Vector(
+        abs(round(face.Surface.Axis.x)),
+        abs(round(face.Surface.Axis.y)),
+        abs(round(face.Surface.Axis.z))
+    )
