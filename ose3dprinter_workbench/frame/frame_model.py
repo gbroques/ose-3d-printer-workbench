@@ -35,7 +35,7 @@ class FrameModel:
         bottom_frame = sheet.cut(inner_sheet)
 
         top_frame = bottom_frame.copy()
-        top_frame.translate(Base.Vector(0, 0, side))
+        top_frame.translate(Base.Vector(0, 0, side - sheet_thickness))
 
         left_wall = bottom_frame.copy()
         left_wall.rotate(Base.Vector(0, 0, 0), Base.Vector(0, -1, 0), 90)
