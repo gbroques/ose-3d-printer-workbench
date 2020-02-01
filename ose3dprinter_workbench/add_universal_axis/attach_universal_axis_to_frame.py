@@ -38,11 +38,15 @@ def validate_potential_frame_face_selection(selection):
         Console.PrintMessage(
             'Selected element is not a face. Skipping attachment.\n')
         return none_tuple
-    if first_selection.Object.Proxy.Type != 'OSEFrame':
-        Console.PrintMessage(
-            'Must select face on frame. Skipping attachment.\n')
+    frame = first_selection.Object
+    if frame.Proxy.Type != 'OSEFrame':
+        Console.PrintMessage('Must select frame. Skipping attachment.\n')
         return none_tuple
-    return first_selection.Object, first_sub_object
+    outer_faces = get_outer_faces_of_frame(frame)
+    if not any(map(lambda f: f.isEqual(first_sub_object), outer_faces)):
+        Console.PrintMessage('Must select outer face of frame. Skipping attachment.\n')
+        return none_tuple
+    return frame, first_sub_object
 
 
 def is_face_parallel_to_yz_plane(face):
