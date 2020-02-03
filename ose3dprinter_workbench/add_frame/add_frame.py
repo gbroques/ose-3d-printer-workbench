@@ -1,7 +1,6 @@
 import FreeCAD as App
-
-from .frame import create_frame
-from .resources import get_resource_path
+from ose3dprinter_workbench.part import create_frame
+from ose3dprinter_workbench.resources import get_resource_path
 
 
 class AddFrame:

@@ -1,6 +1,6 @@
 import FreeCAD as App
 from ose3dprinter_workbench.resources import get_resource_path
-from ose3dprinter_workbench.universal_axis import create_universal_axis
+from ose3dprinter_workbench.part import create_universal_axis
 
 from .attach_universal_axis_to_frame import attach_universal_axis_to_frame
 
