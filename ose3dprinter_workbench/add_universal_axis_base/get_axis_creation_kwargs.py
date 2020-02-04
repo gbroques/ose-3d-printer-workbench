@@ -14,11 +14,12 @@ def get_axis_creation_kwargs(selection, axis_orientation):
         selection, axis_orientation)
     if frame is None and face is None:
         return {}
-    orientation = get_face_orientation(face)
-    if orientation is None:
+    face_orientation = get_face_orientation(face)
+    if face_orientation is None:
         return {}
-    face_closest_to_origin = get_face_closest_to_origin(frame, orientation)
-    lower, upper = get_placement_strategy(orientation)
+    face_closest_to_origin = get_face_closest_to_origin(
+        frame, face_orientation)
+    lower, upper = get_placement_strategy(face_orientation)
     placement = translation_reference_point = None
     if face.isEqual(face_closest_to_origin):
         placement, translation_reference_point = lower(frame, face)
@@ -31,7 +32,7 @@ def get_axis_creation_kwargs(selection, axis_orientation):
     }
 
 
-def get_face_closest_to_origin(frame, orientation):
+def get_face_closest_to_origin(frame, face_orientation):
     """Get the face closest to the origin based on orientation,
     where the origin is defined as the point (0, 0, 0).
 
@@ -39,17 +40,23 @@ def get_face_closest_to_origin(frame, orientation):
     then the face closest to the origin is the bottom face.
     """
     is_face_parallel_to_plane = get_is_face_parallel_to_plane_predicate(
-        orientation)
+        face_orientation)
 
     outer_faces = get_outer_faces_of_frame(frame)
 
     outer_faces_parallel_to_plane = filter(
         is_face_parallel_to_plane, outer_faces)
     sorted_faces_by_position = sort_faces_by_surface_position(
-        outer_faces_parallel_to_plane, orientation)
+        outer_faces_parallel_to_plane, face_orientation)
     return sorted_faces_by_position[0]
 
 
-def sort_faces_by_surface_position(faces, orientation):
-    position_index = ['x', 'y', 'z'].index(orientation)
+def sort_faces_by_surface_position(faces, face_orientation):
+    """
+    If orientation of face is x, then sort by z
+    If orientation of face is y, then sort by x
+    If orientation of face is z, then sort by y
+    """
+    face_orientation_index = ['x', 'y', 'z'].index(face_orientation)
+    position_index = ((face_orientation_index - 1) + 3) % 3
     return sorted(faces, key=lambda f: f.Surface.Position[position_index])

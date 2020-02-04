@@ -1,15 +1,19 @@
 from FreeCAD import Console, Placement, Rotation, Vector
 
 
-def get_placement_strategy(orientation):
+def get_placement_strategy(face_orientation):
+    # TODO: Add axis orientation
     return {
         'x': (get_placement_for_bottom_face, get_placement_for_top_face),
         'y': (get_placement_for_left_face, get_placement_for_right_face),
         'z': (get_placement_for_front_face, get_placement_for_rear_face),
-    }[orientation]
+    }[face_orientation]
 
 
 def get_placement_for_left_face(frame, face):
+    """
+    Assumes Y axis
+    """
     x = face.Placement.Base.x
     y = frame.Shape.BoundBox.YMax
     z = frame.Shape.BoundBox.ZMax
@@ -20,6 +24,9 @@ def get_placement_for_left_face(frame, face):
 
 
 def get_placement_for_right_face(frame, face):
+    """
+    Assumes Y axis
+    """
     x = frame.Shape.BoundBox.XMax
     y = frame.Shape.BoundBox.YMax
     z = frame.Shape.BoundBox.ZMax
@@ -30,6 +37,9 @@ def get_placement_for_right_face(frame, face):
 
 
 def get_placement_for_front_face(frame, face):
+    """
+    Assumes Z axis
+    """
     x = face.CenterOfMass.x
     y = face.Placement.Base.y
     z = frame.Shape.BoundBox.ZMax
@@ -40,6 +50,9 @@ def get_placement_for_front_face(frame, face):
 
 
 def get_placement_for_rear_face(frame, face):
+    """
+    Assumes Z axis
+    """
     x = face.CenterOfMass.x
     y = frame.Shape.BoundBox.YMax
     z = frame.Shape.BoundBox.ZMax
@@ -57,6 +70,9 @@ def get_placement_for_bottom_face(frame, face):
 
 
 def get_placement_for_top_face(frame, face):
+    """
+    Assumes X axis
+    """
     x = face.Placement.Base.x
     y = face.CenterOfMass.y
     z = frame.Shape.BoundBox.ZMax
