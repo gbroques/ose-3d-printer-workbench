@@ -29,7 +29,6 @@ def get_placement_for_right_face(frame, face):
     return placement, translation_reference_point
 
 
-
 def get_placement_for_front_face(frame, face):
     x = face.CenterOfMass.x
     y = face.Placement.Base.y

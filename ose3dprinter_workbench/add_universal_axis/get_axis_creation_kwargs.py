@@ -1,55 +1,18 @@
-import FreeCADGui as Gui
 from FreeCAD import Console, Vector
-from Part import Face
 
+from .get_outer_faces_of_frame import get_outer_faces_of_frame
 from .get_placement_strategy import get_placement_strategy
+from .validate_frame_face_selection import get_frame_and_face_from_selection
 
 
-def attach_universal_axis_to_frame():
-    selection = Gui.Selection.getSelectionEx()
-    frame, face = validate_potential_frame_face_selection(selection)
+def get_axis_creation_kwargs(selection):
+    """
+    Get the length, placement, and translation reference point for
+    creating a universal axis object attached to a selected frame face.
+    """
+    frame, face = get_frame_and_face_from_selection(selection)
     if frame is None and face is None:
         return {}
-    if is_frame_rotated(frame):
-        Console.PrintWarning(
-            'Attaching axis to rotated frame is not supported.\n')
-        return {}
-    return get_kwargs(frame, face)
-
-
-def validate_potential_frame_face_selection(selection):
-    """Validates a potential selection is a face of a frame.
-
-    Returns frame and selected face,
-    or None tuple if no face is selected.
-    """
-    none_tuple = None, None
-    if len(selection) != 1:
-        Console.PrintMessage(
-            'Didn\'t select 1 element. Skipping attachment.\n')
-        return none_tuple
-    first_selection = selection[0]
-    if len(first_selection.SubObjects) != 1:
-        Console.PrintMessage(
-            'Selected object doesn\'t have a single sub object. Skipping attachment.\n')
-        return none_tuple
-    first_sub_object = first_selection.SubObjects[0]
-    if not isinstance(first_sub_object, Face):
-        Console.PrintMessage(
-            'Selected element is not a face. Skipping attachment.\n')
-        return none_tuple
-    frame = first_selection.Object
-    if frame.Proxy.Type != 'OSEFrame':
-        Console.PrintMessage('Must select frame. Skipping attachment.\n')
-        return none_tuple
-    outer_faces = get_outer_faces_of_frame(frame)
-    if not any(map(lambda f: f.isEqual(first_sub_object), outer_faces)):
-        Console.PrintMessage('Must select outer face of frame. Skipping attachment.\n')
-        return none_tuple
-    return frame, first_sub_object
-
-
-def get_kwargs(frame, face):
     orientation = get_face_orientation(face)
     if orientation is None:
         return {}
@@ -94,17 +57,6 @@ def sort_faces_by_surface_position(faces, orientation):
     return sorted(faces, key=lambda f: f.Surface.Position[position_index])
 
 
-def get_outer_faces_of_frame(frame):
-    """Get outer faces of the frame.
-
-    Assumes the 6 largest faces are the outer faces.
-    """
-    faces = frame.Shape.Faces
-    sorted_faces = sorted(faces, key=lambda f: f.Area, reverse=True)
-    outer_faces = sorted_faces[:6]
-    return outer_faces
-
-
 def get_face_orientation(face):
     if is_face_parallel_to_yz_plane(face):
         return 'x'
@@ -114,11 +66,6 @@ def get_face_orientation(face):
         return 'z'
     Console.PrintWarning('Face not parallel to YZ, XZ, or XY plane.\n')
     return None
-
-
-def is_frame_rotated(frame):
-    rotation = frame.Placement.Rotation
-    return rotation.Axis != Vector(0, 0, 1) or rotation.Angle != 0
 
 
 def is_face_parallel_to_yz_plane(face):
