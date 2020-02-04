@@ -36,9 +36,9 @@ class AddUniversalXAxis:
 
 def get_creation_kwargs():
     selection = Gui.Selection.getSelectionEx()
-    is_valid, reason = validate_frame_face_selection(selection)
+    is_valid, reason = validate_frame_face_selection(selection, 'x')
     if is_valid:
-        return get_axis_creation_kwargs(selection)
+        return get_axis_creation_kwargs(selection, 'x')
     else:
         log_invalid_selection_reason(reason)
         return {}

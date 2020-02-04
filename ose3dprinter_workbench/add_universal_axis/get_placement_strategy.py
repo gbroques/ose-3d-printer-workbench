@@ -3,9 +3,9 @@ from FreeCAD import Console, Placement, Rotation, Vector
 
 def get_placement_strategy(orientation):
     return {
-        'x': (get_placement_for_left_face, get_placement_for_right_face),
-        'y': (get_placement_for_front_face, get_placement_for_rear_face),
-        'z': (get_placement_for_bottom_face, get_placement_for_top_face),
+        'x': (get_placement_for_bottom_face, get_placement_for_top_face),
+        'y': (get_placement_for_left_face, get_placement_for_right_face),
+        'z': (get_placement_for_front_face, get_placement_for_rear_face),
     }[orientation]
 
 

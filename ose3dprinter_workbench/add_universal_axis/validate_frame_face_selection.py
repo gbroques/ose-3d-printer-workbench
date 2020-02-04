@@ -2,9 +2,10 @@ from FreeCAD import Vector
 from Part import Face
 
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
+from .face_orientation import get_face_orientation
 
 
-def validate_frame_face_selection(selection):
+def validate_frame_face_selection(selection, axis_orientation):
     """Validates a potential selection is a face of a frame.
 
     Returns whether the selection is valid and reason if not valid.
@@ -35,14 +36,24 @@ def validate_frame_face_selection(selection):
     if not is_outer_face_of_frame(face, frame):
         reason = 'Must select outer face of frame'
         return False, reason
+    face_orientation = get_face_orientation(face)
+    is_face_y_or_z = face_orientation == 'y' or face_orientation == 'z'
+    if is_face_y_or_z and axis_orientation == 'x':
+        reason = 'Cannot attach X axis to side of frame'
+        return False, reason
+    is_axis_y_or_z = axis_orientation == 'y' or axis_orientation == 'z'
+    if is_axis_y_or_z and face_orientation == 'x':
+        reason = 'Cannot attach {} axis to top or bottom of frame'.format(
+            axis_orientation.upper())
+        return False, reason
     return True, ''
 
 
-def get_frame_and_face_from_selection(selection):
+def get_frame_and_face_from_selection(selection, axis_orientation):
     """
     Assumes first selected element is frame, and first sub-object is face.
     """
-    is_valid, _ = validate_frame_face_selection(selection)
+    is_valid, _ = validate_frame_face_selection(selection, axis_orientation)
     if not is_valid:
         return None, None
     else:
