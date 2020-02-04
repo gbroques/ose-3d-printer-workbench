@@ -1,13 +1,15 @@
 from FreeCAD import Console, Placement, Rotation, Vector
 
 
-def get_placement_strategy(face_orientation):
-    # TODO: Add axis orientation
+def get_placement_strategy(face_orientation_name):
     return {
-        'x': (get_placement_for_bottom_face, get_placement_for_top_face),
-        'y': (get_placement_for_left_face, get_placement_for_right_face),
-        'z': (get_placement_for_front_face, get_placement_for_rear_face),
-    }[face_orientation]
+        'bottom': get_placement_for_bottom_face,
+        'top': get_placement_for_top_face,
+        'left': get_placement_for_left_face,
+        'right': get_placement_for_right_face,
+        'front': get_placement_for_front_face,
+        'rear': get_placement_for_rear_face,
+    }[face_orientation_name]
 
 
 def get_placement_for_left_face(frame, face):
