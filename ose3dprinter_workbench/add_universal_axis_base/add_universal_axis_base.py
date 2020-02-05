@@ -23,10 +23,21 @@ class AddUniversalAxisBase:
         document = App.ActiveDocument
         if not document:
             document = App.newDocument()
-        kwargs = get_creation_kwargs(self.axis_orientation)
+        selection = Gui.Selection.getSelectionEx()
+        is_valid, reason = validate_frame_face_selection(
+            selection, self.axis_orientation)
+        kwargs = get_creation_kwargs(
+            is_valid, reason, selection, self.axis_orientation)
         name = 'Universal{}Axis'.format(self.axis_orientation.upper())
-        create_universal_axis(document, name, **kwargs)
+        axis = create_universal_axis(document, name, **kwargs)
         document.recompute()
+        if not is_valid:
+            translation = get_post_creation_translation_vector(
+                axis, self.axis_orientation)
+            placement = Placement()
+            placement.move(translation)
+            axis.Placement = placement
+            document.recompute()
 
     def IsActive(self):
         return True
@@ -41,17 +52,16 @@ class AddUniversalAxisBase:
         }
 
 
-def get_creation_kwargs(axis_orientation):
-    selection = Gui.Selection.getSelectionEx()
-    is_valid, reason = validate_frame_face_selection(
-        selection, axis_orientation)
+def get_creation_kwargs(is_valid, reason, selection, axis_orientation):
     if is_valid:
         return get_axis_frame_attachment_kwargs(selection, axis_orientation)
     else:
         log_invalid_selection_reason(reason)
-        placement = get_placement(axis_orientation)
+        placement, translation_reference_point = get_placement_and_translation_reference_point(
+            axis_orientation)
         return {
-            'placement': placement
+            'placement': placement,
+            'translation_reference_point': translation_reference_point
         }
 
 
@@ -60,9 +70,11 @@ def log_invalid_selection_reason(reason):
     Console.PrintMessage(log_message_template.format(reason))
 
 
-def get_placement(axis_orientation):
+def get_placement_and_translation_reference_point(axis_orientation):
     rotation = get_rotation(axis_orientation)
-    return Placement(Vector(), rotation, Vector())
+    translation_reference_point = get_translation_reference_point(
+        axis_orientation)
+    return Placement(Vector(), rotation, Vector()), translation_reference_point
 
 
 def get_rotation(axis_orientation):
@@ -71,3 +83,20 @@ def get_rotation(axis_orientation):
         AxisOrientation.Y: get_rotation_for_left_face(),
         AxisOrientation.Z: get_rotation_for_front_face()
     }[axis_orientation]
+
+
+def get_translation_reference_point(axis_orientation):
+    return {
+        AxisOrientation.X: Vector(),
+        AxisOrientation.Y: Vector(-1, 0, 0),
+        AxisOrientation.Z: Vector(0, -1, 0)
+    }[axis_orientation]
+
+
+def get_post_creation_translation_vector(axis, axis_orientation):
+    if axis_orientation == AxisOrientation.X:
+        return Vector()
+    if axis_orientation == AxisOrientation.Y:
+        return Vector(0, axis.Length, 0)
+    if axis_orientation == AxisOrientation.Z:
+        return Vector(0, 0, axis.Length)
