@@ -3,7 +3,7 @@ from .get_placement_strategy import get_placement_strategy
 from .validate_frame_face_selection import get_frame_and_face_from_selection
 
 
-def get_axis_creation_kwargs(selection, axis_orientation):
+def get_axis_frame_attachment_kwargs(selection, axis_orientation):
     """
     Get the length, placement, and translation reference point for
     creating a universal axis object attached to a selected frame face.

@@ -1,10 +1,13 @@
 import FreeCAD as App
 import FreeCADGui as Gui
-from FreeCAD import Console
+from FreeCAD import Console, Placement, Rotation, Vector
 from ose3dprinter_workbench.part import create_universal_axis
 from ose3dprinter_workbench.resources import get_resource_path
 
-from .get_axis_creation_kwargs import get_axis_creation_kwargs
+from .enums import AxisOrientation
+from .get_axis_frame_attachment_kwargs import get_axis_frame_attachment_kwargs
+from .get_placement_strategy import (get_rotation_for_front_face,
+                                     get_rotation_for_left_face)
 from .validate_frame_face_selection import validate_frame_face_selection
 
 
@@ -43,12 +46,28 @@ def get_creation_kwargs(axis_orientation):
     is_valid, reason = validate_frame_face_selection(
         selection, axis_orientation)
     if is_valid:
-        return get_axis_creation_kwargs(selection, axis_orientation)
+        return get_axis_frame_attachment_kwargs(selection, axis_orientation)
     else:
         log_invalid_selection_reason(reason)
-        return {}
+        placement = get_placement(axis_orientation)
+        return {
+            'placement': placement
+        }
 
 
 def log_invalid_selection_reason(reason):
     log_message_template = '{}. Skipping attachment of axis to frame.\n'
     Console.PrintMessage(log_message_template.format(reason))
+
+
+def get_placement(axis_orientation):
+    rotation = get_rotation(axis_orientation)
+    return Placement(Vector(), rotation, Vector())
+
+
+def get_rotation(axis_orientation):
+    return {
+        AxisOrientation.X: Rotation(),
+        AxisOrientation.Y: get_rotation_for_left_face(),
+        AxisOrientation.Z: get_rotation_for_front_face()
+    }[axis_orientation]

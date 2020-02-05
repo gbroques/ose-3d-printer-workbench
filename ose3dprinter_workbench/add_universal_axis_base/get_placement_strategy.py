@@ -21,10 +21,15 @@ def get_placement_for_left_face(frame, face):
     x = face.Placement.Base.x
     y = frame.Shape.BoundBox.YMax
     z = frame.Shape.BoundBox.ZMax
+    rotation = get_rotation_for_left_face()
     placement = Placement(
-        Vector(x, y, z), Rotation(-90, 0, 90), Vector(0, 0, 0))
+        Vector(x, y, z), rotation, Vector(0, 0, 0))
     translation_reference_point = Vector(0, 0, 1)
     return placement, translation_reference_point
+
+
+def get_rotation_for_left_face():
+    return Rotation(-90, 0, 90)
 
 
 def get_placement_for_right_face(frame, face):
@@ -47,10 +52,18 @@ def get_placement_for_front_face(frame, face):
     x = face.CenterOfMass.x
     y = face.Placement.Base.y
     z = frame.Shape.BoundBox.ZMax
+    rotation = get_rotation_for_front_face()
     placement = Placement(
-        Vector(x, y, z), Rotation(0, 90, 90), Vector(0, 0, 0))
+        Vector(x, y, z), rotation, Vector(0, 0, 0))
     translation_reference_point = Vector(0.5, 0, 0)
     return placement, translation_reference_point
+
+
+def get_rotation_for_front_face():
+    """
+    Assumes Z axis
+    """
+    return Rotation(0, 90, 90)
 
 
 def get_placement_for_rear_face(frame, face):
