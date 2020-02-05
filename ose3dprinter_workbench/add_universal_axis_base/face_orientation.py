@@ -33,6 +33,9 @@ def sort_faces_by_surface_position(faces, face_orientation):
 
 
 def get_face_orientation(face):
+    """
+    Returns the attachable axis orientation of the face.
+    """
     if is_face_parallel_to_xy_plane(face):
         return 'x'
     if is_face_parallel_to_yz_plane(face):
