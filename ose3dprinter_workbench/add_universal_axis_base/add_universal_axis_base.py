@@ -13,15 +13,15 @@ class AddUniversalAxisBase:
     Base class for commands to add Universal Axis objects.
     """
 
-    def __init__(self, orientation):
-        self.orientation = orientation
+    def __init__(self, axis_orientation):
+        self.axis_orientation = axis_orientation
 
     def Activated(self):
         document = App.ActiveDocument
         if not document:
             document = App.newDocument()
-        kwargs = get_creation_kwargs(self.orientation)
-        name = 'Universal{}Axis'.format(self.orientation.upper())
+        kwargs = get_creation_kwargs(self.axis_orientation)
+        name = 'Universal{}Axis'.format(self.axis_orientation.upper())
         create_universal_axis(document, name, **kwargs)
         document.recompute()
 
@@ -29,7 +29,7 @@ class AddUniversalAxisBase:
         return True
 
     def GetResources(self):
-        orientation = self.orientation.upper()
+        orientation = self.axis_orientation.upper()
         icon_name = 'Universal{}Axis.svg'.format(orientation)
         return {
             'Pixmap': get_resource_path(icon_name),
@@ -38,11 +38,12 @@ class AddUniversalAxisBase:
         }
 
 
-def get_creation_kwargs(orientation):
+def get_creation_kwargs(axis_orientation):
     selection = Gui.Selection.getSelectionEx()
-    is_valid, reason = validate_frame_face_selection(selection, orientation)
+    is_valid, reason = validate_frame_face_selection(
+        selection, axis_orientation)
     if is_valid:
-        return get_axis_creation_kwargs(selection, orientation)
+        return get_axis_creation_kwargs(selection, axis_orientation)
     else:
         log_invalid_selection_reason(reason)
         return {}

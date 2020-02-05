@@ -1,4 +1,6 @@
 from FreeCAD import Console, Vector
+
+from .enums import AxisOrientation, Side
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
 
 
@@ -37,21 +39,21 @@ def get_face_orientation(face):
     Returns the attachable axis orientation of the face.
     """
     if is_face_parallel_to_xy_plane(face):
-        return 'x'
+        return AxisOrientation.X
     if is_face_parallel_to_yz_plane(face):
-        return 'y'
+        return AxisOrientation.Y
     if is_face_parallel_to_xz_plane(face):
-        return 'z'
+        return AxisOrientation.Z
     Console.PrintWarning('Face not parallel to YZ, XZ, or XY plane.\n')
     return None
 
 
-def get_is_face_parallel_to_plane_predicate(orientation):
+def get_is_face_parallel_to_plane_predicate(axis_orientation):
     return {
-        'x': is_face_parallel_to_xy_plane,
-        'y': is_face_parallel_to_yz_plane,
-        'z': is_face_parallel_to_xz_plane
-    }[orientation]
+        AxisOrientation.X: is_face_parallel_to_xy_plane,
+        AxisOrientation.Y: is_face_parallel_to_yz_plane,
+        AxisOrientation.Z: is_face_parallel_to_xz_plane
+    }[axis_orientation]
 
 
 def get_face_orientation_name(frame, face):
@@ -59,9 +61,9 @@ def get_face_orientation_name(frame, face):
     if face_orientation is None:
         return None
     lower, upper = {
-        'x': ('bottom', 'top'),
-        'y': ('left', 'right'),
-        'z': ('front', 'rear')
+        AxisOrientation.X: (Side.BOTTOM, Side.TOP),
+        AxisOrientation.Y: (Side.LEFT, Side.RIGHT),
+        AxisOrientation.Z: (Side.FRONT, Side.REAR)
     }[face_orientation]
     face_closest_to_origin = get_face_closest_to_origin(
         frame, face_orientation)

@@ -1,5 +1,5 @@
 
-from .add_universal_axis_base import AddUniversalAxisBase
+from .add_universal_axis_base import AddUniversalAxisBase, AxisOrientation
 
 
 class AddUniversalXAxis:
@@ -10,7 +10,7 @@ class AddUniversalXAxis:
     NAME = 'AddUniversalXAxis'
 
     def __init__(self):
-        self.base = AddUniversalAxisBase('x')
+        self.base = AddUniversalAxisBase(AxisOrientation.X)
 
     def Activated(self):
         self.base.Activated()

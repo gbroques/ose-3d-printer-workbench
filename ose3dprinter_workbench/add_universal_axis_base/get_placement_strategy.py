@@ -1,15 +1,17 @@
 from FreeCAD import Console, Placement, Rotation, Vector
 
+from .enums import Side
 
-def get_placement_strategy(face_orientation_name):
+
+def get_placement_strategy(face_side):
     return {
-        'bottom': get_placement_for_bottom_face,
-        'top': get_placement_for_top_face,
-        'left': get_placement_for_left_face,
-        'right': get_placement_for_right_face,
-        'front': get_placement_for_front_face,
-        'rear': get_placement_for_rear_face,
-    }[face_orientation_name]
+        Side.BOTTOM: get_placement_for_bottom_face,
+        Side.TOP: get_placement_for_top_face,
+        Side.LEFT: get_placement_for_left_face,
+        Side.RIGHT: get_placement_for_right_face,
+        Side.FRONT: get_placement_for_front_face,
+        Side.REAR: get_placement_for_rear_face,
+    }[face_side]
 
 
 def get_placement_for_left_face(frame, face):
