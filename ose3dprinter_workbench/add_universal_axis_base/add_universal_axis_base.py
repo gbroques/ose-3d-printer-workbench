@@ -31,13 +31,6 @@ class AddUniversalAxisBase:
         name = 'Universal{}Axis'.format(self.axis_orientation.upper())
         axis = create_universal_axis(document, name, **kwargs)
         document.recompute()
-        if not is_valid:
-            translation = get_post_creation_translation_vector(
-                axis, self.axis_orientation)
-            placement = Placement()
-            placement.move(translation)
-            axis.Placement = placement
-            document.recompute()
 
     def IsActive(self):
         return True
@@ -88,15 +81,6 @@ def get_rotation(axis_orientation):
 def get_origin_translation_offset(axis_orientation):
     return {
         AxisOrientation.X: Vector(),
-        AxisOrientation.Y: Vector(-1, 0, 0),
-        AxisOrientation.Z: Vector(0, -1, 0)
+        AxisOrientation.Y: Vector(-1, -1, 0),
+        AxisOrientation.Z: Vector(0, -1, -1)
     }[axis_orientation]
-
-
-def get_post_creation_translation_vector(axis, axis_orientation):
-    if axis_orientation == AxisOrientation.X:
-        return Vector()
-    if axis_orientation == AxisOrientation.Y:
-        return Vector(0, axis.Length, 0)
-    if axis_orientation == AxisOrientation.Z:
-        return Vector(0, 0, axis.Length)

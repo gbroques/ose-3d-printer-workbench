@@ -126,8 +126,9 @@ class UniversalAxisModel:
         base = self.placement.Base
         rotation = self.placement.Rotation
 
+        reference_dimensions = (rod_length, motor_box_length, box_height)
         translation_offset = get_translation_offset(
-            motor_side_box, rotation, self.origin_translation_offset)
+            reference_dimensions, rotation, self.origin_translation_offset)
         origin = base - translation_offset
         for part in parts:
             part.translate(origin)
@@ -180,14 +181,14 @@ def get_vertex_edges(vertex, edges):
     return vertex_edges
 
 
-def get_translation_offset(motor_side_box,
+def get_translation_offset(reference_dimensions,
                            rotation,
                            origin_translation_offset):
-    motor_box_copy = motor_side_box.copy()
-    motor_box_copy.rotate(Vector(0, 0, 0), rotation.Axis,
-                          degrees(rotation.Angle))
-    first_vertex = motor_box_copy.Vertexes[0]
-    first_vertex_edges = get_vertex_edges(first_vertex, motor_box_copy.Edges)
+    reference_box = Part.makeBox(*reference_dimensions)
+    reference_box.rotate(Vector(0, 0, 0), rotation.Axis,
+                         degrees(rotation.Angle))
+    first_vertex = reference_box.Vertexes[0]
+    first_vertex_edges = get_vertex_edges(first_vertex, reference_box.Edges)
     num_edges = len(first_vertex_edges)
     if num_edges != 3:
         Console.PrintWarning(
