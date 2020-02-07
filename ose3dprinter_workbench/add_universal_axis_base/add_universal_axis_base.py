@@ -23,13 +23,9 @@ class AddUniversalAxisBase:
         document = App.ActiveDocument
         if not document:
             document = App.newDocument()
-        selection = Gui.Selection.getSelectionEx()
-        is_valid, reason = validate_frame_face_selection(
-            selection, self.axis_orientation)
-        kwargs = get_creation_kwargs(
-            is_valid, reason, selection, self.axis_orientation)
         name = 'Universal{}Axis'.format(self.axis_orientation.upper())
-        axis = create_universal_axis(document, name, **kwargs)
+        kwargs = get_axis_creation_kwargs(self.axis_orientation)
+        create_universal_axis(document, name, **kwargs)
         document.recompute()
 
     def IsActive(self):
@@ -45,12 +41,15 @@ class AddUniversalAxisBase:
         }
 
 
-def get_creation_kwargs(is_valid, reason, selection, axis_orientation):
-    if is_valid:
+def get_axis_creation_kwargs(axis_orientation):
+    selection = Gui.Selection.getSelectionEx()
+    is_frame_face_selected, reason = validate_frame_face_selection(
+        selection, axis_orientation)
+    if is_frame_face_selected:
         return get_axis_frame_attachment_kwargs(selection, axis_orientation)
     else:
         log_invalid_selection_reason(reason)
-        placement, origin_translation_offset = get_placement_and_origin_translation_offset(
+        placement, origin_translation_offset = get_default_axis_creation_kwargs(
             axis_orientation)
         return {
             'placement': placement,
@@ -63,7 +62,7 @@ def log_invalid_selection_reason(reason):
     Console.PrintMessage(log_message_template.format(reason))
 
 
-def get_placement_and_origin_translation_offset(axis_orientation):
+def get_default_axis_creation_kwargs(axis_orientation):
     rotation = get_rotation(axis_orientation)
     origin_translation_offset = get_origin_translation_offset(
         axis_orientation)
