@@ -4,39 +4,42 @@ from .enums import AxisOrientation, Side
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
 
 
-def get_face_closest_to_origin(frame, face_orientation):
-    """Get the face closest to the origin based on orientation,
-    where the origin is defined as the point (0, 0, 0).
+def get_face_closest_to_origin(frame, axis_orientation):
+    """
+    Get the face closest to the origin based on axis orientation.
 
-    For example, if the orientation is z,
+    For example, if the axis orientation is x,
     then the face closest to the origin is the bottom face.
     """
-    is_face_parallel_to_plane = get_is_face_parallel_to_plane_predicate(
-        face_orientation)
+    is_face_parallel_to_plane = get_is_face_parallel_to_plane(axis_orientation)
 
     outer_faces = get_outer_faces_of_frame(frame)
 
     outer_faces_parallel_to_plane = filter(
         is_face_parallel_to_plane, outer_faces)
     sorted_faces_by_position = sort_faces_by_surface_position(
-        outer_faces_parallel_to_plane, face_orientation)
+        outer_faces_parallel_to_plane, axis_orientation)
     return sorted_faces_by_position[0]
 
 
-def sort_faces_by_surface_position(faces, face_orientation):
+def sort_faces_by_surface_position(faces, axis_orientation):
     """
-    If orientation of face is x, then sort by z
-    If orientation of face is y, then sort by x
-    If orientation of face is z, then sort by y
+    If orientation of axis is x, then sort faces by z
+    If orientation of axis is y, then sort faces by x
+    If orientation of axis is z, then sort faces by y
     """
-    face_orientation_index = ['x', 'y', 'z'].index(face_orientation)
-    position_index = ((face_orientation_index - 1) + 3) % 3
+    axis_orientation_index = [
+        AxisOrientation.X,
+        AxisOrientation.Y,
+        AxisOrientation.Z
+    ].index(axis_orientation)
+    position_index = ((axis_orientation_index - 1) + 3) % 3
     return sorted(faces, key=lambda f: f.Surface.Position[position_index])
 
 
-def get_face_orientation(face):
+def get_orientation_of_attachable_axis(face):
     """
-    Returns the attachable axis orientation of the face.
+    Returns the orientation of which axis is attachable to the face.
     """
     if is_face_parallel_to_xy_plane(face):
         return AxisOrientation.X
@@ -48,7 +51,7 @@ def get_face_orientation(face):
     return None
 
 
-def get_is_face_parallel_to_plane_predicate(axis_orientation):
+def get_is_face_parallel_to_plane(axis_orientation):
     return {
         AxisOrientation.X: is_face_parallel_to_xy_plane,
         AxisOrientation.Y: is_face_parallel_to_yz_plane,
@@ -56,21 +59,26 @@ def get_is_face_parallel_to_plane_predicate(axis_orientation):
     }[axis_orientation]
 
 
-def get_face_orientation_name(frame, face):
-    face_orientation = get_face_orientation(face)
-    if face_orientation is None:
+def get_face_side(frame, face):
+    attachable_axis_orientation = get_orientation_of_attachable_axis(face)
+    if attachable_axis_orientation is None:
         return None
-    lower, upper = {
-        AxisOrientation.X: (Side.BOTTOM, Side.TOP),
-        AxisOrientation.Y: (Side.LEFT, Side.RIGHT),
-        AxisOrientation.Z: (Side.FRONT, Side.REAR)
-    }[face_orientation]
+    sides_by_axis_orientation = get_sides_by_axis_orientation()
+    lower, upper = sides_by_axis_orientation[attachable_axis_orientation]
     face_closest_to_origin = get_face_closest_to_origin(
-        frame, face_orientation)
+        frame, attachable_axis_orientation)
     if face.isEqual(face_closest_to_origin):
         return lower
     else:
         return upper
+
+
+def get_sides_by_axis_orientation():
+    return {
+        AxisOrientation.X: (Side.BOTTOM, Side.TOP),
+        AxisOrientation.Y: (Side.LEFT, Side.RIGHT),
+        AxisOrientation.Z: (Side.FRONT, Side.REAR)
+    }
 
 
 def is_face_parallel_to_yz_plane(face):

@@ -2,7 +2,7 @@ from FreeCAD import Vector
 from Part import Face
 
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
-from .face_orientation import get_face_orientation, get_face_orientation_name
+from .face_orientation import get_face_side, get_orientation_of_attachable_axis
 
 
 def validate_frame_face_selection(selection, axis_orientation):
@@ -36,14 +36,14 @@ def validate_frame_face_selection(selection, axis_orientation):
     if not is_outer_face_of_frame(face, frame):
         reason = 'Must select outer face of frame'
         return False, reason
-    face_orientation_name = get_face_orientation_name(frame, face)
-    if face_orientation_name == 'bottom':
+    face_side = get_face_side(frame, face)
+    if face_side == 'bottom':
         reason = 'Cannot attach axis to bottom side of frame'
         return False, reason
-    face_orientation = get_face_orientation(face)
-    if face_orientation != axis_orientation:
+    attachable_axis = get_orientation_of_attachable_axis(face)
+    if attachable_axis != axis_orientation:
         reason = 'Cannot attach {} axis to {} side of frame'.format(
-            axis_orientation.upper(), face_orientation_name)
+            axis_orientation.upper(), face_side)
         return False, reason
     return True, ''
 
