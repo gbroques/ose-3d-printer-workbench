@@ -5,7 +5,7 @@ from .validate_frame_face_selection import get_frame_and_face_from_selection
 
 def get_axis_frame_attachment_kwargs(selection, axis_orientation):
     """
-    Get the length, placement, and translation reference point for
+    Get the length, placement, and origin translation offset for
     creating a universal axis object attached to a selected frame face.
     """
     frame, face = get_frame_and_face_from_selection(
@@ -14,9 +14,9 @@ def get_axis_frame_attachment_kwargs(selection, axis_orientation):
         return {}
     face_orientation_name = get_face_orientation_name(frame, face)
     placement_strategy = get_placement_strategy(face_orientation_name)
-    placement, translation_reference_point = placement_strategy(frame, face)
+    placement, origin_translation_offset = placement_strategy(frame, face)
     return {
         'length': frame.Size,
         'placement': placement,
-        'translation_reference_point': translation_reference_point
+        'origin_translation_offset': origin_translation_offset
     }

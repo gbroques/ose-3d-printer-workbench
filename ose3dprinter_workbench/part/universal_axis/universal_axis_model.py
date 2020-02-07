@@ -10,7 +10,7 @@ class UniversalAxisModel:
     and is separate from the "view" or GUI representation.
     """
 
-    def __init__(self, obj, length, placement, translation_reference_point):
+    def __init__(self, obj, length, placement, origin_translation_offset):
         """
         Constructor
 
@@ -20,7 +20,7 @@ class UniversalAxisModel:
         """
         self.Type = 'OSEUniversalAxis'
         self.placement = placement
-        self.translation_reference_point = translation_reference_point
+        self.origin_translation_offset = origin_translation_offset
 
         obj.Proxy = self
 
@@ -127,11 +127,11 @@ class UniversalAxisModel:
         rotation = self.placement.Rotation
 
         translation_offset = get_translation_offset(
-            motor_side_box, rotation, self.translation_reference_point)
-        reference_vector = base - translation_offset
+            motor_side_box, rotation, self.origin_translation_offset)
+        origin = base - translation_offset
         for part in parts:
-            part.translate(reference_vector)
-            part.rotate(reference_vector, rotation.Axis, degrees(rotation.Angle))
+            part.translate(origin)
+            part.rotate(origin, rotation.Axis, degrees(rotation.Angle))
         compound = Part.makeCompound(parts)
         obj.Shape = compound
 
@@ -182,7 +182,7 @@ def get_vertex_edges(vertex, edges):
 
 def get_translation_offset(motor_side_box,
                            rotation,
-                           translation_reference_point):
+                           origin_translation_offset):
     motor_box_copy = motor_side_box.copy()
     motor_box_copy.rotate(Vector(0, 0, 0), rotation.Axis,
                           degrees(rotation.Angle))
@@ -205,7 +205,7 @@ def get_translation_offset(motor_side_box,
                 '{} not parallel to x, y, or z axes\n'.format(e))
 
     return Vector(
-        x * translation_reference_point.x,
-        y * translation_reference_point.y,
-        z * translation_reference_point.z
+        x * origin_translation_offset.x,
+        y * origin_translation_offset.y,
+        z * origin_translation_offset.z
     )

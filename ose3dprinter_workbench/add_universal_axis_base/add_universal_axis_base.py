@@ -57,11 +57,11 @@ def get_creation_kwargs(is_valid, reason, selection, axis_orientation):
         return get_axis_frame_attachment_kwargs(selection, axis_orientation)
     else:
         log_invalid_selection_reason(reason)
-        placement, translation_reference_point = get_placement_and_translation_reference_point(
+        placement, origin_translation_offset = get_placement_and_origin_translation_offset(
             axis_orientation)
         return {
             'placement': placement,
-            'translation_reference_point': translation_reference_point
+            'origin_translation_offset': origin_translation_offset
         }
 
 
@@ -70,11 +70,11 @@ def log_invalid_selection_reason(reason):
     Console.PrintMessage(log_message_template.format(reason))
 
 
-def get_placement_and_translation_reference_point(axis_orientation):
+def get_placement_and_origin_translation_offset(axis_orientation):
     rotation = get_rotation(axis_orientation)
-    translation_reference_point = get_translation_reference_point(
+    origin_translation_offset = get_origin_translation_offset(
         axis_orientation)
-    return Placement(Vector(), rotation, Vector()), translation_reference_point
+    return Placement(Vector(), rotation, Vector()), origin_translation_offset
 
 
 def get_rotation(axis_orientation):
@@ -85,7 +85,7 @@ def get_rotation(axis_orientation):
     }[axis_orientation]
 
 
-def get_translation_reference_point(axis_orientation):
+def get_origin_translation_offset(axis_orientation):
     return {
         AxisOrientation.X: Vector(),
         AxisOrientation.Y: Vector(-1, 0, 0),

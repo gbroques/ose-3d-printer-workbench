@@ -24,8 +24,8 @@ def get_placement_for_left_face(frame, face):
     rotation = get_rotation_for_left_face()
     placement = Placement(
         Vector(x, y, z), rotation, Vector(0, 0, 0))
-    translation_reference_point = Vector(0, 0, 1)
-    return placement, translation_reference_point
+    origin_translation_offset = Vector(0, 0, 1)
+    return placement, origin_translation_offset
 
 
 def get_rotation_for_left_face():
@@ -41,8 +41,8 @@ def get_placement_for_right_face(frame, face):
     z = frame.Shape.BoundBox.ZMax
     placement = Placement(
         Vector(x, y, z), Rotation(-90, 0, -90), Vector(0, 0, 0))
-    translation_reference_point = Vector(0, 0, 0)
-    return placement, translation_reference_point
+    origin_translation_offset = Vector(0, 0, 0)
+    return placement, origin_translation_offset
 
 
 def get_placement_for_front_face(frame, face):
@@ -55,8 +55,8 @@ def get_placement_for_front_face(frame, face):
     rotation = get_rotation_for_front_face()
     placement = Placement(
         Vector(x, y, z), rotation, Vector(0, 0, 0))
-    translation_reference_point = Vector(0.5, 0, 0)
-    return placement, translation_reference_point
+    origin_translation_offset = Vector(0.5, 0, 0)
+    return placement, origin_translation_offset
 
 
 def get_rotation_for_front_face():
@@ -75,15 +75,15 @@ def get_placement_for_rear_face(frame, face):
     z = frame.Shape.BoundBox.ZMax
     placement = Placement(
         Vector(x, y, z), Rotation(0, 90, -90), Vector(0, 0, 0))
-    translation_reference_point = Vector(-0.5, 0, 0)
-    return placement, translation_reference_point
+    origin_translation_offset = Vector(-0.5, 0, 0)
+    return placement, origin_translation_offset
 
 
 def get_placement_for_bottom_face(frame, face):
     Console.PrintMessage('Attaching axis to bottom face is not supported.\n')
     placement = Placement()
-    translation_reference_point = Vector()
-    return placement, translation_reference_point
+    origin_translation_offset = Vector()
+    return placement, origin_translation_offset
 
 
 def get_placement_for_top_face(frame, face):
@@ -95,5 +95,5 @@ def get_placement_for_top_face(frame, face):
     z = frame.Shape.BoundBox.ZMax
     placement = Placement(
         Vector(x, y, z), frame.Placement.Rotation, Vector(0, 0, 0))
-    translation_reference_point = Vector(0, 0.5, 0)
-    return placement, translation_reference_point
+    origin_translation_offset = Vector(0, 0.5, 0)
+    return placement, origin_translation_offset
