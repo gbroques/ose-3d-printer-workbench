@@ -46,7 +46,7 @@ def get_axis_creation_kwargs(axis_orientation):
     try:
         return get_axis_frame_attachment_kwargs(selection, axis_orientation)
     except AxisFrameAttachmentError as reason:
-        log_message_template = 'Unable to attach axis to frame. {}.\n'
+        log_message_template = '{}. Placing axis in default position.\n'
         Console.PrintMessage(log_message_template.format(reason))
         return {}
     else:
