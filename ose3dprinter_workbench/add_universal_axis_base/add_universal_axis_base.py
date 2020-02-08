@@ -5,10 +5,10 @@ from ose3dprinter_workbench.part import create_universal_axis
 from ose3dprinter_workbench.resources import get_resource_path
 
 from .enums import AxisOrientation
-from .get_axis_frame_attachment_kwargs import get_axis_frame_attachment_kwargs
+from .get_axis_frame_attachment_kwargs import (
+    AxisFrameAttachmentError, get_axis_frame_attachment_kwargs)
 from .get_placement_strategy import (get_rotation_for_front_face,
                                      get_rotation_for_left_face)
-from .validate_frame_face_selection import validate_frame_face_selection
 
 
 class AddUniversalAxisBase:
@@ -43,30 +43,25 @@ class AddUniversalAxisBase:
 
 def get_axis_creation_kwargs(axis_orientation):
     selection = Gui.Selection.getSelectionEx()
-    is_frame_face_selected, reason = validate_frame_face_selection(
-        selection, axis_orientation)
-    if is_frame_face_selected:
+    try:
         return get_axis_frame_attachment_kwargs(selection, axis_orientation)
+    except AxisFrameAttachmentError as reason:
+        log_message_template = 'Unable to attach axis to frame. {}.\n'
+        Console.PrintMessage(log_message_template.format(reason))
+        return {}
     else:
-        log_invalid_selection_reason(reason)
-        placement, origin_translation_offset = get_default_axis_creation_kwargs(
-            axis_orientation)
-        return {
-            'placement': placement,
-            'origin_translation_offset': origin_translation_offset
-        }
-
-
-def log_invalid_selection_reason(reason):
-    log_message_template = '{}. Skipping attachment of axis to frame.\n'
-    Console.PrintMessage(log_message_template.format(reason))
+        return get_default_axis_creation_kwargs(axis_orientation)
 
 
 def get_default_axis_creation_kwargs(axis_orientation):
     rotation = get_rotation(axis_orientation)
+    placement = Placement(Vector(), rotation, Vector())
     origin_translation_offset = get_origin_translation_offset(
         axis_orientation)
-    return Placement(Vector(), rotation, Vector()), origin_translation_offset
+    return {
+        'placement': placement,
+        'origin_translation_offset': origin_translation_offset
+    }
 
 
 def get_rotation(axis_orientation):
