@@ -41,22 +41,25 @@ def get_orientation_of_attachable_axis(face):
     """
     Returns the orientation of which axis is attachable to the face.
     """
-    if is_face_parallel_to_xy_plane(face):
-        return AxisOrientation.X
-    if is_face_parallel_to_yz_plane(face):
-        return AxisOrientation.Y
-    if is_face_parallel_to_xz_plane(face):
-        return AxisOrientation.Z
-    Console.PrintWarning('Face not parallel to YZ, XZ, or XY plane.\n')
+    d = get_is_face_parallel_to_plane_by_axis_orientation()
+    for axis_orientation, is_face_parallel_to_plane in d.iteritems():
+        if is_face_parallel_to_plane(face):
+            return axis_orientation
+    Console.PrintWarning('Face not parallel to XY, XZ, or YZ plane.\n')
     return None
 
 
 def get_is_face_parallel_to_plane(axis_orientation):
+    d = get_is_face_parallel_to_plane_by_axis_orientation()
+    return d[axis_orientation]
+
+
+def get_is_face_parallel_to_plane_by_axis_orientation():
     return {
         AxisOrientation.X: is_face_parallel_to_xy_plane,
         AxisOrientation.Y: is_face_parallel_to_yz_plane,
         AxisOrientation.Z: is_face_parallel_to_xz_plane
-    }[axis_orientation]
+    }
 
 
 def get_face_side(frame, face):
