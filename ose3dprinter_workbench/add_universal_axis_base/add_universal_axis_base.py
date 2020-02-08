@@ -1,14 +1,12 @@
 import FreeCAD as App
 import FreeCADGui as Gui
-from FreeCAD import Console, Placement, Rotation, Vector
+from FreeCAD import Console
 from ose3dprinter_workbench.part import create_universal_axis
 from ose3dprinter_workbench.resources import get_resource_path
 
-from .enums import AxisOrientation
 from .get_axis_frame_attachment_kwargs import (
     AxisFrameAttachmentError, get_axis_frame_attachment_kwargs)
-from .get_placement_strategy import (get_rotation_for_front_face,
-                                     get_rotation_for_left_face)
+from .get_default_axis_creation_kwargs import get_default_axis_creation_kwargs
 
 
 class AddUniversalAxisBase:
@@ -51,30 +49,3 @@ def get_axis_creation_kwargs(axis_orientation):
         return {}
     else:
         return get_default_axis_creation_kwargs(axis_orientation)
-
-
-def get_default_axis_creation_kwargs(axis_orientation):
-    rotation = get_rotation(axis_orientation)
-    placement = Placement(Vector(), rotation, Vector())
-    origin_translation_offset = get_origin_translation_offset(
-        axis_orientation)
-    return {
-        'placement': placement,
-        'origin_translation_offset': origin_translation_offset
-    }
-
-
-def get_rotation(axis_orientation):
-    return {
-        AxisOrientation.X: Rotation(),
-        AxisOrientation.Y: get_rotation_for_left_face(),
-        AxisOrientation.Z: get_rotation_for_front_face()
-    }[axis_orientation]
-
-
-def get_origin_translation_offset(axis_orientation):
-    return {
-        AxisOrientation.X: Vector(),
-        AxisOrientation.Y: Vector(-1, -1, 0),
-        AxisOrientation.Z: Vector(0, -1, -1)
-    }[axis_orientation]
