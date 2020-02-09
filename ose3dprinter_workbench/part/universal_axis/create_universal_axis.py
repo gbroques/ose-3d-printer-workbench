@@ -14,5 +14,6 @@ def create_universal_axis(document,
     """
     obj = document.addObject('Part::FeaturePython', name)
     UniversalAxisModel(obj, length, placement, origin_translation_offset)
-    obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
+    if obj.ViewObject is not None:
+        obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
     return obj

@@ -8,6 +8,38 @@ A workbench for designing 3D printers by [Open Source Ecology](https://www.opens
 * <img alt="Add Universal Z Axis" src="ose3dprinter_workbench/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis
 * <img alt="Add Heated Bed" src="ose3dprinter_workbench/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
 
+## Tests
+Unit tests are located within the `/test` directory of this repository.
+
+To simplify execution, we use Docker to create a virtualized FreeCAD 0.16 environment with the requisite dependencies for running unit tests in Python with features like [coverage reports](https://en.wikipedia.org/wiki/Code_coverage).
+
+### Pre-Requisites
+Install Docker and [Docker Compose](https://docs.docker.com/compose/install/).
+
+### Build & Run the Test Container
+Run from root of repository:
+
+    docker-compose up -d
+
+The `-d` flag or "detached mode" is to run the container in the background.
+
+### Run Tests
+Run from root of repository:
+
+    docker exec -it ose3dprinter-test pytest test/
+
+A shell script for the above command has been included for convenience:
+
+    ./run_tests.sh
+
+To generate coverage data in `.coverage`, run:
+
+    docker exec -it ose3dprinter-test pytest --cov ose3dprinter_workbench/ test/
+
+To generate a coverage report from the coverage data in `htmlcov/`, run:
+
+    docker exec -it ose3dprinter-test coverage html
+
 ## Limitations
 * Attaching axes to rotated frame is not supported.
 

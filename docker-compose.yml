@@ -1,0 +1,11 @@
+version: '3'
+services:
+  test:
+    container_name: ose3dprinter-test
+    image: ose3dprinter-test-i
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      -  ./:/var/app
+    network_mode: bridge

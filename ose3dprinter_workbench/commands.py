@@ -10,11 +10,14 @@ from .add_universal_y_axis import AddUniversalYAxis
 from .add_universal_z_axis import AddUniversalZAxis
 from .command_registry import CommandCollection, command_registry
 
-command_registry.register(AddFrame.NAME, AddFrame())
-command_registry.register(AddUniversalXAxis.NAME, AddUniversalXAxis())
-command_registry.register(AddUniversalYAxis.NAME, AddUniversalYAxis())
-command_registry.register(AddUniversalZAxis.NAME, AddUniversalZAxis())
-command_registry.register(AddHeatedBed.NAME, AddHeatedBed())
+
+def register_commands():
+    command_registry.register(AddFrame.NAME, AddFrame())
+    command_registry.register(AddUniversalXAxis.NAME, AddUniversalXAxis())
+    command_registry.register(AddUniversalYAxis.NAME, AddUniversalYAxis())
+    command_registry.register(AddUniversalZAxis.NAME, AddUniversalZAxis())
+    command_registry.register(AddHeatedBed.NAME, AddHeatedBed())
+
 
 main_toolbar = CommandCollection('OSE 3D Printer')
 main_toolbar.add(AddFrame.NAME)

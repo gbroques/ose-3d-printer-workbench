@@ -8,5 +8,6 @@ def create_frame(document, name):
     """
     obj = document.addObject('Part::FeaturePython', name)
     FrameModel(obj)
-    obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
+    if obj.ViewObject is not None:
+        obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
     return obj

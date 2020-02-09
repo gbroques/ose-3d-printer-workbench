@@ -6,13 +6,12 @@ from .get_outer_faces_of_frame import get_outer_faces_of_frame
 from .get_placement_strategy import get_placement_strategy
 
 
-def get_axis_frame_attachment_kwargs(selection, axis_orientation):
+def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
     """
     Get the length, placement, and origin translation offset for
     creating a universal axis object attached to a selected frame face.
     """
-    frame, face = get_frame_and_face_from_selection(
-        selection, axis_orientation)
+    validate_frame_and_face(frame, face, axis_orientation)
     face_side = get_face_side(frame, face)
     placement_strategy = get_placement_strategy(face_side)
     placement, origin_translation_offset = placement_strategy(frame, face)
@@ -23,30 +22,11 @@ def get_axis_frame_attachment_kwargs(selection, axis_orientation):
     }
 
 
-def get_frame_and_face_from_selection(selection, axis_orientation):
-    """Gets a selected frame and face.
-
-    Raises AxisFrameAttachmentError,
-    if unable to get frame or face from selection.
-    """
-    num_selected = len(selection)
-    if num_selected != 1:
-        raise AxisFrameAttachmentError(
-            'Selected {} instead of 1 element'.format(num_selected))
-    first_selection = selection[0]
-    num_sub_objects = len(first_selection.SubObjects)
-    if num_sub_objects != 1:
-        message_template = 'Selected object has {} sub objects instead of 1'
-        raise AxisFrameAttachmentError(
-            message_template.format(num_sub_objects))
-    potential_face = first_selection.SubObjects[0]
-    if not isinstance(potential_face, Face):
+def validate_frame_and_face(frame, face, axis_orientation):
+    if not isinstance(face, Face):
         raise AxisFrameAttachmentError('Selected element is not a face')
-    face = potential_face
-    potential_frame = first_selection.Object
-    if potential_frame.Proxy.Type != 'OSEFrame':
+    if frame.Proxy.Type != 'OSEFrame':
         raise AxisFrameAttachmentError('Must select frame')
-    frame = potential_frame
     if is_frame_rotated(frame):
         raise AxisFrameAttachmentError('Frame is rotated')
     if not is_outer_face_of_frame(face, frame):

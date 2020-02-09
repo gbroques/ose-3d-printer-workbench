@@ -7,6 +7,8 @@ from ose3dprinter_workbench.resources import get_resource_path
 from .get_axis_frame_attachment_kwargs import (
     AxisFrameAttachmentError, get_axis_frame_attachment_kwargs)
 from .get_default_axis_creation_kwargs import get_default_axis_creation_kwargs
+from .get_first_selected_object_and_sub_object import \
+    get_first_selected_object_and_sub_object
 
 
 class AddUniversalAxisBase:
@@ -42,7 +44,10 @@ class AddUniversalAxisBase:
 def get_axis_creation_kwargs(axis_orientation):
     selection = Gui.Selection.getSelectionEx()
     try:
-        return get_axis_frame_attachment_kwargs(selection, axis_orientation)
+        frame, face = get_first_selected_object_and_sub_object(selection)
+        return get_axis_frame_attachment_kwargs(frame,
+                                                face,
+                                                axis_orientation)
     except AxisFrameAttachmentError as reason:
         log_message_template = '{}. Placing axis in default position.\n'
         Console.PrintMessage(log_message_template.format(reason))
