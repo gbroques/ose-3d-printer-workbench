@@ -15,7 +15,7 @@ RUN apt-get install -y python-pip --fix-missing
 RUN pip install --upgrade pip
 
 # Install test dependencies
-RUN pip install pytest coverage==4.5.4 pytest-cov python-coveralls
+RUN pip install pytest coverage pytest-cov coveralls
 
 ENV PYTHONPATH=/usr/lib/freecad-0.16/lib/
 
