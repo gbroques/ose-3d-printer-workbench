@@ -20,6 +20,7 @@ RUN pip install pytest coverage pytest-cov coveralls
 ENV PYTHONPATH=/usr/lib/freecad-0.16/lib/
 
 COPY . /var/app
+COPY ./.git /var/app/.git
 WORKDIR /var/app
 
 # Keep container running
