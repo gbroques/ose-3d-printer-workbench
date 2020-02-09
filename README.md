@@ -1,4 +1,6 @@
 # OSE 3D Printer Workbench
+[![Build Status](https://travis-ci.org/gbroques/ose-3d-printer-workbench.svg?branch=master)](https://travis-ci.org/gbroques/ose-3d-printer-workbench) [![Coverage Status](https://coveralls.io/repos/github/gbroques/ose-3d-printer-workbench/badge.svg)](https://coveralls.io/github/gbroques/ose-3d-printer-workbench)
+
 A workbench for designing 3D printers by [Open Source Ecology](https://www.opensourceecology.org/).
 
 ## Tools
