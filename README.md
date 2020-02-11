@@ -4,11 +4,11 @@
 A workbench for designing 3D printers by [Open Source Ecology](https://www.opensourceecology.org/).
 
 ## Tools
-* <img alt="Add Frame" src="ose3dprinter_workbench/resources/Frame.svg" width="32" height="32" /> Add Frame
-* <img alt="Add Universal X Axis" src="ose3dprinter_workbench/resources/UniversalXAxis.svg" width="32" height="32" /> Add Universal X Axis
-* <img alt="Add Universal Y Axis" src="ose3dprinter_workbench/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis
-* <img alt="Add Universal Z Axis" src="ose3dprinter_workbench/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis
-* <img alt="Add Heated Bed" src="ose3dprinter_workbench/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
+* <img alt="Add Frame" src="ose3dprinter/workbench/resources/Frame.svg" width="32" height="32" /> Add Frame
+* <img alt="Add Universal X Axis" src="ose3dprinter/workbench/resources/UniversalXAxis.svg" width="32" height="32" /> Add Universal X Axis
+* <img alt="Add Universal Y Axis" src="ose3dprinter/workbench/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis
+* <img alt="Add Universal Z Axis" src="ose3dprinter/workbench/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis
+* <img alt="Add Heated Bed" src="ose3dprinter/workbench/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
 
 ## Tests
 Unit tests are located within the `/test` directory of this repository.
