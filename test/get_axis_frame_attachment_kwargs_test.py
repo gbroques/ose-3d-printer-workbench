@@ -6,14 +6,13 @@ from ose3dprinter_workbench.add_universal_axis_base.get_axis_frame_attachment_kw
     get_axis_frame_attachment_kwargs
 from ose3dprinter_workbench.part import create_frame
 
-FRAME_LENGTH = 406.4
-
 
 class FreeCADTest(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         document = App.newDocument()
-        self.frame = create_frame(document, 'Frame')
+        cls.frame = create_frame(document, 'Frame')
         document.recompute()
 
     def test_get_axis_frame_attachment_kwargs_for_top_face(self):
@@ -23,9 +22,8 @@ class FreeCADTest(unittest.TestCase):
 
         expected = {
             'origin_translation_offset': Vector(0.0, 0.5, 0.0),
-            'length': FRAME_LENGTH,
             'placement': Placement(
-                Vector(0, FRAME_LENGTH / 2, FRAME_LENGTH),
+                Vector(0, self.frame.Size / 2, self.frame.Size),
                 Rotation()
             )
         }
@@ -39,9 +37,8 @@ class FreeCADTest(unittest.TestCase):
 
         expected = {
             'origin_translation_offset': Vector(0, 0, 1),
-            'length': FRAME_LENGTH,
             'placement': Placement(
-                Vector(0, FRAME_LENGTH, FRAME_LENGTH),
+                Vector(0, self.frame.Size, self.frame.Size),
                 Rotation(-90, 0, 90),
                 Vector()
             )
@@ -56,9 +53,8 @@ class FreeCADTest(unittest.TestCase):
 
         expected = {
             'origin_translation_offset': Vector(0, 0, 0),
-            'length': FRAME_LENGTH,
             'placement': Placement(
-                Vector(FRAME_LENGTH, FRAME_LENGTH, FRAME_LENGTH),
+                Vector(self.frame.Size, self.frame.Size, self.frame.Size),
                 Rotation(-90, 0, -90),
                 Vector()
             )
@@ -73,9 +69,8 @@ class FreeCADTest(unittest.TestCase):
 
         expected = {
             'origin_translation_offset': Vector(0.5, 0, 0),
-            'length': FRAME_LENGTH,
             'placement': Placement(
-                Vector(FRAME_LENGTH / 2, 0, FRAME_LENGTH),
+                Vector(self.frame.Size / 2, 0, self.frame.Size),
                 Rotation(0, 90, 90),
                 Vector()
             )
@@ -90,9 +85,8 @@ class FreeCADTest(unittest.TestCase):
 
         expected = {
             'origin_translation_offset': Vector(-0.5, 0, 0),
-            'length': FRAME_LENGTH,
             'placement': Placement(
-                Vector(FRAME_LENGTH / 2, FRAME_LENGTH, FRAME_LENGTH),
+                Vector(self.frame.Size / 2, self.frame.Size, self.frame.Size),
                 Rotation(0, 90, -90),
                 Vector()
             )
@@ -103,7 +97,7 @@ class FreeCADTest(unittest.TestCase):
     def assert_result_and_expected_are_equal(self, result, expected):
         self.assertEqual(result['origin_translation_offset'],
                          expected['origin_translation_offset'])
-        self.assertEqual(result['length'].Value, expected['length'])
+        self.assertEqual(result['length'].Value, self.frame.Size)
         self.assertEqual(result['placement'].Base, expected['placement'].Base)
         self.assertEqual(result['placement'].Rotation.Angle,
                          expected['placement'].Rotation.Angle)
