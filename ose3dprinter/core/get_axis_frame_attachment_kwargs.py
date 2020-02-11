@@ -1,6 +1,7 @@
 from FreeCAD import Vector
 from Part import Face
 
+from .exceptions import AxisFrameAttachmentError
 from .face_orientation import get_face_side, get_orientation_of_attachable_axis
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
 from .get_placement_strategy import get_placement_strategy
@@ -51,7 +52,3 @@ def is_frame_rotated(frame):
 def is_outer_face_of_frame(face, frame):
     outer_faces = get_outer_faces_of_frame(frame)
     return any(map(lambda f: f.isEqual(face), outer_faces))
-
-
-class AxisFrameAttachmentError(ValueError):
-    """Raise when unable to attach axis to frame"""

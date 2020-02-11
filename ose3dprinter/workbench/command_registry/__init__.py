@@ -8,5 +8,5 @@ from .command_collection import CommandCollection
 
 command_registry = import_module(
     '.OSE-3D-Printer',
-    package='ose3dprinter_workbench.command_registry'
+    package='ose3dprinter.workbench.command_registry'
 ).command_registry

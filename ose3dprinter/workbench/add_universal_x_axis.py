@@ -1,5 +1,7 @@
 
-from .add_universal_axis_base import AddUniversalAxisBase, AxisOrientation
+from ose3dprinter.core.enums import AxisOrientation
+
+from .add_universal_axis_base import AddUniversalAxisBase
 
 
 class AddUniversalXAxis:

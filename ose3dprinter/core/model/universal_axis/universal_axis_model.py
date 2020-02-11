@@ -1,7 +1,7 @@
 from math import degrees
 
 import Part
-from FreeCAD import Vector, Console, Matrix
+from FreeCAD import Vector, Console
 
 
 class UniversalAxisModel:

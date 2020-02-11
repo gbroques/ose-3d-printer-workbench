@@ -1,12 +1,14 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
-from ose3dprinter_workbench.part import create_universal_axis
-from ose3dprinter_workbench.resources import get_resource_path
+from ose3dprinter.core.exceptions import AxisFrameAttachmentError
+from ose3dprinter.core.get_axis_frame_attachment_kwargs import \
+    get_axis_frame_attachment_kwargs
+from ose3dprinter.core.get_default_axis_creation_kwargs import \
+    get_default_axis_creation_kwargs
+from ose3dprinter.workbench.part import create_universal_axis
+from ose3dprinter.workbench.resources import get_resource_path
 
-from .get_axis_frame_attachment_kwargs import (
-    AxisFrameAttachmentError, get_axis_frame_attachment_kwargs)
-from .get_default_axis_creation_kwargs import get_default_axis_creation_kwargs
 from .get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
 
@@ -51,6 +53,4 @@ def get_axis_creation_kwargs(axis_orientation):
     except AxisFrameAttachmentError as reason:
         log_message_template = '{}. Placing axis in default position.\n'
         Console.PrintMessage(log_message_template.format(reason))
-        return {}
-    else:
         return get_default_axis_creation_kwargs(axis_orientation)

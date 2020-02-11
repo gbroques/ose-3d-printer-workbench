@@ -1,6 +1,6 @@
 import FreeCAD as App
-from ose3dprinter_workbench.part import create_heated_bed
-from ose3dprinter_workbench.resources import get_resource_path
+from ose3dprinter.workbench.part import create_heated_bed
+from ose3dprinter.workbench.resources import get_resource_path
 
 
 class AddHeatedBed:

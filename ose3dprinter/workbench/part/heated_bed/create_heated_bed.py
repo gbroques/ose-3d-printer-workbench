@@ -1,4 +1,4 @@
-from .heated_bed_model import HeatedBedModel
+from ose3dprinter.core.model import HeatedBedModel
 
 
 def create_heated_bed(document, name):

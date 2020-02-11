@@ -1,6 +1,6 @@
 from FreeCAD import Placement, Vector
 
-from .universal_axis_model import UniversalAxisModel
+from ose3dprinter.core.model import UniversalAxisModel
 
 
 def create_universal_axis(document,

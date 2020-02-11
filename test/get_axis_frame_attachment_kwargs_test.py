@@ -2,9 +2,9 @@ import unittest
 
 import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter_workbench.add_universal_axis_base.get_axis_frame_attachment_kwargs import \
+from ose3dprinter.core.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
-from ose3dprinter_workbench.part import create_frame
+from ose3dprinter.workbench.part import create_frame
 
 
 class FreeCADTest(unittest.TestCase):

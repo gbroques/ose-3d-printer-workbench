@@ -8,7 +8,7 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
     """
 
     def __init__(self):
-        from ose3dprinter_workbench import get_resource_path
+        from ose3dprinter.workbench import get_resource_path
 
         cls = self.__class__
         cls.MenuText = 'OSE 3D Printer'
@@ -20,7 +20,7 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         Executed when FreeCAD starts
         """
-        from ose3dprinter_workbench import main_toolbar, register_commands
+        from ose3dprinter.workbench import main_toolbar, register_commands
 
         register_commands()
 

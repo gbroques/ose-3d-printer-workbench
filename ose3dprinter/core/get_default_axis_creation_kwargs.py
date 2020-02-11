@@ -26,7 +26,7 @@ def get_rotation(axis_orientation):
 
 def get_origin_translation_offset(axis_orientation):
     return {
-        AxisOrientation.X: Vector(),
+        AxisOrientation.X: Vector(0, 0, 0),
         AxisOrientation.Y: Vector(-1, -1, 0),
         AxisOrientation.Z: Vector(0, -1, -1)
     }[axis_orientation]

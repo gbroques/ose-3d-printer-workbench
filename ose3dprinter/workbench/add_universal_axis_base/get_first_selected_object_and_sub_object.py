@@ -1,4 +1,4 @@
-from .get_axis_frame_attachment_kwargs import AxisFrameAttachmentError
+from ose3dprinter.core.exceptions import AxisFrameAttachmentError
 
 
 def get_first_selected_object_and_sub_object(selection):
@@ -9,7 +9,7 @@ def get_first_selected_object_and_sub_object(selection):
     :raises AxisFrameAttachmentError: If there's not a single selected object,
                                       and not a single sub-object.
     :return: First selected object, and first sub-object
-    :rtype: Tuple of object and sub-object
+    :rtype: Two-element tuple containing object and sub-object
     """
     num_selected = len(selection)
     if num_selected != 1:

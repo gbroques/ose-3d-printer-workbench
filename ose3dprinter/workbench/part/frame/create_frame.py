@@ -1,4 +1,4 @@
-from .frame_model import FrameModel
+from ose3dprinter.core.model import FrameModel
 
 
 def create_frame(document, name):
