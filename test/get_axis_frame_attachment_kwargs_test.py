@@ -6,8 +6,10 @@ from ose3dprinter.core.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
 from ose3dprinter.workbench.part import create_frame
 
+from .freecad_test_case import FreeCADTestCase
 
-class FreeCADTest(unittest.TestCase):
+
+class GetAxisFrameAttachmentKwargsTest(FreeCADTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -98,11 +100,7 @@ class FreeCADTest(unittest.TestCase):
         self.assertEqual(result['origin_translation_offset'],
                          expected['origin_translation_offset'])
         self.assertEqual(result['length'].Value, self.frame.Size)
-        self.assertEqual(result['placement'].Base, expected['placement'].Base)
-        self.assertEqual(result['placement'].Rotation.Angle,
-                         expected['placement'].Rotation.Angle)
-        self.assertEqual(result['placement'].Rotation.Axis,
-                         expected['placement'].Rotation.Axis)
+        self.assertPlacementEqual(result['placement'], expected['placement'])
 
 
 if __name__ == '__main__':
