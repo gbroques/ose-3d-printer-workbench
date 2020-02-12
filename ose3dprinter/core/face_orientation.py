@@ -1,7 +1,10 @@
-from FreeCAD import Console, Vector
+from FreeCAD import Console
 
 from .enums import AxisOrientation, Side
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
+from .is_face_parallel_to_plane import (is_face_parallel_to_xy_plane,
+                                        is_face_parallel_to_xz_plane,
+                                        is_face_parallel_to_yz_plane)
 
 
 def get_face_closest_to_origin(frame, axis_orientation):
@@ -49,17 +52,17 @@ def get_orientation_of_attachable_axis(face):
     return None
 
 
-def get_is_face_parallel_to_plane(axis_orientation):
-    d = get_is_face_parallel_to_plane_by_axis_orientation()
-    return d[axis_orientation]
-
-
 def get_is_face_parallel_to_plane_by_axis_orientation():
     return {
         AxisOrientation.X: is_face_parallel_to_xy_plane,
         AxisOrientation.Y: is_face_parallel_to_yz_plane,
         AxisOrientation.Z: is_face_parallel_to_xz_plane
     }
+
+
+def get_is_face_parallel_to_plane(axis_orientation):
+    d = get_is_face_parallel_to_plane_by_axis_orientation()
+    return d[axis_orientation]
 
 
 def get_face_side(frame, face):
@@ -82,26 +85,3 @@ def get_sides_by_axis_orientation():
         AxisOrientation.Y: (Side.LEFT, Side.RIGHT),
         AxisOrientation.Z: (Side.FRONT, Side.REAR)
     }
-
-
-def is_face_parallel_to_yz_plane(face):
-    x_axis = Vector(1, 0, 0)
-    return is_face_parallel_to_plane(face, x_axis)
-
-
-def is_face_parallel_to_xz_plane(face):
-    y_axis = Vector(0, 1, 0)
-    return is_face_parallel_to_plane(face, y_axis)
-
-
-def is_face_parallel_to_xy_plane(face):
-    z_axis = Vector(0, 0, 1)
-    return is_face_parallel_to_plane(face, z_axis)
-
-
-def is_face_parallel_to_plane(face, axis_vector):
-    return axis_vector == Vector(
-        abs(round(face.Surface.Axis.x)),
-        abs(round(face.Surface.Axis.y)),
-        abs(round(face.Surface.Axis.z))
-    )

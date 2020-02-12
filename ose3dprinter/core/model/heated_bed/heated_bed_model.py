@@ -1,14 +1,14 @@
 import Part
-from FreeCAD import Base
+from ose3dprinter.core.model.base_model import BaseModel
 
 
-class HeatedBedModel:
+class HeatedBedModel(BaseModel):
     """
     Encapsulates the data (i.e. topography and shape) for a Heated Bed,
     and is separate from the "view" or GUI representation.
     """
 
-    def __init__(self, obj):
+    def __init__(self, obj, placement, origin_translation_offset):
         """
         Constructor
 
@@ -16,7 +16,10 @@ class HeatedBedModel:
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
-        self.Type = 'OSEUniversalAxis'
+        init_args = (placement, origin_translation_offset)
+        super(HeatedBedModel, self).__init__(*init_args)
+
+        self.Type = 'OSEHeatedBed'
 
         obj.Proxy = self
 
@@ -30,9 +33,14 @@ class HeatedBedModel:
         Called on document recompute
         """
         size = obj.Size.Value
-        bed = Part.makeBox(size, size, 50.8)  # 50.8 mm = 2 inches
-        bed.rotate(Base.Vector(0, 0, 0), Base.Vector(0, -1, 0), 90)
-        obj.Shape = bed
+        dimensions = (size, size, 50.8)  # 50.8 mm = 2 inches
+        bed = Part.makeBox(*dimensions)
+
+        parts = [bed]
+        self.move_parts(parts, dimensions)
+
+        # TODO: Why does this need to be a compound to visually center heated bed?
+        obj.Shape = Part.makeCompound(parts)
 
     def __getstate__(self):
         return self.Type

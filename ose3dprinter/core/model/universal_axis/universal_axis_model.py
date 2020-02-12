@@ -1,10 +1,11 @@
-from math import degrees
-
 import Part
-from FreeCAD import Vector, Console
+from FreeCAD import Vector
+from ose3dprinter.core.is_edge_parallel_to_axis import \
+    is_edge_parallel_to_z_axis
+from ose3dprinter.core.model.base_model import BaseModel
 
 
-class UniversalAxisModel:
+class UniversalAxisModel(BaseModel):
     """
     Encapsulates the data (i.e. topography and shape) for a Universal Axis,
     and is separate from the "view" or GUI representation.
@@ -18,9 +19,10 @@ class UniversalAxisModel:
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
+        init_args = (placement, origin_translation_offset)
+        super(UniversalAxisModel, self).__init__(*init_args)
+
         self.Type = 'OSEUniversalAxis'
-        self.placement = placement
-        self.origin_translation_offset = origin_translation_offset
 
         obj.Proxy = self
 
@@ -123,16 +125,9 @@ class UniversalAxisModel:
             rod2
         ]
 
-        base = self.placement.Base
-        rotation = self.placement.Rotation
-
         reference_dimensions = (rod_length, motor_box_length, box_height)
-        translation_offset = get_translation_offset(
-            reference_dimensions, rotation, self.origin_translation_offset)
-        origin = base - translation_offset
-        for part in parts:
-            part.translate(origin)
-            part.rotate(origin, rotation.Axis, degrees(rotation.Angle))
+        self.move_parts(parts, reference_dimensions)
+
         compound = Part.makeCompound(parts)
         obj.Shape = compound
 
@@ -142,71 +137,3 @@ class UniversalAxisModel:
     def __setstate__(self, state):
         if state:
             self.Type = state
-
-
-def is_edge_parallel_to_x_axis(edge):
-    return is_edge_parallel_to_axis(edge, 'x')
-
-
-def is_edge_parallel_to_y_axis(edge):
-    return is_edge_parallel_to_axis(edge, 'y')
-
-
-def is_edge_parallel_to_z_axis(edge):
-    return is_edge_parallel_to_axis(edge, 'z')
-
-
-def is_edge_parallel_to_axis(edge, axis):
-    index_by_axis = {'x': 0, 'y': 1, 'z': 2}
-    opposite_orientations = filter(
-        lambda item: item[0] != axis, index_by_axis.items())
-    a_index, b_index = map(lambda item: item[1], opposite_orientations)
-    first_point = edge.valueAt(edge.FirstParameter)
-    a1 = round(first_point[a_index])
-    b1 = round(first_point[b_index])
-
-    last_point = edge.valueAt(edge.LastParameter)
-    a2 = round(last_point[a_index])
-    b2 = round(last_point[b_index])
-
-    return a1 == a2 and b1 == b2
-
-
-def get_vertex_edges(vertex, edges):
-    vertex_edges = []
-    for e in edges:
-        for v in e.Vertexes:
-            if v.isSame(vertex):
-                vertex_edges.append(e)
-    return vertex_edges
-
-
-def get_translation_offset(reference_dimensions,
-                           rotation,
-                           origin_translation_offset):
-    reference_box = Part.makeBox(*reference_dimensions)
-    reference_box.rotate(Vector(0, 0, 0), rotation.Axis,
-                         degrees(rotation.Angle))
-    first_vertex = reference_box.Vertexes[0]
-    first_vertex_edges = get_vertex_edges(first_vertex, reference_box.Edges)
-    num_edges = len(first_vertex_edges)
-    if num_edges != 3:
-        Console.PrintWarning(
-            'Found {} edges connected to cube vertex instead of 3.\n'.format(num_edges))
-    x = y = z = 1.0
-    for e in first_vertex_edges:
-        if is_edge_parallel_to_x_axis(e):
-            x = e.Length
-        elif is_edge_parallel_to_y_axis(e):
-            y = e.Length
-        elif is_edge_parallel_to_z_axis(e):
-            z = e.Length
-        else:
-            Console.PrintWarning(
-                '{} not parallel to x, y, or z axes\n'.format(e))
-
-    return Vector(
-        x * origin_translation_offset.x,
-        y * origin_translation_offset.y,
-        z * origin_translation_offset.z
-    )

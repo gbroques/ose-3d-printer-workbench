@@ -1,4 +1,7 @@
 import FreeCAD as App
+import FreeCADGui as Gui
+from ose3dprinter.core.get_heated_bed_frame_centered_kwargs import \
+    get_heated_bed_frame_centered_kwargs
 from ose3dprinter.workbench.part import create_heated_bed
 from ose3dprinter.workbench.resources import get_resource_path
 
@@ -14,7 +17,8 @@ class AddHeatedBed:
         document = App.ActiveDocument
         if not document:
             document = App.newDocument()
-        create_heated_bed(document, 'HeatedBed')
+        kwargs = get_heated_bed_creation_kwargs()
+        create_heated_bed(document, 'HeatedBed', **kwargs)
         document.recompute()
 
     def IsActive(self):
@@ -26,3 +30,17 @@ class AddHeatedBed:
             'MenuText': 'Add Heated Bed',
             'ToolTip': 'Add Heated Bed'
         }
+
+
+def get_heated_bed_creation_kwargs():
+    selection_objects = Gui.Selection.getSelectionEx()
+    if is_frame_selected(selection_objects):
+        frame = selection_objects[0].Object
+        return get_heated_bed_frame_centered_kwargs(frame)
+    else:
+        return {}
+
+
+def is_frame_selected(selection_objects):
+    return (len(selection_objects) > 0 and
+            selection_objects[0].Object.Proxy.Type == 'OSEFrame')
