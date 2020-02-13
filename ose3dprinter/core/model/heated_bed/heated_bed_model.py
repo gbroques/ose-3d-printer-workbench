@@ -8,6 +8,8 @@ class HeatedBedModel(BaseModel):
     and is separate from the "view" or GUI representation.
     """
 
+    Type = 'OSEHeatedBed'
+
     def __init__(self, obj, placement, origin_translation_offset):
         """
         Constructor
@@ -18,8 +20,6 @@ class HeatedBedModel(BaseModel):
         """
         init_args = (placement, origin_translation_offset)
         super(HeatedBedModel, self).__init__(*init_args)
-
-        self.Type = 'OSEHeatedBed'
 
         obj.Proxy = self
 

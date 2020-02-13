@@ -1,16 +1,16 @@
 def is_edge_parallel_to_x_axis(edge):
-    return is_edge_parallel_to_axis(edge, 'x')
+    return _is_edge_parallel_to_axis(edge, 'x')
 
 
 def is_edge_parallel_to_y_axis(edge):
-    return is_edge_parallel_to_axis(edge, 'y')
+    return _is_edge_parallel_to_axis(edge, 'y')
 
 
 def is_edge_parallel_to_z_axis(edge):
-    return is_edge_parallel_to_axis(edge, 'z')
+    return _is_edge_parallel_to_axis(edge, 'z')
 
 
-def is_edge_parallel_to_axis(edge, axis):
+def _is_edge_parallel_to_axis(edge, axis):
     index_by_axis = {'x': 0, 'y': 1, 'z': 2}
     inverse_orientations = filter(
         lambda item: item[0] != axis, index_by_axis.items())

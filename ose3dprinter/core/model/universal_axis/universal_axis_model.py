@@ -11,6 +11,8 @@ class UniversalAxisModel(BaseModel):
     and is separate from the "view" or GUI representation.
     """
 
+    Type = 'OSEUniversalAxis'
+
     def __init__(self, obj, length, placement, origin_translation_offset):
         """
         Constructor
@@ -21,8 +23,6 @@ class UniversalAxisModel(BaseModel):
         """
         init_args = (placement, origin_translation_offset)
         super(UniversalAxisModel, self).__init__(*init_args)
-
-        self.Type = 'OSEUniversalAxis'
 
         obj.Proxy = self
 

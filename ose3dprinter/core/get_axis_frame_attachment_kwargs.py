@@ -1,10 +1,11 @@
 from FreeCAD import Vector
 from Part import Face
 
-from .exceptions import AxisFrameAttachmentError
+from .exceptions import AttachmentError
 from .face_orientation import get_face_side, get_orientation_of_attachable_axis
 from .get_outer_faces_of_frame import get_outer_faces_of_frame
 from .get_placement_strategy import get_placement_strategy
+from .model import FrameModel
 
 
 def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
@@ -25,21 +26,21 @@ def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
 
 def validate_frame_and_face(frame, face, axis_orientation):
     if not isinstance(face, Face):
-        raise AxisFrameAttachmentError('Selected element is not a face')
-    if frame.Proxy.Type != 'OSEFrame':
-        raise AxisFrameAttachmentError('Must select frame')
+        raise AttachmentError('Selected element is not a face')
+    if frame.Proxy.Type != FrameModel.Type:
+        raise AttachmentError('Must select frame')
     if is_frame_rotated(frame):
-        raise AxisFrameAttachmentError('Frame is rotated')
+        raise AttachmentError('Frame is rotated')
     if not is_outer_face_of_frame(face, frame):
-        raise AxisFrameAttachmentError('Must select outer face of frame')
+        raise AttachmentError('Must select outer face of frame')
     face_side = get_face_side(frame, face)
     if face_side == 'bottom':
-        raise AxisFrameAttachmentError(
+        raise AttachmentError(
             'Cannot attach axis to bottom side of frame')
     attachable_axis = get_orientation_of_attachable_axis(face)
     if attachable_axis != axis_orientation:
         message_template = 'Cannot attach {} axis to {} side of frame'
-        raise AxisFrameAttachmentError(message_template.format(
+        raise AttachmentError(message_template.format(
             axis_orientation.upper(), face_side))
     return frame, face
 

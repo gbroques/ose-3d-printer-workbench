@@ -8,9 +8,9 @@ class FrameModel:
     and is separate from the "view" or GUI representation.
     """
 
-    def __init__(self, obj):
-        self.Type = 'OSEFrame'
+    Type = 'OSEFrame'
 
+    def __init__(self, obj):
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'
         obj.addProperty('App::PropertyLength', 'Size', 'Base', size_tooltip)

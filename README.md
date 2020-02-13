@@ -9,6 +9,7 @@ A workbench for designing 3D printers by [Open Source Ecology](https://www.opens
 * <img alt="Add Universal Y Axis" src="ose3dprinter/workbench/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis
 * <img alt="Add Universal Z Axis" src="ose3dprinter/workbench/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis
 * <img alt="Add Heated Bed" src="ose3dprinter/workbench/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
+* <img alt="Add Extruder" src="ose3dprinter/workbench/resources/Extruder.svg" width="32" height="32" /> Add Extruder
 
 ## Tests
 Unit tests are located within the `/test` directory of this repository.
