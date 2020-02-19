@@ -11,6 +11,26 @@ A workbench for designing 3D printers by [Open Source Ecology](https://www.opens
 * <img alt="Add Heated Bed" src="ose3dprinter/workbench/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
 * <img alt="Add Extruder" src="ose3dprinter/workbench/resources/Extruder.svg" width="32" height="32" /> Add Extruder
 
+## Documentation
+Documentation is located within the `/docs` directory of this reposiotry.
+
+To simplify execution, we use Docker to create a virtualized environment with the requisite dependencies for generating documentation in Python.
+
+### Pre-Requisites
+Install Docker and [Docker Compose](https://docs.docker.com/compose/install/).
+
+### Build & Run the Docs Container
+Run from root of repository:
+
+    docker-compose up -d
+
+The `-d` flag or "detached mode" is to run the container in the background.
+
+### Make Documentation
+Run from root of repository:
+
+    docker exec -it ose3dprinter-docs make html
+
 ## Tests
 Unit tests are located within the `/test` directory of this repository.
 

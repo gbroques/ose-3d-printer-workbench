@@ -9,3 +9,12 @@ services:
     volumes:
       -  ./:/var/app
     network_mode: bridge
+  docs:
+    container_name: ose3dprinter-docs
+    image: ose3dprinter-docs-i
+    build:
+      context: ./
+      dockerfile: docs.Dockerfile
+    volumes:
+      -  ./:/var/app
+    network_mode: bridge

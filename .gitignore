@@ -2,3 +2,4 @@
 .vscode/
 .coverage
 htmlcov/
+_build/
