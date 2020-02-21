@@ -1,5 +1,6 @@
 # OSE 3D Printer Workbench
-[![Build Status](https://travis-ci.org/gbroques/ose-3d-printer-workbench.svg?branch=master)](https://travis-ci.org/gbroques/ose-3d-printer-workbench) [![Coverage Status](https://coveralls.io/repos/github/gbroques/ose-3d-printer-workbench/badge.svg)](https://coveralls.io/github/gbroques/ose-3d-printer-workbench)
+[![Build Status](https://travis-ci.org/gbroques/ose-3d-printer-workbench.svg?branch=master)](https://travis-ci.org/gbroques/ose-3d-printer-workbench) [![Documentation Status](https://readthedocs.org/projects/ose-3d-printer-workbench/badge/?version=latest)](https://ose-3d-printer-workbench.readthedocs.io/en/latest/?badge=latest)
+ [![Coverage Status](https://coveralls.io/repos/github/gbroques/ose-3d-printer-workbench/badge.svg)](https://coveralls.io/github/gbroques/ose-3d-printer-workbench)
 
 A workbench for designing 3D printers by [Open Source Ecology](https://www.opensourceecology.org/).
 
@@ -12,7 +13,9 @@ A workbench for designing 3D printers by [Open Source Ecology](https://www.opens
 * <img alt="Add Extruder" src="ose3dprinter/workbench/resources/Extruder.svg" width="32" height="32" /> Add Extruder
 
 ## Documentation
-Documentation is located within the `/docs` directory of this reposiotry.
+Documentation is located within the `/docs` directory of this repository, and hosted at the following URL with [Read the Docs](https://readthedocs.org/):
+
+https://ose-3d-printer-workbench.readthedocs.io/en/latest/
 
 To simplify execution, we use Docker to create a virtualized environment with the requisite dependencies for generating documentation in Python.
 
