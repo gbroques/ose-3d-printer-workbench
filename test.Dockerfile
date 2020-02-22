@@ -14,14 +14,14 @@ RUN apt-get install -y freecad-0.16
 RUN apt-get install -y python-pip --fix-missing
 RUN pip install --upgrade pip
 
-# Install test dependencies
-RUN pip install pytest coverage pytest-cov coveralls
-
 ENV PYTHONPATH=/usr/lib/freecad-0.16/lib/
 
 COPY . /var/app
 COPY ./.git /var/app/.git
 WORKDIR /var/app
+
+# Install test dependencies
+RUN pip install -r test-requirements.txt
 
 # Keep container running
 CMD tail -f /dev/null

@@ -5,7 +5,7 @@ services:
     image: ose3dprinter-test-i
     build: 
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: test.Dockerfile
     volumes:
       -  ./:/var/app
     network_mode: bridge
