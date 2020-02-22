@@ -4,7 +4,7 @@ python:
 services:
     - docker
 install:
-    - docker build . -t ose3dprinter-test-i
+    - docker build . -f test.Dockerfile -t ose3dprinter-test-i
     - docker run --name ose3dprinter-test --detach ose3dprinter-test-i
 script:
     - docker exec -it ose3dprinter-test pytest --cov ose3dprinter/ test/
