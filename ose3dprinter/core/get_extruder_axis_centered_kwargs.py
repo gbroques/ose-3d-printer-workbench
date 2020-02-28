@@ -40,4 +40,7 @@ def validate_axis_and_face(axis, face):
     if (face_left_bound <= axis_left_bound or
             face_right_bound >= axis_right_bound):
         raise AttachmentError('Must select carriage face')
+
+    if axis_bounding_box.ZMin == face_bounding_box.ZMin:
+        raise AttachmentError('Must select top carriage face')
     return axis, face
