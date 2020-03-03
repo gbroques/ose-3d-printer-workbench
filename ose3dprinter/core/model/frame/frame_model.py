@@ -14,7 +14,12 @@ class FrameModel:
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'
         obj.addProperty('App::PropertyLength', 'Size', 'Base', size_tooltip)
-        obj.Size = 406.4
+        obj.Size = 406.4  # 16 inches
+
+        # Width property
+        width_tooltip = 'Width of frame.'
+        obj.addProperty('App::PropertyLength', 'Width', 'Base', width_tooltip)
+        obj.Width = 50.8  # 2 inches
 
         obj.Proxy = self
 
@@ -23,7 +28,7 @@ class FrameModel:
         Called on document recompute
         """
         side = obj.Size.Value
-        width = 50.8  # Width of 12" (304.8 mm) frame is 25.4 mm or 1"
+        width = obj.Width.Value  # Width of 12" (304.8 mm) frame is 1" (25.4 mm)
         sheet_thickness = 3
 
         sheet = Part.makeBox(side, side, sheet_thickness)
