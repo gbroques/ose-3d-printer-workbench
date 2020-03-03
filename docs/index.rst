@@ -4,8 +4,15 @@
    contain the root `toctree` directive.
 
 
-Welcome to OSE 3D Printer Workbench's documentation!
-====================================================
+OSE 3D Printer Workbench Documentation
+======================================
+
+.. toctree::
+   :caption: Getting Started
+   :maxdepth: 2
+
+   pages/including_move_and_rotate_tools
+
 .. toctree::
    :maxdepth: 2
    :caption: OSE 3D Printer Package

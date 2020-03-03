@@ -43,6 +43,13 @@ ose3dprinter.core.get_default_axis_creation_kwargs
    :undoc-members:
    :show-inheritance:
 
+ose3dprinter.core.get_extruder_axis_centered_kwargs
+---------------------------------------------------
+.. automodule:: ose3dprinter.core.get_extruder_axis_centered_kwargs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ose3dprinter.core.get_heated_bed_frame_centered_kwargs
 ------------------------------------------------------
 .. automodule:: ose3dprinter.core.get_heated_bed_frame_centered_kwargs

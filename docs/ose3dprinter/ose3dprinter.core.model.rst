@@ -5,6 +5,7 @@ ose3dprinter.core.model
 
 .. toctree::
 
+   ose3dprinter.core.model.extruder
    ose3dprinter.core.model.frame
    ose3dprinter.core.model.heated_bed
    ose3dprinter.core.model.universal_axis
