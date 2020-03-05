@@ -3,9 +3,11 @@ from Part import Face
 
 from .exceptions import AttachmentError
 from .face_orientation import get_face_side, get_orientation_of_attachable_axis
-from .get_outer_faces_of_frame import get_outer_faces_of_frame
+from .get_outer_faces_of_cnc_cut_frame import get_outer_faces_of_cnc_cut_frame
 from .get_placement_strategy import get_placement_strategy
 from .model import FrameModel
+from .enums import Side, AxisOrientation
+from .model import UniversalAxisModel
 
 
 def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
@@ -17,8 +19,15 @@ def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
     face_side = get_face_side(frame, face)
     placement_strategy = get_placement_strategy(face_side)
     placement, origin_translation_offset = placement_strategy(frame, face)
+    length = frame.Size
+    # TODO: Consider returning length from get_placement_strategy function
+    #       and then this condition goes away from this function.
+    if frame.HasCorners and axis_orientation == AxisOrientation.Y:
+        length = frame.Proxy.distance_between_axis_side_mount_holes + \
+            UniversalAxisModel.distance_between_inner_motor_side_holes_and_outer_edge() + \
+            UniversalAxisModel.distance_between_idler_side_holes_and_outer_edge()
     return {
-        'length': frame.Size,
+        'length': length,
         'placement': placement,
         'origin_translation_offset': origin_translation_offset
     }
@@ -31,12 +40,14 @@ def validate_frame_and_face(frame, face, axis_orientation):
         raise AttachmentError('Must select frame')
     if is_frame_rotated(frame):
         raise AttachmentError('Frame is rotated')
-    if not is_outer_face_of_frame(face, frame):
+    if not frame.HasCorners and not is_outer_face_of_cnc_cut_frame(face, frame):
         raise AttachmentError('Must select outer face of frame')
     face_side = get_face_side(frame, face)
-    if face_side == 'bottom':
+    if face_side == Side.BOTTOM:
         raise AttachmentError(
             'Cannot attach axis to bottom side of frame')
+    if face_side is None:
+        raise AttachmentError('Must select outer face of frame')
     attachable_axis = get_orientation_of_attachable_axis(face)
     if attachable_axis != axis_orientation:
         message_template = 'Cannot attach {} axis to {} side of frame'
@@ -50,6 +61,6 @@ def is_frame_rotated(frame):
     return rotation.Axis != Vector(0, 0, 1) or rotation.Angle != 0
 
 
-def is_outer_face_of_frame(face, frame):
-    outer_faces = get_outer_faces_of_frame(frame)
+def is_outer_face_of_cnc_cut_frame(face, cnc_cut_frame):
+    outer_faces = get_outer_faces_of_cnc_cut_frame(cnc_cut_frame)
     return any(map(lambda f: f.isEqual(face), outer_faces))

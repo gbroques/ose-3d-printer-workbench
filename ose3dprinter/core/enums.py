@@ -11,3 +11,9 @@ class Side:
     REAR = 'rear'
     BOTTOM = 'bottom'
     LEFT = 'left'
+
+
+class Plane:
+    XY = 'xy'
+    YZ = 'yz'
+    XZ = 'xz'

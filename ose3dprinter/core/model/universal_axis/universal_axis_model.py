@@ -13,6 +13,15 @@ class UniversalAxisModel(BaseModel):
 
     Type = 'OSEUniversalAxis'
 
+    motor_box_width = 59.5
+
+    idler_box_width = 26
+
+    hole_radius = 3.39
+
+    distance_between_holes = 22.44
+    distance_between_hole_and_inner_motor_side = hole_radius + 9.2
+
     def __init__(self, obj, length, placement, origin_translation_offset):
         """
         Constructor
@@ -51,13 +60,30 @@ class UniversalAxisModel(BaseModel):
         box_height = 24
 
         # Define dimensions of motor side box
-        motor_box_width = 59.5
         motor_box_length = 66
         motor_side_box_dimensions = (
-            motor_box_width, motor_box_length, box_height)
+            self.motor_box_width, motor_box_length, box_height)
 
         # Make motor side box
         motor_side_box = Part.makeBox(*motor_side_box_dimensions)
+        front_cylinder = Part.makeCylinder(self.hole_radius, box_height)
+        rear_cylinder = front_cylinder.copy()
+        distance_from_hole_to_side = (
+            motor_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
+        front_cylinder.translate(Vector(
+            self.motor_box_width - self.distance_between_hole_and_inner_motor_side,
+            distance_from_hole_to_side,
+            0
+        ))
+        rear_cylinder.translate(Vector(
+            self.motor_box_width - self.distance_between_hole_and_inner_motor_side,
+            motor_box_length - distance_from_hole_to_side,
+            0
+        ))
+
+        motor_side_box_with_front_hole = motor_side_box.cut(front_cylinder)
+        motor_side_box_with_holes = motor_side_box_with_front_hole.cut(
+            rear_cylinder)
 
         # Motor
         motor_side = 37.8
@@ -66,7 +92,7 @@ class UniversalAxisModel(BaseModel):
 
         # Make Motor
         motor = Part.makeBox(*motor_dimensions)
-        half_motor_box_width = motor_box_width / 2
+        half_motor_box_width = self.motor_box_width / 2
         half_motor_box_length = motor_box_length / 2
         half_motor_side = motor_side / 2
         motor.translate(Vector(
@@ -93,14 +119,34 @@ class UniversalAxisModel(BaseModel):
         carriage_box.translate(Vector(carriage_box_x, carriage_box_y, 0))
 
         # Define dimensions of idler side box
-        idler_box_width = 55
         idler_box_length = 66
         idler_side_box_dimensions = (
-            idler_box_width, idler_box_length, box_height)
+            self.idler_box_width, idler_box_length, box_height)
+
+        distance_between_hole_and_idler_side = (
+            idler_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
+        front_cylinder = Part.makeCylinder(self.hole_radius, box_height)
+        rear_cylinder = front_cylinder.copy()
+        front_cylinder.translate(Vector(
+            self.idler_box_width / 2,
+            distance_between_hole_and_idler_side,
+            0
+        ))
+        rear_cylinder.translate(Vector(
+            self.idler_box_width / 2,
+            idler_box_length - distance_between_hole_and_idler_side,
+            0
+        ))
 
         # Make idler
         idler_side_box = Part.makeBox(*idler_side_box_dimensions)
-        idler_side_box.translate(Vector(rod_length - idler_box_width, 0, 0))
+
+        idler_side_box_with_front_hole = idler_side_box.cut(front_cylinder)
+        idler_side_box_with_holes = idler_side_box_with_front_hole.cut(
+            rear_cylinder)
+
+        idler_side_box_with_holes.translate(
+            Vector(rod_length - self.idler_box_width, 0, 0))
 
         space_between_rod_and_box_edge = 10
         half_box_height = box_height / 2
@@ -117,10 +163,10 @@ class UniversalAxisModel(BaseModel):
         rod2.translate(Vector(0, rod2_y_position, half_box_height))
 
         parts = [
-            motor_side_box,
+            motor_side_box_with_holes,
             chamfered_motor,
             carriage_box,
-            idler_side_box,
+            idler_side_box_with_holes,
             rod1,
             rod2
         ]
@@ -137,3 +183,12 @@ class UniversalAxisModel(BaseModel):
     def __setstate__(self, state):
         if state:
             self.Type = state
+
+    @classmethod
+    def distance_between_inner_motor_side_holes_and_outer_edge(cls):
+        return cls.motor_box_width - \
+            cls.distance_between_hole_and_inner_motor_side
+
+    @classmethod
+    def distance_between_idler_side_holes_and_outer_edge(cls):
+        return cls.idler_box_width / 2

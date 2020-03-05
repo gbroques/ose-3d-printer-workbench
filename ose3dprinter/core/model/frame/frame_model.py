@@ -1,16 +1,26 @@
 import Part
-from FreeCAD import Base
+from FreeCAD import Vector
+
+from .cnc_cut_frame import CNCCutFrame
+from .angled_bar_frame import AngledBarFrame
+from .angle_frame_connector import AngleFrameConnector
 
 
 class FrameModel:
     """
     Encapsulates the data (i.e. topography and shape) for a Frame,
     and is separate from the "view" or GUI representation.
+
+    See D3D Frame on the Open Source Ecology Wiki:
+    https://wiki.opensourceecology.org/wiki/D3D_Frame
     """
 
     Type = 'OSEFrame'
 
     def __init__(self, obj):
+        obj.Proxy = self
+        self.Object = obj
+
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'
         obj.addProperty('App::PropertyLength', 'Size', 'Base', size_tooltip)
@@ -23,57 +33,72 @@ class FrameModel:
 
         # Thickness property
         thickness_tooltip = 'Thickness of frame.'
-        obj.addProperty('App::PropertyLength', 'Thickness', 'Base', thickness_tooltip)
+        obj.addProperty('App::PropertyLength', 'Thickness',
+                        'Base', thickness_tooltip)
         obj.Thickness = 3
 
-        obj.Proxy = self
+        # HasCorners property
+        has_corners = 'Whether the frame has 3d printed corners or not.'
+        obj.addProperty('App::PropertyBool', 'HasCorners', 'Base', has_corners)
+        obj.HasCorners = False
 
     def execute(self, obj):
         """
         Called on document recompute
         """
         side = obj.Size.Value
-        width = obj.Width.Value  # Width of 12" (304.8 mm) frame is 1" (25.4 mm)
+        # Width of 12" (304.8 mm) frame is 1" (25.4 mm)
+        width = obj.Width.Value
         sheet_thickness = obj.Thickness.Value
 
-        sheet = Part.makeBox(side, side, sheet_thickness)
+        Frame = AngledBarFrame if obj.HasCorners else CNCCutFrame
 
-        inner_side = side - (width * 2)
-        inner_sheet = Part.makeBox(inner_side, inner_side, sheet_thickness)
-        inner_sheet.translate(Base.Vector(width, width, 0))
+        obj.Shape = Frame.make(side, width, sheet_thickness)
 
-        bottom_frame = sheet.cut(inner_sheet)
+    @property
+    def distance_between_axis_side_mount_holes(self):
+        d = AngleFrameConnector.distance_between_axis_side_mount_holes_and_frame()
+        return self.Object.Size.Value + (d * 2)
 
-        top_frame = bottom_frame.copy()
-        top_frame.translate(Base.Vector(0, 0, side - sheet_thickness))
+    @property
+    def XMin(self):
+        x_min = self.Object.Shape.BoundBox.XMin
+        if self.Object.HasCorners:
+            return x_min + AngleFrameConnector.axis_side_mount_width
+        else:
+            return x_min
 
-        left_wall = bottom_frame.copy()
-        left_wall.rotate(Base.Vector(0, 0, 0), Base.Vector(0, -1, 0), 90)
-        left_wall.translate(Base.Vector(sheet_thickness, 0, 0))
+    @property
+    def XMax(self):
+        x_min = self.Object.Shape.BoundBox.XMax
+        if self.Object.HasCorners:
+            return x_min - AngleFrameConnector.axis_side_mount_width
+        else:
+            return x_min
 
-        right_wall = left_wall.copy()
-        right_wall.translate(Base.Vector(side - sheet_thickness, 0, 0))
+    @property
+    def YMin(self):
+        y_min = self.Object.Shape.BoundBox.YMin
+        if self.Object.HasCorners:
+            return y_min + AngleFrameConnector.axis_side_mount_length
+        else:
+            return y_min
 
-        front_wall = bottom_frame.copy()
-        front_wall.rotate(Base.Vector(0, 0, 0), Base.Vector(1, 0, 0), 90)
-        front_wall.translate(Base.Vector(0, sheet_thickness, 0))
+    @property
+    def YMax(self):
+        y_max = self.Object.Shape.BoundBox.YMax
+        if self.Object.HasCorners:
+            return y_max - AngleFrameConnector.axis_side_mount_length
+        else:
+            return y_max
 
-        rear_wall = front_wall.copy()
-        rear_wall.translate(Base.Vector(0, side - sheet_thickness, 0))
+    @property
+    def ZMin(self):
+        return self.Object.Shape.BoundBox.ZMin
 
-        parts = [
-            bottom_frame,
-            left_wall,
-            right_wall,
-            front_wall,
-            rear_wall,
-            top_frame
-        ]
-
-        frame = reduce(lambda union, part: union.fuse(part), parts)
-
-        # removeSplitter() refines shape
-        obj.Shape = frame.removeSplitter()
+    @property
+    def ZMax(self):
+        return self.Object.Shape.BoundBox.ZMax
 
     def __getstate__(self):
         return self.Type
