@@ -21,6 +21,11 @@ class FrameModel:
         obj.addProperty('App::PropertyLength', 'Width', 'Base', width_tooltip)
         obj.Width = 50.8  # 2 inches
 
+        # Thickness property
+        thickness_tooltip = 'Thickness of frame.'
+        obj.addProperty('App::PropertyLength', 'Thickness', 'Base', thickness_tooltip)
+        obj.Thickness = 3
+
         obj.Proxy = self
 
     def execute(self, obj):
@@ -29,7 +34,7 @@ class FrameModel:
         """
         side = obj.Size.Value
         width = obj.Width.Value  # Width of 12" (304.8 mm) frame is 1" (25.4 mm)
-        sheet_thickness = 3
+        sheet_thickness = obj.Thickness.Value
 
         sheet = Part.makeBox(side, side, sheet_thickness)
 
