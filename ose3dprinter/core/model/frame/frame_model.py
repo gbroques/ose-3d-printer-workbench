@@ -24,18 +24,18 @@ class FrameModel:
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'
         obj.addProperty('App::PropertyLength', 'Size', 'Base', size_tooltip)
-        obj.Size = 406.4  # 16 inches
+        obj.Size = 304.8  # 12 inches
 
         # Width property
         width_tooltip = 'Width of frame.'
         obj.addProperty('App::PropertyLength', 'Width', 'Base', width_tooltip)
-        obj.Width = 50.8  # 2 inches
+        obj.Width = 38.1  # 1 inches
 
         # Thickness property
         thickness_tooltip = 'Thickness of frame.'
         obj.addProperty('App::PropertyLength', 'Thickness',
                         'Base', thickness_tooltip)
-        obj.Thickness = 3
+        obj.Thickness = 3.175  # 1/8 inch
 
         # HasCorners property
         has_corners = 'Whether the frame has 3d printed corners or not.'
