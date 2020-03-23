@@ -34,7 +34,7 @@ def get_face_side_for_frame_with_corners(frame_with_corners,
 
         upper_bound = round(frame_with_corners.Proxy.ZMax, 2)
         lower_bound = upper_bound - bracket_end_thickness
-        if lower_bound <= value <= upper_bound:
+        if between_bounds(value, lower_bound, upper_bound):
             return Side.TOP
     elif plane == Plane.YZ:
         value = round(face.Surface.Position.x, 2)
@@ -42,25 +42,25 @@ def get_face_side_for_frame_with_corners(frame_with_corners,
         lower_bound = round(frame_with_corners.Shape.BoundBox.XMin, 2)
         upper_bound = lower_bound + bracket_outer_edge_thickness + \
             AngleFrameConnector.axis_side_mount_width
-        if lower_bound <= value <= upper_bound:
+        if between_bounds(value, lower_bound, upper_bound):
             return Side.LEFT
 
         upper_bound = round(frame_with_corners.Shape.BoundBox.XMax, 2)
         lower_bound = upper_bound - bracket_outer_edge_thickness - \
             AngleFrameConnector.axis_side_mount_width
-        if lower_bound <= value <= upper_bound:
+        if between_bounds(value, lower_bound, upper_bound):
             return Side.RIGHT
     elif plane == Plane.XZ:
         value = round(face.Surface.Position.y, 2)
 
         lower_bound = round(frame_with_corners.Proxy.YMin, 2)
         upper_bound = lower_bound + bracket_outer_edge_thickness
-        if lower_bound <= value <= upper_bound:
+        if between_bounds(value, lower_bound, upper_bound):
             return Side.FRONT
 
         upper_bound = round(frame_with_corners.Proxy.YMax, 2)
         lower_bound = upper_bound - bracket_outer_edge_thickness
-        if lower_bound <= value <= upper_bound:
+        if between_bounds(value, lower_bound, upper_bound):
             return Side.REAR
     else:
         Console.PrintWarning('{} is not a valid plane.\n'.format(plane))
@@ -156,3 +156,22 @@ def _sort_faces_by_surface_position(faces, axis_orientation):
     ].index(axis_orientation)
     position_index = ((axis_orientation_index - 1) + 3) % 3
     return sorted(faces, key=lambda f: f.Surface.Position[position_index])
+
+
+def between_bounds(value, lower_bound, upper_bound):
+    is_between_bounds = lower_bound < value < upper_bound
+    return (
+        isclose(value, lower_bound) or
+        is_between_bounds or
+        isclose(value, upper_bound)
+    )
+
+
+def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
+    """
+    TODO: Replace with math.isclose in python 3.5
+    Sources:
+        https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+        https://docs.python.org/3/whatsnew/3.5.html#pep-485-a-function-for-testing-approximate-equality
+    """
+    return abs(a-b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
