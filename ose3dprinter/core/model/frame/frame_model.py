@@ -29,7 +29,7 @@ class FrameModel:
         # Width property
         width_tooltip = 'Width of frame.'
         obj.addProperty('App::PropertyLength', 'Width', 'Base', width_tooltip)
-        obj.Width = 38.1  # 1 inches
+        obj.Width = 38.1  # 1.5 inches
 
         # Thickness property
         thickness_tooltip = 'Thickness of frame.'
