@@ -80,7 +80,8 @@ class FrameModel:
     def YMin(self):
         y_min = self.Object.Shape.BoundBox.YMin
         if self.Object.HasCorners:
-            return y_min + AngleFrameConnector.axis_side_mount_length
+            return y_min + \
+                AngleFrameConnector.calculate_y_axis_overhang_distance()
         else:
             return y_min
 
@@ -88,7 +89,8 @@ class FrameModel:
     def YMax(self):
         y_max = self.Object.Shape.BoundBox.YMax
         if self.Object.HasCorners:
-            return y_max - AngleFrameConnector.axis_side_mount_length
+            return y_max - \
+                AngleFrameConnector.calculate_y_axis_overhang_distance()
         else:
             return y_max
 

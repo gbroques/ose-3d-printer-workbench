@@ -1,4 +1,7 @@
 class Corner:
+    """Represents corners of a cube.
+    TODO: Rename to CubeCorner?
+    """
     BOTTOM_LEFT_FRONT = 'bottom_left_front'
     BOTTOM_LEFT_REAR = 'bottom_left_rear'
     BOTTOM_RIGHT_REAR = 'bottom_right_rear'
@@ -10,6 +13,13 @@ class Corner:
 
 
 def is_top_corner(corner):
+    """Returns whether a corner is a top corner.
+
+    :param corner: A corner.
+    :type corner: str
+    :return: Whether the corner is a top corner or not.
+    :rtype: bool
+    """
     return (
         corner == Corner.TOP_LEFT_FRONT or
         corner == Corner.TOP_LEFT_REAR or

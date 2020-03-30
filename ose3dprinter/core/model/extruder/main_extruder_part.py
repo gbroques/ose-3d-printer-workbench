@@ -1,7 +1,6 @@
 import Part
 from FreeCAD import Vector
-
-from .make_face_from_points import make_face_from_points
+from ose3dprinter.core.model.make_face_from_points import make_face_from_points
 
 
 class MainExtruderPart:
@@ -92,8 +91,7 @@ def make_slanted_side(width_or_thickness, height):
         bottom_right,
         mid_right,
         top_right,
-        top_left,
-        bottom_left
+        top_left
     ]
 
     face = make_face_from_points(points)

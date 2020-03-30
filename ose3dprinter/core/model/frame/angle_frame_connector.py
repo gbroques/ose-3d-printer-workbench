@@ -1,7 +1,7 @@
 import Part
 from FreeCAD import Vector
-from ose3dprinter.core.model.universal_axis import UniversalAxisModel
 
+from .axis_side_mount import AxisSideMount
 from .corner import Corner, is_top_corner
 from .rotate_and_translate_part import rotate_and_translate_part
 
@@ -24,7 +24,7 @@ class AngleFrameConnector:
     bracket_end_thickness = 3.41
 
     axis_side_mount_width = 5
-    axis_side_mount_length = 21.88
+    axis_side_mount_length = 27.75
 
     @classmethod
     def make(cls, width, thickness, corner=Corner.BOTTOM_LEFT_FRONT):
@@ -117,6 +117,11 @@ class AngleFrameConnector:
         return AxisSideMount.calculate_distance_between_holes_and_connector(
             cls.axis_side_mount_length)
 
+    @classmethod
+    def calculate_y_axis_overhang_distance(cls):
+        return AxisSideMount.calculate_overhang_distance(
+            cls.axis_side_mount_length)
+
 
 def make_tri_bracket(length,
                      width,
@@ -181,123 +186,6 @@ def make_angle_connector_corner(bracket_length, bracket_width):
     inner_box.translate(Vector(bracket_width, bracket_width, bracket_width))
 
     return box.cut(inner_box)
-
-
-class AxisSideMount:
-    hole_radius = 3.39
-    height = 65.2
-    distance_between_hole_and_outer_edge = hole_radius + 6.12
-
-    @classmethod
-    def make(cls, width, length, corner):
-        """Returns which side of the angle frame connector to add the axis mount to.
-
-        :param width: Width of axis side mount.
-        :type width: float
-        :param corner: A top corner:
-                        top left front, top right front,
-                        top left rear, or top right rear.
-        :type corner: str
-        :return: Axis side mount
-        :rtype: Part.Shape
-        """
-        base_attachment_overlap = 4.35
-        distance_from_hole_to_side = (
-            cls.height - (UniversalAxisModel.distance_between_holes + (cls.hole_radius * 2))) / 2
-        length_plus_attachment = length + base_attachment_overlap
-        box = None
-        if corner == Corner.TOP_RIGHT_FRONT:
-            box = Part.makeBox(width, length_plus_attachment, cls.height)
-
-            top_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(1, 0, 0))
-            top_hole.translate(Vector(
-                0,
-                cls.distance_between_hole_and_outer_edge,
-                distance_from_hole_to_side))
-            box = box.cut(top_hole)
-
-            bottom_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(1, 0, 0))
-            bottom_hole.translate(Vector(
-                0,
-                cls.distance_between_hole_and_outer_edge,
-                cls.height - distance_from_hole_to_side))
-            box = box.cut(bottom_hole)
-
-            box.translate(Vector(-width, -length, 0))
-        elif corner == Corner.TOP_LEFT_FRONT:
-            box = Part.makeBox(cls.height, length_plus_attachment, width)
-
-            top_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(0, 0, 1))
-            top_hole.translate(Vector(
-                distance_from_hole_to_side,
-                cls.distance_between_hole_and_outer_edge,
-                0))
-            box = box.cut(top_hole)
-
-            bottom_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(0, 0, 1))
-            bottom_hole.translate(Vector(
-                cls.height - distance_from_hole_to_side,
-                cls.distance_between_hole_and_outer_edge,
-                0))
-            box = box.cut(bottom_hole)
-
-            box.translate(Vector(0, -length, -width))
-        elif corner == Corner.TOP_LEFT_REAR:
-            box = Part.makeBox(cls.height, width, length_plus_attachment)
-
-            top_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(0, 1, 0))
-            top_hole.translate(Vector(
-                distance_from_hole_to_side,
-                0,
-                cls.distance_between_hole_and_outer_edge))
-            box = box.cut(top_hole)
-
-            bottom_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(0, 1, 0))
-            bottom_hole.translate(Vector(
-                cls.height - distance_from_hole_to_side,
-                0,
-                cls.distance_between_hole_and_outer_edge))
-            box = box.cut(bottom_hole)
-
-            box.translate(Vector(0, -width, -length))
-        elif corner == Corner.TOP_RIGHT_REAR:
-            box = Part.makeBox(length_plus_attachment, width, cls.height)
-
-            top_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(0, 1, 0))
-            top_hole.translate(Vector(
-                cls.distance_between_hole_and_outer_edge,
-                0,
-                distance_from_hole_to_side))
-            box = box.cut(top_hole)
-
-            bottom_hole = Part.makeCylinder(
-                cls.hole_radius, width, Vector(), Vector(0, 1, 0))
-            bottom_hole.translate(Vector(
-                cls.distance_between_hole_and_outer_edge,
-                0,
-                cls.height - distance_from_hole_to_side))
-            box = box.cut(bottom_hole)
-
-            box.translate(Vector(-length, -width, 0))
-        else:
-            raise ValueError('Corner {} must be one of {}, {}, {}, or {}.'.format(
-                corner,
-                Corner.TOP_LEFT_FRONT,
-                Corner.TOP_RIGHT_FRONT,
-                Corner.TOP_LEFT_REAR,
-                Corner.TOP_RIGHT_REAR))
-        return box
-
-    @classmethod
-    def calculate_distance_between_holes_and_connector(cls, length):
-        return length - cls.distance_between_hole_and_outer_edge
 
 
 def get_angle_frame_connector_rotation_and_translation(corner, length):

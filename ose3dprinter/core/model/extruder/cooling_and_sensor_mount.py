@@ -1,7 +1,6 @@
 import Part
 from FreeCAD import Vector
-
-from .make_face_from_points import make_face_from_points
+from ose3dprinter.core.model.make_face_from_points import make_face_from_points
 
 
 class CoolingAndSensorMount:
@@ -69,9 +68,9 @@ class CoolingAndSensorMount:
         lower_blower_vent_box = Part.makeBox(
             slanted_side_width, sensor_holder_width, lower_blower_vent_height)
         lower_blower_vent_box.translate(Vector(
-                -slanted_side_width,
-                -sensor_holder_width,
-                -lower_blower_vent_height - sensor_holder_height))
+            -slanted_side_width,
+            -sensor_holder_width,
+            -lower_blower_vent_height - sensor_holder_height))
 
         parts = [
             slanted_side,
@@ -121,8 +120,7 @@ def make_cooling_and_sensor_slanted_side(width_or_thickness, length):
         mid_right,
         mid_left,
         top_right,
-        top_left,
-        bottom_left
+        top_left
     ]
 
     face = make_face_from_points(points)
