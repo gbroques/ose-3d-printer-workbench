@@ -48,6 +48,12 @@ class UniversalAxisModel(BaseModel):
                         'Base', rod_diameter_tooltip, read_only)
         obj.RodDiameter = 8
 
+        # Carriage Position property
+        carriage_position_tooltip = 'Position of carriage relative to available rod.'
+        obj.addProperty('App::PropertyPercent', 'CarriagePosition',
+                        'Base', carriage_position_tooltip)
+        obj.CarriagePosition = 50
+
     def execute(self, obj):
         """
         Called on document recompute
@@ -114,7 +120,13 @@ class UniversalAxisModel(BaseModel):
 
         # Make carriage
         carriage_box = Part.makeBox(*carriage_box_dimensions)
-        carriage_box_x = (rod_length - carriage_box_width) / 2
+
+        available_rod_length = rod_length - \
+            self.motor_box_width - self.idler_box_width
+        scale_factor = obj.CarriagePosition / 100.0
+        carriage_box_x = self.motor_box_width + \
+            ((available_rod_length - carriage_box_width) * scale_factor)
+
         carriage_box_y = -(carriage_box_length - motor_box_length) / 2
         carriage_box.translate(Vector(carriage_box_x, carriage_box_y, 0))
 
