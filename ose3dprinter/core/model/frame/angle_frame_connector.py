@@ -17,12 +17,6 @@ class AngleFrameConnector:
 
     bracket_height = 38.1
 
-    # forms the outer-most corner of bracket
-    bracket_outer_edge_thickness = 4.21
-
-    # forms the outer edges of bracket
-    bracket_end_thickness = 3.41
-
     axis_side_mount_width = 5
     axis_side_mount_length = 27.75
 
@@ -40,7 +34,7 @@ class AngleFrameConnector:
         :return: an angle frame connector
         :rtype: Part.Shape
         """
-        bracket_length = cls.calculate_bracket_length(width)
+        bracket_length = cls.calculate_bracket_length(width, thickness)
         length = bracket_length + cls.bracket_height
 
         angle_frame_connector = cls._make_angle_frame_connector(
@@ -66,8 +60,6 @@ class AngleFrameConnector:
             bracket_length,
             bracket_width,
             cls.bracket_height,
-            cls.bracket_outer_edge_thickness,
-            cls.bracket_end_thickness,
             thickness)
 
         # Top tri-bracket
@@ -103,14 +95,12 @@ class AngleFrameConnector:
         return angle_frame_connector.removeSplitter()
 
     @classmethod
-    def calculate_bracket_length(cls, width):
-        return width + \
-            cls.bracket_outer_edge_thickness + cls.bracket_end_thickness
+    def calculate_bracket_length(cls, width, thickness):
+        return width + (thickness * 2)
 
     @classmethod
     def calculate_bracket_width(cls, thickness):
-        return thickness + \
-            cls.bracket_outer_edge_thickness + cls.bracket_end_thickness
+        return thickness * 3
 
     @classmethod
     def distance_between_axis_side_mount_holes_and_frame(cls):
@@ -126,20 +116,16 @@ class AngleFrameConnector:
 def make_tri_bracket(length,
                      width,
                      height,
-                     outer_edge_thickness,
-                     end_thickness,
                      thickness):
     outer_most_edge = make_outer_most_edge_of_tri_bracket(
         length,
         width,
         height,
-        outer_edge_thickness,
-        end_thickness)
+        thickness)
     inner_most_edge = make_inner_most_edge_of_tri_bracket(
         length,
         width,
         height,
-        outer_edge_thickness,
         thickness)
     return outer_most_edge.fuse(inner_most_edge)
 
@@ -147,14 +133,12 @@ def make_tri_bracket(length,
 def make_outer_most_edge_of_tri_bracket(length,
                                         width,
                                         height,
-                                        outer_edge_thickness,
-                                        end_thickness):
+                                        thickness):
     box = Part.makeBox(length, length, height)
-    inner_box_dimension = length - outer_edge_thickness - end_thickness
+    inner_box_dimension = length - (thickness * 2)
     inner_box = Part.makeBox(
         inner_box_dimension, inner_box_dimension, height)
-    inner_box.translate(Vector(
-        outer_edge_thickness, outer_edge_thickness, 0))
+    inner_box.translate(Vector(thickness, thickness, 0))
 
     subtraction_box = Part.makeBox(length, length, height)
     subtraction_box.translate(Vector(width, width, 0))
@@ -165,9 +149,8 @@ def make_outer_most_edge_of_tri_bracket(length,
 def make_inner_most_edge_of_tri_bracket(length,
                                         width,
                                         height,
-                                        outer_edge_thickness,
                                         thickness):
-    inner_most_edge_offset = outer_edge_thickness + thickness
+    inner_most_edge_offset = thickness * 2
     box_dimension = length - inner_most_edge_offset
     box = Part.makeBox(box_dimension, box_dimension, height)
     box.translate(

@@ -27,14 +27,13 @@ class AngledBarFrame:
         :rtype: Part.Shape
         """
         bracket_height = AngleFrameConnector.bracket_height
-        outer_edge_thickess = AngleFrameConnector.bracket_outer_edge_thickness
-        bracket_end_thickness = AngleFrameConnector.bracket_end_thickness
-        bracket_length = AngleFrameConnector.calculate_bracket_length(width)
+        bracket_length = AngleFrameConnector.calculate_bracket_length(
+            width, thickness)
 
         bar_length = side - (bracket_length * 2)
 
         rear_translation = bar_length + bracket_length
-        rear_bar_translation = rear_translation + bracket_end_thickness
+        rear_bar_translation = rear_translation + thickness
 
         parts = []
 
@@ -75,21 +74,21 @@ class AngledBarFrame:
         front_left_upright_bar = AngledBar.make(
             bar_length, width, thickness, AngledBarOrientation.FRONT_LEFT_UPRIGHT)
         front_left_upright_bar.translate(Vector(
-            outer_edge_thickess,
-            outer_edge_thickess,
+            thickness,
+            thickness,
             bracket_length))
 
         front_right_upright_bar = AngledBar.make(
             bar_length, width, thickness, AngledBarOrientation.FRONT_RIGHT_UPRIGHT)
         front_right_upright_bar.translate(Vector(
             rear_bar_translation,
-            outer_edge_thickess,
+            thickness,
             bracket_length))
 
         rear_left_upright_bar = AngledBar.make(
             bar_length, width, thickness, AngledBarOrientation.REAR_LEFT_UPRIGHT)
         rear_left_upright_bar.translate(Vector(
-            outer_edge_thickess,
+            thickness,
             rear_bar_translation,
             bracket_length))
 
@@ -170,7 +169,6 @@ def make_bottom_or_top_of_angled_frame(bar_length,
     left_bar_orientation = bar_orientations[3]
 
     bracket_height = AngleFrameConnector.bracket_height
-    outer_edge_thickess = AngleFrameConnector.bracket_outer_edge_thickness
 
     rear_corner_translation = rear_translation - bracket_height
 
@@ -184,7 +182,7 @@ def make_bottom_or_top_of_angled_frame(bar_length,
     rear_bar.translate(Vector(
         bracket_length,
         rear_bar_translation,
-        outer_edge_thickess))
+        thickness))
 
     right_rear_connector = AngleFrameConnector.make(
         width, thickness, right_rear_corner)
@@ -196,7 +194,7 @@ def make_bottom_or_top_of_angled_frame(bar_length,
     right_bar.translate(Vector(
         rear_bar_translation,
         bracket_length,
-        outer_edge_thickess))
+        thickness))
 
     right_front_connector = AngleFrameConnector.make(
         width, thickness, right_front_corner)
@@ -207,8 +205,8 @@ def make_bottom_or_top_of_angled_frame(bar_length,
         bar_length, width, thickness, front_bar_orientation)
     front_bar.translate(Vector(
         bracket_length,
-        outer_edge_thickess,
-        outer_edge_thickess))
+        thickness,
+        thickness))
 
     left_front_connector = AngleFrameConnector.make(
         width, thickness, left_front_corner)
@@ -216,9 +214,9 @@ def make_bottom_or_top_of_angled_frame(bar_length,
     left_bar = AngledBar.make(
         bar_length, width, thickness, left_bar_orientation)
     left_bar.translate(Vector(
-        outer_edge_thickess,
+        thickness,
         bracket_length,
-        outer_edge_thickess))
+        thickness))
 
     return [
         left_rear_connector,

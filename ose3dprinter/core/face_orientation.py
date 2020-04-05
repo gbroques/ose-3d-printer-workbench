@@ -26,40 +26,38 @@ def get_face_side_for_frame_with_corners(frame_with_corners,
                                          face,
                                          attachable_axis_orientation):
     plane = _get_plane(attachable_axis_orientation)
-    bracket_end_thickness = round(AngleFrameConnector.bracket_end_thickness, 2)
-    bracket_outer_edge_thickness = round(
-        AngleFrameConnector.bracket_outer_edge_thickness, 2)
+    thickness = frame_with_corners.Thickness.Value
     if plane == Plane.XY:
-        value = round(face.Surface.Position.z, 2)
+        value = face.Surface.Position.z
 
-        upper_bound = round(frame_with_corners.Proxy.ZMax, 2)
-        lower_bound = upper_bound - bracket_end_thickness
+        upper_bound = frame_with_corners.Proxy.ZMax
+        lower_bound = upper_bound - thickness
         if between_bounds(value, lower_bound, upper_bound):
             return Side.TOP
     elif plane == Plane.YZ:
-        value = round(face.Surface.Position.x, 2)
+        value = face.Surface.Position.x
 
-        lower_bound = round(frame_with_corners.Shape.BoundBox.XMin, 2)
-        upper_bound = lower_bound + bracket_outer_edge_thickness + \
+        lower_bound = frame_with_corners.Shape.BoundBox.XMin
+        upper_bound = lower_bound + thickness + \
             AngleFrameConnector.axis_side_mount_width
         if between_bounds(value, lower_bound, upper_bound):
             return Side.LEFT
 
-        upper_bound = round(frame_with_corners.Shape.BoundBox.XMax, 2)
-        lower_bound = upper_bound - bracket_outer_edge_thickness - \
+        upper_bound = frame_with_corners.Shape.BoundBox.XMax
+        lower_bound = upper_bound - thickness - \
             AngleFrameConnector.axis_side_mount_width
         if between_bounds(value, lower_bound, upper_bound):
             return Side.RIGHT
     elif plane == Plane.XZ:
-        value = round(face.Surface.Position.y, 2)
+        value = face.Surface.Position.y
 
-        lower_bound = round(frame_with_corners.Proxy.YMin, 2)
-        upper_bound = lower_bound + bracket_outer_edge_thickness
+        lower_bound = frame_with_corners.Proxy.YMin
+        upper_bound = lower_bound + thickness
         if between_bounds(value, lower_bound, upper_bound):
             return Side.FRONT
 
-        upper_bound = round(frame_with_corners.Proxy.YMax, 2)
-        lower_bound = upper_bound - bracket_outer_edge_thickness
+        upper_bound = frame_with_corners.Proxy.YMax
+        lower_bound = upper_bound - thickness
         if between_bounds(value, lower_bound, upper_bound):
             return Side.REAR
     else:
