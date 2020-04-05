@@ -4,20 +4,23 @@ import FreeCAD
 import Part
 
 
-def make_face_from_points(points):
-    if len(points) < 3:
-        raise ValueError('Must have at least 3 points to make a face.')
-    vertices = points + [points[0]]
-    edges = []
-    for pair in pair_wise(vertices):
-        edge = LineSegment(*pair)
-        edges.append(edge)
+def make_face_from_points(*points_list):
+    wires = []
+    for points in points_list:
+        if len(points) < 3:
+            raise ValueError('Must have at least 3 points to make a face.')
+        vertices = points + [points[0]]
+        edges = []
+        for pair in pair_wise(vertices):
+            edge = LineSegment(*pair)
+            edges.append(edge)
 
-    shape = Part.Shape(edges)
-    wire = Part.Wire(shape.Edges)
-    if not wire.isClosed():
-        raise ValueError('Points must form closed face.')
-    return Part.Face(wire)
+        shape = Part.Shape(edges)
+        wire = Part.Wire(shape.Edges)
+        wires.append(wire)
+        if not wire.isClosed():
+            raise ValueError('Points must form closed face.')
+    return Part.Face(wires)
 
 
 def pair_wise(iterable):

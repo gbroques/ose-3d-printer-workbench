@@ -85,7 +85,7 @@ class CoolingAndSensorMount:
         return reduce(lambda union, part: union.fuse(part), parts)
 
 
-def make_cooling_and_sensor_slanted_side(width_or_thickness, length):
+def make_cooling_and_sensor_slanted_side(thickness, length):
     """
           20
        ---------
@@ -125,7 +125,7 @@ def make_cooling_and_sensor_slanted_side(width_or_thickness, length):
 
     face = make_face_from_points(points)
 
-    return face.extrude(Vector(width_or_thickness, 0, 0))
+    return face.extrude(Vector(thickness, 0, 0))
 
 
 def make_sensor_and_sensor_holder(sensor_holder_box_width,

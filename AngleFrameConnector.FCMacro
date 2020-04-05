@@ -4,13 +4,14 @@ import Part
 from ose3dprinter.core.model.frame.angle_frame_connector import \
     AngleFrameConnector
 from ose3dprinter.core.model.frame.corner import Corner
-from PySide import QtCore, QtGui
+from PySide import QtGui
 
 
 class AngleFrameConnectorTaskPanel:
 
     def __init__(self):
         self.form = QtGui.QWidget()
+        self.form.setWindowTitle('Create Angle Frame Connector')
         layout = QtGui.QVBoxLayout(self.form)
 
         # ---------
@@ -52,6 +53,21 @@ class AngleFrameConnectorTaskPanel:
         self.orientationComboBox.setMinimumWidth(110)
         row3.addWidget(self.orientationComboBox)
 
+        # -------------
+        # | Set Screw |
+        # -------------
+        row4 = QtGui.QHBoxLayout()
+        layout.addLayout(row4)
+
+        self.create_label('setScrewLabel', 'Add Set Screw (M6)', row4)
+        self.setScrewCheckbox = QtGui.QCheckBox(self.form)
+        self.setScrewCheckbox.setObjectName('setScrew')
+        size_policy = QtGui.QSizePolicy(
+            QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        self.setScrewCheckbox.setSizePolicy(size_policy)
+        self.setScrewCheckbox.setMinimumWidth(110)
+        row4.addWidget(self.setScrewCheckbox)
+
     def create_input_field(self, name, default_value, layout):
         ui_loader = FreeCADGui.UiLoader()
         input_field = ui_loader.createWidget('Gui::InputField')
@@ -81,8 +97,10 @@ class AngleFrameConnectorTaskPanel:
         thickness = self.thicknessInputField.property('quantity').Value
         orientation_text = self.orientationComboBox.currentText()
         orientation = title_case_to_snake_case(orientation_text)
+        with_set_screw = self.setScrewCheckbox.isChecked()
 
-        connector = AngleFrameConnector.make(width, thickness, orientation)
+        connector = AngleFrameConnector.make(
+            width, thickness, orientation, with_set_screw)
         Part.show(connector)
         FreeCADGui.Control.closeDialog()
 
