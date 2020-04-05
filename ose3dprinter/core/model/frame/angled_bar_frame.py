@@ -26,7 +26,6 @@ class AngledBarFrame:
                  connected by angle frame connectors.
         :rtype: Part.Shape
         """
-        bracket_height = AngleFrameConnector.bracket_height
         bracket_length = AngleFrameConnector.calculate_bracket_length(
             width, thickness)
 
@@ -137,7 +136,7 @@ class AngledBarFrame:
             *top_part_args)
 
         for top_corner in top_corners:
-            top_corner_offset = bar_length + bracket_length - bracket_height
+            top_corner_offset = bar_length + bracket_length - width
             top_corner.translate(Vector(0, 0, top_corner_offset))
 
         for top_bar in top_bars:
@@ -168,9 +167,7 @@ def make_bottom_or_top_of_angled_frame(bar_length,
     front_bar_orientation = bar_orientations[2]
     left_bar_orientation = bar_orientations[3]
 
-    bracket_height = AngleFrameConnector.bracket_height
-
-    rear_corner_translation = rear_translation - bracket_height
+    rear_corner_translation = rear_translation - width
 
     left_rear_connector = AngleFrameConnector.make(
         width, thickness, left_rear_corner)

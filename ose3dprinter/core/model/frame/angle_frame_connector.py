@@ -15,8 +15,6 @@ class AngleFrameConnector:
     An angle frame connector is made up of three brackets.
     """
 
-    bracket_height = 38.1
-
     axis_side_mount_width = 5
     axis_side_mount_length = 27.75
 
@@ -35,10 +33,10 @@ class AngleFrameConnector:
         :rtype: Part.Shape
         """
         bracket_length = cls.calculate_bracket_length(width, thickness)
-        length = bracket_length + cls.bracket_height
+        length = bracket_length + width
 
         angle_frame_connector = cls._make_angle_frame_connector(
-            bracket_length, thickness, length, corner)
+            width, thickness, bracket_length, length, corner)
 
         d = get_angle_frame_connector_rotation_and_translation(corner, length)
         rotate_and_translate_part(angle_frame_connector, d)
@@ -47,8 +45,9 @@ class AngleFrameConnector:
 
     @classmethod
     def _make_angle_frame_connector(cls,
-                                    bracket_length,
+                                    width,
                                     thickness,
+                                    bracket_length,
                                     length,
                                     corner):
         bracket_width = cls.calculate_bracket_width(thickness)
@@ -59,7 +58,7 @@ class AngleFrameConnector:
         tri_bracket = make_tri_bracket(
             bracket_length,
             bracket_width,
-            cls.bracket_height,
+            width,
             thickness)
 
         # Top tri-bracket
