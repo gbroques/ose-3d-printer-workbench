@@ -26,7 +26,8 @@ class AngleFrameConnector:
              width,
              thickness,
              corner=Corner.BOTTOM_LEFT_FRONT,
-             with_set_screw=False):
+             with_set_screw=False,
+             with_filleting=False):
         """Make an angle frame connector.
 
         :param width: Width of the angled frame.
@@ -39,13 +40,20 @@ class AngleFrameConnector:
         :return: an angle frame connector
         :param with_set_screw: Whether to include set screw mechanism.
         :type with_set_screw: bool
+        :param with_filleting: Whether to include filleting.
+        :type with_filleting: bool
         :rtype: Part.Shape
         """
         bracket_length = cls.calculate_bracket_length(width, thickness)
         length = bracket_length + width
 
-        angle_frame_connector = cls._make_angle_frame_connector(
-            width, thickness, bracket_length, length, corner, with_set_screw)
+        angle_frame_connector = cls._make_angle_frame_connector(width,
+                                                                thickness,
+                                                                bracket_length,
+                                                                length,
+                                                                corner,
+                                                                with_set_screw,
+                                                                with_filleting)
 
         d = get_angle_frame_connector_rotation_and_translation(corner, length)
         rotate_and_translate_part(angle_frame_connector, d)
@@ -59,7 +67,8 @@ class AngleFrameConnector:
                                     bracket_length,
                                     length,
                                     corner,
-                                    with_set_screw):
+                                    with_set_screw,
+                                    with_filleting):
         bracket_width = cls.calculate_bracket_width(thickness)
 
         angle_connector_corner = make_angle_connector_corner(
@@ -69,7 +78,8 @@ class AngleFrameConnector:
             bracket_length,
             width,
             thickness,
-            with_set_screw)
+            with_set_screw,
+            with_filleting)
 
         # Top tri-bracket
         top_bracket = tri_bracket.copy()
@@ -127,7 +137,8 @@ class AngleFrameConnector:
 def make_tri_bracket(width,
                      height,
                      thickness,
-                     with_set_screw=False):
+                     with_set_screw=False,
+                     with_filleting=False):
     """Make tri-bracket.
 
     Three tri-brackets make up the angle frame connector.
@@ -140,6 +151,8 @@ def make_tri_bracket(width,
     :type thickness: float
     :param with_set_screw: Whether to include set screw mechanism.
     :type with_set_screw: bool
+    :param with_filleting: Whether to include filleting.
+    :type with_filleting: bool
     """
     set_screw_block_width = 20
 
@@ -154,14 +167,42 @@ def make_tri_bracket(width,
 
     bracket = face.extrude(Vector(0, 0, height))
 
-    if not with_set_screw:
-        return bracket
+    if with_set_screw:
+        bracket = cut_screw_screw(bracket,
+                                  width,
+                                  height,
+                                  thickness,
+                                  set_screw_block_width)
+
+    if with_filleting:
+        return fillet_bracket(bracket, height)
     else:
-        return cut_screw_screw(bracket,
-                               width,
-                               height,
-                               thickness,
-                               set_screw_block_width)
+        return bracket
+
+
+def fillet_bracket(bracket, height):
+    top_wires_parallel_to_xy_plane = find_top_wires_parallel_to_xy_plane(
+        bracket, height)
+    return reduce(
+        lambda b, wire: b.makeFillet(1.0, wire.Edges),
+        top_wires_parallel_to_xy_plane,
+        bracket)
+
+
+def find_top_wires_parallel_to_xy_plane(bracket, height):
+    wires_parallel_to_xy_plane = filter(
+        is_shape_parallel_to_xy_plane, bracket.Wires)
+    is_top_shape = get_is_top_shape(height)
+    return filter(
+        is_top_shape, wires_parallel_to_xy_plane)
+
+
+def get_is_top_shape(height):
+    return lambda shape: shape.BoundBox.ZMax == height
+
+
+def is_shape_parallel_to_xy_plane(shape):
+    return shape.BoundBox.ZMin == shape.BoundBox.ZMax
 
 
 def get_outer_points(width,

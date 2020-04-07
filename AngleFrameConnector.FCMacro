@@ -68,6 +68,22 @@ class AngleFrameConnectorTaskPanel:
         self.setScrewCheckbox.setMinimumWidth(110)
         row4.addWidget(self.setScrewCheckbox)
 
+        # -------------
+        # | Filleting |
+        # -------------
+        row5 = QtGui.QHBoxLayout()
+        layout.addLayout(row5)
+
+        self.create_label('filletLabel', 'Add Filleting', row5)
+        self.filletCheckbox = QtGui.QCheckBox(self.form)
+        self.filletCheckbox.setObjectName('fillet')
+        self.filletCheckbox.setChecked(True)
+        size_policy = QtGui.QSizePolicy(
+            QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        self.filletCheckbox.setSizePolicy(size_policy)
+        self.filletCheckbox.setMinimumWidth(110)
+        row5.addWidget(self.filletCheckbox)
+
     def create_input_field(self, name, default_value, layout):
         ui_loader = FreeCADGui.UiLoader()
         input_field = ui_loader.createWidget('Gui::InputField')
@@ -98,9 +114,10 @@ class AngleFrameConnectorTaskPanel:
         orientation_text = self.orientationComboBox.currentText()
         orientation = title_case_to_snake_case(orientation_text)
         with_set_screw = self.setScrewCheckbox.isChecked()
+        with_filleting = self.filletCheckbox.isChecked()
 
         connector = AngleFrameConnector.make(
-            width, thickness, orientation, with_set_screw)
+            width, thickness, orientation, with_set_screw, with_filleting)
         Part.show(connector)
         FreeCADGui.Control.closeDialog()
 
