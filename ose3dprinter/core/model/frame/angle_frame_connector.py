@@ -330,7 +330,7 @@ def cut_set_screw_hole(bracket,
                        height,
                        thickness,
                        cylinder):
-    translation = thickness * 2
+    translation = thickness * 3
     z = height / 2.0
     cylinder.translate(Vector(translation, translation, z))
     return bracket.cut(cylinder)
