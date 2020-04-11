@@ -21,7 +21,9 @@ class UniversalAxisModel(BaseModel):
 
     hole_radius = 3.39
 
+    # y_distance_between_holes
     distance_between_holes = 22.44
+    x_distance_between_holes = 23.36
     distance_between_hole_and_inner_motor_side = hole_radius + 9.2
 
     def __init__(self, obj, length, placement, origin_translation_offset):
@@ -76,24 +78,8 @@ class UniversalAxisModel(BaseModel):
 
         # Make motor side box
         motor_side_box = Part.makeBox(*motor_side_box_dimensions)
-        front_cylinder = Part.makeCylinder(self.hole_radius, box_height)
-        rear_cylinder = front_cylinder.copy()
-        distance_from_hole_to_side = (
-            motor_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
-        front_cylinder.translate(Vector(
-            self.motor_box_width - self.distance_between_hole_and_inner_motor_side,
-            distance_from_hole_to_side,
-            0
-        ))
-        rear_cylinder.translate(Vector(
-            self.motor_box_width - self.distance_between_hole_and_inner_motor_side,
-            motor_box_length - distance_from_hole_to_side,
-            0
-        ))
-
-        motor_side_box_with_front_hole = motor_side_box.cut(front_cylinder)
-        motor_side_box_with_holes = motor_side_box_with_front_hole.cut(
-            rear_cylinder)
+        motor_side_box_with_holes = self.cut_holes_in_motor_side_box(
+            motor_side_box, box_height, motor_box_length)
 
         # Motor
         motor_side = 37.8
@@ -186,6 +172,49 @@ class UniversalAxisModel(BaseModel):
 
         compound = Part.makeCompound(parts)
         obj.Shape = compound
+
+    def cut_holes_in_motor_side_box(self,
+                                    motor_side_box,
+                                    box_height,
+                                    motor_box_length):
+        front_right_cylinder = Part.makeCylinder(self.hole_radius, box_height)
+        rear_right_cylinder = front_right_cylinder.copy()
+        front_left_cylinder = front_right_cylinder.copy()
+        rear_left_cylinder = front_right_cylinder.copy()
+
+        right_cylinder_x = self.motor_box_width - \
+            self.distance_between_hole_and_inner_motor_side
+        distance_from_hole_to_side = (
+            motor_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
+        front_right_cylinder.translate(Vector(
+            right_cylinder_x,
+            distance_from_hole_to_side,
+            0
+        ))
+        rear_right_cylinder.translate(Vector(
+            right_cylinder_x,
+            motor_box_length - distance_from_hole_to_side,
+            0
+        ))
+
+        left_cylinder_x = right_cylinder_x - \
+            (self.x_distance_between_holes + (self.hole_radius * 2))
+        front_left_cylinder.translate(Vector(
+            left_cylinder_x,
+            distance_from_hole_to_side,
+            0
+        ))
+        rear_left_cylinder.translate(Vector(
+            left_cylinder_x,
+            motor_box_length - distance_from_hole_to_side,
+            0
+        ))
+
+        motor_side_box = motor_side_box.cut(front_right_cylinder)
+        motor_side_box = motor_side_box.cut(rear_right_cylinder)
+        motor_side_box = motor_side_box.cut(front_left_cylinder)
+        motor_side_box_with_holes = motor_side_box.cut(rear_left_cylinder)
+        return motor_side_box_with_holes
 
     def __getstate__(self):
         return self.Type
