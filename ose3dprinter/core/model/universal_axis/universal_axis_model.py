@@ -15,6 +15,8 @@ class UniversalAxisModel(BaseModel):
 
     motor_box_width = 59.5
 
+    carriage_box_width = 52
+
     idler_box_width = 26
 
     hole_radius = 3.39
@@ -33,7 +35,9 @@ class UniversalAxisModel(BaseModel):
         init_args = (placement, origin_translation_offset)
         super(UniversalAxisModel, self).__init__(*init_args)
 
+        # TODO: Move these two lines to BaseModel?
         obj.Proxy = self
+        self.Object = obj
 
         # Length property
         length_tooltip = 'Length of axis corresponds to rod length.'
@@ -113,19 +117,13 @@ class UniversalAxisModel(BaseModel):
         chamfered_motor = motor.makeChamfer(5, vertical_edges)
 
         # Define dimensions of carriage box
-        carriage_box_width = 52
         carriage_box_length = 74
         carriage_box_dimensions = (
-            carriage_box_width, carriage_box_length, box_height)
+            self.carriage_box_width, carriage_box_length, box_height)
 
         # Make carriage
         carriage_box = Part.makeBox(*carriage_box_dimensions)
-
-        available_rod_length = rod_length - \
-            self.motor_box_width - self.idler_box_width
-        scale_factor = obj.CarriagePosition / 100.0
-        carriage_box_x = self.motor_box_width + \
-            ((available_rod_length - carriage_box_width) * scale_factor)
+        carriage_box_x = self.calculate_carriage_box_x()
 
         carriage_box_y = -(carriage_box_length - motor_box_length) / 2
         carriage_box.translate(Vector(carriage_box_x, carriage_box_y, 0))
@@ -204,3 +202,14 @@ class UniversalAxisModel(BaseModel):
     @classmethod
     def distance_between_idler_side_holes_and_outer_edge(cls):
         return cls.idler_box_width / 2
+
+    def calculate_carriage_box_x(self):
+        obj = self.Object
+        rod_length = obj.Length.Value
+        carriage_position = obj.CarriagePosition
+
+        available_rod_length = rod_length - \
+            self.motor_box_width - self.idler_box_width
+        scale_factor = carriage_position / 100.0
+        return self.motor_box_width + \
+            ((available_rod_length - self.carriage_box_width) * scale_factor)

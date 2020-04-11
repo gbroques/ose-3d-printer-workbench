@@ -7,14 +7,14 @@ from Part import Face
 from .is_face_parallel_to_plane import is_face_parallel_to_xy_plane
 
 
-def get_extruder_axis_centered_kwargs(universal_axis, face):
+def get_extruder_x_axis_carriage_attachment_kwargs(universal_axis, face):
     validate_axis_and_face(universal_axis, face)
-    x = universal_axis.Shape.BoundBox.Center.x
+    x = universal_axis.Proxy.calculate_carriage_box_x()
     y = universal_axis.Shape.BoundBox.YMin
     z = face.BoundBox.ZMax
     placement = Placement(
         Vector(x, y, z), Rotation())
-    origin_translation_offset = Vector(0.5, 0, 0)
+    origin_translation_offset = Vector(0, 0, 0)
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset
