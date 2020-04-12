@@ -3,6 +3,7 @@ from FreeCAD import Vector
 from ose3dprinter.core.is_edge_parallel_to_axis import \
     is_edge_parallel_to_z_axis
 from ose3dprinter.core.model.base_model import BaseModel
+from ose3dprinter.core.enums import AxisOrientation
 
 
 class UniversalAxisModel(BaseModel):
@@ -230,8 +231,10 @@ class UniversalAxisModel(BaseModel):
 
     @classmethod
     def distance_between_inner_motor_side_holes_and_outer_edge(cls):
-        return cls.motor_box_width - \
+        return (
+            cls.motor_box_width -
             cls.distance_between_hole_and_inner_motor_side
+        )
 
     @classmethod
     def distance_between_idler_side_holes_and_outer_edge(cls):
@@ -242,8 +245,56 @@ class UniversalAxisModel(BaseModel):
         rod_length = obj.Length.Value
         carriage_position = obj.CarriagePosition
 
-        available_rod_length = rod_length - \
-            self.motor_box_width - self.idler_box_width
+        available_rod_length = (
+            rod_length -
+            self.motor_box_width -
+            self.idler_box_width)
         scale_factor = carriage_position / 100.0
-        return self.motor_box_width + \
-            ((available_rod_length - self.carriage_box_width) * scale_factor)
+        return (
+            self.motor_box_width +
+            (
+                (available_rod_length - self.carriage_box_width) *
+                scale_factor
+            )
+        )
+
+    def is_z(self):
+        """Return whether or not this axis is a Z axis.
+
+        This assumes the axis is parallel to the XY, YZ, or XZ planes,
+        and not rotated in a weird diagonal or skewed way.
+
+        :return: Whether this axis is a Z axis.
+        :rtype: bool
+        """
+        axis = self.Object
+        return _is_oriented_in(axis, AxisOrientation.Z)
+
+    def calculate_top_of_carriage_box_for_z_axis(self):
+        return (
+            self.Object.Shape.BoundBox.ZMin +
+            (
+                self.Object.Length.Value -
+                self.calculate_carriage_box_x()
+            )
+        )
+
+
+def _is_oriented_in(axis, axis_orientation):
+    bound_box = axis.Shape.BoundBox
+    lengths = [
+        bound_box.XLength,
+        bound_box.YLength,
+        bound_box.ZLength
+    ]
+    max_length = max(lengths)
+    length_property = _get_length_property(axis_orientation)
+    return max_length == getattr(bound_box, length_property)
+
+
+def _get_length_property(axis_orientation):
+    return {
+        AxisOrientation.X: 'XLength',
+        AxisOrientation.Y: 'YLength',
+        AxisOrientation.Z: 'ZLength',
+    }[axis_orientation]
