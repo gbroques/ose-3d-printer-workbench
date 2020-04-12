@@ -26,7 +26,12 @@ class UniversalAxisModel(BaseModel):
     x_distance_between_holes = 23.36
     distance_between_hole_and_inner_motor_side = hole_radius + 9.2
 
-    def __init__(self, obj, length, placement, origin_translation_offset):
+    def __init__(self,
+                 obj,
+                 length,
+                 carriage_position,
+                 placement,
+                 origin_translation_offset):
         """
         Constructor
 
@@ -58,7 +63,7 @@ class UniversalAxisModel(BaseModel):
         carriage_position_tooltip = 'Position of carriage relative to available rod.'
         obj.addProperty('App::PropertyPercent', 'CarriagePosition',
                         'Base', carriage_position_tooltip)
-        obj.CarriagePosition = 50
+        obj.CarriagePosition = carriage_position
 
     def execute(self, obj):
         """

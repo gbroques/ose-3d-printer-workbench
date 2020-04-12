@@ -6,6 +6,7 @@ from ose3dprinter.core.model import UniversalAxisModel
 def create_universal_axis(document,
                           name,
                           length=304.80,
+                          carriage_position=50,
                           placement=Placement(),
                           origin_translation_offset=Vector()):
     """
@@ -13,7 +14,11 @@ def create_universal_axis(document,
     and adds it to the document.
     """
     obj = document.addObject('Part::FeaturePython', name)
-    UniversalAxisModel(obj, length, placement, origin_translation_offset)
+    UniversalAxisModel(obj,
+                       length,
+                       carriage_position,
+                       placement,
+                       origin_translation_offset)
     if obj.ViewObject is not None:
         obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
     return obj

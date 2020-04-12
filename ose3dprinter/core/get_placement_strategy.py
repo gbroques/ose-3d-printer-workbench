@@ -148,7 +148,8 @@ def get_placement_for_front_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset,
-        'length': frame.Size
+        'length': frame.Size,
+        'carriage_position': 90
     }
 
 
@@ -172,7 +173,8 @@ def get_placement_for_rear_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset,
-        'length': frame.Size
+        'length': frame.Size,
+        'carriage_position': 90
     }
 
 
