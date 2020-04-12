@@ -1,13 +1,12 @@
 from FreeCAD import Vector
 from Part import Face
 
+from .enums import Side
 from .exceptions import AttachmentError
 from .face_orientation import get_face_side, get_orientation_of_attachable_axis
 from .get_outer_faces_of_cnc_cut_frame import get_outer_faces_of_cnc_cut_frame
 from .get_placement_strategy import get_placement_strategy
 from .model import FrameModel
-from .enums import Side, AxisOrientation
-from .model import UniversalAxisModel
 
 
 def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
@@ -18,19 +17,7 @@ def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
     validate_frame_and_face(frame, face, axis_orientation)
     face_side = get_face_side(frame, face)
     placement_strategy = get_placement_strategy(face_side)
-    placement, origin_translation_offset = placement_strategy(frame, face)
-    length = frame.Size
-    # TODO: Consider returning length from get_placement_strategy function
-    #       and then this condition goes away from this function.
-    if frame.HasCorners and axis_orientation == AxisOrientation.Y:
-        length = frame.Proxy.distance_between_axis_side_mount_holes + \
-            UniversalAxisModel.distance_between_inner_motor_side_holes_and_outer_edge() + \
-            UniversalAxisModel.distance_between_idler_side_holes_and_outer_edge()
-    return {
-        'length': length,
-        'placement': placement,
-        'origin_translation_offset': origin_translation_offset
-    }
+    return placement_strategy(frame)
 
 
 def validate_frame_and_face(frame, face, axis_orientation):
