@@ -20,11 +20,13 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         Executed when FreeCAD starts
         """
-        from ose3dprinter.workbench import main_toolbar, register_commands
+        from ose3dprinter.workbench import (
+            main_menu, main_toolbar, register_commands)
 
         register_commands()
 
         self.appendToolbar(main_toolbar.name, main_toolbar.command_keys)
+        self.appendMenu(main_menu.name, main_menu.command_keys)
 
     def Activated(self):
         """

@@ -20,6 +20,9 @@ class UniversalAxisModel(BaseModel):
 
     idler_box_width = 26
 
+    # Motor side, idler side, and carriage boxes share same height
+    box_height = 24
+
     hole_radius = 3.39
 
     # y_distance_between_holes
@@ -74,18 +77,15 @@ class UniversalAxisModel(BaseModel):
         rod_length = obj.Length.Value
         rod_radius = obj.RodDiameter.Value / 2
 
-        # Motor side, idler side, and carriage boxes share same height
-        box_height = 24
-
         # Define dimensions of motor side box
         motor_box_length = 66
         motor_side_box_dimensions = (
-            self.motor_box_width, motor_box_length, box_height)
+            self.motor_box_width, motor_box_length, self.box_height)
 
         # Make motor side box
         motor_side_box = Part.makeBox(*motor_side_box_dimensions)
         motor_side_box_with_holes = self.cut_holes_in_motor_side_box(
-            motor_side_box, box_height, motor_box_length)
+            motor_side_box, self.box_height, motor_box_length)
 
         # Motor
         motor_side = 37.8
@@ -100,7 +100,7 @@ class UniversalAxisModel(BaseModel):
         motor.translate(Vector(
             half_motor_box_width - half_motor_side,
             half_motor_box_length - half_motor_side,
-            box_height
+            self.box_height
         ))
         motor.rotate(Vector(half_motor_box_width,
                             half_motor_box_length, 0), Vector(0, 0, 1), 45)
@@ -111,7 +111,7 @@ class UniversalAxisModel(BaseModel):
         # Define dimensions of carriage box
         carriage_box_length = 74
         carriage_box_dimensions = (
-            self.carriage_box_width, carriage_box_length, box_height)
+            self.carriage_box_width, carriage_box_length, self.box_height)
 
         # Make carriage
         carriage_box = Part.makeBox(*carriage_box_dimensions)
@@ -123,11 +123,11 @@ class UniversalAxisModel(BaseModel):
         # Define dimensions of idler side box
         idler_box_length = 66
         idler_side_box_dimensions = (
-            self.idler_box_width, idler_box_length, box_height)
+            self.idler_box_width, idler_box_length, self.box_height)
 
         distance_between_hole_and_idler_side = (
             idler_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
-        front_cylinder = Part.makeCylinder(self.hole_radius, box_height)
+        front_cylinder = Part.makeCylinder(self.hole_radius, self.box_height)
         rear_cylinder = front_cylinder.copy()
         front_cylinder.translate(Vector(
             self.idler_box_width / 2,
@@ -151,7 +151,7 @@ class UniversalAxisModel(BaseModel):
             Vector(rod_length - self.idler_box_width, 0, 0))
 
         space_between_rod_and_box_edge = 10
-        half_box_height = box_height / 2
+        half_box_height = self.box_height / 2
 
         rod1_y_position = idler_box_length - space_between_rod_and_box_edge
 
@@ -173,7 +173,7 @@ class UniversalAxisModel(BaseModel):
             rod2
         ]
 
-        reference_dimensions = (rod_length, motor_box_length, box_height)
+        reference_dimensions = (rod_length, motor_box_length, self.box_height)
         self.move_parts(parts, reference_dimensions)
 
         compound = Part.makeCompound(parts)
@@ -257,6 +257,30 @@ class UniversalAxisModel(BaseModel):
                 scale_factor
             )
         )
+
+    def is_x(self):
+        """Return whether or not this axis is a X axis.
+
+        This assumes the axis is parallel to the XY, YZ, or XZ planes,
+        and not rotated in a weird diagonal or skewed way.
+
+        :return: Whether this axis is a X axis.
+        :rtype: bool
+        """
+        axis = self.Object
+        return _is_oriented_in(axis, AxisOrientation.X)
+
+    def is_y(self):
+        """Return whether or not this axis is a Y axis.
+
+        This assumes the axis is parallel to the XY, YZ, or XZ planes,
+        and not rotated in a weird diagonal or skewed way.
+
+        :return: Whether this axis is a Y axis.
+        :rtype: bool
+        """
+        axis = self.Object
+        return _is_oriented_in(axis, AxisOrientation.Y)
 
     def is_z(self):
         """Return whether or not this axis is a Z axis.

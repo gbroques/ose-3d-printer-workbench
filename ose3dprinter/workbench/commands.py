@@ -10,6 +10,7 @@ from .add_universal_x_axis import AddUniversalXAxis
 from .add_universal_y_axis import AddUniversalYAxis
 from .add_universal_z_axis import AddUniversalZAxis
 from .command_registry import CommandCollection, command_registry
+from .generate_cut_list import CopyCutListToClipboard, SaveCutListAsCsv
 
 
 def register_commands():
@@ -19,6 +20,9 @@ def register_commands():
     command_registry.register(AddUniversalZAxis.NAME, AddUniversalZAxis())
     command_registry.register(AddHeatedBed.NAME, AddHeatedBed())
     command_registry.register(AddExtruder.NAME, AddExtruder())
+    command_registry.register(
+        CopyCutListToClipboard.NAME, CopyCutListToClipboard())
+    command_registry.register(SaveCutListAsCsv.NAME, SaveCutListAsCsv())
 
 
 main_toolbar = CommandCollection('OSE 3D Printer')
@@ -28,3 +32,7 @@ main_toolbar.add(AddUniversalYAxis.NAME)
 main_toolbar.add(AddUniversalZAxis.NAME)
 main_toolbar.add(AddHeatedBed.NAME)
 main_toolbar.add(AddExtruder.NAME)
+
+main_menu = CommandCollection('OSE 3D Printer')
+main_menu.add(CopyCutListToClipboard.NAME)
+main_menu.add(SaveCutListAsCsv.NAME)

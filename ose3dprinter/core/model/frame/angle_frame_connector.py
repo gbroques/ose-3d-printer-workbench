@@ -191,7 +191,7 @@ def fillet_bracket(bracket, height):
 
 def find_top_wires_parallel_to_xy_plane(bracket, height):
     wires_parallel_to_xy_plane = filter(
-        is_shape_parallel_to_xy_plane, bracket.Wires)
+        is_wire_parallel_to_xy_plane, bracket.Wires)
     is_top_shape = get_is_top_shape(height)
     return filter(
         is_top_shape, wires_parallel_to_xy_plane)
@@ -201,8 +201,8 @@ def get_is_top_shape(height):
     return lambda shape: shape.BoundBox.ZMax == height
 
 
-def is_shape_parallel_to_xy_plane(shape):
-    return shape.BoundBox.ZMin == shape.BoundBox.ZMax
+def is_wire_parallel_to_xy_plane(wire):
+    return wire.BoundBox.ZMin == wire.BoundBox.ZMax
 
 
 def get_outer_points(width,
