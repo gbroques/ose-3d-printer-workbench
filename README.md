@@ -10,6 +10,8 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
   * [FreeCAD 16](#freecad-16)
 * [Documentation](#documentation)
 * [Tests](#tests)
+* [Contributing](#contributing)
+* [License](#license)
 * [Limitations](#limitations)
 * [Supported FreeCAD Versions](#supported-freecad-versions)
 
@@ -90,6 +92,16 @@ To generate coverage data in `.coverage`, run:
 To generate a coverage report from the coverage data in `htmlcov/`, run:
 
     docker exec -it ose3dprinter-test coverage html
+
+## Contributing
+
+See [Contributing Guidelines](./CONTRIBUTING.md).
+
+## License
+
+Licensed under the [GNU Lesser General Public License, version 2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html) or LGPL v2.1. See [LICENSE](./LICENSE) for details.
+
+This is the same license as [FreeCAD](https://wiki.freecadweb.org/Licence) to ensure this code could potentially be incorporated into future FreeCAD modules or FreeCAD source itself.
 
 ## Limitations
 * Attaching axes to rotated frame is not supported.
