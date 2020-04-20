@@ -76,9 +76,9 @@ def is_axis_selected(selection_objects):
 
 def find_object_by_type_in_selection_objects(selection_objects,
                                              object_type):
-    potential_objects = filter(
+    potential_objects = list(filter(
         lambda x: _is_selection_object_type_of(x, object_type),
-        selection_objects)
+        selection_objects))
     if len(potential_objects) == 0:
         raise AttachmentError(
             'No object with type {} selected'.format(object_type))

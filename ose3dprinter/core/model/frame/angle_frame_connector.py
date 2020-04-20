@@ -7,6 +7,7 @@ from ose3dprinter.core.model.make_face_from_points import make_face_from_points
 from .axis_side_mount import AxisSideMount
 from .corner import Corner, is_top_corner
 from .rotate_and_translate_part import rotate_and_translate_part
+from functools import reduce
 
 
 class AngleFrameConnector:

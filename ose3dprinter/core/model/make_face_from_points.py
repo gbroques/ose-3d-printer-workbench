@@ -1,4 +1,10 @@
-from itertools import izip, tee
+# TODO: Remove when we no longer need to support Python 2.7
+try:
+    from itertools import izip as zip
+except ImportError:
+    pass
+
+from itertools import tee
 
 import FreeCAD
 import Part
@@ -29,7 +35,7 @@ def pair_wise(iterable):
     """
     a, b = tee(iterable)
     next(b, None)
-    return izip(a, b)
+    return zip(a, b)
 
 
 def LineSegment(*args):

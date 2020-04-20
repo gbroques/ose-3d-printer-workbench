@@ -1,3 +1,5 @@
+from functools import reduce
+
 import Part
 from FreeCAD import Vector
 from ose3dprinter.core.is_edge_parallel_to_axis import \
@@ -91,7 +93,8 @@ class ExtruderModel(BaseModel):
             blower_box,
             motor
         ]
-        dimensions = (main_part_width, main_part_length, MainExtruderPart.base_height)
+        dimensions = (main_part_width, main_part_length,
+                      MainExtruderPart.base_height)
         self.move_parts(parts, dimensions)
 
         extruder = reduce(lambda union, part: union.fuse(part), parts)

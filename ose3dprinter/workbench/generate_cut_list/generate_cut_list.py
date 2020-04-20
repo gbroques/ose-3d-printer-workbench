@@ -77,18 +77,18 @@ def show_generate_cut_list_task_panel(cut_list_table_rows,
                                       task_type):
     FreeCADGui.Control.closeDialog()
     task_panel_factory = GenerateCutListTaskPanelFactory(
-        cut_list_table_rows, columns)
+        list(cut_list_table_rows), columns)
     panel = task_panel_factory.create(task_type)
     FreeCADGui.Control.showDialog(panel)
 
 
 def retrieve_axes_by_orientation_from_document(document):
     objects = [] if document is None else document.Objects
-    axes = filter(lambda o: is_axis(o), objects)
+    axes = list(filter(lambda o: is_axis(o), objects))
     return OrderedDict([
-        (AxisOrientation.X, list(filter(lambda a: a.Proxy.is_x(), axes))),
-        (AxisOrientation.Y, list(filter(lambda a: a.Proxy.is_y(), axes))),
-        (AxisOrientation.Z, list(filter(lambda a: a.Proxy.is_z(), axes)))
+        (AxisOrientation.X, [a for a in axes if a.Proxy.is_x()]),
+        (AxisOrientation.Y, [a for a in axes if a.Proxy.is_y()]),
+        (AxisOrientation.Z, [a for a in axes if a.Proxy.is_z()])
     ])
 
 

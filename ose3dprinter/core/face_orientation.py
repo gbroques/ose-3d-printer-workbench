@@ -86,7 +86,7 @@ def get_orientation_of_attachable_axis(face):
     Returns the orientation of which axis is attachable to the face.
     """
     d = _get_is_face_parallel_to_plane_by_axis_orientation()
-    for axis_orientation, is_face_parallel_to_plane in d.iteritems():
+    for axis_orientation, is_face_parallel_to_plane in d.items():
         if is_face_parallel_to_plane(face):
             return axis_orientation
     Console.PrintWarning('Face not parallel to XY, XZ, or YZ plane.\n')

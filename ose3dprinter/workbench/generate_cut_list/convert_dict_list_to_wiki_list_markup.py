@@ -1,3 +1,6 @@
+from functools import reduce
+
+
 def convert_dict_list_to_wiki_list_markup(dict_list):
     return reduce(row_to_list_item, dict_list, '')
 

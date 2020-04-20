@@ -1,3 +1,5 @@
+from functools import reduce
+
 import Part
 from FreeCAD import Vector
 

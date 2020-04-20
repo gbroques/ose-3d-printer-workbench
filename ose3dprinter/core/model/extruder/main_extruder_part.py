@@ -1,3 +1,5 @@
+from functools import reduce
+
 import Part
 from FreeCAD import Vector
 from ose3dprinter.core.model.make_face_from_points import make_face_from_points
