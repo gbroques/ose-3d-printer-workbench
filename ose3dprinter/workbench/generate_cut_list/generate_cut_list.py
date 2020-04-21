@@ -2,22 +2,59 @@ from collections import OrderedDict
 
 import FreeCAD as App
 import FreeCADGui
+from FreeCAD import Console
 from ose3dprinter.core.enums import AxisOrientation
-from ose3dprinter.core.model import UniversalAxisModel
+from ose3dprinter.core.model import FrameModel, UniversalAxisModel
 
 from .copy_cut_list_to_clipboard_task_panel import \
     CopyCutListToClipboardTaskPanel
+from .merge_cut_list_rows_and_format_descriptions import \
+    merge_cut_list_rows_and_format_descriptions
 from .save_cut_list_as_csv_task_panel import SaveCutListAsCsvTaskPanel
 from .task_type import TaskType
 
 
 def generate_cut_list(task_type):
+    document = App.ActiveDocument
     axes_by_orientation = retrieve_axes_by_orientation_from_document(
-        App.ActiveDocument)
+        document)
     columns = ['Quantity', 'Description', 'Length']
     rows = transform_axes_by_orientation_into_cut_list_table_rows(
         axes_by_orientation)
-    show_generate_cut_list_task_panel(rows, columns, task_type)
+    rows = concatenate_heated_beds_and_spool_holder_rods_to_rows(
+        rows, document)
+    merged_rows = merge_cut_list_rows_and_format_descriptions(rows)
+    show_generate_cut_list_task_panel(merged_rows, columns, task_type)
+
+
+def concatenate_heated_beds_and_spool_holder_rods_to_rows(cut_list_table_rows,
+                                                          document):
+    frame = retrieve_frame_from_document(document)
+    if frame is None:
+        Console.PrintMessage(
+            'Frame must be added to document to calculate length of heated bed rods and spool holder rod.')
+        return cut_list_table_rows
+    frame_size = frame.Size.Value
+    rod_length_equal_to_frame_length = convert_value_to_quantity_and_format(
+        frame_size)
+    one_inch = 25.4
+    return cut_list_table_rows + [
+        OrderedDict([
+            ('Quantity', '2'),
+            ('Description', 'Heated Bed Rod'),
+            ('Length', rod_length_equal_to_frame_length)
+        ]),
+        OrderedDict([
+            ('Quantity', '1'),
+            ('Description', 'Spool Holder Rod'),
+            ('Length', rod_length_equal_to_frame_length)
+        ]),
+        OrderedDict([
+            ('Quantity', '2'),
+            ('Description', 'Spool Holder Rod'),
+            ('Length', convert_value_to_quantity_and_format(
+                frame_size - one_inch))
+        ])]
 
 
 def transform_axes_by_orientation_into_cut_list_table_rows(axes_by_orientation):
@@ -37,7 +74,7 @@ def axes_by_orientation_item_to_cut_list_table_row(axes_by_orientation_item):
     num_rods_per_axis = 2
     return OrderedDict([
         ('Quantity', str(len(axes) * num_rods_per_axis)),
-        ('Description', 'Rods for {} Axis'.format(orientation.upper())),
+        ('Description', '{} Axis Rod'.format(orientation.upper())),
         ('Length', get_axis_length_for_cut_list(axes[0], orientation))
     ])
 
@@ -77,13 +114,13 @@ def show_generate_cut_list_task_panel(cut_list_table_rows,
                                       task_type):
     FreeCADGui.Control.closeDialog()
     task_panel_factory = GenerateCutListTaskPanelFactory(
-        list(cut_list_table_rows), columns)
+        cut_list_table_rows, columns)
     panel = task_panel_factory.create(task_type)
     FreeCADGui.Control.showDialog(panel)
 
 
 def retrieve_axes_by_orientation_from_document(document):
-    objects = [] if document is None else document.Objects
+    objects = get_objects_from_document(document)
     axes = list(filter(lambda o: is_axis(o), objects))
     return OrderedDict([
         (AxisOrientation.X, [a for a in axes if a.Proxy.is_x()]),
@@ -92,8 +129,25 @@ def retrieve_axes_by_orientation_from_document(document):
     ])
 
 
+def retrieve_frame_from_document(document):
+    objects = get_objects_from_document(document)
+    return next((o for o in objects if is_frame(o)), None)
+
+
+def get_objects_from_document(document):
+    return [] if document is None else document.Objects
+
+
 def is_axis(object):
-    return object.Proxy.Type == UniversalAxisModel.Type
+    return is_object(object, UniversalAxisModel.Type)
+
+
+def is_frame(object):
+    return is_object(object, FrameModel.Type)
+
+
+def is_object(object, type):
+    return object.Proxy.Type == type
 
 
 class GenerateCutListTaskPanelFactory:

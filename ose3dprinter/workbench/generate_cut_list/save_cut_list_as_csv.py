@@ -17,6 +17,6 @@ class SaveCutListAsCsv:
 
     def GetResources(self):
         return {
-            'MenuText': 'Save Axis Rod Cut List as CSV',
-            'ToolTip': 'Save Axis Rod Cut List as CSV'
+            'MenuText': 'Save Rod Cut List as CSV',
+            'ToolTip': 'Save Rod Cut List as CSV'
         }

@@ -11,7 +11,7 @@ from .write_dict_list_to_csv import write_dict_list_to_csv
 class SaveCutListAsCsvTaskPanel(GenerateCutListTaskPanel):
 
     def __init__(self, cut_list_table_rows, columns):
-        title = 'Save Axis Rod Cut List as CSV'
+        title = 'Save Rod Cut List as CSV'
         super(SaveCutListAsCsvTaskPanel, self).__init__(
             title, cut_list_table_rows, columns)
         self.cut_list_table_rows = cut_list_table_rows

@@ -17,6 +17,6 @@ class CopyCutListToClipboard:
 
     def GetResources(self):
         return {
-            'MenuText': 'Copy Axis Rod Cut List to Clipboard',
-            'ToolTip': 'Copy Axis Rod Cut List to Clipboard'
+            'MenuText': 'Copy Rod Cut List to Clipboard',
+            'ToolTip': 'Copy Rod Cut List to Clipboard'
         }

@@ -12,7 +12,7 @@ from .generate_cut_list_task_panel import GenerateCutListTaskPanel
 class CopyCutListToClipboardTaskPanel(GenerateCutListTaskPanel):
 
     def __init__(self, cut_list_table_rows, columns):
-        title = 'Copy Axis Rod Cut List to Clipboard'
+        title = 'Copy Rod Cut List to Clipboard'
         super(CopyCutListToClipboardTaskPanel, self).__init__(
             title, cut_list_table_rows, columns)
 

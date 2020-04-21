@@ -45,6 +45,7 @@ def build_cut_list_table_widget(cut_list_table_rows, columns):
             item = QtGui.QTableWidgetItem(value)
             # make table cell not editable
             item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+            item.setToolTip(value)
             table.setItem(row_index, column_index, item)
 
     header = table.horizontalHeader()
