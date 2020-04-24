@@ -7,7 +7,8 @@ import FreeCADGui as Gui
 
 class CommandRegistry:
 
-    def __init__(self):
+    def __init__(self, namespace):
+        self.namespace = namespace
         self.command_keys = []
 
     def register(self, command_name, command):
@@ -23,9 +24,9 @@ class CommandRegistry:
         Gui.addCommand(key, command)
 
     def from_command_name_to_key(self, command_name):
-        command_namespace = 'OSE3DP'
-        return '{}_{}'.format(command_namespace, command_name)
+        return '{}_{}'.format(self.namespace, command_name)
 
 
 # Singleton registry for commands.
-command_registry = CommandRegistry()
+command_namespace = 'OSE3DP'
+command_registry = CommandRegistry(command_namespace)
