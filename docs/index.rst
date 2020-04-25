@@ -12,6 +12,7 @@ OSE 3D Printer Workbench Documentation
    :maxdepth: 2
 
    pages/app_gui_architecture
+   pages/command_registry_and_collection_pattern
    pages/including_move_and_rotate_tools
 
 .. toctree::
