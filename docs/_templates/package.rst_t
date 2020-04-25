@@ -25,15 +25,18 @@
 {% endif %}
 
 {%- if subpackages %}
-
+Packages
+--------
 {{ toctree(subpackages) }}
 
 {% endif %}
 
+Modules
+-------
 {%- if submodules %}
 {%- for item in submodules %}
-{{ item }}
-{% for character in range(item|length) -%}-{% endfor %}
+{{ item.split('.') | last }}
+{% for character in range(item|length) -%}^{% endfor %}
 {{ automodule(item, automodule_options) }}
 {% endfor %}
 {% endif %}

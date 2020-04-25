@@ -19,10 +19,11 @@ sys.path.insert(0, os.path.abspath('../'))
 def run_apidoc(app):
     """Generate API documentation"""
     from sphinx.ext import apidoc
+    max_depth = '1'
     apidoc.main([
         '../ose3dprinter',
         '-o', 'ose3dprinter',
-        '-d', '1',
+        '-d', max_depth,
         '--templatedir=_templates/',
         '--force',
         '--no-toc'

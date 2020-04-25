@@ -2,8 +2,11 @@
 ose3dprinter.workbench.add_universal_axis_base
 ==============================================
 
-ose3dprinter.workbench.add_universal_axis_base.add_universal_axis_base
-----------------------------------------------------------------------
+
+Modules
+-------
+add_universal_axis_base
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. automodule:: ose3dprinter.workbench.add_universal_axis_base.add_universal_axis_base
    :members:
    :undoc-members:
