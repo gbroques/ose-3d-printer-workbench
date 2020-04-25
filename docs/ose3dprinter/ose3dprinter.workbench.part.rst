@@ -2,8 +2,6 @@
 ose3dprinter.workbench.part
 ===========================
 
-Packages
---------
 .. toctree::
    :maxdepth: 1
 

@@ -2,8 +2,6 @@
 ose3dprinter
 ============
 
-Packages
---------
 .. toctree::
    :maxdepth: 1
 

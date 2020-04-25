@@ -2,8 +2,6 @@
 ose3dprinter.core.model
 =======================
 
-Packages
---------
 .. toctree::
    :maxdepth: 1
 
@@ -13,11 +11,9 @@ Packages
    ose3dprinter.core.model.universal_axis
 
 
-Modules
--------
 
 base_model
-^^^^^^^^^^
+----------
 .. automodule:: ose3dprinter.core.model.base_model
    :members:
    :undoc-members:
@@ -25,7 +21,7 @@ base_model
 
 
 make_face_from_points
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 .. automodule:: ose3dprinter.core.model.make_face_from_points
    :members:
    :undoc-members:
