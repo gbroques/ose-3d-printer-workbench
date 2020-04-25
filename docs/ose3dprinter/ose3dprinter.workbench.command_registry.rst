@@ -2,7 +2,6 @@
 ose3dprinter.workbench.command_registry
 =======================================
 
-
 Modules
 -------
 

@@ -2,7 +2,6 @@
 ose3dprinter.core.model.universal_axis
 ======================================
 
-
 Modules
 -------
 

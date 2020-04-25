@@ -10,7 +10,3 @@ Packages
    ose3dprinter.core
    ose3dprinter.workbench
 
-
-
-Modules
--------

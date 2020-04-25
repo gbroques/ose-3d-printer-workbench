@@ -31,9 +31,9 @@ Packages
 
 {% endif %}
 
+{%- if submodules %}
 Modules
 -------
-{%- if submodules %}
 {%- for item in submodules %}
 {% set last_item = item.split('.') | last %}
 {{ last_item }}

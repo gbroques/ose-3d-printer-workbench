@@ -2,7 +2,6 @@
 ose3dprinter.core.model.heated_bed
 ==================================
 
-
 Modules
 -------
 

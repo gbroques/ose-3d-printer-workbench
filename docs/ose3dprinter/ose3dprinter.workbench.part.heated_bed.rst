@@ -2,7 +2,6 @@
 ose3dprinter.workbench.part.heated_bed
 ======================================
 
-
 Modules
 -------
 
