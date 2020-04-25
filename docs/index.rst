@@ -9,7 +9,7 @@ OSE 3D Printer Workbench Documentation
 
 .. toctree::
    :caption: Getting Started
-   :maxdepth: 2
+   :maxdepth: 1
 
    pages/app_gui_architecture
    pages/command_registry_and_collection_pattern
