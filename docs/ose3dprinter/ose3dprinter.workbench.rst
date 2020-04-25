@@ -4,9 +4,11 @@ ose3dprinter.workbench
 
 
 .. toctree::
+   :maxdepth: 1
 
    ose3dprinter.workbench.add_universal_axis_base
    ose3dprinter.workbench.command_registry
+   ose3dprinter.workbench.generate_cut_list
    ose3dprinter.workbench.part
    ose3dprinter.workbench.resources
 

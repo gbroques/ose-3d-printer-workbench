@@ -4,6 +4,7 @@ ose3dprinter.core
 
 
 .. toctree::
+   :maxdepth: 1
 
    ose3dprinter.core.model
 
@@ -43,23 +44,23 @@ ose3dprinter.core.get_default_axis_creation_kwargs
    :undoc-members:
    :show-inheritance:
 
-ose3dprinter.core.get_extruder_axis_centered_kwargs
----------------------------------------------------
-.. automodule:: ose3dprinter.core.get_extruder_axis_centered_kwargs
+ose3dprinter.core.get_extruder_x_axis_carriage_attachment_kwargs
+----------------------------------------------------------------
+.. automodule:: ose3dprinter.core.get_extruder_x_axis_carriage_attachment_kwargs
    :members:
    :undoc-members:
    :show-inheritance:
 
-ose3dprinter.core.get_heated_bed_frame_centered_kwargs
-------------------------------------------------------
-.. automodule:: ose3dprinter.core.get_heated_bed_frame_centered_kwargs
+ose3dprinter.core.get_heated_bed_frame_attachment_kwargs
+--------------------------------------------------------
+.. automodule:: ose3dprinter.core.get_heated_bed_frame_attachment_kwargs
    :members:
    :undoc-members:
    :show-inheritance:
 
-ose3dprinter.core.get_outer_faces_of_frame
-------------------------------------------
-.. automodule:: ose3dprinter.core.get_outer_faces_of_frame
+ose3dprinter.core.get_outer_faces_of_cnc_cut_frame
+--------------------------------------------------
+.. automodule:: ose3dprinter.core.get_outer_faces_of_cnc_cut_frame
    :members:
    :undoc-members:
    :show-inheritance:

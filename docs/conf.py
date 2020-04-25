@@ -22,6 +22,7 @@ def run_apidoc(app):
     apidoc.main([
         '../ose3dprinter',
         '-o', 'ose3dprinter',
+        '-d', '1',
         '--templatedir=_templates/',
         '--force',
         '--no-toc'

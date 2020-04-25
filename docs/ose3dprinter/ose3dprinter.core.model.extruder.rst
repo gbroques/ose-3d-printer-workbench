@@ -23,10 +23,3 @@ ose3dprinter.core.model.extruder.main_extruder_part
    :undoc-members:
    :show-inheritance:
 
-ose3dprinter.core.model.extruder.make_face_from_points
-------------------------------------------------------
-.. automodule:: ose3dprinter.core.model.extruder.make_face_from_points
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
