@@ -67,7 +67,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 add_module_names = False
 
 # -- Auto-doc Options --------------------------------------------------------
-autodoc_mock_imports = ['FreeCAD', 'FreeCADGui', 'Part']
+autodoc_mock_imports = [
+    'FreeCAD',
+    'FreeCADGui',
+    'Part',
+    'PySide'
+]
 
 # -- Options for HTML output -------------------------------------------------
 
