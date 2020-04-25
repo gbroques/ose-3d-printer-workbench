@@ -35,8 +35,9 @@ Modules
 -------
 {%- if submodules %}
 {%- for item in submodules %}
-{{ item.split('.') | last }}
-{% for character in range(item|length) -%}^{% endfor %}
+{% set last_item = item.split('.') | last %}
+{{ last_item }}
+{% for character in range(last_item|length) -%}^{% endfor %}
 {{ automodule(item, automodule_options) }}
 {% endfor %}
 {% endif %}

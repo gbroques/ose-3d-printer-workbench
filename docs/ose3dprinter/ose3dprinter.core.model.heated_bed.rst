@@ -5,8 +5,9 @@ ose3dprinter.core.model.heated_bed
 
 Modules
 -------
+
 heated_bed_model
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 .. automodule:: ose3dprinter.core.model.heated_bed.heated_bed_model
    :members:
    :undoc-members:
