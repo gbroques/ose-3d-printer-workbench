@@ -1,7 +1,7 @@
 import unittest
 
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.core.get_default_axis_creation_kwargs import \
+from ose3dprinter.app.get_default_axis_creation_kwargs import \
     get_default_axis_creation_kwargs
 
 from .freecad_test_case import FreeCADTestCase

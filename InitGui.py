@@ -1,4 +1,4 @@
 import FreeCADGui as Gui
-from ose3dprinter.workbench import ThreeDimensionalPrinterWorkbench
+from ose3dprinter.gui import ThreeDimensionalPrinterWorkbench
 
 Gui.addWorkbench(ThreeDimensionalPrinterWorkbench())
