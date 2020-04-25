@@ -4,7 +4,7 @@ import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.core.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
-from ose3dprinter.workbench.part import create_frame
+from ose3dprinter.core.model import FrameModel
 
 from .freecad_test_case import FreeCADTestCase
 
@@ -14,7 +14,8 @@ class GetAxisFrameAttachmentKwargsTest(FreeCADTestCase):
     @classmethod
     def setUpClass(cls):
         document = App.newDocument()
-        cls.frame = create_frame(document, 'Frame')
+        cls.frame = document.addObject('Part::FeaturePython', 'Frame')
+        FrameModel(cls.frame)
         document.recompute()
 
     def test_get_axis_frame_attachment_kwargs_for_top_face(self):
