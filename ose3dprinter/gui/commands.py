@@ -11,6 +11,7 @@ from .add_universal_y_axis import AddUniversalYAxis
 from .add_universal_z_axis import AddUniversalZAxis
 from .command_registry import CommandCollection, command_registry
 from .generate_cut_list import CopyCutListToClipboard, SaveCutListAsCsv
+from .make_angle_frame_connector import MakeAngleFrameConnector
 
 
 def register_commands():
@@ -23,6 +24,8 @@ def register_commands():
     command_registry.register(
         CopyCutListToClipboard.NAME, CopyCutListToClipboard())
     command_registry.register(SaveCutListAsCsv.NAME, SaveCutListAsCsv())
+    command_registry.register(
+        MakeAngleFrameConnector.NAME, MakeAngleFrameConnector())
 
 
 main_toolbar = CommandCollection('OSE 3D Printer')
@@ -36,3 +39,4 @@ main_toolbar.add(AddExtruder.NAME)
 main_menu = CommandCollection('OSE 3D Printer')
 main_menu.add(CopyCutListToClipboard.NAME)
 main_menu.add(SaveCutListAsCsv.NAME)
+main_menu.add(MakeAngleFrameConnector.NAME)

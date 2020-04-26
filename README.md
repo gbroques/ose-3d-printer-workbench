@@ -27,6 +27,7 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 ## Main Menu
 * [<img alt="Copy Rod Cut List to Clipboard" src="ose3dprinter/gui/resources/edit-copy.svg" width="32" height="32" /> Copy Rod Cut List to Clipboard](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_rod_cut_list.html)
 * [<img alt="Save Rod Cut List as CSV" src="ose3dprinter/gui/resources/document-save-as.svg" width="32" height="32" /> Save Rod Cut List as CSV](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_rod_cut_list.html)
+* [<img alt="Make Angle Frame Connector" src="ose3dprinter/gui/resources/Std_CoordinateSystem.svg" width="32" height="32" /> Make Angle Frame Connector](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/make_angle_frame_connector.html)
 
 ## Installation
 ### FreeCAD 17+

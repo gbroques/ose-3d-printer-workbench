@@ -1,9 +1,9 @@
-import FreeCAD
-import FreeCADGui
+import FreeCAD as App
+import FreeCADGui as Gui
 import Part
-from ose3dprinter.core.model.frame.angle_frame_connector import \
+from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector
-from ose3dprinter.core.model.frame.corner import Corner
+from ose3dprinter.app.model.frame.corner import Corner
 from PySide import QtGui
 
 
@@ -11,7 +11,7 @@ class AngleFrameConnectorTaskPanel:
 
     def __init__(self):
         self.form = QtGui.QWidget()
-        self.form.setWindowTitle('Create Angle Frame Connector')
+        self.form.setWindowTitle('Make Angle Frame Connector')
         layout = QtGui.QVBoxLayout(self.form)
 
         # ---------
@@ -85,7 +85,7 @@ class AngleFrameConnectorTaskPanel:
         row5.addWidget(self.filletCheckbox)
 
     def create_input_field(self, name, default_value, layout):
-        ui_loader = FreeCADGui.UiLoader()
+        ui_loader = Gui.UiLoader()
         input_field = ui_loader.createWidget('Gui::InputField')
         input_field.setObjectName(name)
         size_policy = QtGui.QSizePolicy(
@@ -93,8 +93,8 @@ class AngleFrameConnectorTaskPanel:
         input_field.setSizePolicy(size_policy)
         input_field.setMinimumWidth(110)
         input_field.installEventFilter(self.form)
-        input_field.setText(FreeCAD.Units.Quantity(
-            default_value, FreeCAD.Units.Length).UserString)
+        input_field.setText(App.Units.Quantity(
+            default_value, App.Units.Length).UserString)
         layout.addWidget(input_field)
         return input_field
 
@@ -119,7 +119,7 @@ class AngleFrameConnectorTaskPanel:
         connector = AngleFrameConnector.make(
             width, thickness, orientation, with_set_screw, with_filleting)
         Part.show(connector)
-        FreeCADGui.Control.closeDialog()
+        Gui.Control.closeDialog()
 
 
 def get_corner_combo_box_options():
@@ -134,8 +134,3 @@ def snake_case_to_title_case(string):
 
 def title_case_to_snake_case(string):
     return '_'.join(w.lower() for w in string.split(' '))
-
-
-FreeCADGui.Control.closeDialog()
-panel = AngleFrameConnectorTaskPanel()
-FreeCADGui.Control.showDialog(panel)

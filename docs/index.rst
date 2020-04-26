@@ -26,6 +26,7 @@ A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://w
    :maxdepth: 1
 
    pages/generate_rod_cut_list
+   pages/make_angle_frame_connector
 
 .. toctree::
    :caption: User Guide
