@@ -5,8 +5,9 @@ from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.get_heated_bed_frame_attachment_kwargs import \
     get_heated_bed_frame_attachment_kwargs
 from ose3dprinter.app.model import FrameModel, UniversalAxisModel
-from ose3dprinter.gui.part import create_heated_bed
-from ose3dprinter.gui.resources import get_resource_path
+
+from .part import create_heated_bed
+from .resources import get_resource_path
 
 
 class AddHeatedBed:

@@ -23,6 +23,10 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [<img alt="Add Heated Bed" src="ose3dprinter/gui/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_heated_bed.html)
 * [<img alt="Add Extruder" src="ose3dprinter/gui/resources/Extruder.svg" width="32" height="32" /> Add Extruder](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_extruder.html)
 
+## Main Menu
+* [<img alt="Copy Rod Cut List to Clipboard" src="ose3dprinter/gui/resources/edit-copy.svg" width="32" height="32" /> Copy Rod Cut List to Clipboard](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_rod_cut_list.html)
+* [<img alt="Save Rod Cut List as CSV" src="ose3dprinter/gui/resources/document-save-as.svg" width="32" height="32" /> Save Rod Cut List as CSV](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_rod_cut_list.html)
+
 ## Installation
 ### FreeCAD 17+
 **WARNING:** Not yet available via the **Addon Manager**, but we plan to make it available there eventually. Until then, manually install as you would any other workbench.

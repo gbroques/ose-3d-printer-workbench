@@ -20,6 +20,13 @@ A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://w
    pages/add_heated_bed
    pages/add_extruder
 
+
+.. toctree::
+   :caption: Main Menu
+   :maxdepth: 1
+
+   pages/generate_rod_cut_list
+
 .. toctree::
    :caption: User Guide
    :maxdepth: 1

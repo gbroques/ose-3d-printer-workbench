@@ -4,10 +4,11 @@ from FreeCAD import Console
 from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.get_extruder_x_axis_carriage_attachment_kwargs import \
     get_extruder_x_axis_carriage_attachment_kwargs
-from ose3dprinter.gui.get_first_selected_object_and_sub_object import \
+
+from .get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
-from ose3dprinter.gui.part import create_extruder
-from ose3dprinter.gui.resources import get_resource_path
+from .part import create_extruder
+from .resources import get_resource_path
 
 
 class AddExtruder:
