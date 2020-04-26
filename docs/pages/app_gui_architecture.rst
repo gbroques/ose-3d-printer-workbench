@@ -6,7 +6,7 @@ When you execute FreeCAD in command-line mode, the geometry part is present, but
 
 For more information see `"Python scripting tutorial - App and Gui", on the FreeCAD Wiki <https://wiki.freecadweb.org/Python_scripting_tutorial#App_and_Gui>`_.
 
-The OSE 3D Printer mirrors this in it's top-level package structure for the following reasons:
+The OSE 3D Printer Workbench mirrors this in it's top-level package structure for the following reasons:
 
 * Provide the ability to run the ``app`` package from a command-line context, similar to FreeCAD
 * Encapsulate logic in the ``app`` package, and keep the ``gui`` package "dumb" 
