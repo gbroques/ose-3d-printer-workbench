@@ -1,0 +1,2 @@
+Name,Type,Default Value,Description
+**Size**,``App::PropertyLength``,203.2 mm,Size or dimension of heated bed.

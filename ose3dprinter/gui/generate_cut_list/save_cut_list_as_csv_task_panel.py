@@ -2,10 +2,10 @@ import os
 
 import FreeCADGui
 from FreeCAD import Console
+from ose3dprinter.app.write_dict_list_to_csv import write_dict_list_to_csv
 from PySide import QtGui
 
 from .generate_cut_list_task_panel import GenerateCutListTaskPanel
-from .write_dict_list_to_csv import write_dict_list_to_csv
 
 
 class SaveCutListAsCsvTaskPanel(GenerateCutListTaskPanel):

@@ -1,9 +1,9 @@
 import Part
-from FreeCAD import Vector
+from FreeCAD import Placement, Vector
+from ose3dprinter.app.enums import AxisOrientation
 from ose3dprinter.app.is_edge_parallel_to_axis import \
     is_edge_parallel_to_z_axis
 from ose3dprinter.app.model.base_model import BaseModel
-from ose3dprinter.app.enums import AxisOrientation
 
 
 class UniversalAxisModel(BaseModel):
@@ -32,10 +32,10 @@ class UniversalAxisModel(BaseModel):
 
     def __init__(self,
                  obj,
-                 length,
-                 carriage_position,
-                 placement,
-                 origin_translation_offset):
+                 length=304.80,
+                 carriage_position=50,
+                 placement=Placement(),
+                 origin_translation_offset=Vector()):
         """
         Constructor
 

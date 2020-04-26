@@ -51,7 +51,10 @@ release = '0.1.0'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.apidoc'
+    'sphinx.ext.apidoc',
+    # Helps with having many external links that point to the OSE Wiki.
+    # https://www.sphinx-doc.org/en/master/usage/extensions/extlinks.html
+    'sphinx.ext.extlinks'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -86,3 +89,9 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+extlinks = {
+    'osewikipage': (
+        'https://wiki.opensourceecology.org/wiki/%s', ''
+    )
+}

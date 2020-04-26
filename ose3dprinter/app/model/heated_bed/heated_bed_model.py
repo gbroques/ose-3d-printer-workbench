@@ -1,4 +1,5 @@
 import Part
+from FreeCAD import Placement, Vector
 from ose3dprinter.app.model.base_model import BaseModel
 
 
@@ -10,7 +11,10 @@ class HeatedBedModel(BaseModel):
 
     Type = 'OSEHeatedBed'
 
-    def __init__(self, obj, placement, origin_translation_offset):
+    def __init__(self,
+                 obj,
+                 placement=Placement(),
+                 origin_translation_offset=Vector()):
         """
         Constructor
 

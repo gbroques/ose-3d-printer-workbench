@@ -16,6 +16,12 @@ OSE 3D Printer Workbench Documentation
    pages/including_move_and_rotate_tools
 
 .. toctree::
+   :caption: Tools
+   :maxdepth: 1
+
+   pages/add_frame
+
+.. toctree::
    :maxdepth: 2
    :caption: OSE 3D Printer Package
 

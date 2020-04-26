@@ -90,11 +90,3 @@ task_type
    :undoc-members:
    :show-inheritance:
 
-
-write_dict_list_to_csv
-----------------------
-.. automodule:: ose3dprinter.gui.generate_cut_list.write_dict_list_to_csv
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

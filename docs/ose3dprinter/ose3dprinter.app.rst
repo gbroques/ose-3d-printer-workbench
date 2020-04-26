@@ -96,3 +96,11 @@ is_face_parallel_to_plane
    :undoc-members:
    :show-inheritance:
 
+
+write_dict_list_to_csv
+----------------------
+.. automodule:: ose3dprinter.app.write_dict_list_to_csv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

@@ -1,7 +1,7 @@
 from functools import reduce
 
 import Part
-from FreeCAD import Vector
+from FreeCAD import Placement, Vector
 from ose3dprinter.app.is_edge_parallel_to_axis import \
     is_edge_parallel_to_y_axis
 from ose3dprinter.app.model.base_model import BaseModel
@@ -24,7 +24,10 @@ class ExtruderModel(BaseModel):
 
     Type = 'OSEExtruder'
 
-    def __init__(self, obj,  placement, origin_translation_offset):
+    def __init__(self,
+                 obj,
+                 placement=Placement(),
+                 origin_translation_offset=Vector()):
         init_args = (placement, origin_translation_offset)
         super(ExtruderModel, self).__init__(*init_args)
 

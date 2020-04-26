@@ -61,6 +61,10 @@ Run from root of repository:
 
     docker exec -it ose3dprinter-docs make html
 
+### Update Property Tables
+
+    docker exec -it ose3dprinter-test python docs/generate_property_tables.py
+
 ## Tests
 Unit tests are located within the `/test` directory of this repository.
 
