@@ -22,6 +22,7 @@ See `Add Universal Axis <add_universal_axis.html>`_ for details on how to attach
 
 .. WARNING:: In order to attach axes to the frame, the frame must **not** be rotated.
 
-See also:
+See Also
+--------
 
 * :osewikipage:`D3D Frame`

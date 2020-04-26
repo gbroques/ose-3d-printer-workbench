@@ -32,6 +32,9 @@ Attaching Axes to the Frame
 ---------------------------
 You may attach axes to the frame by selecting one of it's outer faces, and then clicking a button in the main toolbar to add a universal axis.
 
+.. image:: /_static/attaching-axes-to-frame.gif
+   :alt: Attaching X, Y, and Z axes to Top, Right, and Front faces
+
 Only certain axes can be attached to certain faces or sides of the frame based on it's orientation.
 
 ================ ==================
