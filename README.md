@@ -4,7 +4,7 @@
 
 A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://www.opensourceecology.org/) for [Distributive Enterprise](https://wiki.opensourceecology.org/wiki/Distributive_Enterprise).
 
-* [Tools](#tools)
+* [Main Toolbar](#main-toolbar)
 * [Installation](#installation)
   * [FreeCAD 17+](#freecad-17+)
   * [FreeCAD 16](#freecad-16)
@@ -15,7 +15,7 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [Limitations](#limitations)
 * [Supported FreeCAD Versions](#supported-freecad-versions)
 
-## Tools
+## Main Toolbar
 * [<img alt="Add Frame" src="ose3dprinter/gui/resources/Frame.svg" width="32" height="32" /> Add Frame](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_frame.html)
 * [<img alt="Add Universal X Axis" src="ose3dprinter/gui/resources/UniversalXAxis.svg" width="32" height="32" /> Add Universal X Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
 * [<img alt="Add Universal Y Axis" src="ose3dprinter/gui/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
