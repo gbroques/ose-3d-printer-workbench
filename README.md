@@ -5,6 +5,7 @@
 A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://www.opensourceecology.org/) for [Distributive Enterprise](https://wiki.opensourceecology.org/wiki/Distributive_Enterprise).
 
 * [Main Toolbar](#main-toolbar)
+* [Main Menu](#main-menu)
 * [Installation](#installation)
   * [FreeCAD 17+](#freecad-17+)
   * [FreeCAD 16](#freecad-16)
