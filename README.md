@@ -20,8 +20,8 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [<img alt="Add Universal X Axis" src="ose3dprinter/gui/resources/UniversalXAxis.svg" width="32" height="32" /> Add Universal X Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
 * [<img alt="Add Universal Y Axis" src="ose3dprinter/gui/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
 * [<img alt="Add Universal Z Axis" src="ose3dprinter/gui/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
-* <img alt="Add Heated Bed" src="ose3dprinter/gui/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
-* <img alt="Add Extruder" src="ose3dprinter/gui/resources/Extruder.svg" width="32" height="32" /> Add Extruder
+* [<img alt="Add Heated Bed" src="ose3dprinter/gui/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_heated_bed.html)
+* [<img alt="Add Extruder" src="ose3dprinter/gui/resources/Extruder.svg" width="32" height="32" /> Add Extruder](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_extruder.html)
 
 ## Installation
 ### FreeCAD 17+
