@@ -4,8 +4,13 @@
    contain the root `toctree` directive.
 
 
-OSE 3D Printer Workbench Documentation
-======================================
+|Frame Icon| OSE 3D Printer Workbench Documentation
+===================================================
+
+.. |Frame Icon| image:: /../ose3dprinter/gui/resources/Frame.svg
+   :height: 32px
+   :width: 32px
+   :alt: Workbench Icon
 
 .. image:: /_static/ose-3d-printer-workbench-demo.gif
 
