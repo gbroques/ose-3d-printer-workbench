@@ -7,12 +7,15 @@
 OSE 3D Printer Workbench Documentation
 ======================================
 
+.. image:: /_static/ose-3d-printer-workbench-demo.gif
+
+A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://www.opensourceecology.org/>`_ for `Distributive Enterprise <https://wiki.opensourceecology.org/wiki/Distributive_Enterprise>`_.
+
+
 .. toctree::
-   :caption: Getting Started
+   :caption: User Guide
    :maxdepth: 1
 
-   pages/app_gui_architecture
-   pages/command_registry_and_collection_pattern
    pages/including_move_and_rotate_tools
 
 .. toctree::
@@ -21,6 +24,13 @@ OSE 3D Printer Workbench Documentation
 
    pages/add_frame
    pages/add_universal_axis
+
+.. toctree::
+   :caption: Codebase Conventions & Patterns
+   :maxdepth: 1
+
+   pages/app_gui_architecture
+   pages/command_registry_and_collection_pattern
 
 .. toctree::
    :maxdepth: 2
