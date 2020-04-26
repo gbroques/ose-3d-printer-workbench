@@ -4,7 +4,7 @@ Generate Rod Cut List
 There are two options in the main menu to generate a rod cut list:
 
 1. |Copy Icon| Copy Rod Cut List to Clipboard
-2. |Save Icon| Save Rod Cut List to CSV
+2. |Save Icon| Save Rod Cut List as CSV
 
 
 .. |Copy Icon| image:: /../ose3dprinter/gui/resources/edit-copy.svg
@@ -15,7 +15,7 @@ There are two options in the main menu to generate a rod cut list:
 .. |Save Icon| image:: /../ose3dprinter/gui/resources/document-save-as.svg
    :height: 32px
    :width: 32px
-   :alt: Save Rod Cut List to CSV
+   :alt: Save Rod Cut List as CSV
 
 How it Works
 ------------
