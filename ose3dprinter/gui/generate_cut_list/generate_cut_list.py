@@ -147,6 +147,8 @@ def is_frame(object):
 
 
 def is_object(object, type):
+    if not hasattr(object, 'Proxy'):
+        return False
     return object.Proxy.Type == type
 
 
