@@ -20,6 +20,7 @@ OSE 3D Printer Workbench Documentation
    :maxdepth: 1
 
    pages/add_frame
+   pages/add_universal_axis
 
 .. toctree::
    :maxdepth: 2
