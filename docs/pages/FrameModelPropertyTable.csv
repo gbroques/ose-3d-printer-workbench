@@ -1,5 +1,5 @@
 Name,Type,Default Value,Description
-**Has Corners**,``App::PropertyBool``,False,Whether the frame has 3d printed corners or not.
-**Size**,``App::PropertyLength``,304.8 mm,Size or dimension of cubic frame.
-**Thickness**,``App::PropertyLength``,3.175 mm,Thickness of frame.
-**Width**,``App::PropertyLength``,38.1 mm,Width of frame.
+**Has Corners**,``Bool``,False,Whether the frame has 3d printed corners or not.
+**Size**,``Length``,304.8 mm,Size or dimension of cubic frame.
+**Thickness**,``Length``,3.175 mm,Thickness of frame.
+**Width**,``Length``,38.1 mm,Width of frame.

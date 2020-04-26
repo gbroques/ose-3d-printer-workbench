@@ -57,10 +57,11 @@ def build_rows(custom_obj_attrs, obj):
     for attr in custom_obj_attrs:
         description = obj.getDocumentationOfProperty(attr)
         property_type = obj.getTypeIdOfProperty(attr)
+        human_readable_property = property_type.replace('App::Property', '')
         default_value = getattr(obj, attr)
         rows.append(OrderedDict([
             ('Name', '**{}**'.format(pascal_case_to_human_readable(attr))),
-            ('Type', '``{}``'.format(property_type)),
+            ('Type', '``{}``'.format(human_readable_property)),
             ('Default Value', default_value),
             ('Description', description)
         ]))
