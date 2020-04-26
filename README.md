@@ -16,10 +16,10 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [Supported FreeCAD Versions](#supported-freecad-versions)
 
 ## Tools
-* <img alt="Add Frame" src="ose3dprinter/gui/resources/Frame.svg" width="32" height="32" /> Add Frame
-* <img alt="Add Universal X Axis" src="ose3dprinter/gui/resources/UniversalXAxis.svg" width="32" height="32" /> Add Universal X Axis
-* <img alt="Add Universal Y Axis" src="ose3dprinter/gui/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis
-* <img alt="Add Universal Z Axis" src="ose3dprinter/gui/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis
+* [<img alt="Add Frame" src="ose3dprinter/gui/resources/Frame.svg" width="32" height="32" /> Add Frame](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_frame.html)
+* [<img alt="Add Universal X Axis" src="ose3dprinter/gui/resources/UniversalXAxis.svg" width="32" height="32" /> Add Universal X Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
+* [<img alt="Add Universal Y Axis" src="ose3dprinter/gui/resources/UniversalYAxis.svg" width="32" height="32" /> Add Universal Y Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
+* [<img alt="Add Universal Z Axis" src="ose3dprinter/gui/resources/UniversalZAxis.svg" width="32" height="32" /> Add Universal Z Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_universal_axis.html)
 * <img alt="Add Heated Bed" src="ose3dprinter/gui/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed
 * <img alt="Add Extruder" src="ose3dprinter/gui/resources/Extruder.svg" width="32" height="32" /> Add Extruder
 
