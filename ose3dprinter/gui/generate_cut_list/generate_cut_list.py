@@ -21,26 +21,32 @@ def generate_cut_list(task_type):
     columns = ['Quantity', 'Description', 'Length']
     rows = transform_axes_by_orientation_into_cut_list_table_rows(
         axes_by_orientation)
+    num_z_axes = len(axes_by_orientation[AxisOrientation.Z])
     rows = concatenate_heated_beds_and_spool_holder_rods_to_rows(
-        rows, document)
+        rows, num_z_axes, document)
     merged_rows = merge_cut_list_rows_and_format_descriptions(rows)
     show_generate_cut_list_task_panel(merged_rows, columns, task_type)
 
 
 def concatenate_heated_beds_and_spool_holder_rods_to_rows(cut_list_table_rows,
+                                                          num_z_axes,
                                                           document):
     frame = retrieve_frame_from_document(document)
     if frame is None:
         Console.PrintMessage(
-            'Frame must be added to document to calculate length of heated bed rods and spool holder rod.')
+            'Frame must be added to document to calculate length of heated bed rods and spool holder rod.\n')
         return cut_list_table_rows
     frame_size = frame.Size.Value
     rod_length_equal_to_frame_length = convert_value_to_quantity_and_format(
         frame_size)
     one_inch = 25.4
+
+    # 2 heated bed rods per pair of Z axes
+    num_heated_bed_rods = (num_z_axes / 2) * 2
+    log_warning_if_odd_number_of_z_axes(num_z_axes, num_heated_bed_rods)
     return cut_list_table_rows + [
         OrderedDict([
-            ('Quantity', '2'),
+            ('Quantity', num_heated_bed_rods),
             ('Description', 'Heated Bed Rod'),
             ('Length', rod_length_equal_to_frame_length)
         ]),
@@ -55,6 +61,15 @@ def concatenate_heated_beds_and_spool_holder_rods_to_rows(cut_list_table_rows,
             ('Length', convert_value_to_quantity_and_format(
                 frame_size - one_inch))
         ])]
+
+
+def log_warning_if_odd_number_of_z_axes(num_z_axes, num_heated_bed_rods):
+    if num_z_axes % 2 == 1:
+        Console.PrintWarning(
+            'An odd number of {} Z axes has been detected when determining number of heated bed rods.\n'
+            .format(num_z_axes))
+        Console.PrintWarning('Rounding down to {} Z axes and {} heated bed rods.\n'
+                             .format(num_z_axes - 1, num_heated_bed_rods))
 
 
 def transform_axes_by_orientation_into_cut_list_table_rows(axes_by_orientation):
