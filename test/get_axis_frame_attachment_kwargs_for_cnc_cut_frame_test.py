@@ -16,7 +16,7 @@ from ose3dprinter.app.model import FrameModel
 from .freecad_test_case import FreeCADTestCase
 
 
-class GetAxisFrameAttachmentKwargsTest(FreeCADTestCase):
+class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
 
     @classmethod
     def setUpClass(cls):
