@@ -13,7 +13,7 @@ class BaseModel(object):
     for a part, and is separate from the "view" or GUI representation.
     """
 
-    def __init__(self, placement, origin_translation_offset):
+    def __init__(self, obj, placement, origin_translation_offset):
         """
         Constructor
 
@@ -21,8 +21,20 @@ class BaseModel(object):
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
+        obj.Proxy = self
+
+        self.Object = obj
         self.placement = placement
         self.origin_translation_offset = origin_translation_offset
+
+    def onDocumentRestored(self, fp):
+        """Executed after a document is restored,
+        or a FeaturePython object is copied or duplicated.
+
+        :param fp: Custom feature python object
+        :type fp: Part::FeaturePython
+        """
+        self.Object = fp
 
     def move_parts(self, parts, reference_dimensions):
         base = self.placement.Base

@@ -1,12 +1,13 @@
 import Part
-from FreeCAD import Vector
+from FreeCAD import Placement, Vector
+from ose3dprinter.app.model.base_model import BaseModel
 
-from .cnc_cut_frame import CNCCutFrame
-from .angled_bar_frame import AngledBarFrame
 from .angle_frame_connector import AngleFrameConnector
+from .angled_bar_frame import AngledBarFrame
+from .cnc_cut_frame import CNCCutFrame
 
 
-class FrameModel:
+class FrameModel(BaseModel):
     """
     Encapsulates the data (i.e. topography and shape) for a Frame,
     and is separate from the "view" or GUI representation.
@@ -17,9 +18,12 @@ class FrameModel:
 
     Type = 'OSEFrame'
 
-    def __init__(self, obj):
-        obj.Proxy = self
-        self.Object = obj
+    def __init__(self,
+                 obj,
+                 placement=Placement(),
+                 origin_translation_offset=Vector()):
+        init_args = (obj, placement, origin_translation_offset)
+        super(FrameModel, self).__init__(*init_args)
 
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'

@@ -22,10 +22,8 @@ class HeatedBedModel(BaseModel):
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
-        init_args = (placement, origin_translation_offset)
+        init_args = (obj, placement, origin_translation_offset)
         super(HeatedBedModel, self).__init__(*init_args)
-
-        obj.Proxy = self
 
         # Size property
         size_tooltip = 'Size or dimension of heated bed.'

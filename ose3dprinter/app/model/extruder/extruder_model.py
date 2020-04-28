@@ -28,10 +28,8 @@ class ExtruderModel(BaseModel):
                  obj,
                  placement=Placement(),
                  origin_translation_offset=Vector()):
-        init_args = (placement, origin_translation_offset)
+        init_args = (obj, placement, origin_translation_offset)
         super(ExtruderModel, self).__init__(*init_args)
-
-        obj.Proxy = self
 
     def execute(self, obj):
         """

@@ -43,12 +43,8 @@ class UniversalAxisModel(BaseModel):
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
-        init_args = (placement, origin_translation_offset)
+        init_args = (obj, placement, origin_translation_offset)
         super(UniversalAxisModel, self).__init__(*init_args)
-
-        # TODO: Move these two lines to BaseModel?
-        obj.Proxy = self
-        self.Object = obj
 
         # Length property
         length_tooltip = 'Length of axis corresponds to rod length.'
