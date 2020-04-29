@@ -20,6 +20,6 @@ class CopyCutListToClipboard:
     def GetResources(self):
         return {
             'Pixmap': get_resource_path('edit-copy.svg'),
-            'MenuText': 'Copy Rod Cut List to Clipboard',
-            'ToolTip': 'Copy Rod Cut List to Clipboard'
+            'MenuText': 'Copy Cut List to Clipboard',
+            'ToolTip': 'Copy Cut List to Clipboard'
         }

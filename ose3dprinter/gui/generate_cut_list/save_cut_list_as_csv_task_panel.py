@@ -11,7 +11,7 @@ from .generate_cut_list_task_panel import GenerateCutListTaskPanel
 class SaveCutListAsCsvTaskPanel(GenerateCutListTaskPanel):
 
     def __init__(self, cut_list_table_rows, columns):
-        title = 'Save Rod Cut List as CSV'
+        title = 'Save Cut List as CSV'
         super(SaveCutListAsCsvTaskPanel, self).__init__(
             title, cut_list_table_rows, columns)
         self.cut_list_table_rows = cut_list_table_rows

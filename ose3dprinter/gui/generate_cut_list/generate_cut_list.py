@@ -5,6 +5,8 @@ import FreeCADGui
 from FreeCAD import Console
 from ose3dprinter.app.enums import AxisOrientation
 from ose3dprinter.app.model import FrameModel, UniversalAxisModel
+from ose3dprinter.app.model.frame.angle_frame_connector import \
+    AngleFrameConnector
 
 from .copy_cut_list_to_clipboard_task_panel import \
     CopyCutListToClipboardTaskPanel
@@ -24,8 +26,27 @@ def generate_cut_list(task_type):
     num_z_axes = len(axes_by_orientation[AxisOrientation.Z])
     rows = concatenate_heated_beds_and_spool_holder_rods_to_rows(
         rows, num_z_axes, document)
+    rows = concatentate_angle_bars_to_rows(rows, document)
     merged_rows = merge_cut_list_rows_and_format_descriptions(rows)
     show_generate_cut_list_task_panel(merged_rows, columns, task_type)
+
+
+def concatentate_angle_bars_to_rows(cut_list_table_rows, document):
+    frame = retrieve_frame_from_document(document)
+    if frame is None:
+        Console.PrintMessage(
+            'Frame must be added to document to add angled bars to cut list.\n')
+        return cut_list_table_rows
+    bracket_length = AngleFrameConnector.calculate_bracket_length(
+        frame.Width, frame.Thickness)
+    angle_bar_length = frame.Size - (bracket_length * 2)
+    return cut_list_table_rows + [
+        OrderedDict([
+            ('Quantity', '12'),
+            ('Description', '({} x {}) Angled Bar'.format(
+                frame.Width.UserString, frame.Thickness.UserString)),
+            ('Length', convert_value_to_quantity_and_format(angle_bar_length))
+        ])]
 
 
 def concatenate_heated_beds_and_spool_holder_rods_to_rows(cut_list_table_rows,
@@ -44,12 +65,15 @@ def concatenate_heated_beds_and_spool_holder_rods_to_rows(cut_list_table_rows,
     # 2 heated bed rods per pair of Z axes
     num_heated_bed_rods = (num_z_axes / 2) * 2
     log_warning_if_odd_number_of_z_axes(num_z_axes, num_heated_bed_rods)
+    if num_heated_bed_rods > 0:
+        cut_list_table_rows = cut_list_table_rows + [
+            OrderedDict([
+                ('Quantity', num_heated_bed_rods),
+                ('Description', 'Heated Bed Rod'),
+                ('Length', rod_length_equal_to_frame_length)
+            ])
+        ]
     return cut_list_table_rows + [
-        OrderedDict([
-            ('Quantity', num_heated_bed_rods),
-            ('Description', 'Heated Bed Rod'),
-            ('Length', rod_length_equal_to_frame_length)
-        ]),
         OrderedDict([
             ('Quantity', '1'),
             ('Description', 'Spool Holder Rod'),

@@ -20,6 +20,6 @@ class SaveCutListAsCsv:
     def GetResources(self):
         return {
             'Pixmap': get_resource_path('document-save-as.svg'),
-            'MenuText': 'Save Rod Cut List as CSV',
-            'ToolTip': 'Save Rod Cut List as CSV'
+            'MenuText': 'Save Cut List as CSV',
+            'ToolTip': 'Save Cut List as CSV'
         }
