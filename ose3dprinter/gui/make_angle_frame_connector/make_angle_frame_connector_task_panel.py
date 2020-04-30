@@ -125,7 +125,7 @@ class AngleFrameConnectorTaskPanel:
 def get_corner_combo_box_options():
     corners = [getattr(Corner, x)
                for x in dir(Corner) if not x.startswith('__')]
-    return map(snake_case_to_title_case, corners)
+    return list(map(snake_case_to_title_case, corners))
 
 
 def snake_case_to_title_case(string):

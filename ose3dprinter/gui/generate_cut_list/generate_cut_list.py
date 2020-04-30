@@ -100,7 +100,7 @@ def transform_axes_by_orientation_into_cut_list_table_rows(axes_by_orientation):
     items_with_axes = filter(filter_item_with_axes,
                              axes_by_orientation.items())
     return list(map(axes_by_orientation_item_to_cut_list_table_row,
-               items_with_axes))
+                    items_with_axes))
 
 
 def filter_item_with_axes(axes_by_orientation_item):
