@@ -99,8 +99,8 @@ def log_warning_if_odd_number_of_z_axes(num_z_axes, num_heated_bed_rods):
 def transform_axes_by_orientation_into_cut_list_table_rows(axes_by_orientation):
     items_with_axes = filter(filter_item_with_axes,
                              axes_by_orientation.items())
-    return map(axes_by_orientation_item_to_cut_list_table_row,
-               items_with_axes)
+    return list(map(axes_by_orientation_item_to_cut_list_table_row,
+               items_with_axes))
 
 
 def filter_item_with_axes(axes_by_orientation_item):
