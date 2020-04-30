@@ -13,7 +13,7 @@ class AxisSideMount:
     """
     hole_radius = 3.39
     height = 65.2
-    distance_between_hole_and_outer_edge = hole_radius + 6.12
+    distance_between_hole_and_outer_edge = hole_radius + 5.99554
     attachment_overlap = 10.22
 
     @classmethod
