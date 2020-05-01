@@ -30,6 +30,13 @@
 {% endif %}
 
 {%- if submodules %}
+
+.. autosummary::
+
+{%- for item in submodules %}
+      {{ item }}
+{% endfor %}
+
 {%- for item in submodules %}
 {% set last_item = item.split('.') | last %}
 {{ last_item }}

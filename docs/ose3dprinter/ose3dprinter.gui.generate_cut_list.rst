@@ -3,6 +3,30 @@ ose3dprinter.gui.generate_cut_list
 ==================================
 
 
+.. autosummary::
+      ose3dprinter.gui.generate_cut_list.convert_dict_list_to_wiki_list_markup
+
+      ose3dprinter.gui.generate_cut_list.convert_dict_list_to_wiki_table_markup
+
+      ose3dprinter.gui.generate_cut_list.copy_cut_list_to_clipboard
+
+      ose3dprinter.gui.generate_cut_list.copy_cut_list_to_clipboard_task_panel
+
+      ose3dprinter.gui.generate_cut_list.generate_cut_list
+
+      ose3dprinter.gui.generate_cut_list.generate_cut_list_task_panel
+
+      ose3dprinter.gui.generate_cut_list.merge_cut_list_rows_and_format_descriptions
+
+      ose3dprinter.gui.generate_cut_list.pluralize
+
+      ose3dprinter.gui.generate_cut_list.save_cut_list_as_csv
+
+      ose3dprinter.gui.generate_cut_list.save_cut_list_as_csv_task_panel
+
+      ose3dprinter.gui.generate_cut_list.task_type
+
+
 convert_dict_list_to_wiki_list_markup
 -------------------------------------
 .. automodule:: ose3dprinter.gui.generate_cut_list.convert_dict_list_to_wiki_list_markup

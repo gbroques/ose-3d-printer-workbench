@@ -15,6 +15,9 @@ from .make_angle_frame_connector import MakeAngleFrameConnector
 
 
 def register_commands():
+    """
+    Register all workbench commands.
+    """
     command_registry.register(AddFrame.NAME, AddFrame())
     command_registry.register(AddUniversalXAxis.NAME, AddUniversalXAxis())
     command_registry.register(AddUniversalYAxis.NAME, AddUniversalYAxis())
@@ -28,6 +31,7 @@ def register_commands():
         MakeAngleFrameConnector.NAME, MakeAngleFrameConnector())
 
 
+#: Main Toolbar
 main_toolbar = CommandCollection('OSE 3D Printer')
 main_toolbar.add(AddFrame.NAME)
 main_toolbar.add(AddUniversalXAxis.NAME)
@@ -36,6 +40,7 @@ main_toolbar.add(AddUniversalZAxis.NAME)
 main_toolbar.add(AddHeatedBed.NAME)
 main_toolbar.add(AddExtruder.NAME)
 
+#: Main Menu
 main_menu = CommandCollection('OSE 3D Printer')
 main_menu.add(CopyCutListToClipboard.NAME)
 main_menu.add(SaveCutListAsCsv.NAME)

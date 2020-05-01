@@ -8,12 +8,12 @@ command_registry = import_module(
 
 class CommandCollection:
     """
-    Collection of commands for toolbars, menus, and context menu.
+    Collection of commands for toolbars, menus, sub-menus, and context menu.
     """
 
     def __init__(self, collection_name):
         """
-        :param collection_name: Name of toolbar, menu, or context menu.
+        :param collection_name: Name of toolbar, menu, sub-menu, or context menu.
         """
         self.name = collection_name
         self.command_names = []

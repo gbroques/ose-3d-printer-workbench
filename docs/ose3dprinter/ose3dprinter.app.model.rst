@@ -12,6 +12,12 @@ ose3dprinter.app.model
 
 
 
+.. autosummary::
+      ose3dprinter.app.model.base_model
+
+      ose3dprinter.app.model.make_face_from_points
+
+
 base_model
 ----------
 .. automodule:: ose3dprinter.app.model.base_model

@@ -3,6 +3,26 @@ ose3dprinter.app.model.frame
 ============================
 
 
+.. autosummary::
+      ose3dprinter.app.model.frame.angle_frame_connector
+
+      ose3dprinter.app.model.frame.angled_bar
+
+      ose3dprinter.app.model.frame.angled_bar_frame
+
+      ose3dprinter.app.model.frame.angled_bar_orientation
+
+      ose3dprinter.app.model.frame.axis_side_mount
+
+      ose3dprinter.app.model.frame.cnc_cut_frame
+
+      ose3dprinter.app.model.frame.corner
+
+      ose3dprinter.app.model.frame.frame_model
+
+      ose3dprinter.app.model.frame.rotate_and_translate_part
+
+
 angle_frame_connector
 ---------------------
 .. automodule:: ose3dprinter.app.model.frame.angle_frame_connector

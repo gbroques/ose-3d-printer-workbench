@@ -3,6 +3,12 @@ ose3dprinter.gui.make_angle_frame_connector
 ===========================================
 
 
+.. autosummary::
+      ose3dprinter.gui.make_angle_frame_connector.make_angle_frame_connector
+
+      ose3dprinter.gui.make_angle_frame_connector.make_angle_frame_connector_task_panel
+
+
 make_angle_frame_connector
 --------------------------
 .. automodule:: ose3dprinter.gui.make_angle_frame_connector.make_angle_frame_connector

@@ -14,6 +14,26 @@ ose3dprinter.gui
 
 
 
+.. autosummary::
+      ose3dprinter.gui.add_extruder
+
+      ose3dprinter.gui.add_frame
+
+      ose3dprinter.gui.add_heated_bed
+
+      ose3dprinter.gui.add_universal_x_axis
+
+      ose3dprinter.gui.add_universal_y_axis
+
+      ose3dprinter.gui.add_universal_z_axis
+
+      ose3dprinter.gui.commands
+
+      ose3dprinter.gui.get_first_selected_object_and_sub_object
+
+      ose3dprinter.gui.three_dimensional_printer_workbench
+
+
 add_extruder
 ------------
 .. automodule:: ose3dprinter.gui.add_extruder

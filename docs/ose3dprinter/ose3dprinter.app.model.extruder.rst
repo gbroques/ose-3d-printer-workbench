@@ -3,6 +3,14 @@ ose3dprinter.app.model.extruder
 ===============================
 
 
+.. autosummary::
+      ose3dprinter.app.model.extruder.cooling_and_sensor_mount
+
+      ose3dprinter.app.model.extruder.extruder_model
+
+      ose3dprinter.app.model.extruder.main_extruder_part
+
+
 cooling_and_sensor_mount
 ------------------------
 .. automodule:: ose3dprinter.app.model.extruder.cooling_and_sensor_mount

@@ -3,6 +3,10 @@ ose3dprinter.gui.part.extruder
 ==============================
 
 
+.. autosummary::
+      ose3dprinter.gui.part.extruder.create_extruder
+
+
 create_extruder
 ---------------
 .. automodule:: ose3dprinter.gui.part.extruder.create_extruder
