@@ -15,6 +15,13 @@ Pull requests will not be merged if tests are failing.
 
 We currently don't have end-to-end or integration tests, but are interested in exploring these in the future.
 
+## Documentation
+Improving the docstring on packages, modules, classes, functions, and other symbols throughout the codebase is encouraged.
+
+We use the [Sphinx docstring format](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html) which is the standard docstring format used with [Sphinx](https://www.sphinx-doc.org/en/master/).
+
+For details on building the docs, see the [README](./README.md) and [docs/README](./docs/README.rst).
+
 ## Philosophy
 We generally subscribe to the philosophy provided by [The Zen of Python](https://www.python.org/dev/peps/pep-0020/).
 
