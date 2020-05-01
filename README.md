@@ -97,7 +97,7 @@ A shell script for the above command has been included for convenience:
 
 To generate coverage data in `.coverage`, run:
 
-    docker exec -it ose3dprinter-test pytest --cov ose3dprinter_workbench/ test/
+    docker exec -it ose3dprinter-test pytest --cov ose3dprinter/ test/
 
 To generate a coverage report from the coverage data in `htmlcov/`, run:
 
