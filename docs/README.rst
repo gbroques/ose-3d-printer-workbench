@@ -6,7 +6,7 @@ We automatically generate our documentation with a tool called `Sphinx <http://w
 A Sphinx extension, called `sphinx-apidoc <http://www.sphinx-doc.org/en/stable/man/sphinx-apidoc.html>`_,
 automatically generates Sphinx sources as reStructuredText or ``.rst`` files from the ``ose3dprinter`` package.
 
-For a primer on reStructuredText see Sphinx's `reStructuredText Primer <ahttp://www.sphinx-doc.org/en/stable/rest.html#rst-primer>`_.
+For a primer on reStructuredText see Sphinx's `reStructuredText Primer <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_.
 
 Sphinx creates the HTML and other necessary files in ``docs/_build``.
 
