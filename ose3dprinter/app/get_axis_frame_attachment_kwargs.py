@@ -4,7 +4,7 @@ from Part import Face
 from .enums import Side
 from .exceptions import AttachmentError
 from .face_orientation import get_face_side, get_orientation_of_attachable_axis
-from .get_outer_faces_of_cnc_cut_frame import get_outer_faces_of_cnc_cut_frame
+from .get_outer_faces import get_outer_faces_of_cnc_cut_frame
 from .get_placement_strategy import get_placement_strategy
 from .model import FrameModel
 

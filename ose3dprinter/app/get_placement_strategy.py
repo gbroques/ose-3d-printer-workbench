@@ -1,4 +1,4 @@
-from FreeCAD import Console, Placement, Rotation, Vector
+from FreeCAD import Console, Placement, Rotation, Units, Vector
 
 from .enums import Side
 from .model import UniversalAxisModel
@@ -66,11 +66,11 @@ def get_placement_for_left_face_on_frame_with_corners(frame_with_corners):
     placement = Placement(
         Vector(x, y, z), rotation, Vector(0, 0, 0))
 
+    length = calculate_y_axis_length_for_frame_with_corners(frame_with_corners)
     return {
         'placement': placement,
         'origin_translation_offset': Vector(0, 0, 0.5),
-        'length': calculate_y_axis_length_for_frame_with_corners(
-            frame_with_corners)
+        'length': convert_value_to_quantity(length)
     }
 
 
@@ -106,7 +106,7 @@ def get_placement_for_right_face_on_frame_with_corners(frame_with_corners):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(0, 0, -0.5),
-        'length': length
+        'length': convert_value_to_quantity(length)
     }
 
 
@@ -204,3 +204,7 @@ def get_placement_for_top_face(frame):
         'origin_translation_offset': origin_translation_offset,
         'length': frame.Size
     }
+
+
+def convert_value_to_quantity(value):
+    return Units.Quantity(value, Units.Length)

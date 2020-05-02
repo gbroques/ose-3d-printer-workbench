@@ -20,6 +20,10 @@ class FrameModel(BaseModel):
 
     def __init__(self,
                  obj,
+                 size=304.8,  # 12 inches
+                 width=38.1,  # 1.5 inches
+                 thickness=3.175,  # 1/8 inch
+                 has_corners=False,
                  placement=Placement(),
                  origin_translation_offset=Vector()):
         init_args = (obj, placement, origin_translation_offset)
@@ -28,23 +32,24 @@ class FrameModel(BaseModel):
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'
         obj.addProperty('App::PropertyLength', 'Size', 'Base', size_tooltip)
-        obj.Size = 304.8  # 12 inches
+        obj.Size = size
 
         # Width property
         width_tooltip = 'Width of frame.'
         obj.addProperty('App::PropertyLength', 'Width', 'Base', width_tooltip)
-        obj.Width = 38.1  # 1.5 inches
+        obj.Width = width
 
         # Thickness property
         thickness_tooltip = 'Thickness of frame.'
         obj.addProperty('App::PropertyLength', 'Thickness',
                         'Base', thickness_tooltip)
-        obj.Thickness = 3.175  # 1/8 inch
+        obj.Thickness = thickness
 
         # HasCorners property
-        has_corners = 'Whether the frame has 3d printed corners or not.'
-        obj.addProperty('App::PropertyBool', 'HasCorners', 'Base', has_corners)
-        obj.HasCorners = False
+        has_corners_tooltip = 'Whether the frame has 3d printed corners or not.'
+        obj.addProperty('App::PropertyBool', 'HasCorners',
+                        'Base', has_corners_tooltip)
+        obj.HasCorners = has_corners
 
     def execute(self, obj):
         """

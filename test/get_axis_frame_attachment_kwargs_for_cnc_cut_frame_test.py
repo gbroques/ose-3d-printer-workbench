@@ -6,7 +6,7 @@ from ose3dprinter.app.enums import Plane, Side
 from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
-from ose3dprinter.app.get_outer_faces_of_cnc_cut_frame import \
+from ose3dprinter.app.get_outer_faces import \
     get_outer_faces_of_cnc_cut_frame
 from ose3dprinter.app.is_face_parallel_to_plane import (
     is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
@@ -155,6 +155,7 @@ def get_faces_by_side(cnc_cut_frame):
 
 
 def get_is_parallel_to_plane_predicate(plane):
+    """TODO: Duplicated in face_orientation.py"""
     return {
         Plane.XY: is_face_parallel_to_xy_plane,
         Plane.YZ: is_face_parallel_to_yz_plane,
