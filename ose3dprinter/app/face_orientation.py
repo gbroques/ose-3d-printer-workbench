@@ -79,6 +79,8 @@ def is_face_planar_and_within_y_bounds(face, frame_with_corners):
     # Exclude cylindrical surfaces and holes
     if not isinstance(face.Surface, Part.Plane):
         return False
+    elif isclose(face.BoundBox.YMax, frame_with_corners.Proxy.YMax):
+        return True
     # Filter out back or inwards faces of angle frame connector tabs
     elif face.BoundBox.YMax > frame_with_corners.Proxy.YMax:
         return False

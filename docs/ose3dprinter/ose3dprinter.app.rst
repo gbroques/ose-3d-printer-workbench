@@ -24,7 +24,7 @@ ose3dprinter.app
 
       ose3dprinter.app.get_heated_bed_frame_attachment_kwargs
 
-      ose3dprinter.app.get_outer_faces_of_cnc_cut_frame
+      ose3dprinter.app.get_outer_faces
 
       ose3dprinter.app.get_placement_strategy
 
@@ -91,9 +91,9 @@ get_heated_bed_frame_attachment_kwargs
    :show-inheritance:
 
 
-get_outer_faces_of_cnc_cut_frame
---------------------------------
-.. automodule:: ose3dprinter.app.get_outer_faces_of_cnc_cut_frame
+get_outer_faces
+---------------
+.. automodule:: ose3dprinter.app.get_outer_faces
    :members:
    :undoc-members:
    :show-inheritance:
