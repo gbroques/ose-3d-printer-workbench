@@ -1,4 +1,5 @@
-# TODO: Remove when we no longer need to support Python 2.7
+# TODO: Remove try / except import for zip
+#       when we no longer need to support Python 2.7
 try:
     from itertools import izip as zip
 except ImportError:
@@ -11,6 +12,13 @@ import Part
 
 
 def make_face_from_points(*points_list):
+    """Make a Face from a variable number of point lists.
+
+    :raises ValueError: When there's less than three points in a list.
+    :raises ValueError: When points don't form a closed wire.
+    :return: A face
+    :rtype: Part.Face
+    """
     wires = []
     for points in points_list:
         if len(points) < 3:
