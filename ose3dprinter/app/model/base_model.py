@@ -69,8 +69,11 @@ def get_translation_offset(reference_dimensions,
         elif is_edge_parallel_to_z_axis(e):
             z = e.Length
         else:
+            def round_vec(v):
+                return Vector(round(v.x), round(v.y), round(v.z))
             Console.PrintWarning(
-                '{} not parallel to x, y, or z axes\n'.format(e))
+                'Edge: {} not parallel to x, y, or z axes\n'.format(
+                    [round_vec(v.Point) for v in e.Vertexes]))
 
     return Vector(
         x * origin_translation_offset.x,
