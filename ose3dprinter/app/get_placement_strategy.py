@@ -1,4 +1,5 @@
 from FreeCAD import Console, Placement, Rotation, Units, Vector
+import Draft
 
 from .enums import Side
 from .model import UniversalAxisModel
@@ -142,6 +143,9 @@ def get_placement_for_front_face(frame):
     y = frame.Proxy.YMin
     z = frame.Shape.BoundBox.ZMax
     rotation = get_rotation_for_front_face()
+    print "X value is {}".format(x)
+
+    print "Y value is {}".format(y)
     placement = Placement(
         Vector(x, y, z), rotation, Vector(0, 0, 0))
     origin_translation_offset = Vector(0.5, 0, 0)
@@ -208,3 +212,10 @@ def get_placement_for_top_face(frame):
 
 def convert_value_to_quantity(value):
     return Units.Quantity(value, Units.Length)
+
+
+def get_unrotated_frame_shape(frame):
+    frame_shape_copy = frame.Shape.copy()
+    frame_shape_copy.Placement = Placement(
+        frame.Shape.Placement.Base, Rotation())
+    return frame_shape_copy
