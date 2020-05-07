@@ -1,5 +1,7 @@
 import Part
 from FreeCAD import Console
+from FreeCAD import Vector
+from math import degrees
 
 from .enums import AxisOrientation, Plane, Side
 from .get_outer_faces import (get_outer_faces_of_angled_bar,
@@ -12,7 +14,11 @@ from .model.frame.angle_frame_connector import AngleFrameConnector
 
 
 def get_face_side(frame, face):
-    attachable_axis_orientation = get_orientation_of_attachable_axis(face)
+    frame_rotation = frame.Placement.Rotation
+    face_copy = face.copy()
+    face_copy.rotate(Vector(), frame_rotation.Axis, degrees(-frame_rotation.Angle))
+    attachable_axis_orientation = get_orientation_of_attachable_axis(face_copy)
+    print "attachable_axis_orientation {}".format(attachable_axis_orientation)
     if attachable_axis_orientation is None:
         return None
     if frame.HasCorners:
@@ -273,7 +279,10 @@ def _get_sides_by_axis_orientation():
 def get_face_side_for_cnc_cut_frame(cnc_cut_frame,
                                     face,
                                     attachable_axis_orientation):
-    attachable_axis_orientation = get_orientation_of_attachable_axis(face)
+    frame_rotation = cnc_cut_frame.Placement.Rotation
+    face_copy = face.copy()
+    face_copy.rotate(Vector(), frame_rotation.Axis, degrees(-frame_rotation.Angle))
+    attachable_axis_orientation = get_orientation_of_attachable_axis(face_copy)
     if attachable_axis_orientation is None:
         return None
     sides_by_axis_orientation = _get_sides_by_axis_orientation()

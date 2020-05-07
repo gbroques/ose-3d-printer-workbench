@@ -26,7 +26,10 @@ class AddUniversalAxisBase:
             document = App.newDocument()
         name = 'Universal{}Axis'.format(self.axis_orientation.upper())
         kwargs = get_axis_creation_kwargs(self.axis_orientation)
-        create_universal_axis(document, name, **kwargs)
+        axis = create_universal_axis(document, name, **kwargs)
+        # rot1 = App.ActiveDocument.Frame.Placement.Rotation
+        # axis.Placement = axis.Placement.multiply(
+        #     App.Placement(App.Vector(), rot1))
         document.recompute()
 
     def IsActive(self):

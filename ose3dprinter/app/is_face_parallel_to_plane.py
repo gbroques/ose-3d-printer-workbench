@@ -17,6 +17,14 @@ def is_face_parallel_to_xy_plane(face):
 
 
 def _is_face_parallel_to_plane(face, axis_vector):
+    # TODO: Handle when face axis vector is 1, 1, 0
+    #       i.e. rotated at 45 degrees on Z
+    # print "_is_face_parallel_to_plane"
+    # print "axis vector {}".format(axis_vector)
+    # print "x {}, y {}, z {}".format(
+    #     abs(round(face.Surface.Axis.x)),
+    #     abs(round(face.Surface.Axis.y)),
+    #     abs(round(face.Surface.Axis.z)))
     return axis_vector == Vector(
         abs(round(face.Surface.Axis.x)),
         abs(round(face.Surface.Axis.y)),
