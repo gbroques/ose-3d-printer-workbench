@@ -1,6 +1,8 @@
+from math import degrees
+
 import Part
-from FreeCAD import Placement, Vector
-from ose3dprinter.app.enums import AxisOrientation
+from FreeCAD import Placement, Rotation, Vector
+from ose3dprinter.app.enums import AxisOrientation, Side
 from ose3dprinter.app.is_edge_parallel_to_axis import \
     is_edge_parallel_to_z_axis
 from ose3dprinter.app.model.base_model import BaseModel
@@ -19,6 +21,7 @@ class UniversalAxisModel(BaseModel):
     carriage_box_width = 52
 
     idler_box_width = 26
+    idler_box_length = 66
 
     # Motor side, idler side, and carriage boxes share same height
     box_height = 24
@@ -34,6 +37,8 @@ class UniversalAxisModel(BaseModel):
                  obj,
                  length=304.80,
                  carriage_position=50,
+                 orientation=AxisOrientation.X,
+                 side=Side.TOP,
                  placement=Placement(),
                  origin_translation_offset=Vector()):
         """
@@ -64,6 +69,19 @@ class UniversalAxisModel(BaseModel):
         obj.addProperty('App::PropertyPercent', 'CarriagePosition',
                         'Base', carriage_position_tooltip)
         obj.CarriagePosition = carriage_position
+
+        # Orientation property
+        orientation_tooltip = 'Orientation of axis: X, Y, or Z.'
+        hidden = 4
+        obj.addProperty('App::PropertyString', 'Orientation',
+                        'Base', orientation_tooltip, hidden)
+        obj.Orientation = orientation
+
+        # Side property
+        side_tooltip = 'Which side the bottom of the axis faces.'
+        obj.addProperty('App::PropertyString', 'Side',
+                        'Base', side_tooltip, hidden)
+        obj.Side = side
 
     def execute(self, obj):
         """
@@ -117,12 +135,12 @@ class UniversalAxisModel(BaseModel):
         carriage_box.translate(Vector(carriage_box_x, carriage_box_y, 0))
 
         # Define dimensions of idler side box
-        idler_box_length = 66
+        self.idler_box_length = 66
         idler_side_box_dimensions = (
-            self.idler_box_width, idler_box_length, self.box_height)
+            self.idler_box_width, self.idler_box_length, self.box_height)
 
         distance_between_hole_and_idler_side = (
-            idler_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
+            self.idler_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
         front_cylinder = Part.makeCylinder(self.hole_radius, self.box_height)
         rear_cylinder = front_cylinder.copy()
         front_cylinder.translate(Vector(
@@ -132,7 +150,7 @@ class UniversalAxisModel(BaseModel):
         ))
         rear_cylinder.translate(Vector(
             self.idler_box_width / 2,
-            idler_box_length - distance_between_hole_and_idler_side,
+            self.idler_box_length - distance_between_hole_and_idler_side,
             0
         ))
 
@@ -149,7 +167,7 @@ class UniversalAxisModel(BaseModel):
         space_between_rod_and_box_edge = 10
         half_box_height = self.box_height / 2
 
-        rod1_y_position = idler_box_length - space_between_rod_and_box_edge
+        rod1_y_position = self.idler_box_length - space_between_rod_and_box_edge
 
         rod1 = Part.makeCylinder(rod_radius, rod_length)
         rod1.rotate(Vector(0, 0, 0), Vector(0, 1, 0), 90)
@@ -169,8 +187,19 @@ class UniversalAxisModel(BaseModel):
             rod2
         ]
 
+        placement_strategy = get_placement_strategy(obj.Orientation,
+                                                    obj.Side,
+                                                    self.box_height,
+                                                    rod_length,
+                                                    motor_box_length)
+        rotation = placement_strategy['rotation']
+        translation = placement_strategy['translation']
+        for part in parts:
+            part.rotate(Vector(), rotation.Axis, degrees(rotation.Angle))
+            part.translate(translation)
+
         reference_dimensions = (rod_length, motor_box_length, self.box_height)
-        self.move_parts(parts, reference_dimensions)
+        self.move_parts(parts, reference_dimensions, rotation)
 
         compound = Part.makeCompound(parts)
         obj.Shape = compound
@@ -318,3 +347,42 @@ def _get_length_property(axis_orientation):
         AxisOrientation.Y: 'YLength',
         AxisOrientation.Z: 'ZLength',
     }[axis_orientation]
+
+
+def get_placement_strategy(orientation,
+                           side,
+                           box_height,
+                           length,
+                           motor_box_length):
+    try:
+        return {
+            AxisOrientation.X: {
+                Side.TOP: {
+                    'rotation': Rotation(),
+                    'translation': Vector()
+                }
+            },
+            AxisOrientation.Y: {
+                Side.LEFT: {
+                    'rotation': Rotation(-90, 0, 90),
+                    'translation': Vector(box_height, length, 0)
+                },
+                Side.RIGHT: {
+                    'rotation': Rotation(-90, 0, -90),
+                    'translation': Vector(0, length, motor_box_length)
+                }
+            },
+            AxisOrientation.Z: {
+                Side.FRONT: {
+                    'rotation': Rotation(0, 90, 90),
+                    'translation': Vector(0, box_height, length)
+                },
+                Side.REAR: {
+                    'rotation': Rotation(0, 90, -90),
+                    'translation': Vector(motor_box_length, 0, length)
+                }
+            }
+        }[orientation][side]
+    except KeyError:
+        message = 'Invalid combination of orientation "{}" and side "{}" passed.'
+        raise ValueError(message.format(orientation, side))

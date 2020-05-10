@@ -9,7 +9,10 @@ from .is_face_parallel_to_plane import is_face_parallel_to_xy_plane
 
 def get_extruder_x_axis_carriage_attachment_kwargs(universal_axis, face):
     validate_axis_and_face(universal_axis, face)
-    x = universal_axis.Proxy.calculate_carriage_box_x()
+    x = (
+        universal_axis.Shape.BoundBox.XMin +
+        universal_axis.Proxy.calculate_carriage_box_x()
+    )
     y = universal_axis.Shape.BoundBox.YMin
     z = face.BoundBox.ZMax
     placement = Placement(

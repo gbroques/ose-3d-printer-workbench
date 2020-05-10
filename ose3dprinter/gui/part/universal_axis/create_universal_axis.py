@@ -1,12 +1,15 @@
 from FreeCAD import Placement, Vector
 
 from ose3dprinter.app.model import UniversalAxisModel
+from ose3dprinter.app.enums import AxisOrientation, Side
 
 
 def create_universal_axis(document,
                           name,
                           length=304.80,
                           carriage_position=50,
+                          orientation=AxisOrientation.X,
+                          side=Side.TOP,
                           placement=Placement(),
                           origin_translation_offset=Vector()):
     """
@@ -17,6 +20,8 @@ def create_universal_axis(document,
     UniversalAxisModel(obj,
                        length,
                        carriage_position,
+                       orientation,
+                       side,
                        placement,
                        origin_translation_offset)
     if obj.ViewObject is not None:

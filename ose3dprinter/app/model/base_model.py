@@ -1,7 +1,7 @@
 from math import degrees
 
 import Part
-from FreeCAD import Console, Vector
+from FreeCAD import Console, Vector, Rotation
 from ose3dprinter.app.is_edge_parallel_to_axis import (
     is_edge_parallel_to_x_axis, is_edge_parallel_to_y_axis,
     is_edge_parallel_to_z_axis)
@@ -36,27 +36,15 @@ class BaseModel(object):
         """
         self.Object = fp
 
-    def move_parts(self, parts, reference_dimensions):
-        base = self.placement.Base
-        rotation = self.placement.Rotation
-
+    def move_parts(self, parts, reference_dimensions, rotation=Rotation()):
         translation_offset = get_translation_offset(
             reference_dimensions, rotation, self.origin_translation_offset)
-        origin = base - translation_offset
         for part in parts:
-            part.translate(origin)
-            part.rotate(origin, rotation.Axis, degrees(rotation.Angle))
-
-    def move_part(self, part, reference_dimensions):
-        base = self.placement.Base
-        rotation = self.placement.Rotation
-
-        translation_offset = get_translation_offset(
-            reference_dimensions, rotation, self.origin_translation_offset)
-        origin = base - translation_offset
-
-        part.translate(origin)
-        part.rotate(origin, rotation.Axis, degrees(rotation.Angle))
+            part.translate(translation_offset)
+            placement_rotation = self.placement.Rotation
+            part.rotate(translation_offset, placement_rotation.Axis,
+                        degrees(placement_rotation.Angle))
+            part.translate(self.placement.Base)
 
 
 def get_translation_offset(reference_dimensions,
