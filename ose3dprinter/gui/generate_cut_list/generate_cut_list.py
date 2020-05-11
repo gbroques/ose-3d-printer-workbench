@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 import FreeCAD as App
-import FreeCADGui
+import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.enums import AxisOrientation
 from ose3dprinter.app.model import FrameModel, UniversalAxisModel
@@ -151,11 +151,11 @@ def convert_value_to_quantity_and_format(value):
 def show_generate_cut_list_task_panel(cut_list_table_rows,
                                       columns,
                                       task_type):
-    FreeCADGui.Control.closeDialog()
+    Gui.Control.closeDialog()
     task_panel_factory = GenerateCutListTaskPanelFactory(
         cut_list_table_rows, columns)
     panel = task_panel_factory.create(task_type)
-    FreeCADGui.Control.showDialog(panel)
+    Gui.Control.showDialog(panel)
 
 
 def retrieve_axes_by_orientation_from_document(document):
