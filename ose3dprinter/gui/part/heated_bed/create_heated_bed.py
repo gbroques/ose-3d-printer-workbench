@@ -12,6 +12,5 @@ def create_heated_bed(document,
     """
     obj = document.addObject('Part::FeaturePython', name)
     HeatedBedModel(obj, placement, origin_translation_offset)
-    if obj.ViewObject is not None:
-        obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
+    obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
     return obj

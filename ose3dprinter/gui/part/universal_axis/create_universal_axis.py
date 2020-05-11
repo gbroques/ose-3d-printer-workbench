@@ -24,6 +24,5 @@ def create_universal_axis(document,
                        side,
                        placement,
                        origin_translation_offset)
-    if obj.ViewObject is not None:
-        obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
+    obj.ViewObject.Proxy = 0  # Mandatory unless ViewProvider is coded
     return obj
