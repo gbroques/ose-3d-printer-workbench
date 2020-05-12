@@ -6,7 +6,7 @@ from ose3dprinter.app.enums import AxisOrientation, Side
 from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
-from ose3dprinter.app.face_orientation import get_faces_by_side
+from ose3dprinter.app.get_faces_by_side import get_faces_by_side
 from ose3dprinter.app.model import FrameModel
 
 from .freecad_test_case import FreeCADTestCase

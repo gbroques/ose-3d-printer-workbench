@@ -2,7 +2,7 @@ import unittest
 
 import FreeCAD as App
 from ose3dprinter.app.enums import Side
-from ose3dprinter.app.face_orientation import \
+from ose3dprinter.app.get_faces_within_bounds_of_side_for_frame_with_corners import \
     get_faces_within_bounds_of_side_for_frame_with_corners
 from ose3dprinter.app.is_face_parallel_to_plane import (
     is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,

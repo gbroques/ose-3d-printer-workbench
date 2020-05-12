@@ -4,7 +4,7 @@ import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.enums import AxisOrientation, Side
 from ose3dprinter.app.exceptions import AttachmentError
-from ose3dprinter.app.face_orientation import \
+from ose3dprinter.app.get_faces_within_bounds_of_side_for_frame_with_corners import \
     get_faces_within_bounds_of_side_for_frame_with_corners
 from ose3dprinter.app.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
