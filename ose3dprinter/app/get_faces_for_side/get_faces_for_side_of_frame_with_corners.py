@@ -1,16 +1,19 @@
-from .enums import AxisOrientation, Plane, Side
-from .face_side import get_face_side
-from .future import isclose
-from .get_outer_faces import (get_outer_faces_of_angled_bar,
-                              get_outer_faces_of_corner)
-from .is_face_parallel_to_plane import (is_face_parallel_to_xy_plane,
-                                        is_face_parallel_to_xz_plane,
-                                        is_face_parallel_to_yz_plane)
-from .model.frame.angle_frame_connector import AngleFrameConnector
+from ose3dprinter.app.enums import AxisOrientation, Plane, Side
+from ose3dprinter.app.face_side import get_face_side
+from ose3dprinter.app.future import isclose
+from ose3dprinter.app.get_outer_faces import (get_outer_faces_of_angled_bar,
+                                              get_outer_faces_of_corner)
+from ose3dprinter.app.is_face_parallel_to_plane import (
+    is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
+    is_face_parallel_to_yz_plane)
+from ose3dprinter.app.model.frame.angle_frame_connector import \
+    AngleFrameConnector
+
+from .filter_faces_parallel_to_plane import filter_faces_parallel_to_plane
 
 
-def get_faces_within_bounds_of_side_for_frame_with_corners(frame_with_corners,
-                                                           side):
+def get_faces_for_side_of_frame_with_corners(frame_with_corners,
+                                             side):
     """TODO: Doesn't include faces of angle frame connector tabs
 
     :param frame_with_corners: Frame object with HasCorners property = True
@@ -31,13 +34,12 @@ def get_faces_within_bounds_of_side_for_frame_with_corners(frame_with_corners,
     faces = corner_faces + angle_bar_faces
 
     plane = _get_plane_from_side(side)
-    is_face_parallel_to_plane = _get_is_parallel_to_plane_predicate(plane)
-    angle_bar_faces_parallel_to_side = filter(
-        is_face_parallel_to_plane, faces)
+    faces_parallel_to_side = filter_faces_parallel_to_plane(
+        faces, plane)
 
     faces_within_bound_of_side = filter(
         lambda f: _is_face_within_bounds_of_side(f, frame_with_corners, side),
-        angle_bar_faces_parallel_to_side)
+        faces_parallel_to_side)
     return list(faces_within_bound_of_side)
 
 
@@ -98,15 +100,6 @@ def _get_plane_from_side(side):
         Side.FRONT: Plane.XZ,
         Side.REAR: Plane.XZ
     }[side]
-
-
-def _get_is_parallel_to_plane_predicate(plane):
-    # TODO: duplicated in get_faces_by_side.py
-    return {
-        Plane.XY: is_face_parallel_to_xy_plane,
-        Plane.YZ: is_face_parallel_to_yz_plane,
-        Plane.XZ: is_face_parallel_to_xz_plane
-    }[plane]
 
 
 def _is_face_within_bounds_of_side(face, frame_with_corners, side):
