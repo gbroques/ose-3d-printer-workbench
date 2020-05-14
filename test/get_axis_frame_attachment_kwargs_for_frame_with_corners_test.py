@@ -4,8 +4,6 @@ import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.enums import AxisOrientation, Side
 from ose3dprinter.app.exceptions import AttachmentError
-from ose3dprinter.app.get_faces_for_side import \
-    get_faces_for_side
 from ose3dprinter.app.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
 from ose3dprinter.app.model import FrameModel
@@ -25,7 +23,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
         document.recompute()
 
     def test_get_axis_frame_attachment_kwargs_for_top_face(self):
-        top_faces = get_faces_for_side(self.frame, Side.TOP)
+        top_faces = self.frame.Proxy.get_faces_for_side(Side.TOP)
         for top_face in top_faces:
             result = get_axis_frame_attachment_kwargs(
                 self.frame, top_face, AxisOrientation.X)
@@ -44,7 +42,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
             self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_left_face(self):
-        left_faces = get_faces_for_side(self.frame, Side.LEFT)
+        left_faces = self.frame.Proxy.get_faces_for_side(Side.LEFT)
         for left_face in left_faces:
             result = get_axis_frame_attachment_kwargs(
                 self.frame, left_face, AxisOrientation.Y)
@@ -69,7 +67,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
             self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_right_face(self):
-        right_faces = get_faces_for_side(self.frame, Side.RIGHT)
+        right_faces = self.frame.Proxy.get_faces_for_side(Side.RIGHT)
         for right_face in right_faces:
             result = get_axis_frame_attachment_kwargs(
                 self.frame, right_face, AxisOrientation.Y)
@@ -96,7 +94,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
             self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_front_face(self):
-        front_faces = get_faces_for_side(self.frame, Side.FRONT)
+        front_faces = self.frame.Proxy.get_faces_for_side(Side.FRONT)
         for front_face in front_faces:
             result = get_axis_frame_attachment_kwargs(
                 self.frame, front_face, AxisOrientation.Z)
@@ -116,7 +114,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
             self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_rear_face(self):
-        rear_faces = get_faces_for_side(self.frame, Side.REAR)
+        rear_faces = self.frame.Proxy.get_faces_for_side(Side.REAR)
         for rear_face in rear_faces:
             result = get_axis_frame_attachment_kwargs(
                 self.frame, rear_face, 'z')
@@ -136,7 +134,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
             self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_bottom_face(self):
-        bottom_faces = get_faces_for_side(self.frame, Side.BOTTOM)
+        bottom_faces = self.frame.Proxy.get_faces_for_side(Side.BOTTOM)
         for bottom_face in bottom_faces:
             with self.assertRaises(AttachmentError):
                 get_axis_frame_attachment_kwargs(self.frame, bottom_face, 'x')

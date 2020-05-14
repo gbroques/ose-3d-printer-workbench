@@ -3,7 +3,6 @@ from Part import Face
 
 from .enums import AxisOrientation, Side
 from .exceptions import AttachmentError
-from .face_side import get_face_side
 from .get_outer_faces import get_outer_faces_of_cnc_cut_frame
 from .get_placement_strategy import get_placement_strategy
 from .is_face_parallel_to_plane import (is_face_parallel_to_xy_plane,
@@ -18,7 +17,7 @@ def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
     creating a universal axis object attached to a selected frame face.
     """
     validate_frame_and_face(frame, face, axis_orientation)
-    face_side = get_face_side(frame, face, axis_orientation)
+    face_side = frame.Proxy.get_face_side(face, axis_orientation)
     placement_strategy = get_placement_strategy(face_side)
     result = placement_strategy(frame)
     result['side'] = face_side
@@ -34,7 +33,7 @@ def validate_frame_and_face(frame, face, axis_orientation):
         raise AttachmentError('Frame is rotated')
     if not frame.HasCorners and not is_outer_face_of_cnc_cut_frame(face, frame):
         raise AttachmentError('Must select outer face of frame')
-    face_side = get_face_side(frame, face, axis_orientation)
+    face_side = frame.Proxy.get_face_side(face, axis_orientation)
     if face_side == Side.BOTTOM:
         raise AttachmentError(
             'Cannot attach axis to bottom side of frame')

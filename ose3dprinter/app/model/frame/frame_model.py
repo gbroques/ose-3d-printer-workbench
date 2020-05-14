@@ -5,6 +5,8 @@ from ose3dprinter.app.model.base_model import BaseModel
 from .angle_frame_connector import AngleFrameConnector
 from .angled_bar_frame import AngledBarFrame
 from .cnc_cut_frame import CNCCutFrame
+from .get_face_side import get_face_side
+from .get_faces_for_side import get_faces_for_side
 
 
 class FrameModel(BaseModel):
@@ -110,6 +112,12 @@ class FrameModel(BaseModel):
     @property
     def ZMax(self):
         return self.Object.Shape.BoundBox.ZMax
+
+    def get_face_side(self, face, axis_orientation):
+        return get_face_side(self.Object, face, axis_orientation)
+
+    def get_faces_for_side(self, side):
+        return get_faces_for_side(self.Object, side)
 
     def __getstate__(self):
         return self.Type

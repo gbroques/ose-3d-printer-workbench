@@ -6,7 +6,6 @@ from ose3dprinter.app.enums import AxisOrientation, Side
 from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.get_axis_frame_attachment_kwargs import \
     get_axis_frame_attachment_kwargs
-from ose3dprinter.app.get_faces_for_side import get_faces_for_side
 from ose3dprinter.app.model import FrameModel
 
 from .freecad_test_case import FreeCADTestCase
@@ -22,7 +21,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         document.recompute()
 
     def test_get_axis_frame_attachment_kwargs_for_top_face(self):
-        top_face = get_faces_for_side(self.frame, Side.TOP)[0]
+        top_face = self.frame.Proxy.get_faces_for_side(Side.TOP)[0]
 
         result = get_axis_frame_attachment_kwargs(
             self.frame, top_face, AxisOrientation.X)
@@ -40,7 +39,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_left_face(self):
-        left_face = get_faces_for_side(self.frame, Side.LEFT)[0]
+        left_face = self.frame.Proxy.get_faces_for_side(Side.LEFT)[0]
 
         result = get_axis_frame_attachment_kwargs(
             self.frame, left_face, AxisOrientation.Y)
@@ -59,7 +58,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_right_face(self):
-        right_face = get_faces_for_side(self.frame, Side.RIGHT)[0]
+        right_face = self.frame.Proxy.get_faces_for_side(Side.RIGHT)[0]
 
         result = get_axis_frame_attachment_kwargs(
             self.frame, right_face, AxisOrientation.Y)
@@ -78,7 +77,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_front_face(self):
-        front_face = get_faces_for_side(self.frame, Side.FRONT)[0]
+        front_face = self.frame.Proxy.get_faces_for_side(Side.FRONT)[0]
 
         result = get_axis_frame_attachment_kwargs(
             self.frame, front_face, AxisOrientation.Z)
@@ -97,7 +96,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_rear_face(self):
-        rear_face = get_faces_for_side(self.frame, Side.REAR)[0]
+        rear_face = self.frame.Proxy.get_faces_for_side(Side.REAR)[0]
 
         result = get_axis_frame_attachment_kwargs(
             self.frame, rear_face, AxisOrientation.Z)
@@ -116,7 +115,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         self.assert_result_and_expected_are_equal(result, expected)
 
     def test_get_axis_frame_attachment_kwargs_for_bottom_face(self):
-        bottom_face = get_faces_for_side(self.frame, Side.BOTTOM)[0]
+        bottom_face = self.frame.Proxy.get_faces_for_side(Side.BOTTOM)[0]
 
         with self.assertRaises(AttachmentError):
             get_axis_frame_attachment_kwargs(

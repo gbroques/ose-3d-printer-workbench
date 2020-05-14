@@ -1,11 +1,7 @@
 from ose3dprinter.app.enums import AxisOrientation, Plane, Side
-from ose3dprinter.app.face_side import get_face_side
 from ose3dprinter.app.future import isclose
 from ose3dprinter.app.get_outer_faces import (get_outer_faces_of_angled_bar,
                                               get_outer_faces_of_corner)
-from ose3dprinter.app.is_face_parallel_to_plane import (
-    is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
-    is_face_parallel_to_yz_plane)
 from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector
 
@@ -102,9 +98,9 @@ def _get_plane_from_side(side):
     }[side]
 
 
-def _is_face_within_bounds_of_side(face, frame_with_corners, side):
+def _is_face_within_bounds_of_side(face, frame, side):
     axis_orientation = get_axis_orientation(side)
-    face_side = get_face_side(frame_with_corners, face, axis_orientation)
+    face_side = frame.Proxy.get_face_side(face, axis_orientation)
     return face_side == side
 
 
