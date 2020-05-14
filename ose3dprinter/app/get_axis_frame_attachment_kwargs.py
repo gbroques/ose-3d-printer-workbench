@@ -3,7 +3,6 @@ from Part import Face
 
 from .enums import AxisOrientation, Side
 from .exceptions import AttachmentError
-from .get_outer_faces import get_outer_faces_of_cnc_cut_frame
 from .get_placement_strategy import get_placement_strategy
 from .is_face_parallel_to_plane import (is_face_parallel_to_xy_plane,
                                         is_face_parallel_to_xz_plane,
@@ -31,7 +30,7 @@ def validate_frame_and_face(frame, face, axis_orientation):
         raise AttachmentError('Must select frame')
     if is_frame_rotated(frame):
         raise AttachmentError('Frame is rotated')
-    if not frame.HasCorners and not is_outer_face_of_cnc_cut_frame(face, frame):
+    if not frame.HasCorners and not is_outer_face(face, frame):
         raise AttachmentError('Must select outer face of frame')
     face_side = frame.Proxy.get_face_side(face, axis_orientation)
     if face_side == Side.BOTTOM:
@@ -51,8 +50,8 @@ def is_frame_rotated(frame):
     return rotation.Axis != Vector(0, 0, 1) or rotation.Angle != 0
 
 
-def is_outer_face_of_cnc_cut_frame(face, cnc_cut_frame):
-    outer_faces = get_outer_faces_of_cnc_cut_frame(cnc_cut_frame)
+def is_outer_face(face, frame):
+    outer_faces = frame.Proxy.get_outer_faces()
     return any(map(lambda f: f.isEqual(face), outer_faces))
 
 

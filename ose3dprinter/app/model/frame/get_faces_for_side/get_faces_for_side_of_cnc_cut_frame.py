@@ -1,5 +1,4 @@
 from ose3dprinter.app.enums import Plane, Side
-from ose3dprinter.app.get_outer_faces import get_outer_faces_of_cnc_cut_frame
 from ose3dprinter.app.is_face_parallel_to_plane import (
     is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
     is_face_parallel_to_yz_plane)
@@ -21,7 +20,7 @@ def _get_faces_by_side_for_cnc_cut_frame(cnc_cut_frame):
     :rtype: dict
     """
     faces_by_side = {}
-    outer_faces = get_outer_faces_of_cnc_cut_frame(cnc_cut_frame)
+    outer_faces = cnc_cut_frame.Proxy.get_outer_faces()
     for outer_face in outer_faces:
         parallel_plane = _get_parallel_plane(outer_face)
         outer_faces_parallel_to_plane = filter_faces_parallel_to_plane(

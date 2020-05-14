@@ -7,6 +7,7 @@ from .angled_bar_frame import AngledBarFrame
 from .cnc_cut_frame import CNCCutFrame
 from .get_face_side import get_face_side
 from .get_faces_for_side import get_faces_for_side
+from .get_outer_faces import get_outer_faces
 
 
 class FrameModel(BaseModel):
@@ -118,6 +119,9 @@ class FrameModel(BaseModel):
 
     def get_faces_for_side(self, side):
         return get_faces_for_side(self.Object, side)
+
+    def get_outer_faces(self):
+        return get_outer_faces(self.Object)
 
     def __getstate__(self):
         return self.Type
