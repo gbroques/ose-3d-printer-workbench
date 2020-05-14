@@ -1,4 +1,4 @@
-from .enums import AxisOrientation, Side
+from ose3dprinter.app.enums import AxisOrientation, Side
 
 
 def get_default_axis_creation_kwargs(axis_orientation):

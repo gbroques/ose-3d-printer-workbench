@@ -1,13 +1,13 @@
 from FreeCAD import Vector
+from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.exceptions import AttachmentError
+from ose3dprinter.app.is_face_parallel_to_plane import (
+    is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
+    is_face_parallel_to_yz_plane)
+from ose3dprinter.app.model import FrameModel
 from Part import Face
 
-from .enums import AxisOrientation, Side
-from .exceptions import AttachmentError
 from .get_placement_strategy import get_placement_strategy
-from .is_face_parallel_to_plane import (is_face_parallel_to_xy_plane,
-                                        is_face_parallel_to_xz_plane,
-                                        is_face_parallel_to_yz_plane)
-from .model import FrameModel
 
 
 def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):

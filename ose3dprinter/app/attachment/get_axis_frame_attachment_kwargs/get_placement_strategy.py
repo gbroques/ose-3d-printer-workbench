@@ -1,8 +1,7 @@
 from FreeCAD import Console, Placement, Units, Vector
-
-from .enums import AxisOrientation, Side
-from .model import UniversalAxisModel
-from .model.frame.angle_frame_connector import AxisSideMount
+from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.model import UniversalAxisModel
+from ose3dprinter.app.model.frame.angle_frame_connector import AxisSideMount
 
 
 def get_placement_strategy(face_side):

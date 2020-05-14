@@ -1,8 +1,7 @@
 import unittest
 
+from ose3dprinter.app.attachment import get_default_axis_creation_kwargs
 from ose3dprinter.app.enums import AxisOrientation, Side
-from ose3dprinter.app.get_default_axis_creation_kwargs import \
-    get_default_axis_creation_kwargs
 
 from .freecad_test_case import FreeCADTestCase
 

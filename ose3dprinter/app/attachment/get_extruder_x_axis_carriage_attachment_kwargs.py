@@ -1,10 +1,9 @@
 from FreeCAD import Placement, Rotation, Vector
-
-from .exceptions import AttachmentError
-from .model import UniversalAxisModel
+from ose3dprinter.app.exceptions import AttachmentError
+from ose3dprinter.app.is_face_parallel_to_plane import \
+    is_face_parallel_to_xy_plane
+from ose3dprinter.app.model import UniversalAxisModel
 from Part import Face
-
-from .is_face_parallel_to_plane import is_face_parallel_to_xy_plane
 
 
 def get_extruder_x_axis_carriage_attachment_kwargs(universal_axis, face):

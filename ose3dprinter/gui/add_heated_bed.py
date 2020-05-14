@@ -1,9 +1,8 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
+from ose3dprinter.app.attachment import get_heated_bed_frame_attachment_kwargs
 from ose3dprinter.app.exceptions import AttachmentError
-from ose3dprinter.app.get_heated_bed_frame_attachment_kwargs import \
-    get_heated_bed_frame_attachment_kwargs
 from ose3dprinter.app.model import FrameModel, UniversalAxisModel
 
 from .part import create_heated_bed
