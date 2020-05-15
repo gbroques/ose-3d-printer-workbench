@@ -1,8 +1,8 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
-from ose3dprinter.app.attachment import get_extruder_axis_attachment_kwargs
-from ose3dprinter.app.exceptions import AttachmentError
+from ose3dprinter.app.attachment import (AttachmentError,
+                                         get_extruder_axis_attachment_kwargs)
 
 from .get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object

@@ -2,9 +2,9 @@ import unittest
 
 import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.app.attachment import get_axis_frame_attachment_kwargs
+from ose3dprinter.app.attachment import (AttachmentError,
+                                         get_axis_frame_attachment_kwargs)
 from ose3dprinter.app.enums import AxisOrientation, Side
-from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.model import FrameModel
 from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector

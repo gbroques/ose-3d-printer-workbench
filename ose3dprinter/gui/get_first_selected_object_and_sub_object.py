@@ -1,4 +1,4 @@
-from ose3dprinter.app.exceptions import AttachmentError
+from ose3dprinter.app.attachment import AttachmentError
 
 
 def get_first_selected_object_and_sub_object(selection_objects):

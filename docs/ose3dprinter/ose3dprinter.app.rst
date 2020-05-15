@@ -13,8 +13,6 @@ ose3dprinter.app
 .. autosummary::
       ose3dprinter.app.enums
 
-      ose3dprinter.app.exceptions
-
       ose3dprinter.app.future
 
       ose3dprinter.app.is_edge_parallel_to_axis
@@ -27,14 +25,6 @@ ose3dprinter.app
 enums
 -----
 .. automodule:: ose3dprinter.app.enums
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-exceptions
-----------
-.. automodule:: ose3dprinter.app.exceptions
    :members:
    :undoc-members:
    :show-inheritance:
