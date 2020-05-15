@@ -18,7 +18,7 @@ Custom Properties
 
 Attaching Axes to the Frame
 ---------------------------
-See `Add Universal Axis <add_universal_axis.html>`_ for details on how to attach axes to the frame.
+See `Add Axis <add_axis.html>`_ for details on how to attach axes to the frame.
 
 .. WARNING:: In order to attach axes to the frame, the frame must **not** be rotated.
 

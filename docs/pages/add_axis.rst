@@ -1,36 +1,36 @@
-|Universal X Axis Icon| Add Universal Axis
+|X Axis Icon| Add Axis
 ==========================================
 
-There a three tools in the main toolbar to add a :osewikipage:`Universal Axis` object in different orientations to the **active** document:
+There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universal Axis` object in different orientations to the **active** document:
 
-1. |Universal X Axis Icon| Add Universal X Axis
-2. |Universal Y Axis Icon| Add Universal Y Axis
-3. |Universal Z Axis Icon| Add Universal Z Axis
+1. |X Axis Icon| Add X Axis
+2. |Y Axis Icon| Add Y Axis
+3. |Z Axis Icon| Add Z Axis
 
-.. |Universal X Axis Icon| image:: /../ose3dprinter/gui/resources/UniversalXAxis.svg
+.. |X Axis Icon| image:: /../ose3dprinter/gui/resources/XAxis.svg
    :height: 32px
    :width: 32px
-   :alt: Add Universal X Axis Icon
+   :alt: Add X Axis Icon
 
-.. |Universal Y Axis Icon| image:: /../ose3dprinter/gui/resources/UniversalYAxis.svg
+.. |Y Axis Icon| image:: /../ose3dprinter/gui/resources/YAxis.svg
    :height: 32px
    :width: 32px
-   :alt: Add Universal Y Axis Icon
+   :alt: Add Y Axis Icon
 
-.. |Universal Z Axis Icon| image:: /../ose3dprinter/gui/resources/UniversalZAxis.svg
+.. |Z Axis Icon| image:: /../ose3dprinter/gui/resources/ZAxis.svg
    :height: 32px
    :width: 32px
-   :alt: Add Universal Z Axis Icon
+   :alt: Add Z Axis Icon
 
 Custom Properties
 -----------------
 .. csv-table::
-   :file: UniversalAxisModelPropertyTable.csv
+   :file: AxisModelPropertyTable.csv
    :header-rows: 1
 
 Attaching Axes to the Frame
 ---------------------------
-You may attach axes to the frame by selecting one of it's outer faces, and then clicking a button in the main toolbar to add a universal axis.
+You may attach axes to the frame by selecting one of it's outer faces, and then clicking a button in the main toolbar to add a axis.
 
 .. image:: /_static/attaching-axes-to-frame.gif
    :alt: Attaching X, Y, and Z axes to Top, Right, and Front faces

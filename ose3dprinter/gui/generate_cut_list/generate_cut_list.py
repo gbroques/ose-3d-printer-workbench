@@ -4,7 +4,7 @@ import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.enums import AxisOrientation
-from ose3dprinter.app.model import FrameModel, UniversalAxisModel
+from ose3dprinter.app.model import AxisModel, FrameModel
 from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector
 
@@ -178,7 +178,7 @@ def get_objects_from_document(document):
 
 
 def is_axis(object):
-    return is_object(object, UniversalAxisModel.Type)
+    return is_object(object, AxisModel.Type)
 
 
 def is_frame(object):

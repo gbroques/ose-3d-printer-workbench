@@ -23,7 +23,7 @@ Both options generate a cut list with the following:
 
 How it Works
 ------------
-Each option queries the **active** document for Universal Axis objects and the Frame object in order to determine the rods and angled bars for the cut list.
+Each option queries the **active** document for Axis objects and the Frame object in order to determine the rods and angled bars for the cut list.
 
 Determining Rod Quantity
 ^^^^^^^^^^^^^^^^^^^^^^^^

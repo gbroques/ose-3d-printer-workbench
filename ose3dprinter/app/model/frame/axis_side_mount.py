@@ -1,7 +1,7 @@
 import Part
 from FreeCAD import Vector
 from ose3dprinter.app.model.make_face_from_points import make_face_from_points
-from ose3dprinter.app.model.universal_axis import UniversalAxisModel
+from ose3dprinter.app.model.axis import AxisModel
 
 from .corner import Corner, is_top_corner
 from .rotate_and_translate_part import rotate_and_translate_part
@@ -38,7 +38,7 @@ class AxisSideMount:
                 Corner.TOP_RIGHT_REAR))
 
         distance_from_hole_to_side = (
-            cls.height - (UniversalAxisModel.distance_between_holes + (cls.hole_radius * 2))) / 2
+            cls.height - (AxisModel.distance_between_holes + (cls.hole_radius * 2))) / 2
 
         if length <= cls.attachment_overlap:
             raise ValueError(

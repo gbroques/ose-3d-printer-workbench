@@ -2,17 +2,17 @@ from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.app.is_face_parallel_to_plane import \
     is_face_parallel_to_xy_plane
-from ose3dprinter.app.model import UniversalAxisModel
+from ose3dprinter.app.model import AxisModel
 from Part import Face
 
 
-def get_extruder_x_axis_carriage_attachment_kwargs(universal_axis, face):
-    validate_axis_and_face(universal_axis, face)
+def get_extruder_x_axis_carriage_attachment_kwargs(axis, face):
+    validate_axis_and_face(axis, face)
     x = (
-        universal_axis.Shape.BoundBox.XMin +
-        universal_axis.Proxy.calculate_carriage_box_x()
+        axis.Shape.BoundBox.XMin +
+        axis.Proxy.calculate_carriage_box_x()
     )
-    y = universal_axis.Shape.BoundBox.YMin
+    y = axis.Shape.BoundBox.YMin
     z = face.BoundBox.ZMax
     placement = Placement(
         Vector(x, y, z), Rotation())
@@ -26,8 +26,8 @@ def get_extruder_x_axis_carriage_attachment_kwargs(universal_axis, face):
 def validate_axis_and_face(axis, face):
     if not isinstance(face, Face):
         raise AttachmentError('Selected element is not a face')
-    if axis.Proxy.Type != UniversalAxisModel.Type:
-        raise AttachmentError('Must select universal axis')
+    if axis.Proxy.Type != AxisModel.Type:
+        raise AttachmentError('Must select axis')
     if not is_face_parallel_to_xy_plane(face):
         raise AttachmentError('Face must be parallel to XY plane')
 

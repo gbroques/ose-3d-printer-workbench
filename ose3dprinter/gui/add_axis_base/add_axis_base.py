@@ -6,13 +6,13 @@ from ose3dprinter.app.attachment import (get_axis_frame_attachment_kwargs,
 from ose3dprinter.app.exceptions import AttachmentError
 from ose3dprinter.gui.get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
-from ose3dprinter.gui.part import create_universal_axis
+from ose3dprinter.gui.part import create_axis
 from ose3dprinter.gui.resources import get_resource_path
 
 
-class AddUniversalAxisBase:
+class AddAxisBase:
     """
-    Base class for commands to add Universal Axis objects.
+    Base class for commands to add Axis objects.
     """
 
     def __init__(self, axis_orientation):
@@ -22,9 +22,9 @@ class AddUniversalAxisBase:
         document = App.ActiveDocument
         if not document:
             document = App.newDocument()
-        name = 'Universal{}Axis'.format(self.axis_orientation.upper())
+        name = '{}Axis'.format(self.axis_orientation.upper())
         kwargs = get_axis_creation_kwargs(self.axis_orientation)
-        create_universal_axis(document, name, **kwargs)
+        create_axis(document, name, **kwargs)
         document.recompute()
 
     def IsActive(self):
@@ -32,11 +32,11 @@ class AddUniversalAxisBase:
 
     def GetResources(self):
         orientation = self.axis_orientation.upper()
-        icon_name = 'Universal{}Axis.svg'.format(orientation)
+        icon_name = '{}Axis.svg'.format(orientation)
         return {
             'Pixmap': get_resource_path(icon_name),
-            'MenuText': 'Add Universal {} Axis'.format(orientation),
-            'ToolTip': 'Add Universal {} Axis'.format(orientation)
+            'MenuText': 'Add {} Axis'.format(orientation),
+            'ToolTip': 'Add {} Axis'.format(orientation)
         }
 
 

@@ -5,6 +5,7 @@ ose3dprinter.app
 .. toctree::
    :maxdepth: 1
 
+   ose3dprinter.app.attachment
    ose3dprinter.app.model
 
 
@@ -14,19 +15,7 @@ ose3dprinter.app
 
       ose3dprinter.app.exceptions
 
-      ose3dprinter.app.face_orientation
-
-      ose3dprinter.app.get_axis_frame_attachment_kwargs
-
-      ose3dprinter.app.get_default_axis_creation_kwargs
-
-      ose3dprinter.app.get_extruder_x_axis_carriage_attachment_kwargs
-
-      ose3dprinter.app.get_heated_bed_frame_attachment_kwargs
-
-      ose3dprinter.app.get_outer_faces
-
-      ose3dprinter.app.get_placement_strategy
+      ose3dprinter.app.future
 
       ose3dprinter.app.is_edge_parallel_to_axis
 
@@ -51,57 +40,9 @@ exceptions
    :show-inheritance:
 
 
-face_orientation
-----------------
-.. automodule:: ose3dprinter.app.face_orientation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-get_axis_frame_attachment_kwargs
---------------------------------
-.. automodule:: ose3dprinter.app.get_axis_frame_attachment_kwargs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-get_default_axis_creation_kwargs
---------------------------------
-.. automodule:: ose3dprinter.app.get_default_axis_creation_kwargs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-get_extruder_x_axis_carriage_attachment_kwargs
-----------------------------------------------
-.. automodule:: ose3dprinter.app.get_extruder_x_axis_carriage_attachment_kwargs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-get_heated_bed_frame_attachment_kwargs
---------------------------------------
-.. automodule:: ose3dprinter.app.get_heated_bed_frame_attachment_kwargs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-get_outer_faces
----------------
-.. automodule:: ose3dprinter.app.get_outer_faces
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-get_placement_strategy
-----------------------
-.. automodule:: ose3dprinter.app.get_placement_strategy
+future
+------
+.. automodule:: ose3dprinter.app.future
    :members:
    :undoc-members:
    :show-inheritance:

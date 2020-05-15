@@ -1,6 +1,6 @@
 from FreeCAD import Console, Placement, Units, Vector
 from ose3dprinter.app.enums import AxisOrientation, Side
-from ose3dprinter.app.model import UniversalAxisModel
+from ose3dprinter.app.model import AxisModel
 from ose3dprinter.app.model.frame.angle_frame_connector import AxisSideMount
 
 
@@ -96,7 +96,7 @@ def get_placement_for_right_face_on_frame_with_corners(frame_with_corners):
 def calculate_y_of_y_axis_for_frame_with_corners(frame_with_corners):
     return (
         frame_with_corners.Shape.BoundBox.YMin -
-        (UniversalAxisModel.idler_box_width / 2) +
+        (AxisModel.idler_box_width / 2) +
         AxisSideMount.distance_between_hole_and_outer_edge
     )
 
@@ -104,15 +104,15 @@ def calculate_y_of_y_axis_for_frame_with_corners(frame_with_corners):
 def calculate_z_of_y_axis_for_frame_with_corners(frame_with_corners):
     return (
         frame_with_corners.Shape.BoundBox.ZMax + (
-            (UniversalAxisModel.idler_box_length - AxisSideMount.height) / 2)
+            (AxisModel.idler_box_length - AxisSideMount.height) / 2)
     )
 
 
 def calculate_y_axis_length_for_frame_with_corners(frame_with_corners):
     return (
         frame_with_corners.Proxy.distance_between_axis_side_mount_holes +
-        UniversalAxisModel.distance_between_inner_motor_side_holes_and_outer_edge() +
-        UniversalAxisModel.distance_between_idler_side_holes_and_outer_edge()
+        AxisModel.distance_between_inner_motor_side_holes_and_outer_edge() +
+        AxisModel.distance_between_idler_side_holes_and_outer_edge()
     )
 
 

@@ -3,4 +3,4 @@
 See Also:
     https://wiki.opensourceecology.org/wiki/Universal_CNC_Axis
 """
-from .create_universal_axis import create_universal_axis
+from .create_axis import create_axis

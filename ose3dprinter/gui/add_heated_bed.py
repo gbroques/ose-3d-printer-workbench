@@ -3,7 +3,7 @@ import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.attachment import get_heated_bed_frame_attachment_kwargs
 from ose3dprinter.app.exceptions import AttachmentError
-from ose3dprinter.app.model import FrameModel, UniversalAxisModel
+from ose3dprinter.app.model import FrameModel, AxisModel
 
 from .part import create_heated_bed
 from .resources import get_resource_path
@@ -51,7 +51,7 @@ def get_frame_and_axis(selection_objects):
         frame = find_object_by_type_in_selection_objects(
             selection_objects, FrameModel.Type)
         axis = find_object_by_type_in_selection_objects(
-            selection_objects, UniversalAxisModel.Type)
+            selection_objects, AxisModel.Type)
         return frame, axis
     else:
         raise AttachmentError('Must select Frame and Axis')
@@ -71,7 +71,7 @@ def is_frame_selected(selection_objects):
 
 def is_axis_selected(selection_objects):
     return _do_selection_objects_contain_type(
-        selection_objects, UniversalAxisModel.Type)
+        selection_objects, AxisModel.Type)
 
 
 def find_object_by_type_in_selection_objects(selection_objects,

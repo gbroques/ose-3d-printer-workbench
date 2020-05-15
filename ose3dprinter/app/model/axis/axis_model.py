@@ -8,13 +8,13 @@ from ose3dprinter.app.is_edge_parallel_to_axis import \
 from ose3dprinter.app.model.base_model import BaseModel
 
 
-class UniversalAxisModel(BaseModel):
+class AxisModel(BaseModel):
     """
-    Encapsulates the data (i.e. topography and shape) for a Universal Axis,
+    Encapsulates the data (i.e. topography and shape) for a Axis,
     and is separate from the "view" or GUI representation.
     """
 
-    Type = 'OSEUniversalAxis'
+    Type = 'OSEAxis'
 
     motor_box_width = 59.5
 
@@ -49,7 +49,7 @@ class UniversalAxisModel(BaseModel):
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
         init_args = (obj, placement, origin_translation_offset)
-        super(UniversalAxisModel, self).__init__(*init_args)
+        super(AxisModel, self).__init__(*init_args)
 
         # Length property
         length_tooltip = 'Length of axis corresponds to rod length.'

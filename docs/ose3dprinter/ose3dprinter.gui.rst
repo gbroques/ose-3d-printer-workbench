@@ -5,7 +5,7 @@ ose3dprinter.gui
 .. toctree::
    :maxdepth: 1
 
-   ose3dprinter.gui.add_universal_axis_base
+   ose3dprinter.gui.add_axis_base
    ose3dprinter.gui.command_registry
    ose3dprinter.gui.generate_cut_list
    ose3dprinter.gui.make_angle_frame_connector
@@ -21,11 +21,11 @@ ose3dprinter.gui
 
       ose3dprinter.gui.add_heated_bed
 
-      ose3dprinter.gui.add_universal_x_axis
+      ose3dprinter.gui.add_x_axis
 
-      ose3dprinter.gui.add_universal_y_axis
+      ose3dprinter.gui.add_y_axis
 
-      ose3dprinter.gui.add_universal_z_axis
+      ose3dprinter.gui.add_z_axis
 
       ose3dprinter.gui.commands
 
@@ -58,25 +58,25 @@ add_heated_bed
    :show-inheritance:
 
 
-add_universal_x_axis
---------------------
-.. automodule:: ose3dprinter.gui.add_universal_x_axis
+add_x_axis
+----------
+.. automodule:: ose3dprinter.gui.add_x_axis
    :members:
    :undoc-members:
    :show-inheritance:
 
 
-add_universal_y_axis
---------------------
-.. automodule:: ose3dprinter.gui.add_universal_y_axis
+add_y_axis
+----------
+.. automodule:: ose3dprinter.gui.add_y_axis
    :members:
    :undoc-members:
    :show-inheritance:
 
 
-add_universal_z_axis
---------------------
-.. automodule:: ose3dprinter.gui.add_universal_z_axis
+add_z_axis
+----------
+.. automodule:: ose3dprinter.gui.add_z_axis
    :members:
    :undoc-members:
    :show-inheritance:

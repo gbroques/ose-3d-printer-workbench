@@ -13,7 +13,7 @@ from .get_placement_strategy import get_placement_strategy
 def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
     """
     Get the length, placement, and origin translation offset for
-    creating a universal axis object attached to a selected frame face.
+    creating a axis object attached to a selected frame face.
     """
     validate_frame_and_face(frame, face, axis_orientation)
     face_side = frame.Proxy.get_face_side(face, axis_orientation)

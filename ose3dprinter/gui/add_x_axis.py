@@ -1,18 +1,18 @@
 
 from ose3dprinter.app.enums import AxisOrientation
 
-from .add_universal_axis_base import AddUniversalAxisBase
+from .add_axis_base import AddAxisBase
 
 
-class AddUniversalYAxis:
+class AddXAxis:
     """
-    Command to add Universal Y Axis object.
+    Command to add X Axis object.
     """
 
-    NAME = 'AddUniversalYAxis'
+    NAME = 'AddXAxis'
 
     def __init__(self):
-        self.base = AddUniversalAxisBase(AxisOrientation.Y)
+        self.base = AddAxisBase(AxisOrientation.X)
 
     def Activated(self):
         self.base.Activated()
