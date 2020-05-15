@@ -8,9 +8,9 @@ ose3dprinter.gui
    ose3dprinter.gui.add_axis_base
    ose3dprinter.gui.command_registry
    ose3dprinter.gui.generate_cut_list
+   ose3dprinter.gui.icon
    ose3dprinter.gui.make_angle_frame_connector
    ose3dprinter.gui.part
-   ose3dprinter.gui.resources
 
 
 

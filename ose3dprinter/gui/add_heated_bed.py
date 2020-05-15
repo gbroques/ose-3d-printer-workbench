@@ -5,8 +5,8 @@ from ose3dprinter.app.attachment import (
     AttachmentError, get_heated_bed_frame_axis_attachment_kwargs)
 from ose3dprinter.app.model import AxisModel, FrameModel
 
+from .icon import get_icon_path
 from .part import create_heated_bed
-from .resources import get_resource_path
 
 
 class AddHeatedBed:
@@ -29,7 +29,7 @@ class AddHeatedBed:
 
     def GetResources(self):
         return {
-            'Pixmap': get_resource_path('HeatedBed.svg'),
+            'Pixmap': get_icon_path('HeatedBed.svg'),
             'MenuText': 'Add Heated Bed',
             'ToolTip': 'Add Heated Bed'
         }

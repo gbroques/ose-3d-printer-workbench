@@ -7,7 +7,7 @@ from ose3dprinter.app.attachment import (AttachmentError,
 from .get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
 from .part import create_extruder
-from .resources import get_resource_path
+from .icon import get_icon_path
 
 
 class AddExtruder:
@@ -30,7 +30,7 @@ class AddExtruder:
 
     def GetResources(self):
         return {
-            'Pixmap': get_resource_path('Extruder.svg'),
+            'Pixmap': get_icon_path('Extruder.svg'),
             'MenuText': 'Add Extruder',
             'ToolTip': 'Add Extruder'
         }

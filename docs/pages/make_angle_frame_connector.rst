@@ -1,7 +1,7 @@
 |Angle Frame Connector Icon| Make Angle Frame Connector
 =======================================================
 
-.. |Angle Frame Connector Icon| image:: /../ose3dprinter/gui/resources/Std_CoordinateSystem.svg
+.. |Angle Frame Connector Icon| image:: /../ose3dprinter/gui/icon/Std_CoordinateSystem.svg
    :height: 32px
    :width: 32px
    :alt: Make Angle Frame Connecto Command

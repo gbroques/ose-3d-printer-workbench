@@ -17,17 +17,17 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [Supported FreeCAD Versions](#supported-freecad-versions)
 
 ## Main Toolbar
-* [<img alt="Add Frame" src="ose3dprinter/gui/resources/Frame.svg" width="32" height="32" /> Add Frame](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_frame.html)
-* [<img alt="Add X Axis" src="ose3dprinter/gui/resources/XAxis.svg" width="32" height="32" /> Add X Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_axis.html)
-* [<img alt="Add Y Axis" src="ose3dprinter/gui/resources/YAxis.svg" width="32" height="32" /> Add Y Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_axis.html)
-* [<img alt="Add Z Axis" src="ose3dprinter/gui/resources/ZAxis.svg" width="32" height="32" /> Add Z Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_axis.html)
-* [<img alt="Add Heated Bed" src="ose3dprinter/gui/resources/HeatedBed.svg" width="32" height="32" /> Add Heated Bed](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_heated_bed.html)
-* [<img alt="Add Extruder" src="ose3dprinter/gui/resources/Extruder.svg" width="32" height="32" /> Add Extruder](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_extruder.html)
+* [<img alt="Add Frame" src="ose3dprinter/gui/icon/Frame.svg" width="32" height="32" /> Add Frame](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_frame.html)
+* [<img alt="Add X Axis" src="ose3dprinter/gui/icon/XAxis.svg" width="32" height="32" /> Add X Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_axis.html)
+* [<img alt="Add Y Axis" src="ose3dprinter/gui/icon/YAxis.svg" width="32" height="32" /> Add Y Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_axis.html)
+* [<img alt="Add Z Axis" src="ose3dprinter/gui/icon/ZAxis.svg" width="32" height="32" /> Add Z Axis](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_axis.html)
+* [<img alt="Add Heated Bed" src="ose3dprinter/gui/icon/HeatedBed.svg" width="32" height="32" /> Add Heated Bed](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_heated_bed.html)
+* [<img alt="Add Extruder" src="ose3dprinter/gui/icon/Extruder.svg" width="32" height="32" /> Add Extruder](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/add_extruder.html)
 
 ## Main Menu
-* [<img alt="Copy Rod Cut List to Clipboard" src="ose3dprinter/gui/resources/edit-copy.svg" width="32" height="32" /> Copy Rod Cut List to Clipboard](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_cut_list.html)
-* [<img alt="Save Rod Cut List as CSV" src="ose3dprinter/gui/resources/document-save-as.svg" width="32" height="32" /> Save Rod Cut List as CSV](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_cut_list.html)
-* [<img alt="Make Angle Frame Connector" src="ose3dprinter/gui/resources/Std_CoordinateSystem.svg" width="32" height="32" /> Make Angle Frame Connector](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/make_angle_frame_connector.html)
+* [<img alt="Copy Rod Cut List to Clipboard" src="ose3dprinter/gui/icon/edit-copy.svg" width="32" height="32" /> Copy Rod Cut List to Clipboard](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_cut_list.html)
+* [<img alt="Save Rod Cut List as CSV" src="ose3dprinter/gui/icon/document-save-as.svg" width="32" height="32" /> Save Rod Cut List as CSV](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/generate_cut_list.html)
+* [<img alt="Make Angle Frame Connector" src="ose3dprinter/gui/icon/Std_CoordinateSystem.svg" width="32" height="32" /> Make Angle Frame Connector](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/make_angle_frame_connector.html)
 
 ## Installation
 ### FreeCAD 17+

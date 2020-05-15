@@ -7,17 +7,17 @@ There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universa
 2. |Y Axis Icon| Add Y Axis
 3. |Z Axis Icon| Add Z Axis
 
-.. |X Axis Icon| image:: /../ose3dprinter/gui/resources/XAxis.svg
+.. |X Axis Icon| image:: /../ose3dprinter/gui/icon/XAxis.svg
    :height: 32px
    :width: 32px
    :alt: Add X Axis Icon
 
-.. |Y Axis Icon| image:: /../ose3dprinter/gui/resources/YAxis.svg
+.. |Y Axis Icon| image:: /../ose3dprinter/gui/icon/YAxis.svg
    :height: 32px
    :width: 32px
    :alt: Add Y Axis Icon
 
-.. |Z Axis Icon| image:: /../ose3dprinter/gui/resources/ZAxis.svg
+.. |Z Axis Icon| image:: /../ose3dprinter/gui/icon/ZAxis.svg
    :height: 32px
    :width: 32px
    :alt: Add Z Axis Icon

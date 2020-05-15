@@ -1,4 +1,4 @@
-from ose3dprinter.gui.resources import get_resource_path
+from ose3dprinter.gui.icon import get_icon_path
 
 from .generate_cut_list import generate_cut_list
 from .task_type import TaskType
@@ -19,7 +19,7 @@ class SaveCutListAsCsv:
 
     def GetResources(self):
         return {
-            'Pixmap': get_resource_path('document-save-as.svg'),
+            'Pixmap': get_icon_path('document-save-as.svg'),
             'MenuText': 'Save Cut List as CSV',
             'ToolTip': 'Save Cut List as CSV'
         }

@@ -1,5 +1,5 @@
 import FreeCADGui as Gui
-from ose3dprinter.gui.resources import get_resource_path
+from ose3dprinter.gui.icon import get_icon_path
 
 from .make_angle_frame_connector_task_panel import AngleFrameConnectorTaskPanel
 
@@ -19,7 +19,7 @@ class MakeAngleFrameConnector:
 
     def GetResources(self):
         return {
-            'Pixmap': get_resource_path('Std_CoordinateSystem.svg'),
+            'Pixmap': get_icon_path('Std_CoordinateSystem.svg'),
             'MenuText': 'Make Angle Frame Connector',
             'ToolTip': 'Make Angle Frame Connector'
         }

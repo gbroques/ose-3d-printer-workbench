@@ -7,7 +7,7 @@
 |Frame Icon| OSE 3D Printer Workbench Documentation
 ===================================================
 
-.. |Frame Icon| image:: /../ose3dprinter/gui/resources/Frame.svg
+.. |Frame Icon| image:: /../ose3dprinter/gui/icon/Frame.svg
    :height: 32px
    :width: 32px
    :alt: Workbench Icon

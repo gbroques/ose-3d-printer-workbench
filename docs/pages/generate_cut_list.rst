@@ -6,12 +6,12 @@ There are two options in the main menu to generate a cut list:
 1. |Copy Icon| Copy Cut List to Clipboard
 2. |Save Icon| Save Cut List as CSV
 
-.. |Copy Icon| image:: /../ose3dprinter/gui/resources/edit-copy.svg
+.. |Copy Icon| image:: /../ose3dprinter/gui/icon/edit-copy.svg
    :height: 32px
    :width: 32px
    :alt: Copy Cut List to Clipboard Command
 
-.. |Save Icon| image:: /../ose3dprinter/gui/resources/document-save-as.svg
+.. |Save Icon| image:: /../ose3dprinter/gui/icon/document-save-as.svg
    :height: 32px
    :width: 32px
    :alt: Save Cut List as CSV

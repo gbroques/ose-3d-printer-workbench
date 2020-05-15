@@ -1,7 +1,7 @@
 |Frame Icon| Add Frame
 ======================
 
-.. |Frame Icon| image:: /../ose3dprinter/gui/resources/Frame.svg
+.. |Frame Icon| image:: /../ose3dprinter/gui/icon/Frame.svg
    :height: 32px
    :width: 32px
    :alt: Add Frame Command

@@ -1,7 +1,7 @@
 import FreeCAD as App
 
+from .icon import get_icon_path
 from .part import create_frame
-from .resources import get_resource_path
 
 
 class AddFrame:
@@ -23,7 +23,7 @@ class AddFrame:
 
     def GetResources(self):
         return {
-            'Pixmap': get_resource_path('Frame.svg'),
+            'Pixmap': get_icon_path('Frame.svg'),
             'MenuText': 'Add Frame',
             'ToolTip': 'Add Frame'
         }

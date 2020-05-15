@@ -6,8 +6,8 @@ from ose3dprinter.app.attachment import (AttachmentError,
                                          get_default_axis_creation_kwargs)
 from ose3dprinter.gui.get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
+from ose3dprinter.gui.icon import get_icon_path
 from ose3dprinter.gui.part import create_axis
-from ose3dprinter.gui.resources import get_resource_path
 
 
 class AddAxisBase:
@@ -34,7 +34,7 @@ class AddAxisBase:
         orientation = self.axis_orientation.upper()
         icon_name = '{}Axis.svg'.format(orientation)
         return {
-            'Pixmap': get_resource_path(icon_name),
+            'Pixmap': get_icon_path(icon_name),
             'MenuText': 'Add {} Axis'.format(orientation),
             'ToolTip': 'Add {} Axis'.format(orientation)
         }

@@ -1,7 +1,7 @@
 |Heated Bed Icon| Add Heated Bed
 ================================
 
-.. |Heated Bed Icon| image:: /../ose3dprinter/gui/resources/HeatedBed.svg
+.. |Heated Bed Icon| image:: /../ose3dprinter/gui/icon/HeatedBed.svg
    :height: 32px
    :width: 32px
    :alt: Add Heated Bed Command
