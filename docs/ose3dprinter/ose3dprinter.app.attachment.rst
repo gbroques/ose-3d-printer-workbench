@@ -10,22 +10,22 @@ ose3dprinter.app.attachment
 
 
 .. autosummary::
-      ose3dprinter.app.attachment.get_extruder_x_axis_carriage_attachment_kwargs
+      ose3dprinter.app.attachment.get_extruder_axis_attachment_kwargs
 
-      ose3dprinter.app.attachment.get_heated_bed_frame_attachment_kwargs
+      ose3dprinter.app.attachment.get_heated_bed_frame_axis_attachment_kwargs
 
 
-get_extruder_x_axis_carriage_attachment_kwargs
-----------------------------------------------
-.. automodule:: ose3dprinter.app.attachment.get_extruder_x_axis_carriage_attachment_kwargs
+get_extruder_axis_attachment_kwargs
+-----------------------------------
+.. automodule:: ose3dprinter.app.attachment.get_extruder_axis_attachment_kwargs
    :members:
    :undoc-members:
    :show-inheritance:
 
 
-get_heated_bed_frame_attachment_kwargs
---------------------------------------
-.. automodule:: ose3dprinter.app.attachment.get_heated_bed_frame_attachment_kwargs
+get_heated_bed_frame_axis_attachment_kwargs
+-------------------------------------------
+.. automodule:: ose3dprinter.app.attachment.get_heated_bed_frame_axis_attachment_kwargs
    :members:
    :undoc-members:
    :show-inheritance:

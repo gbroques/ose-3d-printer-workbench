@@ -6,14 +6,14 @@ from ose3dprinter.app.model import AxisModel
 from Part import Face
 
 
-def get_extruder_x_axis_carriage_attachment_kwargs(axis, face):
-    validate_axis_and_face(axis, face)
+def get_extruder_axis_attachment_kwargs(axis, selected_axis_face):
+    validate_axis_and_face(axis, selected_axis_face)
     x = (
         axis.Shape.BoundBox.XMin +
         axis.Proxy.calculate_carriage_box_x()
     )
     y = axis.Shape.BoundBox.YMin
-    z = face.BoundBox.ZMax
+    z = selected_axis_face.BoundBox.ZMax
     placement = Placement(
         Vector(x, y, z), Rotation())
     origin_translation_offset = Vector(0, 0, 0)
@@ -30,6 +30,8 @@ def validate_axis_and_face(axis, face):
         raise AttachmentError('Must select axis')
     if not is_face_parallel_to_xy_plane(face):
         raise AttachmentError('Face must be parallel to XY plane')
+    if not axis.Proxy.is_x():
+        raise AttachmentError('Must select X axis')
 
     axis_bounding_box = axis.Shape.BoundBox
     axis_left_bound = axis_bounding_box.XMin

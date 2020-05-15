@@ -1,8 +1,7 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
-from ose3dprinter.app.attachment import \
-    get_extruder_x_axis_carriage_attachment_kwargs
+from ose3dprinter.app.attachment import get_extruder_axis_attachment_kwargs
 from ose3dprinter.app.exceptions import AttachmentError
 
 from .get_first_selected_object_and_sub_object import \
@@ -41,7 +40,7 @@ def get_extruder_creation_kwargs():
     selection = Gui.Selection.getSelectionEx()
     try:
         axis, face = get_first_selected_object_and_sub_object(selection)
-        return get_extruder_x_axis_carriage_attachment_kwargs(axis, face)
+        return get_extruder_axis_attachment_kwargs(axis, face)
     except AttachmentError as reason:
         log_message_template = '{}. Placing extruder in default position.\n'
         Console.PrintMessage(log_message_template.format(reason))

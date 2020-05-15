@@ -10,13 +10,16 @@ from Part import Face
 from .get_placement_strategy import get_placement_strategy
 
 
-def get_axis_frame_attachment_kwargs(frame, face, axis_orientation):
+def get_axis_frame_attachment_kwargs(frame,
+                                     selected_frame_face,
+                                     axis_orientation):
     """
     Get the length, placement, and origin translation offset for
     creating a axis object attached to a selected frame face.
     """
-    validate_frame_and_face(frame, face, axis_orientation)
-    face_side = frame.Proxy.get_face_side(face, axis_orientation)
+    validate_frame_and_face(frame, selected_frame_face, axis_orientation)
+    face_side = frame.Proxy.get_face_side(
+        selected_frame_face, axis_orientation)
     placement_strategy = get_placement_strategy(face_side)
     result = placement_strategy(frame)
     result['side'] = face_side

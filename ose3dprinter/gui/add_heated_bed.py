@@ -1,9 +1,10 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
-from ose3dprinter.app.attachment import get_heated_bed_frame_attachment_kwargs
+from ose3dprinter.app.attachment import \
+    get_heated_bed_frame_axis_attachment_kwargs
 from ose3dprinter.app.exceptions import AttachmentError
-from ose3dprinter.app.model import FrameModel, AxisModel
+from ose3dprinter.app.model import AxisModel, FrameModel
 
 from .part import create_heated_bed
 from .resources import get_resource_path
@@ -39,7 +40,7 @@ def get_heated_bed_creation_kwargs():
     selection_objects = Gui.Selection.getSelectionEx()
     try:
         frame, axis = get_frame_and_axis(selection_objects)
-        return get_heated_bed_frame_attachment_kwargs(frame, axis)
+        return get_heated_bed_frame_axis_attachment_kwargs(frame, axis)
     except AttachmentError as reason:
         log_message_template = '{}. Placing heated bed in default position.\n'
         Console.PrintMessage(log_message_template.format(reason))
