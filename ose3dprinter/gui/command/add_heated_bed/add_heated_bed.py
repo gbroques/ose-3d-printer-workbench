@@ -4,9 +4,8 @@ from FreeCAD import Console
 from ose3dprinter.app.attachment import (
     AttachmentError, get_heated_bed_frame_axis_attachment_kwargs)
 from ose3dprinter.app.model import AxisModel, FrameModel
-
-from .icon import get_icon_path
-from .part import create_heated_bed
+from ose3dprinter.gui.icon import get_icon_path
+from ose3dprinter.gui.part import create_heated_bed
 
 
 class AddHeatedBed:

@@ -3,11 +3,10 @@ import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.attachment import (AttachmentError,
                                          get_extruder_axis_attachment_kwargs)
-
-from .get_first_selected_object_and_sub_object import \
+from ose3dprinter.gui.get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
-from .part import create_extruder
-from .icon import get_icon_path
+from ose3dprinter.gui.icon import get_icon_path
+from ose3dprinter.gui.part import create_extruder
 
 
 class AddExtruder:
