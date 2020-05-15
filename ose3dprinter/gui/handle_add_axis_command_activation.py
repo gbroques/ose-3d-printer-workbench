@@ -6,41 +6,20 @@ from ose3dprinter.app.attachment import (AttachmentError,
                                          get_default_axis_creation_kwargs)
 from ose3dprinter.gui.get_first_selected_object_and_sub_object import \
     get_first_selected_object_and_sub_object
-from ose3dprinter.gui.icon import get_icon_path
 from ose3dprinter.gui.part import create_axis
 
 
-class AddAxisBase:
-    """
-    Base class for commands to add Axis objects.
-    """
-
-    def __init__(self, axis_orientation):
-        self.axis_orientation = axis_orientation
-
-    def Activated(self):
-        document = App.ActiveDocument
-        if not document:
-            document = App.newDocument()
-        name = '{}Axis'.format(self.axis_orientation.upper())
-        kwargs = get_axis_creation_kwargs(self.axis_orientation)
-        create_axis(document, name, **kwargs)
-        document.recompute()
-
-    def IsActive(self):
-        return True
-
-    def GetResources(self):
-        orientation = self.axis_orientation.upper()
-        icon_name = '{}Axis.svg'.format(orientation)
-        return {
-            'Pixmap': get_icon_path(icon_name),
-            'MenuText': 'Add {} Axis'.format(orientation),
-            'ToolTip': 'Add {} Axis'.format(orientation)
-        }
+def handle_add_axis_command_activation(axis_orientation):
+    document = App.ActiveDocument
+    if not document:
+        document = App.newDocument()
+    name = '{}Axis'.format(axis_orientation.upper())
+    kwargs = _get_axis_creation_kwargs(axis_orientation)
+    create_axis(document, name, **kwargs)
+    document.recompute()
 
 
-def get_axis_creation_kwargs(axis_orientation):
+def _get_axis_creation_kwargs(axis_orientation):
     selection = Gui.Selection.getSelectionEx()
     try:
         frame, face = get_first_selected_object_and_sub_object(selection)

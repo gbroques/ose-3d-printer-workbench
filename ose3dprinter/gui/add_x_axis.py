@@ -1,7 +1,8 @@
-
 from ose3dprinter.app.enums import AxisOrientation
 
-from .add_axis_base import AddAxisBase
+from .handle_add_axis_command_activation import \
+    handle_add_axis_command_activation
+from .icon import get_icon_path
 
 
 class AddXAxis:
@@ -11,14 +12,15 @@ class AddXAxis:
 
     NAME = 'AddXAxis'
 
-    def __init__(self):
-        self.base = AddAxisBase(AxisOrientation.X)
-
     def Activated(self):
-        self.base.Activated()
+        handle_add_axis_command_activation(AxisOrientation.X)
 
     def IsActive(self):
-        return self.base.IsActive()
+        return True
 
     def GetResources(self):
-        return self.base.GetResources()
+        return {
+            'Pixmap': get_icon_path('XAxis.svg'),
+            'MenuText': 'Add X Axis',
+            'ToolTip': 'Add X Axis'
+        }
