@@ -17,7 +17,7 @@ def get_axis_frame_attachment_kwargs(frame,
     Get the length, placement, and origin translation offset for
     creating a axis object attached to a selected frame face.
     """
-    validate_frame_and_face(frame, selected_frame_face, axis_orientation)
+    _validate_frame_and_face(frame, selected_frame_face, axis_orientation)
     face_side = frame.Proxy.get_face_side(
         selected_frame_face, axis_orientation)
     placement_strategy = get_placement_strategy(face_side)
@@ -26,14 +26,14 @@ def get_axis_frame_attachment_kwargs(frame,
     return result
 
 
-def validate_frame_and_face(frame, face, axis_orientation):
+def _validate_frame_and_face(frame, face, axis_orientation):
     if not isinstance(face, Face):
         raise AttachmentError('Selected element is not a face')
     if frame.Proxy.Type != FrameModel.Type:
         raise AttachmentError('Must select frame')
-    if is_frame_rotated(frame):
+    if _is_frame_rotated(frame):
         raise AttachmentError('Frame is rotated')
-    if not frame.HasCorners and not is_outer_face(face, frame):
+    if not frame.HasCorners and not _is_outer_face(face, frame):
         raise AttachmentError('Must select outer face of frame')
     face_side = frame.Proxy.get_face_side(face, axis_orientation)
     if face_side == Side.BOTTOM:
@@ -48,12 +48,12 @@ def validate_frame_and_face(frame, face, axis_orientation):
     return frame, face
 
 
-def is_frame_rotated(frame):
+def _is_frame_rotated(frame):
     rotation = frame.Placement.Rotation
     return rotation.Axis != Vector(0, 0, 1) or rotation.Angle != 0
 
 
-def is_outer_face(face, frame):
+def _is_outer_face(face, frame):
     outer_faces = frame.Proxy.get_outer_faces()
     return any(map(lambda f: f.isEqual(face), outer_faces))
 

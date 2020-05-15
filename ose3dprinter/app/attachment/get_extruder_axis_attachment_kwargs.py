@@ -7,7 +7,7 @@ from Part import Face
 
 
 def get_extruder_axis_attachment_kwargs(axis, selected_axis_face):
-    validate_axis_and_face(axis, selected_axis_face)
+    _validate_axis_and_face(axis, selected_axis_face)
     x = (
         axis.Shape.BoundBox.XMin +
         axis.Proxy.calculate_carriage_box_x()
@@ -23,7 +23,7 @@ def get_extruder_axis_attachment_kwargs(axis, selected_axis_face):
     }
 
 
-def validate_axis_and_face(axis, face):
+def _validate_axis_and_face(axis, face):
     if not isinstance(face, Face):
         raise AttachmentError('Selected element is not a face')
     if axis.Proxy.Type != AxisModel.Type:
