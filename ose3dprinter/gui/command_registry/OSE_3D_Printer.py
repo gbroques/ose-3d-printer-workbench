@@ -27,6 +27,7 @@ class CommandRegistry:
         return '{}_{}'.format(self.namespace, command_name)
 
 
-# Singleton registry for commands.
 command_namespace = 'OSE3DP'
+
+#: Singleton registry for commands.
 command_registry = CommandRegistry(command_namespace)
