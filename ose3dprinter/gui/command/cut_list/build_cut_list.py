@@ -17,11 +17,11 @@ def build_cut_list():
     num_z_axes = len(axes_by_orientation[AxisOrientation.Z])
     cut_list = add_heated_beds_and_spool_holder_rods_to_cut_list(
         cut_list, num_z_axes, document)
-    cut_list = angle_bars_to_cut_list(cut_list, document)
+    cut_list = add_angle_bars_to_cut_list(cut_list, document)
     return cut_list
 
 
-def angle_bars_to_cut_list(cut_list_table_rows, document):
+def add_angle_bars_to_cut_list(cut_list_table_rows, document):
     frame = retrieve_frame_from_document(document)
     if frame is None:
         Console.PrintMessage(
