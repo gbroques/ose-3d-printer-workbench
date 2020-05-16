@@ -1,4 +1,5 @@
 import FreeCAD as App
+import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.attachment import (AttachmentError,
                                          get_axis_frame_attachment_kwargs,
@@ -20,8 +21,9 @@ def handle_add_axis_command_activation(axis_orientation):
 
 
 def _get_axis_creation_kwargs(axis_orientation):
+    selection_objects = Gui.Selection.getSelectionEx()
     try:
-        frame, face = find_frame_and_face_in_selection()
+        frame, face = find_frame_and_face_in_selection(selection_objects)
         return get_axis_frame_attachment_kwargs(frame,
                                                 face,
                                                 axis_orientation)
@@ -31,8 +33,9 @@ def _get_axis_creation_kwargs(axis_orientation):
         return get_default_axis_creation_kwargs(axis_orientation)
 
 
-def find_frame_and_face_in_selection():
-    frame_selection_object = find_selection_object_by_type(FrameModel.Type)
+def find_frame_and_face_in_selection(selection_objects):
+    frame_selection_object = find_selection_object_by_type(
+        selection_objects, FrameModel.Type)
     if frame_selection_object is None:
         raise AttachmentError('Must select Frame')
     frame_face = find_face_in_selection_object(frame_selection_object)

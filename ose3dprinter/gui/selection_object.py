@@ -1,9 +1,7 @@
-import FreeCADGui as Gui
 from FreeCAD import Console
 
 
-def find_selection_object_by_type(object_type):
-    selection_objects = Gui.Selection.getSelectionEx()
+def find_selection_object_by_type(selection_objects, object_type):
     return _find_object_by_type(
         selection_objects,
         'selection objects',

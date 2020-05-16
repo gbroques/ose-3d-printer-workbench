@@ -1,4 +1,5 @@
 import FreeCAD as App
+import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.attachment import (AttachmentError,
                                          get_extruder_axis_attachment_kwargs)
@@ -36,8 +37,9 @@ class AddExtruder:
 
 
 def get_extruder_creation_kwargs():
+    selection_objects = Gui.Selection.getSelectionEx()
     try:
-        axis, face = find_axis_and_face_in_selection()
+        axis, face = find_axis_and_face_in_selection(selection_objects)
         return get_extruder_axis_attachment_kwargs(axis, face)
     except AttachmentError as reason:
         log_message_template = '{}. Placing extruder in default position.\n'
@@ -45,8 +47,9 @@ def get_extruder_creation_kwargs():
         return {}
 
 
-def find_axis_and_face_in_selection():
-    axis_selection_object = find_selection_object_by_type(AxisModel.Type)
+def find_axis_and_face_in_selection(selection_objects):
+    axis_selection_object = find_selection_object_by_type(
+        selection_objects, AxisModel.Type)
     if axis_selection_object is None:
         raise AttachmentError('Must select Axis')
     axis_face = find_face_in_selection_object(axis_selection_object)
