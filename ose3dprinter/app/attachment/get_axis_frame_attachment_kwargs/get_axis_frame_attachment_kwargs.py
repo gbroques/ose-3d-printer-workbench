@@ -29,7 +29,7 @@ def get_axis_frame_attachment_kwargs(frame,
 def _validate_frame_and_face(frame, face, axis_orientation):
     if not isinstance(face, Face):
         raise AttachmentError('Selected element is not a face')
-    if frame.Proxy.Type != FrameModel.Type:
+    if not _is_frame(frame):
         raise AttachmentError('Must select frame')
     if _is_frame_rotated(frame):
         raise AttachmentError('Frame is rotated')
@@ -43,7 +43,7 @@ def _validate_frame_and_face(frame, face, axis_orientation):
         raise AttachmentError('Must select outer face of frame')
     attachable_axis_orientation = _get_orientation_of_attachable_axis(face)
     if attachable_axis_orientation != axis_orientation:
-        raise AttachmentError('Attachable "{}" axis orientation of face doesn\'t match "{}" axis orientation.\n'.format(
+        raise AttachmentError('Attachable "{}" axis orientation of face doesn\'t match "{}" axis orientation'.format(
             attachable_axis_orientation, axis_orientation))
     return frame, face
 
@@ -75,3 +75,10 @@ def _get_is_face_parallel_to_plane_by_axis_orientation():
         AxisOrientation.Y: is_face_parallel_to_yz_plane,
         AxisOrientation.Z: is_face_parallel_to_xz_plane
     }
+
+
+def _is_frame(obj):
+    return (
+        obj.TypeId == 'Part::FeaturePython' and
+        obj.Proxy.Type == FrameModel.Type
+    )

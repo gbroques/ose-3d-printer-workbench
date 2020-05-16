@@ -1,9 +1,11 @@
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.attachment.attachment_error import AttachmentError
+from ose3dprinter.app.model import AxisModel, FrameModel
 
 
 def get_heated_bed_frame_axis_attachment_kwargs(frame, axis):
-    _validate_axis_is_in_z_orientation(axis)
+    _validate_frame(frame)
+    _validate_axis(axis)
     x = frame.Shape.BoundBox.Center.x
     y = frame.Shape.BoundBox.Center.y
     z = axis.Proxy.calculate_top_of_carriage_box_for_z_axis()
@@ -15,6 +17,25 @@ def get_heated_bed_frame_axis_attachment_kwargs(frame, axis):
     }
 
 
-def _validate_axis_is_in_z_orientation(z_axis):
-    if not z_axis.Proxy.is_z():
+def _validate_frame(frame):
+    if not _is_frame(frame):
+        raise AttachmentError('Must select frame')
+
+
+def _validate_axis(z_axis):
+    if not _is_axis(z_axis) or not z_axis.Proxy.is_z():
         raise AttachmentError('Must select Z axis')
+
+
+def _is_axis(obj):
+    return (
+        obj.TypeId == 'Part::FeaturePython' and
+        obj.Proxy.Type == AxisModel.Type
+    )
+
+
+def _is_frame(obj):
+    return (
+        obj.TypeId == 'Part::FeaturePython' and
+        obj.Proxy.Type == FrameModel.Type
+    )

@@ -1,11 +1,11 @@
 import FreeCAD as App
-import FreeCADGui as Gui
 from FreeCAD import Console
 from ose3dprinter.app.attachment import (
     AttachmentError, get_heated_bed_frame_axis_attachment_kwargs)
 from ose3dprinter.app.model import AxisModel, FrameModel
 from ose3dprinter.gui.icon import get_icon_path
 from ose3dprinter.gui.part import create_heated_bed
+from ose3dprinter.gui.selection_object import find_selection_object_by_type
 
 
 class AddHeatedBed:
@@ -35,9 +35,8 @@ class AddHeatedBed:
 
 
 def get_heated_bed_creation_kwargs():
-    selection_objects = Gui.Selection.getSelectionEx()
     try:
-        frame, axis = get_frame_and_axis(selection_objects)
+        frame, axis = find_frame_and_axis_in_selection()
         return get_heated_bed_frame_axis_attachment_kwargs(frame, axis)
     except AttachmentError as reason:
         log_message_template = '{}. Placing heated bed in default position.\n'
@@ -45,51 +44,9 @@ def get_heated_bed_creation_kwargs():
         return {}
 
 
-def get_frame_and_axis(selection_objects):
-    if is_frame_and_axis_selected(selection_objects):
-        frame = find_object_by_type_in_selection_objects(
-            selection_objects, FrameModel.Type)
-        axis = find_object_by_type_in_selection_objects(
-            selection_objects, AxisModel.Type)
-        return frame, axis
-    else:
+def find_frame_and_axis_in_selection():
+    frame_selection_object = find_selection_object_by_type(FrameModel.Type)
+    axis_selection_object = find_selection_object_by_type(AxisModel.Type)
+    if frame_selection_object is None or axis_selection_object is None:
         raise AttachmentError('Must select Frame and Axis')
-
-
-def is_frame_and_axis_selected(selection_objects):
-    return (
-        is_frame_selected(selection_objects) and
-        is_axis_selected(selection_objects)
-    )
-
-
-def is_frame_selected(selection_objects):
-    return _do_selection_objects_contain_type(
-        selection_objects, FrameModel.Type)
-
-
-def is_axis_selected(selection_objects):
-    return _do_selection_objects_contain_type(
-        selection_objects, AxisModel.Type)
-
-
-def find_object_by_type_in_selection_objects(selection_objects,
-                                             object_type):
-    potential_objects = list(filter(
-        lambda x: _is_selection_object_type_of(x, object_type),
-        selection_objects))
-    if len(potential_objects) == 0:
-        raise AttachmentError(
-            'No object with type {} selected'.format(object_type))
-    return potential_objects[0].Object
-
-
-def _do_selection_objects_contain_type(selection_objects, object_type):
-    is_type_of_flags = map(
-        lambda x: _is_selection_object_type_of(x, object_type),
-        selection_objects)
-    return any(is_type_of_flags)
-
-
-def _is_selection_object_type_of(selection_object, object_type):
-    return selection_object.Object.Proxy.Type == object_type
+    return frame_selection_object.Object, axis_selection_object.Object

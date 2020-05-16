@@ -26,7 +26,7 @@ def get_extruder_axis_attachment_kwargs(axis, selected_axis_face):
 def _validate_axis_and_face(axis, face):
     if not isinstance(face, Face):
         raise AttachmentError('Selected element is not a face')
-    if axis.Proxy.Type != AxisModel.Type:
+    if not _is_axis:
         raise AttachmentError('Must select axis')
     if not is_face_parallel_to_xy_plane(face):
         raise AttachmentError('Face must be parallel to XY plane')
@@ -48,3 +48,10 @@ def _validate_axis_and_face(axis, face):
     if axis_bounding_box.ZMin == face_bounding_box.ZMin:
         raise AttachmentError('Must select top carriage face')
     return axis, face
+
+
+def _is_axis(obj):
+    return (
+        obj.TypeId == 'Part::FeaturePython' and
+        obj.Proxy.Type == AxisModel.Type
+    )
