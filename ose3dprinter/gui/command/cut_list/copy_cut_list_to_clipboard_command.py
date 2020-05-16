@@ -4,7 +4,7 @@ from .generate_cut_list import generate_cut_list
 from .task_type import TaskType
 
 
-class CopyCutListToClipboard:
+class CopyCutListToClipboardCommand:
     """
     Command to copy cut-list to clipboard
     """

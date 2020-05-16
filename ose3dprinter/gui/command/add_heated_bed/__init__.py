@@ -1,1 +1,1 @@
-from .add_heated_bed import AddHeatedBed
+from .add_heated_bed_command import AddHeatedBedCommand

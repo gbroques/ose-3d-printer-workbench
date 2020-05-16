@@ -1,1 +1,1 @@
-from .make_angle_frame_connector import MakeAngleFrameConnector
+from .make_angle_frame_connector_command import MakeAngleFrameConnectorCommand

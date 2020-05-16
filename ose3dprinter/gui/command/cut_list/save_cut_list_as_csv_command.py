@@ -4,7 +4,7 @@ from .generate_cut_list import generate_cut_list
 from .task_type import TaskType
 
 
-class SaveCutListAsCsv:
+class SaveCutListAsCsvCommand:
     """
     Command to save cut-list as a CSV file.
     """

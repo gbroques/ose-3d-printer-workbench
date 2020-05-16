@@ -1,8 +1,12 @@
 import FreeCADGui as Gui
 
-from .command import (AddExtruder, AddFrame, AddHeatedBed, AddXAxis, AddYAxis,
-                      AddZAxis, CopyCutListToClipboard,
-                      MakeAngleFrameConnector, SaveCutListAsCsv)
+from .command.add_axis import AddXAxisCommand, AddYAxisCommand, AddZAxisCommand
+from .command.add_extruder import AddExtruderCommand
+from .command.add_frame import AddFrameCommand
+from .command.add_heated_bed import AddHeatedBedCommand
+from .command.cut_list import (CopyCutListToClipboardCommand,
+                               SaveCutListAsCsvCommand)
+from .command.make_angle_frame_connector import MakeAngleFrameConnectorCommand
 
 #: Command Namespace: Must be unique to all FreeCAD workbenches.
 command_namespace = 'OSE3DP'
@@ -13,18 +17,19 @@ def register_commands():
     Register all workbench commands,
     and associate them to toolbars, menus, sub-menus, and context menu.
     """
-    add_frame_key = register(AddFrame.NAME, AddFrame())
-    add_x_axis_key = register(AddXAxis.NAME, AddXAxis())
-    add_y_axis_key = register(AddYAxis.NAME, AddYAxis())
-    add_z_axis_key = register(AddZAxis.NAME, AddZAxis())
-    add_heated_bed_key = register(AddHeatedBed.NAME, AddHeatedBed())
-    add_extruder_key = register(AddExtruder.NAME, AddExtruder())
+    add_frame_key = register(AddFrameCommand.NAME, AddFrameCommand())
+    add_x_axis_key = register(AddXAxisCommand.NAME, AddXAxisCommand())
+    add_y_axis_key = register(AddYAxisCommand.NAME, AddYAxisCommand())
+    add_z_axis_key = register(AddZAxisCommand.NAME, AddZAxisCommand())
+    add_heated_bed_key = register(
+        AddHeatedBedCommand.NAME, AddHeatedBedCommand())
+    add_extruder_key = register(AddExtruderCommand.NAME, AddExtruderCommand())
     copy_cut_list_to_clipboard_key = register(
-        CopyCutListToClipboard.NAME, CopyCutListToClipboard())
+        CopyCutListToClipboardCommand.NAME, CopyCutListToClipboardCommand())
     save_cut_list_as_csv_key = register(
-        SaveCutListAsCsv.NAME, SaveCutListAsCsv())
+        SaveCutListAsCsvCommand.NAME, SaveCutListAsCsvCommand())
     make_angle_frame_connector_key = register(
-        MakeAngleFrameConnector.NAME, MakeAngleFrameConnector())
+        MakeAngleFrameConnectorCommand.NAME, MakeAngleFrameConnectorCommand())
 
     #: Main Toolbar Commands
     main_toolbar_commands = [

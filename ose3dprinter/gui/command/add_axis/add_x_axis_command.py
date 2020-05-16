@@ -5,22 +5,22 @@ from .handle_add_axis_command_activation import \
     handle_add_axis_command_activation
 
 
-class AddZAxis:
+class AddXAxisCommand:
     """
-    Command to add Z Axis object.
+    Command to add X Axis object.
     """
 
-    NAME = 'AddZAxis'
+    NAME = 'AddXAxis'
 
     def Activated(self):
-        handle_add_axis_command_activation(AxisOrientation.Z)
+        handle_add_axis_command_activation(AxisOrientation.X)
 
     def IsActive(self):
         return True
 
     def GetResources(self):
         return {
-            'Pixmap': get_icon_path('ZAxis.svg'),
-            'MenuText': 'Add Z Axis',
-            'ToolTip': 'Add Z Axis'
+            'Pixmap': get_icon_path('XAxis.svg'),
+            'MenuText': 'Add X Axis',
+            'ToolTip': 'Add X Axis'
         }

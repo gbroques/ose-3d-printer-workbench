@@ -4,7 +4,7 @@ from ose3dprinter.gui.icon import get_icon_path
 from .make_angle_frame_connector_task_panel import AngleFrameConnectorTaskPanel
 
 
-class MakeAngleFrameConnector:
+class MakeAngleFrameConnectorCommand:
     """
     Command to make an Angle Frame Connector.
     """

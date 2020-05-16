@@ -1,1 +1,1 @@
-from .add_frame import AddFrame
+from .add_frame_command import AddFrameCommand

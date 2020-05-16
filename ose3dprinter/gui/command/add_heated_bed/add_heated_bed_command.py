@@ -9,7 +9,7 @@ from ose3dprinter.gui.part import create_heated_bed
 from ose3dprinter.gui.selection_object import find_selection_object_by_type
 
 
-class AddHeatedBed:
+class AddHeatedBedCommand:
     """
     Command to add Heated Bed object.
     """

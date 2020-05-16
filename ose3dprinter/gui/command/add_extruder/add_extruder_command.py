@@ -10,7 +10,7 @@ from ose3dprinter.gui.selection_object import (find_face_in_selection_object,
                                                find_selection_object_by_type)
 
 
-class AddExtruder:
+class AddExtruderCommand:
     """
     Command to add extruder object.
     """

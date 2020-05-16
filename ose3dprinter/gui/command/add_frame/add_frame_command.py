@@ -3,7 +3,7 @@ from ose3dprinter.gui.icon import get_icon_path
 from ose3dprinter.gui.part import create_frame
 
 
-class AddFrame:
+class AddFrameCommand:
     """
     Command to add Frame object.
     """
