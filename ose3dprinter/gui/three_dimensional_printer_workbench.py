@@ -26,8 +26,8 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
 
         main_toolbar, main_menu = ose_3d_printer.register_commands()
 
-        self.appendToolbar(main_toolbar.name, main_toolbar.command_keys)
-        self.appendMenu(main_menu.name, main_menu.command_keys)
+        self.appendToolbar('OSE 3D Printer', main_toolbar)
+        self.appendMenu('OSE 3D Printer', main_menu)
 
     def Activated(self):
         """

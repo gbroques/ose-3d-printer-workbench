@@ -3,7 +3,6 @@ import FreeCADGui as Gui
 from .command import (AddExtruder, AddFrame, AddHeatedBed, AddXAxis, AddYAxis,
                       AddZAxis, CopyCutListToClipboard,
                       MakeAngleFrameConnector, SaveCutListAsCsv)
-from .command_collection import CommandCollection
 
 #: Command Namespace: Must be unique to all FreeCAD workbenches.
 command_namespace = 'OSE3DP'
@@ -12,7 +11,7 @@ command_namespace = 'OSE3DP'
 def register_commands():
     """
     Register all workbench commands,
-    and add them to toolbars, menus, sub-menus, and context menu.
+    and associate them to toolbars, menus, sub-menus, and context menu.
     """
     add_frame_key = register(AddFrame.NAME, AddFrame())
     add_x_axis_key = register(AddXAxis.NAME, AddXAxis())
@@ -27,22 +26,23 @@ def register_commands():
     make_angle_frame_connector_key = register(
         MakeAngleFrameConnector.NAME, MakeAngleFrameConnector())
 
-    #: Main Toolbar
-    main_toolbar = CommandCollection('OSE 3D Printer')
-    main_toolbar.add(add_frame_key)
-    main_toolbar.add(add_x_axis_key)
-    main_toolbar.add(add_y_axis_key)
-    main_toolbar.add(add_z_axis_key)
-    main_toolbar.add(add_heated_bed_key)
-    main_toolbar.add(add_extruder_key)
+    #: Main Toolbar Commands
+    main_toolbar_commands = [
+        add_frame_key,
+        add_x_axis_key,
+        add_y_axis_key,
+        add_z_axis_key,
+        add_heated_bed_key,
+        add_extruder_key
+    ]
 
-    #: Main Menu
-    main_menu = CommandCollection('OSE 3D Printer')
-    main_menu.add(copy_cut_list_to_clipboard_key)
-    main_menu.add(save_cut_list_as_csv_key)
-    main_menu.add(make_angle_frame_connector_key)
-
-    return main_toolbar, main_menu
+    #: Main Menu Commands
+    main_menu_commands = [
+        copy_cut_list_to_clipboard_key,
+        save_cut_list_as_csv_key,
+        make_angle_frame_connector_key
+    ]
+    return main_toolbar_commands, main_menu_commands
 
 
 def register(name, command):
