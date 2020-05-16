@@ -2,18 +2,18 @@ import os
 
 import FreeCADGui
 from FreeCAD import Console
-from ose3dprinter.app.write_dict_list_to_csv import write_dict_list_to_csv
+from ose3dprinter.app.cut_list import write_dict_list_to_csv
 from PySide import QtGui
 
-from .generate_cut_list_task_panel import GenerateCutListTaskPanel
+from .cut_list_task_panel_base import CutListTaskPanelBase
 
 
-class SaveCutListAsCsvTaskPanel(GenerateCutListTaskPanel):
+class SaveCutListAsCsvTaskPanel(CutListTaskPanelBase):
 
-    def __init__(self, cut_list_table_rows, columns):
+    def __init__(self, cut_list_table_rows, columns, note=None):
         title = 'Save Cut List as CSV'
         super(SaveCutListAsCsvTaskPanel, self).__init__(
-            title, cut_list_table_rows, columns)
+            title, cut_list_table_rows, columns, note)
         self.cut_list_table_rows = cut_list_table_rows
         self.columns = columns
 

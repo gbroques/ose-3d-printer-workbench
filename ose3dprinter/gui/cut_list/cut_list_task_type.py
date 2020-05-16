@@ -1,3 +1,3 @@
-class TaskType:
+class CutListTaskType:
     SaveAsCsv = 'SaveAsCsv'
     CopyToClipboard = 'CopyToClipboard'

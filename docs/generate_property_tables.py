@@ -17,7 +17,7 @@ import os
 from collections import OrderedDict
 
 import FreeCAD as App
-from ose3dprinter.app.write_dict_list_to_csv import write_dict_list_to_csv
+from ose3dprinter.app.cut_list import write_dict_list_to_csv
 
 
 def main():

@@ -1,13 +1,13 @@
 from PySide import QtCore, QtGui
 
 
-class GenerateCutListTaskPanel(object):
-    """Abstract base class for cut list task panels.
+class CutListTaskPanelBase(object):
+    """Base class for cut list task panels.
 
     Handles building cut list table and initializing layout.
     """
 
-    def __init__(self, title, cut_list_table_rows, columns):
+    def __init__(self, title, cut_list_table_rows, columns, note=None):
         self.cut_list_table_rows = cut_list_table_rows
         self.columns = columns
 
@@ -19,19 +19,20 @@ class GenerateCutListTaskPanel(object):
         self.layout.addLayout(row)
         row.addWidget(table)
 
-        row2 = QtGui.QHBoxLayout()
-        note = QtGui.QLabel(self.form)
-        note.setObjectName('note')
-        note.setText('<b>Note:</b> X and Z Rod lengths adjusted by +4" and -1" respectively.')
-        note.setWordWrap(True)
-        row2.addWidget(note)
-        self.layout.addLayout(row2)
+        if note is not None:
+            row2 = QtGui.QHBoxLayout()
+            note = QtGui.QLabel(self.form)
+            note.setObjectName('note')
+            note.setText('<b>Note:</b> {}'.format(note))
+            note.setWordWrap(True)
+            row2.addWidget(note)
+            self.layout.addLayout(row2)
 
     def accept(self):
         """
         Executed upon clicking "OK" file_select_button in FreeCAD Tasks panel.
         """
-        raise NotImplementedError('Must implement method accept()')
+        raise NotImplementedError('Sub class must implement accept() method.')
 
 
 def build_cut_list_table_widget(cut_list_table_rows, columns):

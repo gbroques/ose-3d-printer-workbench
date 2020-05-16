@@ -1,20 +1,18 @@
 import FreeCADGui
 from FreeCAD import Console
+from ose3dprinter.app.cut_list import (convert_dict_list_to_wiki_list_markup,
+                                       convert_dict_list_to_wiki_table_markup)
 from PySide import QtGui
 
-from .convert_dict_list_to_wiki_list_markup import \
-    convert_dict_list_to_wiki_list_markup
-from .convert_dict_list_to_wiki_table_markup import \
-    convert_dict_list_to_wiki_table_markup
-from .generate_cut_list_task_panel import GenerateCutListTaskPanel
+from .cut_list_task_panel_base import CutListTaskPanelBase
 
 
-class CopyCutListToClipboardTaskPanel(GenerateCutListTaskPanel):
+class CopyCutListToClipboardTaskPanel(CutListTaskPanelBase):
 
-    def __init__(self, cut_list_table_rows, columns):
+    def __init__(self, cut_list_table_rows, columns, note=None):
         title = 'Copy Cut List to Clipboard'
         super(CopyCutListToClipboardTaskPanel, self).__init__(
-            title, cut_list_table_rows, columns)
+            title, cut_list_table_rows, columns, note)
 
         # Row 1 - Markup Format options
         row1 = QtGui.QVBoxLayout()

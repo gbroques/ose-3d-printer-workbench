@@ -1,7 +1,8 @@
+from ose3dprinter.gui.cut_list import create_save_cut_list_to_file_task_panel
 from ose3dprinter.gui.icon import get_icon_path
 
-from .generate_cut_list import generate_cut_list
-from .task_type import TaskType
+from .handle_cut_list_command_activation import \
+    handle_cut_list_command_activation
 
 
 class SaveCutListAsCsvCommand:
@@ -12,7 +13,8 @@ class SaveCutListAsCsvCommand:
     NAME = 'SaveCutListAsCsv'
 
     def Activated(self):
-        generate_cut_list(TaskType.SaveAsCsv)
+        handle_cut_list_command_activation(
+            create_save_cut_list_to_file_task_panel)
 
     def IsActive(self):
         return True
