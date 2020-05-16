@@ -6,6 +6,7 @@ ose3dprinter.app
    :maxdepth: 1
 
    ose3dprinter.app.attachment
+   ose3dprinter.app.cut_list
    ose3dprinter.app.model
 
 
@@ -18,8 +19,6 @@ ose3dprinter.app
       ose3dprinter.app.is_edge_parallel_to_axis
 
       ose3dprinter.app.is_face_parallel_to_plane
-
-      ose3dprinter.app.write_dict_list_to_csv
 
 
 enums
@@ -49,14 +48,6 @@ is_edge_parallel_to_axis
 is_face_parallel_to_plane
 -------------------------
 .. automodule:: ose3dprinter.app.is_face_parallel_to_plane
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-write_dict_list_to_csv
-----------------------
-.. automodule:: ose3dprinter.app.write_dict_list_to_csv
    :members:
    :undoc-members:
    :show-inheritance:

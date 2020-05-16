@@ -6,7 +6,7 @@ ose3dprinter.gui
    :maxdepth: 1
 
    ose3dprinter.gui.command
-   ose3dprinter.gui.command_collection
+   ose3dprinter.gui.cut_list
    ose3dprinter.gui.icon
    ose3dprinter.gui.part
 
@@ -15,7 +15,7 @@ ose3dprinter.gui
 .. autosummary::
       ose3dprinter.gui.OSE-3D-Printer
 
-      ose3dprinter.gui.get_first_selected_object_and_sub_object
+      ose3dprinter.gui.selection_object
 
       ose3dprinter.gui.three_dimensional_printer_workbench
 
@@ -28,9 +28,9 @@ OSE-3D-Printer
    :show-inheritance:
 
 
-get_first_selected_object_and_sub_object
-----------------------------------------
-.. automodule:: ose3dprinter.gui.get_first_selected_object_and_sub_object
+selection_object
+----------------
+.. automodule:: ose3dprinter.gui.selection_object
    :members:
    :undoc-members:
    :show-inheritance:
