@@ -7,10 +7,10 @@ from .pluralize import pluralize
 
 def merge_cut_list_items_by_length(cut_list_rows):
     """Merge cut list items with same length.
-    
+
     This will combine descriptions.
 
-    Note, we also pluralize the the 'Description' if needed,
+    Note, we also pluralize the 'Description' if needed,
     so rows should have the 'Description' in singular form.
 
     :param cut_list_rows: cut list rows
