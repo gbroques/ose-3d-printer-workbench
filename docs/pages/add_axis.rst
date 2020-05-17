@@ -47,6 +47,6 @@ Z                Front, Rear
 
 **Note:** You cannot attach an axis to the **Bottom** face or side of the frame.
 
-The axis-frame attachment logic assumes the frame is **not** rotated, and determines the whether the user is attaching the axis to the appropriate side based on whether the selected face of the frame is parallel to the XY, YZ, or XZ planes.
+The axis-frame attachment logic assumes the frame is **not** rotated, and determines whether the user is attaching the axis to the appropriate side of the frame based on whether the selected face is parallel to the XY, YZ, or XZ plane.
 
 .. Tip:: See the **Report View** for attachment troubleshooting.
