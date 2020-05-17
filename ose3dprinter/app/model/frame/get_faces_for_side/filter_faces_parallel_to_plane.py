@@ -1,7 +1,7 @@
 from ose3dprinter.app.enums import Plane
-from ose3dprinter.app.is_face_parallel_to_plane import (
-    is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
-    is_face_parallel_to_yz_plane)
+from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
+                                         is_face_parallel_to_xz_plane,
+                                         is_face_parallel_to_yz_plane)
 
 
 def filter_faces_parallel_to_plane(faces, plane):

@@ -3,9 +3,8 @@ from math import degrees
 import Part
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.enums import AxisOrientation, Side
-from ose3dprinter.app.is_edge_parallel_to_axis import \
-    is_edge_parallel_to_z_axis
 from ose3dprinter.app.model.base_model import BaseModel
+from ose3dprinter.app.shape.edge import is_edge_parallel_to_z_axis
 
 
 class AxisModel(BaseModel):

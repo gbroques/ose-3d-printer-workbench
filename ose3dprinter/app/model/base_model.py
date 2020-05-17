@@ -1,10 +1,11 @@
 from math import degrees
 
 import Part
-from FreeCAD import Console, Vector, Rotation
-from ose3dprinter.app.is_edge_parallel_to_axis import (
-    is_edge_parallel_to_x_axis, is_edge_parallel_to_y_axis,
-    is_edge_parallel_to_z_axis)
+from FreeCAD import Console, Rotation, Vector
+from ose3dprinter.app.shape.edge import (find_edges_connected_to_vertex,
+                                         is_edge_parallel_to_x_axis,
+                                         is_edge_parallel_to_y_axis,
+                                         is_edge_parallel_to_z_axis)
 
 
 class BaseModel(object):
@@ -54,7 +55,7 @@ def get_translation_offset(reference_dimensions,
     reference_box.rotate(Vector(0, 0, 0), rotation.Axis,
                          degrees(rotation.Angle))
     first_vertex = reference_box.Vertexes[0]
-    first_vertex_edges = get_edges_connected_to_vertex(
+    first_vertex_edges = find_edges_connected_to_vertex(
         first_vertex, reference_box.Edges)
     num_edges = len(first_vertex_edges)
     if num_edges != 3:
@@ -80,12 +81,3 @@ def get_translation_offset(reference_dimensions,
         y * origin_translation_offset.y,
         z * origin_translation_offset.z
     )
-
-
-def get_edges_connected_to_vertex(vertex, edges):
-    vertex_edges = []
-    for e in edges:
-        for v in e.Vertexes:
-            if v.isSame(vertex):
-                vertex_edges.append(e)
-    return vertex_edges

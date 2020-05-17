@@ -2,7 +2,7 @@ from functools import reduce
 
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.model.make_face_from_points import make_face_from_points
+from ose3dprinter.app.shape.face import make_face_from_points
 
 
 class CoolingAndSensorMount:

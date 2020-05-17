@@ -2,7 +2,7 @@ from math import cos, radians, tan
 
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.model.make_face_from_points import make_face_from_points
+from ose3dprinter.app.shape.face import make_face_from_points
 
 from .axis_side_mount import AxisSideMount
 from .corner import Corner, is_top_corner

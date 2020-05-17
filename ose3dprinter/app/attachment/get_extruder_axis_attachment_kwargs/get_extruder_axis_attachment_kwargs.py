@@ -1,8 +1,7 @@
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.attachment.attachment_error import AttachmentError
-from ose3dprinter.app.is_face_parallel_to_plane import \
-    is_face_parallel_to_xy_plane
 from ose3dprinter.app.model import AxisModel
+from ose3dprinter.app.shape.face import is_face_parallel_to_xy_plane
 from Part import Face
 
 

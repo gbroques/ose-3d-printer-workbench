@@ -2,9 +2,8 @@ from functools import reduce
 
 import Part
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.is_edge_parallel_to_axis import \
-    is_edge_parallel_to_y_axis
 from ose3dprinter.app.model.base_model import BaseModel
+from ose3dprinter.app.shape.edge import is_edge_parallel_to_y_axis
 
 from .cooling_and_sensor_mount import CoolingAndSensorMount
 from .main_extruder_part import MainExtruderPart

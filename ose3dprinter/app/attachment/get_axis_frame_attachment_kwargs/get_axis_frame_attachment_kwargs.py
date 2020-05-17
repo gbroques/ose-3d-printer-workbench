@@ -1,10 +1,10 @@
 from FreeCAD import Vector
 from ose3dprinter.app.attachment.attachment_error import AttachmentError
 from ose3dprinter.app.enums import AxisOrientation, Side
-from ose3dprinter.app.is_face_parallel_to_plane import (
-    is_face_parallel_to_xy_plane, is_face_parallel_to_xz_plane,
-    is_face_parallel_to_yz_plane)
 from ose3dprinter.app.model import FrameModel
+from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
+                                         is_face_parallel_to_xz_plane,
+                                         is_face_parallel_to_yz_plane)
 from Part import Face
 
 from .get_placement_strategy import get_placement_strategy
