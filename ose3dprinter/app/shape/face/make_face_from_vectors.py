@@ -11,21 +11,21 @@ import FreeCAD
 import Part
 
 
-def make_face_from_points(*points_list):
-    """Make a Face from a variable number of point lists.
+def make_face_from_vectors(*vectors_list):
+    """Make a Face from a variable number of vector lists.
 
-    :raises ValueError: When there's less than three points in a list.
-    :raises ValueError: When points don't form a closed wire.
+    :raises ValueError: When there's less than three vectors in a list.
+    :raises ValueError: When vectors don't form a closed wire.
     :return: A face
     :rtype: Part.Face
     """
     wires = []
-    for points in points_list:
-        if len(points) < 3:
-            raise ValueError('Must have at least 3 points to make a face.')
-        vertices = points + [points[0]]
+    for vectors in vectors_list:
+        if len(vectors) < 3:
+            raise ValueError('Must have at least 3 vectors to make a face.')
+        vertices = vectors + [vectors[0]]
         edges = []
-        for pair in pair_wise(vertices):
+        for pair in _pair_wise(vertices):
             edge = LineSegment(*pair)
             edges.append(edge)
 
@@ -33,11 +33,11 @@ def make_face_from_points(*points_list):
         wire = Part.Wire(shape.Edges)
         wires.append(wire)
         if not wire.isClosed():
-            raise ValueError('Points must form closed face.')
+            raise ValueError('Vectors must form closed face.')
     return Part.Face(wires)
 
 
-def pair_wise(iterable):
+def _pair_wise(iterable):
     """
     s -> (s0,s1), (s1,s2), (s2, s3), ...
     """
@@ -52,6 +52,8 @@ def LineSegment(*args):
 
     In FreeCAD 0.16 Part.Line is used,
     for FreeCAD 0.17 Part.LineSegment has to be used.
+
+    TODO: Should this be moved to a freecad_future module?
 
     .. seealso::
         https://www.freecadweb.org/wiki/Topological_data_scripting#Line
@@ -68,6 +70,8 @@ def LineSegment(*args):
 
 def get_freecad_version():
     """Get FreeCAD Version as an integer.
+
+    TODO: Should this be moved to a freecad_future module?
 
     :return: FreeCAD minor version (e.g. 16, 17, 18)
     :rtype: int

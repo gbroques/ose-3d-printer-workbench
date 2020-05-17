@@ -2,12 +2,11 @@ from math import cos, radians, tan
 
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.shape.face import make_face_from_points
+from ose3dprinter.app.shape.face import make_face_from_vectors
 
 from .axis_side_mount import AxisSideMount
 from .corner import Corner, is_top_corner
 from .rotate_and_translate_part import rotate_and_translate_part
-from functools import reduce
 
 
 class AngleFrameConnector:
@@ -157,14 +156,14 @@ def make_tri_bracket(width,
     """
     set_screw_block_width = 20
 
-    outer_points = get_outer_points(width,
-                                    thickness,
-                                    set_screw_block_width,
-                                    with_set_screw)
+    outer_vectors = get_outer_points(width,
+                                     thickness,
+                                     set_screw_block_width,
+                                     with_set_screw)
 
-    inner_points = get_inner_points(width, thickness)
+    inner_vectors = get_inner_points(width, thickness)
 
-    face = make_face_from_points(outer_points, inner_points)
+    face = make_face_from_vectors(outer_vectors, inner_vectors)
 
     bracket = face.extrude(Vector(0, 0, height))
 
@@ -316,12 +315,12 @@ def make_set_screw_cutout(length, nut_height, height):
     bottom_left = Vector(0, 0, 0)
     top_left = Vector(0, offset, 0)
     bottom_right = Vector(offset, 0, 0)
-    points = [
+    vectors = [
         bottom_left,
         top_left,
         bottom_right
     ]
-    face = make_face_from_points(points)
+    face = make_face_from_vectors(vectors)
     right_triangle = face.extrude(Vector(0, 0, height))
 
     return box.fuse(right_triangle)
@@ -373,12 +372,12 @@ def fuse_nut_ramps_to_bracket(bracket,
     bottom_left = Vector(0, 0, 0)
     top_left = Vector(0, 0, height)
     bottom_right = Vector(ramp_length, 0, 0)
-    points = [
+    vectors = [
         bottom_left,
         top_left,
         bottom_right
     ]
-    face = make_face_from_points(points)
+    face = make_face_from_vectors(vectors)
 
     rotation = 45
     left_ramp = face.extrude(Vector(0, set_screw_cutout_width, 0))

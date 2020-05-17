@@ -1,6 +1,6 @@
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.shape.face import make_face_from_points
+from ose3dprinter.app.shape.face import make_face_from_vectors
 from ose3dprinter.app.model.axis import AxisModel
 
 from .corner import Corner, is_top_corner
@@ -106,7 +106,7 @@ class AxisSideMount:
             bottom_right
         ]
 
-        face = make_face_from_points(points)
+        face = make_face_from_vectors(points)
 
         trapezoid = face.extrude(Vector(0, 0, width))
 
@@ -126,8 +126,8 @@ class AxisSideMount:
         a = Vector(0, slanted_edge_distance, 0)
         b = Vector(0, 0, 0)
         c = Vector(0, slanted_edge_distance, width)
-        points = [a, b, c]
-        face = make_face_from_points(points)
+        vectors = [a, b, c]
+        face = make_face_from_vectors(vectors)
         return face.extrude(Vector(cls.height, 0, 0))
 
 

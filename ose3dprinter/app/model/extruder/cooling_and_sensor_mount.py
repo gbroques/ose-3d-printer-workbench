@@ -2,7 +2,7 @@ from functools import reduce
 
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.shape.face import make_face_from_points
+from ose3dprinter.app.shape.face import make_face_from_vectors
 
 
 class CoolingAndSensorMount:
@@ -116,7 +116,7 @@ def make_cooling_and_sensor_slanted_side(thickness, length):
     top_right = Vector(0, top, left)
     top_left = Vector(0, 0, left)
 
-    points = [
+    vectors = [
         bottom_left,
         bottom_right,
         mid_right,
@@ -125,7 +125,7 @@ def make_cooling_and_sensor_slanted_side(thickness, length):
         top_left
     ]
 
-    face = make_face_from_points(points)
+    face = make_face_from_vectors(vectors)
 
     return face.extrude(Vector(thickness, 0, 0))
 
