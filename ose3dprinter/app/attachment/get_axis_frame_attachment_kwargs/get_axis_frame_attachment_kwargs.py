@@ -1,10 +1,10 @@
 from FreeCAD import Vector
 from ose3dprinter.app.attachment.attachment_error import AttachmentError
-from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 from ose3dprinter.app.model import FrameModel
 from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
                                          is_face_parallel_to_xz_plane,
                                          is_face_parallel_to_yz_plane)
+from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 from Part import Face
 
 from .get_placement_strategy import get_placement_strategy
@@ -17,7 +17,8 @@ def get_axis_frame_attachment_kwargs(frame,
     Get the length, placement, and origin translation offset for
     creating a axis object attached to a selected frame face.
     """
-    _validate_frame_and_face(frame, selected_frame_face, axis_orientation)
+    _validate_frame(frame)
+    _validate_selected_face(frame, selected_frame_face, axis_orientation)
     face_side = frame.Proxy.get_face_side(
         selected_frame_face, axis_orientation)
     placement_strategy = get_placement_strategy(face_side)
@@ -26,13 +27,16 @@ def get_axis_frame_attachment_kwargs(frame,
     return result
 
 
-def _validate_frame_and_face(frame, face, axis_orientation):
-    if not isinstance(face, Face):
-        raise AttachmentError('Selected element is not a face')
+def _validate_frame(frame):
     if not _is_frame(frame):
         raise AttachmentError('Must select frame')
     if _is_frame_rotated(frame):
-        raise AttachmentError('Frame is rotated')
+        raise AttachmentError('Frame must not be rotated')
+
+
+def _validate_selected_face(frame, face, axis_orientation):
+    if not isinstance(face, Face):
+        raise AttachmentError('Selected element is not a face')
     if not frame.HasCorners and not _is_outer_face(face, frame):
         raise AttachmentError('Must select outer face of frame')
     face_side = frame.Proxy.get_face_side(face, axis_orientation)
@@ -45,7 +49,6 @@ def _validate_frame_and_face(frame, face, axis_orientation):
     if attachable_axis_orientation != axis_orientation:
         raise AttachmentError('Attachable "{}" axis orientation of face doesn\'t match "{}" axis orientation'.format(
             attachable_axis_orientation, axis_orientation))
-    return frame, face
 
 
 def _is_frame_rotated(frame):
