@@ -10,4 +10,4 @@ def create_save_cut_list_to_file_task_panel(
         cut_list_items,
         merge_cut_list=merge_cut_list_items_by_length,
         note=note)
-    return factory.create(CutListTaskType.SaveAsCsv)
+    return factory.create(CutListTaskType.SaveToFile)

@@ -21,11 +21,12 @@ class CutListTaskPanelBase(object):
 
         if note is not None:
             row2 = QtGui.QHBoxLayout()
-            note = QtGui.QLabel(self.form)
-            note.setObjectName('note')
-            note.setText('<b>Note:</b> {}'.format(note))
-            note.setWordWrap(True)
-            row2.addWidget(note)
+            note_label = QtGui.QLabel(self.form)
+            note_label.setObjectName('note_label')
+            note_text = '<b>Note:</b> {}'.format(note)
+            note_label.setText(note_text)
+            note_label.setWordWrap(True)
+            row2.addWidget(note_label)
             self.layout.addLayout(row2)
 
     def accept(self):

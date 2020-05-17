@@ -1,4 +1,4 @@
-from ose3dprinter.gui.cut_list import \
+from ose3dprinter.gui.create_cut_list_task_panel import \
     create_copy_cut_list_to_clipboard_task_panel
 from ose3dprinter.gui.icon import get_icon_path
 
