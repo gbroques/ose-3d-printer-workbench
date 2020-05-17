@@ -2,9 +2,10 @@ from math import degrees
 
 import Part
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 from ose3dprinter.app.model.base_model import BaseModel
+from ose3dprinter.app.shape import place_shapes
 from ose3dprinter.app.shape.edge import is_edge_parallel_to_z_axis
+from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 
 
 class AxisModel(BaseModel):
@@ -186,19 +187,15 @@ class AxisModel(BaseModel):
             rod2
         ]
 
-        placement_strategy = get_placement_strategy(obj.Orientation,
-                                                    obj.Side,
-                                                    self.box_height,
-                                                    rod_length,
-                                                    motor_box_length)
-        rotation = placement_strategy['rotation']
-        translation = placement_strategy['translation']
-        for part in parts:
-            part.rotate(Vector(), rotation.Axis, degrees(rotation.Angle))
-            part.translate(translation)
+        placement = get_placement(obj.Orientation,
+                                  obj.Side,
+                                  self.box_height,
+                                  rod_length,
+                                  motor_box_length)
+        place_shapes(parts, placement)
 
         reference_dimensions = (rod_length, motor_box_length, self.box_height)
-        self.move_parts(parts, reference_dimensions, rotation)
+        self.move_parts(parts, reference_dimensions, placement.Rotation)
 
         compound = Part.makeCompound(parts)
         obj.Shape = compound
@@ -348,38 +345,35 @@ def _get_length_property(axis_orientation):
     }[axis_orientation]
 
 
-def get_placement_strategy(orientation,
-                           side,
-                           box_height,
-                           length,
-                           motor_box_length):
+def get_placement(orientation,
+                  side,
+                  box_height,
+                  length,
+                  motor_box_length):
     try:
         return {
             Axis.X: {
-                Side.TOP: {
-                    'rotation': Rotation(),
-                    'translation': Vector()
-                }
+                Side.TOP: Placement()
             },
             Axis.Y: {
-                Side.LEFT: {
-                    'rotation': Rotation(-90, 0, 90),
-                    'translation': Vector(box_height, length, 0)
-                },
-                Side.RIGHT: {
-                    'rotation': Rotation(-90, 0, -90),
-                    'translation': Vector(0, length, motor_box_length)
-                }
+                Side.LEFT: Placement(
+                    Vector(box_height, length, 0),
+                    Rotation(-90, 0, 90)
+                ),
+                Side.RIGHT: Placement(
+                    Vector(0, length, motor_box_length),
+                    Rotation(-90, 0, -90)
+                )
             },
             Axis.Z: {
-                Side.FRONT: {
-                    'rotation': Rotation(0, 90, 90),
-                    'translation': Vector(0, box_height, length)
-                },
-                Side.REAR: {
-                    'rotation': Rotation(0, 90, -90),
-                    'translation': Vector(motor_box_length, 0, length)
-                }
+                Side.FRONT: Placement(
+                    Vector(0, box_height, length),
+                    Rotation(0, 90, 90)
+                ),
+                Side.REAR: Placement(
+                    Vector(motor_box_length, 0, length),
+                    Rotation(0, 90, -90)
+                )
             }
         }[orientation][side]
     except KeyError:

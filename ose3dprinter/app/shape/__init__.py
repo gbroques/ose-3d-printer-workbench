@@ -23,4 +23,4 @@ Shape is  generic term covering all of the above.
 See Also:
     https://wiki.freecadweb.org/Topological_data_scripting
 """
-from .place_shape import place_shape
+from .place_shape import place_shape, place_shapes

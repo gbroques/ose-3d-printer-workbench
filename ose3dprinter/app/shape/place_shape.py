@@ -3,6 +3,11 @@ from math import degrees
 from FreeCAD import Vector
 
 
+def place_shapes(shapes, placement):
+    for shape in shapes:
+        place_shape(shape, placement)
+
+
 def place_shape(shape, placement):
     """Apply a placement to a given shape.
 
