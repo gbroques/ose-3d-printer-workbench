@@ -1,4 +1,4 @@
-class AxisOrientation:
+class Axis:
     X = 'x'
     Y = 'y'
     Z = 'z'

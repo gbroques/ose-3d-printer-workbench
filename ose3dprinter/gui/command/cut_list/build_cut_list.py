@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 import FreeCAD as App
 from FreeCAD import Console
-from ose3dprinter.app.enums import AxisOrientation
+from ose3dprinter.app.enums import Axis
 from ose3dprinter.app.model import AxisModel, FrameModel
 from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector
@@ -14,7 +14,7 @@ def build_cut_list():
         document)
     cut_list = transform_axes_by_orientation_into_cut_list(
         axes_by_orientation)
-    num_z_axes = len(axes_by_orientation[AxisOrientation.Z])
+    num_z_axes = len(axes_by_orientation[Axis.Z])
     cut_list = add_heated_beds_and_spool_holder_rods_to_cut_list(
         cut_list, num_z_axes, document)
     cut_list = add_angle_bars_to_cut_list(cut_list, document)
@@ -116,12 +116,12 @@ def get_axis_length_for_cut_list(axis, orientation):
     """
     one_inch = 25.4
     axis_length = axis.Length.Value
-    if orientation == AxisOrientation.X:
+    if orientation == Axis.X:
         four_inches = one_inch * 4
         return convert_value_to_quantity_and_format(axis_length + four_inches)
-    if orientation == AxisOrientation.Y:
+    if orientation == Axis.Y:
         return axis.Length.UserString
-    elif orientation == AxisOrientation.Z:
+    elif orientation == Axis.Z:
         #   Only the Z1 axis (front side) needs to be shortened by an inch
         #   to allow for spool-holder rods to insert into the top of the axis.
         #
@@ -143,9 +143,9 @@ def retrieve_axes_by_orientation_from_document(document):
     objects = get_objects_from_document(document)
     axes = list(filter(lambda o: is_axis(o), objects))
     return OrderedDict([
-        (AxisOrientation.X, [a for a in axes if a.Proxy.is_x()]),
-        (AxisOrientation.Y, [a for a in axes if a.Proxy.is_y()]),
-        (AxisOrientation.Z, [a for a in axes if a.Proxy.is_z()])
+        (Axis.X, [a for a in axes if a.Proxy.is_x()]),
+        (Axis.Y, [a for a in axes if a.Proxy.is_y()]),
+        (Axis.Z, [a for a in axes if a.Proxy.is_z()])
     ])
 
 

@@ -1,4 +1,4 @@
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 
 
 def get_default_axis_creation_kwargs(axis_orientation):
@@ -10,7 +10,7 @@ def get_default_axis_creation_kwargs(axis_orientation):
 
 def _get_default_side(axis_orientation):
     return {
-        AxisOrientation.X: Side.TOP,
-        AxisOrientation.Y: Side.LEFT,
-        AxisOrientation.Z: Side.FRONT
+        Axis.X: Side.TOP,
+        Axis.Y: Side.LEFT,
+        Axis.Z: Side.FRONT
     }[axis_orientation]

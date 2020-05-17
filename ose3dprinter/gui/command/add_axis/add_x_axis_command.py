@@ -1,4 +1,4 @@
-from ose3dprinter.app.enums import AxisOrientation
+from ose3dprinter.app.enums import Axis
 from ose3dprinter.gui.icon import get_icon_path
 
 from .handle_add_axis_command_activation import \
@@ -13,7 +13,7 @@ class AddXAxisCommand:
     NAME = 'AddXAxis'
 
     def Activated(self):
-        handle_add_axis_command_activation(AxisOrientation.X)
+        handle_add_axis_command_activation(Axis.X)
 
     def IsActive(self):
         return True

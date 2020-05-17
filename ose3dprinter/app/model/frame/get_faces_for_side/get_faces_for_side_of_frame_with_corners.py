@@ -1,4 +1,4 @@
-from ose3dprinter.app.enums import AxisOrientation, Plane, Side
+from ose3dprinter.app.enums import Axis, Plane, Side
 
 from .filter_faces_parallel_to_plane import filter_faces_parallel_to_plane
 
@@ -45,10 +45,10 @@ def _is_face_within_bounds_of_side(face, frame, side):
 
 def get_axis_orientation(side):
     return {
-        Side.BOTTOM: AxisOrientation.X,
-        Side.TOP: AxisOrientation.X,
-        Side.LEFT: AxisOrientation.Y,
-        Side.RIGHT: AxisOrientation.Y,
-        Side.FRONT: AxisOrientation.Z,
-        Side.REAR: AxisOrientation.Z,
+        Side.BOTTOM: Axis.X,
+        Side.TOP: Axis.X,
+        Side.LEFT: Axis.Y,
+        Side.RIGHT: Axis.Y,
+        Side.FRONT: Axis.Z,
+        Side.REAR: Axis.Z,
     }[side]

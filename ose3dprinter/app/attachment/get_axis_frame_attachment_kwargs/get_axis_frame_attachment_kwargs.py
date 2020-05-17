@@ -1,6 +1,6 @@
 from FreeCAD import Vector
 from ose3dprinter.app.attachment.attachment_error import AttachmentError
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 from ose3dprinter.app.model import FrameModel
 from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
                                          is_face_parallel_to_xz_plane,
@@ -71,9 +71,9 @@ def _get_orientation_of_attachable_axis(face):
 
 def _get_is_face_parallel_to_plane_by_axis_orientation():
     return {
-        AxisOrientation.X: is_face_parallel_to_xy_plane,
-        AxisOrientation.Y: is_face_parallel_to_yz_plane,
-        AxisOrientation.Z: is_face_parallel_to_xz_plane
+        Axis.X: is_face_parallel_to_xy_plane,
+        Axis.Y: is_face_parallel_to_yz_plane,
+        Axis.Z: is_face_parallel_to_xz_plane
     }
 
 

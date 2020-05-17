@@ -4,7 +4,7 @@ import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.attachment import (AttachmentError,
                                          get_axis_frame_attachment_kwargs)
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 from ose3dprinter.app.model import FrameModel
 
 from .freecad_test_case import FreeCADTestCase
@@ -23,7 +23,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         top_face = self.frame.Proxy.get_faces_for_side(Side.TOP)[0]
 
         result = get_axis_frame_attachment_kwargs(
-            self.frame, top_face, AxisOrientation.X)
+            self.frame, top_face, Axis.X)
 
         expected = {
             'origin_translation_offset': Vector(0.0, -0.5, 0.0),
@@ -31,7 +31,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
                 Vector(0, self.frame.Size / 2, self.frame.Size),
                 Rotation()
             ),
-            'orientation': AxisOrientation.X,
+            'orientation': Axis.X,
             'side': Side.TOP
         }
 
@@ -41,7 +41,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         left_face = self.frame.Proxy.get_faces_for_side(Side.LEFT)[0]
 
         result = get_axis_frame_attachment_kwargs(
-            self.frame, left_face, AxisOrientation.Y)
+            self.frame, left_face, Axis.Y)
 
         expected = {
             'origin_translation_offset': Vector(-1.0, 0.0, -1.0),
@@ -50,7 +50,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
                 Rotation(),
                 Vector()
             ),
-            'orientation': AxisOrientation.Y,
+            'orientation': Axis.Y,
             'side': Side.LEFT
         }
 
@@ -60,7 +60,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         right_face = self.frame.Proxy.get_faces_for_side(Side.RIGHT)[0]
 
         result = get_axis_frame_attachment_kwargs(
-            self.frame, right_face, AxisOrientation.Y)
+            self.frame, right_face, Axis.Y)
 
         expected = {
             'origin_translation_offset': Vector(0.0, 0.0, -1.0),
@@ -69,7 +69,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
                 Rotation(),
                 Vector()
             ),
-            'orientation': AxisOrientation.Y,
+            'orientation': Axis.Y,
             'side': Side.RIGHT
         }
 
@@ -79,7 +79,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         front_face = self.frame.Proxy.get_faces_for_side(Side.FRONT)[0]
 
         result = get_axis_frame_attachment_kwargs(
-            self.frame, front_face, AxisOrientation.Z)
+            self.frame, front_face, Axis.Z)
 
         expected = {
             'origin_translation_offset': Vector(-0.5, -1.0, 0.0),
@@ -88,7 +88,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
                 Rotation(),
                 Vector()
             ),
-            'orientation': AxisOrientation.Z,
+            'orientation': Axis.Z,
             'side': Side.FRONT
         }
 
@@ -98,7 +98,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
         rear_face = self.frame.Proxy.get_faces_for_side(Side.REAR)[0]
 
         result = get_axis_frame_attachment_kwargs(
-            self.frame, rear_face, AxisOrientation.Z)
+            self.frame, rear_face, Axis.Z)
 
         expected = {
             'origin_translation_offset': Vector(-0.5, 0, 0),
@@ -107,7 +107,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
                 Rotation(),
                 Vector()
             ),
-            'orientation': AxisOrientation.Z,
+            'orientation': Axis.Z,
             'side': Side.REAR
         }
 
@@ -118,7 +118,7 @@ class GetAxisFrameAttachmentKwargsForCNCCutFrameTest(FreeCADTestCase):
 
         with self.assertRaises(AttachmentError):
             get_axis_frame_attachment_kwargs(
-                self.frame, bottom_face, AxisOrientation.X)
+                self.frame, bottom_face, Axis.X)
 
     def assert_result_and_expected_are_equal(self, result, expected):
         self.assertEqual(result['origin_translation_offset'],

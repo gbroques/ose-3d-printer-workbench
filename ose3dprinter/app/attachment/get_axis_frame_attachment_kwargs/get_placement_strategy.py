@@ -1,5 +1,5 @@
 from FreeCAD import Console, Placement, Units, Vector
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 from ose3dprinter.app.model import AxisModel
 from ose3dprinter.app.model.frame.angle_frame_connector import AxisSideMount
 
@@ -39,7 +39,7 @@ def _get_placement_for_left_face_on_frame(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-1, 0, -1),
-        'orientation': AxisOrientation.Y,
+        'orientation': Axis.Y,
         'length': frame.Size
     }
 
@@ -57,7 +57,7 @@ def _get_placement_for_left_face_on_frame_with_corners(frame_with_corners):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-1, 0, -1),
-        'orientation': AxisOrientation.Y,
+        'orientation': Axis.Y,
         'length': _convert_value_to_quantity(length)
     }
 
@@ -72,7 +72,7 @@ def _get_placement_for_right_face_on_frame(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(0, 0, -1),
-        'orientation': AxisOrientation.Y,
+        'orientation': Axis.Y,
         'length': frame.Size
     }
 
@@ -90,7 +90,7 @@ def _get_placement_for_right_face_on_frame_with_corners(frame_with_corners):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(0, 0, -1),
-        'orientation': AxisOrientation.Y,
+        'orientation': Axis.Y,
         'length': _convert_value_to_quantity(length)
     }
 
@@ -127,7 +127,7 @@ def _get_placement_for_front_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-0.5, -1, 0),
-        'orientation': AxisOrientation.Z,
+        'orientation': Axis.Z,
         'length': frame.Size,
         'carriage_position': 90
     }
@@ -142,7 +142,7 @@ def _get_placement_for_rear_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-0.5, 0, 0),
-        'orientation': AxisOrientation.Z,
+        'orientation': Axis.Z,
         'length': frame.Size,
         'carriage_position': 90
     }
@@ -155,7 +155,7 @@ def _get_placement_for_bottom_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset,
-        'orientation': AxisOrientation.X,
+        'orientation': Axis.X,
         'length': frame.Size
     }
 
@@ -170,7 +170,7 @@ def _get_placement_for_top_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset,
-        'orientation': AxisOrientation.X,
+        'orientation': Axis.X,
         'length': frame.Size
     }
 

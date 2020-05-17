@@ -2,7 +2,7 @@ from math import degrees
 
 import Part
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 from ose3dprinter.app.model.base_model import BaseModel
 from ose3dprinter.app.shape.edge import is_edge_parallel_to_z_axis
 
@@ -36,7 +36,7 @@ class AxisModel(BaseModel):
                  obj,
                  length=304.80,
                  carriage_position=50,
-                 orientation=AxisOrientation.X,
+                 orientation=Axis.X,
                  side=Side.TOP,
                  placement=Placement(),
                  origin_translation_offset=Vector()):
@@ -292,7 +292,7 @@ class AxisModel(BaseModel):
         :rtype: bool
         """
         axis = self.Object
-        return _is_oriented_in(axis, AxisOrientation.X)
+        return _is_oriented_in(axis, Axis.X)
 
     def is_y(self):
         """Return whether or not this axis is a Y axis.
@@ -304,7 +304,7 @@ class AxisModel(BaseModel):
         :rtype: bool
         """
         axis = self.Object
-        return _is_oriented_in(axis, AxisOrientation.Y)
+        return _is_oriented_in(axis, Axis.Y)
 
     def is_z(self):
         """Return whether or not this axis is a Z axis.
@@ -316,7 +316,7 @@ class AxisModel(BaseModel):
         :rtype: bool
         """
         axis = self.Object
-        return _is_oriented_in(axis, AxisOrientation.Z)
+        return _is_oriented_in(axis, Axis.Z)
 
     def calculate_top_of_carriage_box_for_z_axis(self):
         return (
@@ -342,9 +342,9 @@ def _is_oriented_in(axis, axis_orientation):
 
 def _get_length_property(axis_orientation):
     return {
-        AxisOrientation.X: 'XLength',
-        AxisOrientation.Y: 'YLength',
-        AxisOrientation.Z: 'ZLength',
+        Axis.X: 'XLength',
+        Axis.Y: 'YLength',
+        Axis.Z: 'ZLength',
     }[axis_orientation]
 
 
@@ -355,13 +355,13 @@ def get_placement_strategy(orientation,
                            motor_box_length):
     try:
         return {
-            AxisOrientation.X: {
+            Axis.X: {
                 Side.TOP: {
                     'rotation': Rotation(),
                     'translation': Vector()
                 }
             },
-            AxisOrientation.Y: {
+            Axis.Y: {
                 Side.LEFT: {
                     'rotation': Rotation(-90, 0, 90),
                     'translation': Vector(box_height, length, 0)
@@ -371,7 +371,7 @@ def get_placement_strategy(orientation,
                     'translation': Vector(0, length, motor_box_length)
                 }
             },
-            AxisOrientation.Z: {
+            Axis.Z: {
                 Side.FRONT: {
                     'rotation': Rotation(0, 90, 90),
                     'translation': Vector(0, box_height, length)

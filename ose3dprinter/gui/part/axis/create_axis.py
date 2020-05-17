@@ -1,5 +1,5 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 from ose3dprinter.app.model import AxisModel
 
 
@@ -7,7 +7,7 @@ def create_axis(document,
                 name,
                 length=304.80,
                 carriage_position=50,
-                orientation=AxisOrientation.X,
+                orientation=Axis.X,
                 side=Side.TOP,
                 placement=Placement(),
                 origin_translation_offset=Vector()):

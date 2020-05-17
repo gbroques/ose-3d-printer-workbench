@@ -1,7 +1,7 @@
 import unittest
 
 from ose3dprinter.app.attachment import get_default_axis_creation_kwargs
-from ose3dprinter.app.enums import AxisOrientation, Side
+from ose3dprinter.app.enums import Axis, Side
 
 from .freecad_test_case import FreeCADTestCase
 
@@ -12,7 +12,7 @@ class GetDefaultAxisCreationKwargsTest(FreeCADTestCase):
         result = get_default_axis_creation_kwargs('x')
 
         expected = {
-            'orientation': AxisOrientation.X,
+            'orientation': Axis.X,
             'side': Side.TOP
         }
 
@@ -22,7 +22,7 @@ class GetDefaultAxisCreationKwargsTest(FreeCADTestCase):
         result = get_default_axis_creation_kwargs('y')
 
         expected = {
-            'orientation': AxisOrientation.Y,
+            'orientation': Axis.Y,
             'side': Side.LEFT
         }
 
@@ -32,7 +32,7 @@ class GetDefaultAxisCreationKwargsTest(FreeCADTestCase):
         result = get_default_axis_creation_kwargs('z')
 
         expected = {
-            'orientation': AxisOrientation.Z,
+            'orientation': Axis.Z,
             'side': Side.FRONT
         }
 
