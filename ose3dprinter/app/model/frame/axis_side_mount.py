@@ -1,10 +1,10 @@
 import Part
-from FreeCAD import Vector
-from ose3dprinter.app.shape.face import make_face_from_vectors
+from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.model.axis import AxisModel
+from ose3dprinter.app.shape import place_shape
+from ose3dprinter.app.shape.face import make_face_from_vectors
 
 from .corner import Corner, is_top_corner
-from .rotate_and_translate_part import rotate_and_translate_part
 
 
 class AxisSideMount:
@@ -62,9 +62,8 @@ class AxisSideMount:
             0))
         box = box.cut(bottom_hole)
 
-        d = get_rotation_and_translation(
-            top_corner, cls.height, cls.attachment_overlap)
-        rotate_and_translate_part(box, d)
+        placement = get_placement(top_corner, cls.height, cls.attachment_overlap)
+        place_shape(box, placement)
 
         return box
 
@@ -131,41 +130,27 @@ class AxisSideMount:
         return face.extrude(Vector(cls.height, 0, 0))
 
 
-def get_rotation_and_translation(top_corner, height, attachment_overlap):
-    d = get_rotation_and_translation_by_top_corner(height, attachment_overlap)
+def get_placement(top_corner, height, attachment_overlap):
+    d = get_placement_by_top_corner(height, attachment_overlap)
     return d[top_corner]
 
 
-def get_rotation_and_translation_by_top_corner(height,
-                                               attachment_overlap):
+def get_placement_by_top_corner(height, attachment_overlap):
     return {
-        Corner.TOP_LEFT_FRONT: {
-            'rotate_args': [
-                [Vector(), Vector(0, -1, 0), 180],
-                [Vector(), Vector(0, 0, 1), 180]
-            ],
-            'translation': Vector(0, attachment_overlap, 0)
-        },
-        Corner.TOP_LEFT_REAR: {
-            'rotate_args': [
-                [Vector(), Vector(1, 0, 0), 90],
-                [Vector(), Vector(0, 1, 0), 180]
-            ],
-            'translation': Vector(height, 0, attachment_overlap)
-        },
-        Corner.TOP_RIGHT_REAR: {
-            'rotate_args': [
-                [Vector(), Vector(-1, 0, 0), 90],
-                [Vector(), Vector(0, -1, 0), 90],
-                [Vector(), Vector(0, 0, -1), 180]
-            ],
-            'translation': Vector(attachment_overlap, 0, 0)
-        },
-        Corner.TOP_RIGHT_FRONT: {
-            'rotate_args': [
-                [Vector(), Vector(0, -1, 0), 90],
-                [Vector(), Vector(-1, 0, 0), 180]
-            ],
-            'translation': Vector(0, attachment_overlap, height)
-        }
+        Corner.TOP_LEFT_FRONT: Placement(
+            Vector(0, attachment_overlap, 0),
+            Rotation(180, -180, 0)
+        ),
+        Corner.TOP_LEFT_REAR: Placement(
+            Vector(height, 0, attachment_overlap),
+            Rotation(0, 180, 90)
+        ),
+        Corner.TOP_RIGHT_REAR: Placement(
+            Vector(attachment_overlap, 0, 0),
+            Rotation(-180, -90, -90)
+        ),
+        Corner.TOP_RIGHT_FRONT: Placement(
+            Vector(0, attachment_overlap, height),
+            Rotation(0, 90, 180)
+        )
     }

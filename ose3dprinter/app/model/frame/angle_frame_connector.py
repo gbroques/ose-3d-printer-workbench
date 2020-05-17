@@ -1,12 +1,13 @@
+from functools import reduce
 from math import cos, radians, tan
 
 import Part
-from FreeCAD import Vector
+from FreeCAD import Placement, Rotation, Vector
+from ose3dprinter.app.shape import place_shape
 from ose3dprinter.app.shape.face import make_face_from_vectors
 
 from .axis_side_mount import AxisSideMount
 from .corner import Corner, is_top_corner
-from .rotate_and_translate_part import rotate_and_translate_part
 
 
 class AngleFrameConnector:
@@ -55,8 +56,8 @@ class AngleFrameConnector:
                                                                 with_set_screw,
                                                                 with_filleting)
 
-        d = get_angle_frame_connector_rotation_and_translation(corner, length)
-        rotate_and_translate_part(angle_frame_connector, d)
+        placement = get_angle_frame_connector_placement(corner, length)
+        place_shape(angle_frame_connector, placement)
 
         return angle_frame_connector
 
@@ -411,49 +412,40 @@ def make_angle_connector_corner(bracket_length, bracket_width):
     return box.cut(inner_box)
 
 
-def get_angle_frame_connector_rotation_and_translation(corner, length):
-    d = get_rotation_and_translation_by_corner(length)
+def get_angle_frame_connector_placement(corner, length):
+    d = get_placement_by_corner(length)
     return d[corner]
 
 
-def get_rotation_and_translation_by_corner(length):
+def get_placement_by_corner(length):
     return {
-        Corner.BOTTOM_LEFT_FRONT: {
-            'rotate_args': [Vector(), Vector(0, 0, 1), 0],
-            'translation': Vector()
-        },
-        Corner.BOTTOM_LEFT_REAR: {
-            'rotate_args': [Vector(), Vector(0, 0, -1), 90],
-            'translation': Vector(0, length, 0)
-        },
-        Corner.BOTTOM_RIGHT_REAR: {
-            'rotate_args': [Vector(), Vector(0, 0, 1), 180],
-            'translation': Vector(length, length, 0)
-        },
-        Corner.BOTTOM_RIGHT_FRONT: {
-            'rotate_args': [Vector(), Vector(0, 0, 1), 90],
-            'translation': Vector(length, 0, 0)
-        },
-        Corner.TOP_LEFT_FRONT: {
-            'rotate_args': [Vector(), Vector(0, 1, 0), 90],
-            'translation': Vector(0, 0, length)
-        },
-        Corner.TOP_LEFT_REAR: {
-            'rotate_args': [
-                [Vector(), Vector(0, 1, 0), 90],
-                [Vector(), Vector(0, 0, -1), 90]
-            ],
-            'translation': Vector(0, length, length)
-        },
-        Corner.TOP_RIGHT_REAR: {
-            'rotate_args': [
-                [Vector(), Vector(0, 1, 0), 180],
-                [Vector(), Vector(0, 0, 1), 90]
-            ],
-            'translation': Vector(length, length, length)
-        },
-        Corner.TOP_RIGHT_FRONT: {
-            'rotate_args': [Vector(), Vector(0, 1, 0), 180],
-            'translation': Vector(length, 0, length)
-        }
+        Corner.BOTTOM_LEFT_FRONT: Placement(),
+        Corner.BOTTOM_LEFT_REAR: Placement(
+            Vector(0, length, 0),
+            Rotation(-90, 0, 0)
+        ),
+        Corner.BOTTOM_RIGHT_REAR: Placement(
+            Vector(length, length, 0),
+            Rotation(180, 0, 0)
+        ),
+        Corner.BOTTOM_RIGHT_FRONT: Placement(
+            Vector(length, 0, 0),
+            Rotation(90, 0, 0)
+        ),
+        Corner.TOP_LEFT_FRONT: Placement(
+            Vector(0, 0, length),
+            Rotation(0, 90, 0)
+        ),
+        Corner.TOP_LEFT_REAR: Placement(
+            Vector(0, length, length),
+            Rotation(-90, 90, 0)
+        ),
+        Corner.TOP_RIGHT_REAR: Placement(
+            Vector(length, length, length),
+            Rotation(90, 180, 0)
+        ),
+        Corner.TOP_RIGHT_FRONT: Placement(
+            Vector(length, 0, length),
+            Rotation(0, 180, 0)
+        )
     }

@@ -1,11 +1,10 @@
-
 from functools import reduce
 
 import Part
-from FreeCAD import Vector
+from FreeCAD import Placement, Rotation, Vector
 
 from .angled_bar_orientation import AngledBarOrientation
-from .rotate_and_translate_part import rotate_and_translate_part
+from ose3dprinter.app.shape import place_shape
 
 
 class AngledBar:
@@ -40,8 +39,8 @@ class AngledBar:
         # removeSplitter() refines shape
         refined_angled_bar = angled_bar.removeSplitter()
 
-        d = get_angled_bar_rotation_and_translation(orientation, length, width)
-        rotate_and_translate_part(refined_angled_bar, d)
+        placement = get_angled_bar_placement(orientation, length, width)
+        place_shape(refined_angled_bar, placement)
 
         return refined_angled_bar
 
@@ -50,71 +49,59 @@ def fuse_parts(*parts):
     return reduce(lambda union, part: union.fuse(part), parts)
 
 
-def get_angled_bar_rotation_and_translation(orientation, length, width):
-    d = get_rotation_and_translation_by_orientation(length, width)
+def get_angled_bar_placement(orientation, length, width):
+    d = get_placement_by_orientation(length, width)
     return d[orientation]
 
 
-def get_rotation_and_translation_by_orientation(length, width):
+def get_placement_by_orientation(length, width):
     return {
-        AngledBarOrientation.BOTTOM_FRONT_FLAT: {
-            'rotate_args': [Vector(), Vector(0, 0, 1), 0],
-            'translation': Vector()
-        },
-        AngledBarOrientation.BOTTOM_LEFT_FLAT: {
-            'rotate_args': [Vector(), Vector(0, 0, -1), 90],
-            'translation': Vector(0, length, 0)
-        },
-        AngledBarOrientation.BOTTOM_REAR_FLAT: {
-            'rotate_args': [Vector(), Vector(0, 0, 1), 180],
-            'translation': Vector(length, width, 0)
-        },
-        AngledBarOrientation.BOTTOM_RIGHT_FLAT: {
-            'rotate_args': [Vector(), Vector(0, 0, 1), 90],
-            'translation': Vector(width, 0, 0)
-        },
-        AngledBarOrientation.TOP_FRONT_FLAT: {
-            'rotate_args': [Vector(), Vector(1, 0, 0), 270],
-            'translation': Vector(0, 0, width)
-        },
-        AngledBarOrientation.TOP_LEFT_FLAT: {
-            'rotate_args': [
-                [Vector(), Vector(0, 0, 1), 90],
-                [Vector(), Vector(0, 1, 0), 180]
-            ],
-            'translation': Vector(0, 0, width)
-        },
-        AngledBarOrientation.TOP_REAR_FLAT: {
-            'rotate_args': [Vector(), Vector(1, 0, 0), 180],
-            'translation': Vector(0, width, width)
-        },
-        AngledBarOrientation.TOP_RIGHT_FLAT: {
-            'rotate_args': [
-                [Vector(), Vector(0, 0, 1), 90],
-                [Vector(), Vector(0, -1, 0), 90]
-            ],
-            'translation': Vector(width, 0, width)
-        },
-        AngledBarOrientation.FRONT_LEFT_UPRIGHT: {
-            'rotate_args': [Vector(), Vector(0, 1, 0), 90],
-            'translation': Vector(0, 0, length)
-        },
-        AngledBarOrientation.FRONT_RIGHT_UPRIGHT: {
-            'rotate_args': [Vector(), Vector(0, -1, 0), 90],
-            'translation': Vector(width, 0, 0)
-        },
-        AngledBarOrientation.REAR_LEFT_UPRIGHT: {
-            'rotate_args': [
-                [Vector(), Vector(0, 1, 0), 90],
-                [Vector(), Vector(0, 0, -1), 90]
-            ],
-            'translation': Vector(0, width, length)
-        },
-        AngledBarOrientation.REAR_RIGHT_UPRIGHT: {
-            'rotate_args':  [
-                [Vector(), Vector(0, -1, 0), 90],
-                [Vector(), Vector(0, 0, 1), 90]
-            ],
-            'translation': Vector(width, width, 0)
-        }
+        AngledBarOrientation.BOTTOM_FRONT_FLAT: Placement(
+            Vector(),
+            Rotation()
+        ),
+        AngledBarOrientation.BOTTOM_LEFT_FLAT: Placement(
+            Vector(0, length, 0),
+            Rotation(-90, 0, 0)
+        ),
+        AngledBarOrientation.BOTTOM_REAR_FLAT: Placement(
+            Vector(length, width, 0),
+            Rotation(180, 0, 0)
+        ),
+        AngledBarOrientation.BOTTOM_RIGHT_FLAT: Placement(
+            Vector(width, 0, 0),
+            Rotation(90, 0, 0)
+        ),
+        AngledBarOrientation.TOP_FRONT_FLAT: Placement(
+            Vector(0, 0, width),
+            Rotation(0, 0, 270)
+        ),
+        AngledBarOrientation.TOP_LEFT_FLAT: Placement(
+            Vector(0, 0, width),
+            Rotation(90, 0, -180)
+        ),
+        AngledBarOrientation.TOP_REAR_FLAT: Placement(
+            Vector(0, width, width),
+            Rotation(0, 0, 180)
+        ),
+        AngledBarOrientation.TOP_RIGHT_FLAT: Placement(
+            Vector(width, 0, width),
+            Rotation(90, 0, 270)
+        ),
+        AngledBarOrientation.FRONT_LEFT_UPRIGHT: Placement(
+            Vector(0, 0, length),
+            Rotation(0, 90, 0)
+        ),
+        AngledBarOrientation.FRONT_RIGHT_UPRIGHT: Placement(
+            Vector(width, 0, 0),
+            Rotation(0, -90, 0)
+        ),
+        AngledBarOrientation.REAR_LEFT_UPRIGHT: Placement(
+            Vector(0, width, length),
+            Rotation(-90, 90, 0)
+        ),
+        AngledBarOrientation.REAR_RIGHT_UPRIGHT: Placement(
+            Vector(width, width, 0),
+            Rotation(90, -90, 0)
+        )
     }
