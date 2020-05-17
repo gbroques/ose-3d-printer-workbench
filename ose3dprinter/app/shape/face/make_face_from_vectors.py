@@ -14,6 +14,9 @@ import Part
 def make_face_from_vectors(*vectors_list):
     """Make a Face from a variable number of vector lists.
 
+    See Part::TopoShapeFacePy Class Reference:
+        https://www.freecadweb.org/api/d9/d35/classPart_1_1TopoShapeFacePy.html
+
     :raises ValueError: When there's less than three vectors in a list.
     :raises ValueError: When vectors don't form a closed wire.
     :return: A face
