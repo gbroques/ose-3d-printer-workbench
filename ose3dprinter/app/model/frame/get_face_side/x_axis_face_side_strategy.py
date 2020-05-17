@@ -1,5 +1,5 @@
 from FreeCAD import Console
-from ose3dprinter.app.enums import Side
+from ose3dprinter.app.three_dimensional_space_enums import Side
 
 from .between_bounds import between_bounds
 from .face_side_strategy import FaceSideStrategy

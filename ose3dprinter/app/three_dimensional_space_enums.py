@@ -1,3 +1,7 @@
+"""A set of enumerations relating to three-dimensional space.
+"""
+
+
 class Axis:
     X = 'x'
     Y = 'y'

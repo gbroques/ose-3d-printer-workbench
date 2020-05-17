@@ -1,5 +1,5 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.enums import Axis, Side
+from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 from ose3dprinter.app.model import AxisModel
 
 

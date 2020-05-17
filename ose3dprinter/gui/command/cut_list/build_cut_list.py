@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 import FreeCAD as App
 from FreeCAD import Console
-from ose3dprinter.app.enums import Axis
+from ose3dprinter.app.three_dimensional_space_enums import Axis
 from ose3dprinter.app.model import AxisModel, FrameModel
 from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector

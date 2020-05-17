@@ -1,6 +1,6 @@
 from FreeCAD import Vector
 from ose3dprinter.app.attachment.attachment_error import AttachmentError
-from ose3dprinter.app.enums import Axis, Side
+from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 from ose3dprinter.app.model import FrameModel
 from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
                                          is_face_parallel_to_xz_plane,

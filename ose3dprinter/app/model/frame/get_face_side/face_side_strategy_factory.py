@@ -1,4 +1,4 @@
-from ose3dprinter.app.enums import Axis
+from ose3dprinter.app.three_dimensional_space_enums import Axis
 
 from .x_axis_face_side_strategy import XAxisFaceSideStrategy
 from .y_axis_face_side_strategy import YAxisFaceSideStrategy

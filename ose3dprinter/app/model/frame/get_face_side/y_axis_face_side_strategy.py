@@ -1,5 +1,5 @@
 
-from ose3dprinter.app.enums import Side
+from ose3dprinter.app.three_dimensional_space_enums import Side
 from ose3dprinter.app.model.frame.angle_frame_connector import \
     AngleFrameConnector
 
