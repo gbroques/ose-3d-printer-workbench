@@ -17,4 +17,4 @@ class FaceSideStrategyFactory:
             return ZAxisFaceSideStrategy()
         else:
             raise ValueError(
-                'Unrecognized {} axis orientation'.format(axis_orientation))
+                'Unrecognized "{}" axis orientation.'.format(axis_orientation))
