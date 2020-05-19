@@ -4,10 +4,9 @@ import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.attachment import (AttachmentError,
                                          get_axis_frame_attachment_kwargs)
-from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
 from ose3dprinter.app.model import FrameModel
-from ose3dprinter.app.model.frame.angle_frame_connector import \
-    AngleFrameConnector
+from ose3dprinter.app.part import AngleFrameConnector
+from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 from .freecad_test_case import FreeCADTestCase
 
@@ -25,7 +24,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
         top_faces = self.frame.Proxy.get_faces_for_side(Side.TOP)
         for top_face in top_faces:
             result = get_axis_frame_attachment_kwargs(
-                self.frame, top_face, Axis.X)
+                self.frame, top_face, CoordinateAxis.X)
 
             expected = {
                 'origin_translation_offset': Vector(0.0, -0.5, 0.0),
@@ -34,7 +33,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
                     Rotation()
                 ),
                 'length_value': self.frame.Size.Value,
-                'orientation': Axis.X,
+                'orientation': CoordinateAxis.X,
                 'side': Side.TOP
             }
 
@@ -44,7 +43,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
         left_faces = self.frame.Proxy.get_faces_for_side(Side.LEFT)
         for left_face in left_faces:
             result = get_axis_frame_attachment_kwargs(
-                self.frame, left_face, Axis.Y)
+                self.frame, left_face, CoordinateAxis.Y)
             three_inches = 76.2  # in millimeters (mm)
             length = self.frame.Size.Value + three_inches
             expected = {
@@ -59,7 +58,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
                     Vector()
                 ),
                 'length_value': length,
-                'orientation': Axis.Y,
+                'orientation': CoordinateAxis.Y,
                 'side': Side.LEFT
             }
 
@@ -69,7 +68,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
         right_faces = self.frame.Proxy.get_faces_for_side(Side.RIGHT)
         for right_face in right_faces:
             result = get_axis_frame_attachment_kwargs(
-                self.frame, right_face, Axis.Y)
+                self.frame, right_face, CoordinateAxis.Y)
 
             frame_size = self.frame.Size.Value
             three_inches = 76.2  # in millimeters (mm)
@@ -86,7 +85,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
                     Vector()
                 ),
                 'length_value': length,
-                'orientation': Axis.Y,
+                'orientation': CoordinateAxis.Y,
                 'side': Side.RIGHT
             }
 
@@ -96,7 +95,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
         front_faces = self.frame.Proxy.get_faces_for_side(Side.FRONT)
         for front_face in front_faces:
             result = get_axis_frame_attachment_kwargs(
-                self.frame, front_face, Axis.Z)
+                self.frame, front_face, CoordinateAxis.Z)
 
             expected = {
                 'origin_translation_offset': Vector(-0.5, -1.0, 0.0),
@@ -106,7 +105,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
                     Vector()
                 ),
                 'length_value': self.frame.Size.Value,
-                'orientation': Axis.Z,
+                'orientation': CoordinateAxis.Z,
                 'side': Side.FRONT
             }
 
@@ -126,7 +125,7 @@ class GetAxisFrameAttachmentKwargsForFrameWithCornersTest(FreeCADTestCase):
                     Vector()
                 ),
                 'length_value': self.frame.Size.Value,
-                'orientation': Axis.Z,
+                'orientation': CoordinateAxis.Z,
                 'side': Side.REAR
             }
 

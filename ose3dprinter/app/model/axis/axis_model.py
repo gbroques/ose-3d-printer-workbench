@@ -1,11 +1,7 @@
-from math import degrees
-
-import Part
-from FreeCAD import Placement, Rotation, Vector
+from FreeCAD import Placement, Vector
 from ose3dprinter.app.model.base_model import BaseModel
-from ose3dprinter.app.shape import place_shapes
-from ose3dprinter.app.shape.edge import is_edge_parallel_to_z_axis
-from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
+from ose3dprinter.app.part import Axis
+from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
 class AxisModel(BaseModel):
@@ -16,28 +12,11 @@ class AxisModel(BaseModel):
 
     Type = 'OSEAxis'
 
-    motor_box_width = 59.5
-
-    carriage_box_width = 52
-
-    idler_box_width = 26
-    idler_box_length = 66
-
-    # Motor side, idler side, and carriage boxes share same height
-    box_height = 24
-
-    hole_radius = 3.39
-
-    # y_distance_between_holes
-    distance_between_holes = 22.44
-    x_distance_between_holes = 23.36
-    distance_between_hole_and_inner_motor_side = hole_radius + 9.2
-
     def __init__(self,
                  obj,
                  length=304.80,
                  carriage_position=50,
-                 orientation=Axis.X,
+                 orientation=CoordinateAxis.X,
                  side=Side.TOP,
                  placement=Placement(),
                  origin_translation_offset=Vector()):
@@ -48,8 +27,9 @@ class AxisModel(BaseModel):
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
-        init_args = (obj, placement, origin_translation_offset)
-        super(AxisModel, self).__init__(*init_args)
+        super(AxisModel, self).__init__(obj)
+        self.placement = placement
+        self.origin_translation_offset = origin_translation_offset
 
         # Length property
         length_tooltip = 'Length of axis corresponds to rod length.'
@@ -91,157 +71,13 @@ class AxisModel(BaseModel):
         rod_length = obj.Length.Value
         rod_radius = obj.RodDiameter.Value / 2
 
-        # Define dimensions of motor side box
-        motor_box_length = 66
-        motor_side_box_dimensions = (
-            self.motor_box_width, motor_box_length, self.box_height)
-
-        # Make motor side box
-        motor_side_box = Part.makeBox(*motor_side_box_dimensions)
-        motor_side_box_with_holes = self.cut_holes_in_motor_side_box(
-            motor_side_box, self.box_height, motor_box_length)
-
-        # Motor
-        motor_side = 37.8
-        motor_height = 39.878
-        motor_dimensions = (motor_side, motor_side, motor_height)
-
-        # Make Motor
-        motor = Part.makeBox(*motor_dimensions)
-        half_motor_box_width = self.motor_box_width / 2
-        half_motor_box_length = motor_box_length / 2
-        half_motor_side = motor_side / 2
-        motor.translate(Vector(
-            half_motor_box_width - half_motor_side,
-            half_motor_box_length - half_motor_side,
-            self.box_height
-        ))
-        motor.rotate(Vector(half_motor_box_width,
-                            half_motor_box_length, 0), Vector(0, 0, 1), 45)
-        vertical_edges = list(
-            filter(is_edge_parallel_to_z_axis, motor.Edges))
-        chamfered_motor = motor.makeChamfer(5, vertical_edges)
-
-        # Define dimensions of carriage box
-        carriage_box_length = 74
-        carriage_box_dimensions = (
-            self.carriage_box_width, carriage_box_length, self.box_height)
-
-        # Make carriage
-        carriage_box = Part.makeBox(*carriage_box_dimensions)
-        carriage_box_x = self.calculate_carriage_box_x()
-
-        carriage_box_y = -(carriage_box_length - motor_box_length) / 2
-        carriage_box.translate(Vector(carriage_box_x, carriage_box_y, 0))
-
-        # Define dimensions of idler side box
-        self.idler_box_length = 66
-        idler_side_box_dimensions = (
-            self.idler_box_width, self.idler_box_length, self.box_height)
-
-        distance_between_hole_and_idler_side = (
-            self.idler_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
-        front_cylinder = Part.makeCylinder(self.hole_radius, self.box_height)
-        rear_cylinder = front_cylinder.copy()
-        front_cylinder.translate(Vector(
-            self.idler_box_width / 2,
-            distance_between_hole_and_idler_side,
-            0
-        ))
-        rear_cylinder.translate(Vector(
-            self.idler_box_width / 2,
-            self.idler_box_length - distance_between_hole_and_idler_side,
-            0
-        ))
-
-        # Make idler
-        idler_side_box = Part.makeBox(*idler_side_box_dimensions)
-
-        idler_side_box_with_front_hole = idler_side_box.cut(front_cylinder)
-        idler_side_box_with_holes = idler_side_box_with_front_hole.cut(
-            rear_cylinder)
-
-        idler_side_box_with_holes.translate(
-            Vector(rod_length - self.idler_box_width, 0, 0))
-
-        space_between_rod_and_box_edge = 10
-        half_box_height = self.box_height / 2
-
-        rod1_y_position = self.idler_box_length - space_between_rod_and_box_edge
-
-        rod1 = Part.makeCylinder(rod_radius, rod_length)
-        rod1.rotate(Vector(0, 0, 0), Vector(0, 1, 0), 90)
-        rod1.translate(Vector(0, rod1_y_position, half_box_height))
-
-        rod2_y_position = space_between_rod_and_box_edge
-        rod2 = Part.makeCylinder(rod_radius, rod_length)
-        rod2.rotate(Vector(0, 0, 0), Vector(0, 1, 0), 90)
-        rod2.translate(Vector(0, rod2_y_position, half_box_height))
-
-        parts = [
-            motor_side_box_with_holes,
-            chamfered_motor,
-            carriage_box,
-            idler_side_box_with_holes,
-            rod1,
-            rod2
-        ]
-
-        placement = get_placement(obj.Orientation,
-                                  obj.Side,
-                                  self.box_height,
-                                  rod_length,
-                                  motor_box_length)
-        place_shapes(parts, placement)
-
-        reference_dimensions = (rod_length, motor_box_length, self.box_height)
-        self.move_parts(parts, reference_dimensions, placement.Rotation)
-
-        compound = Part.makeCompound(parts)
-        obj.Shape = compound
-
-    def cut_holes_in_motor_side_box(self,
-                                    motor_side_box,
-                                    box_height,
-                                    motor_box_length):
-        front_right_cylinder = Part.makeCylinder(self.hole_radius, box_height)
-        rear_right_cylinder = front_right_cylinder.copy()
-        front_left_cylinder = front_right_cylinder.copy()
-        rear_left_cylinder = front_right_cylinder.copy()
-
-        right_cylinder_x = self.motor_box_width - \
-            self.distance_between_hole_and_inner_motor_side
-        distance_from_hole_to_side = (
-            motor_box_length - (self.distance_between_holes + (self.hole_radius * 2))) / 2
-        front_right_cylinder.translate(Vector(
-            right_cylinder_x,
-            distance_from_hole_to_side,
-            0
-        ))
-        rear_right_cylinder.translate(Vector(
-            right_cylinder_x,
-            motor_box_length - distance_from_hole_to_side,
-            0
-        ))
-
-        left_cylinder_x = right_cylinder_x - \
-            (self.x_distance_between_holes + (self.hole_radius * 2))
-        front_left_cylinder.translate(Vector(
-            left_cylinder_x,
-            distance_from_hole_to_side,
-            0
-        ))
-        rear_left_cylinder.translate(Vector(
-            left_cylinder_x,
-            motor_box_length - distance_from_hole_to_side,
-            0
-        ))
-
-        motor_side_box = motor_side_box.cut(front_right_cylinder)
-        motor_side_box = motor_side_box.cut(rear_right_cylinder)
-        motor_side_box = motor_side_box.cut(front_left_cylinder)
-        motor_side_box_with_holes = motor_side_box.cut(rear_left_cylinder)
-        return motor_side_box_with_holes
+        obj.Shape = Axis.make(rod_length,
+                              rod_radius,
+                              obj.CarriagePosition,
+                              obj.Orientation,
+                              obj.Side,
+                              self.placement,
+                              self.origin_translation_offset)
 
     def __getstate__(self):
         return self.Type
@@ -250,32 +86,19 @@ class AxisModel(BaseModel):
         if state:
             self.Type = state
 
-    @classmethod
-    def distance_between_inner_motor_side_holes_and_outer_edge(cls):
-        return (
-            cls.motor_box_width -
-            cls.distance_between_hole_and_inner_motor_side
-        )
-
-    @classmethod
-    def distance_between_idler_side_holes_and_outer_edge(cls):
-        return cls.idler_box_width / 2
-
     def calculate_carriage_box_x(self):
         obj = self.Object
         rod_length = obj.Length.Value
         carriage_position = obj.CarriagePosition
+        return Axis.calculate_carriage_box_x(
+            rod_length, carriage_position)
 
-        available_rod_length = (
-            rod_length -
-            self.motor_box_width -
-            self.idler_box_width)
-        scale_factor = carriage_position / 100.0
+    def calculate_top_of_carriage_box_for_z_axis(self):
         return (
-            self.motor_box_width +
+            self.Object.Shape.BoundBox.ZMin +
             (
-                (available_rod_length - self.carriage_box_width) *
-                scale_factor
+                self.Object.Length.Value -
+                self.calculate_carriage_box_x()
             )
         )
 
@@ -289,7 +112,7 @@ class AxisModel(BaseModel):
         :rtype: bool
         """
         axis = self.Object
-        return _is_oriented_in(axis, Axis.X)
+        return _is_oriented_in(axis, CoordinateAxis.X)
 
     def is_y(self):
         """Return whether or not this axis is a Y axis.
@@ -301,7 +124,7 @@ class AxisModel(BaseModel):
         :rtype: bool
         """
         axis = self.Object
-        return _is_oriented_in(axis, Axis.Y)
+        return _is_oriented_in(axis, CoordinateAxis.Y)
 
     def is_z(self):
         """Return whether or not this axis is a Z axis.
@@ -313,16 +136,7 @@ class AxisModel(BaseModel):
         :rtype: bool
         """
         axis = self.Object
-        return _is_oriented_in(axis, Axis.Z)
-
-    def calculate_top_of_carriage_box_for_z_axis(self):
-        return (
-            self.Object.Shape.BoundBox.ZMin +
-            (
-                self.Object.Length.Value -
-                self.calculate_carriage_box_x()
-            )
-        )
+        return _is_oriented_in(axis, CoordinateAxis.Z)
 
 
 def _is_oriented_in(axis, axis_orientation):
@@ -339,43 +153,7 @@ def _is_oriented_in(axis, axis_orientation):
 
 def _get_length_property(axis_orientation):
     return {
-        Axis.X: 'XLength',
-        Axis.Y: 'YLength',
-        Axis.Z: 'ZLength',
+        CoordinateAxis.X: 'XLength',
+        CoordinateAxis.Y: 'YLength',
+        CoordinateAxis.Z: 'ZLength',
     }[axis_orientation]
-
-
-def get_placement(orientation,
-                  side,
-                  box_height,
-                  length,
-                  motor_box_length):
-    try:
-        return {
-            Axis.X: {
-                Side.TOP: Placement()
-            },
-            Axis.Y: {
-                Side.LEFT: Placement(
-                    Vector(box_height, length, 0),
-                    Rotation(-90, 0, 90)
-                ),
-                Side.RIGHT: Placement(
-                    Vector(0, length, motor_box_length),
-                    Rotation(-90, 0, -90)
-                )
-            },
-            Axis.Z: {
-                Side.FRONT: Placement(
-                    Vector(0, box_height, length),
-                    Rotation(0, 90, 90)
-                ),
-                Side.REAR: Placement(
-                    Vector(motor_box_length, 0, length),
-                    Rotation(0, 90, -90)
-                )
-            }
-        }[orientation][side]
-    except KeyError:
-        message = 'Invalid combination of orientation "{}" and side "{}" passed.'
-        raise ValueError(message.format(orientation, side))

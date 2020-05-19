@@ -1,6 +1,6 @@
-import Part
 from FreeCAD import Placement, Vector
 from ose3dprinter.app.model.base_model import BaseModel
+from ose3dprinter.app.part import HeatedBed
 
 
 class HeatedBedModel(BaseModel):
@@ -22,8 +22,9 @@ class HeatedBedModel(BaseModel):
         ---------
         - obj: Created with document.addObject('Part::FeaturePython', '{name}')
         """
-        init_args = (obj, placement, origin_translation_offset)
-        super(HeatedBedModel, self).__init__(*init_args)
+        super(HeatedBedModel, self).__init__(obj)
+        self.placement = placement
+        self.origin_translation_offset = origin_translation_offset
 
         # Size property
         size_tooltip = 'Size or dimension of heated bed.'
@@ -35,14 +36,8 @@ class HeatedBedModel(BaseModel):
         Called on document recompute
         """
         size = obj.Size.Value
-        dimensions = (size, size, 50.8)  # 50.8 mm = 2 inches
-        bed = Part.makeBox(*dimensions)
-
-        parts = [bed]
-        self.move_parts(parts, dimensions)
-
-        # TODO: Why does this need to be a compound to visually center heated bed?
-        obj.Shape = Part.makeCompound(parts)
+        obj.Shape = HeatedBed.make(
+            size, self.placement, self.origin_translation_offset)
 
     def __getstate__(self):
         return self.Type

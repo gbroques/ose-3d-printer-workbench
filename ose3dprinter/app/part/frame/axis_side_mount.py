@@ -1,6 +1,6 @@
 import Part
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.app.model.axis import AxisModel
+from ose3dprinter.app.part import Axis
 from ose3dprinter.app.shape import place_shape
 from ose3dprinter.app.shape.face import make_face_from_vectors
 
@@ -38,7 +38,7 @@ class AxisSideMount:
                 Corner.TOP_RIGHT_REAR))
 
         distance_from_hole_to_side = (
-            cls.height - (AxisModel.distance_between_holes + (cls.hole_radius * 2))) / 2
+            cls.height - (Axis.distance_between_holes + (cls.hole_radius * 2))) / 2
 
         if length <= cls.attachment_overlap:
             raise ValueError(
@@ -62,7 +62,8 @@ class AxisSideMount:
             0))
         box = box.cut(bottom_hole)
 
-        placement = get_placement(top_corner, cls.height, cls.attachment_overlap)
+        placement = get_placement(
+            top_corner, cls.height, cls.attachment_overlap)
         place_shape(box, placement)
 
         return box

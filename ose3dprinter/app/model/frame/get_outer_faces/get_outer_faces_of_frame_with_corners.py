@@ -1,9 +1,8 @@
 
-from .sort_faces_by_area_descending import sort_faces_by_area_descending
-
 from ose3dprinter.app.future import isclose
-from ose3dprinter.app.model.frame.angle_frame_connector import \
-    AngleFrameConnector
+from ose3dprinter.app.part import AngleFrameConnector
+
+from .sort_faces_by_area_descending import sort_faces_by_area_descending
 
 
 def get_outer_faces_of_frame_with_corners(frame_with_corners):

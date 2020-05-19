@@ -4,7 +4,7 @@ from ose3dprinter.app.model import FrameModel
 from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
                                          is_face_parallel_to_xz_plane,
                                          is_face_parallel_to_yz_plane)
-from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
+from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
 from Part import Face
 
 from .get_placement_strategy import get_placement_strategy
@@ -74,9 +74,9 @@ def _get_orientation_of_attachable_axis(face):
 
 def _get_is_face_parallel_to_plane_by_axis_orientation():
     return {
-        Axis.X: is_face_parallel_to_xy_plane,
-        Axis.Y: is_face_parallel_to_yz_plane,
-        Axis.Z: is_face_parallel_to_xz_plane
+        CoordinateAxis.X: is_face_parallel_to_xy_plane,
+        CoordinateAxis.Y: is_face_parallel_to_yz_plane,
+        CoordinateAxis.Z: is_face_parallel_to_xz_plane
     }
 
 

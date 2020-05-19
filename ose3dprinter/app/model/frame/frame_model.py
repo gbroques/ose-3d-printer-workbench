@@ -1,10 +1,9 @@
 import Part
 from FreeCAD import Placement, Vector
 from ose3dprinter.app.model.base_model import BaseModel
+from ose3dprinter.app.part import (AngledBarFrame, AngleFrameConnector,
+                                   CNCCutFrame)
 
-from .angle_frame_connector import AngleFrameConnector
-from .angled_bar_frame import AngledBarFrame
-from .cnc_cut_frame import CNCCutFrame
 from .get_face_side import get_face_side
 from .get_faces_for_side import get_faces_for_side
 from .get_outer_faces import get_outer_faces
@@ -29,8 +28,7 @@ class FrameModel(BaseModel):
                  has_corners=False,
                  placement=Placement(),
                  origin_translation_offset=Vector()):
-        init_args = (obj, placement, origin_translation_offset)
-        super(FrameModel, self).__init__(*init_args)
+        super(FrameModel, self).__init__(obj)
 
         # Size property
         size_tooltip = 'Size or dimension of cubic frame.'

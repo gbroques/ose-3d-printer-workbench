@@ -2,7 +2,7 @@
 """
 
 
-class Axis:
+class CoordinateAxis:
     X = 'x'
     Y = 'y'
     Z = 'z'

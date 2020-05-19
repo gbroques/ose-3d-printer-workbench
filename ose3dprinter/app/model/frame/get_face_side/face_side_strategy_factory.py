@@ -1,4 +1,4 @@
-from ose3dprinter.app.three_dimensional_space_enums import Axis
+from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis
 
 from .x_axis_face_side_strategy import XAxisFaceSideStrategy
 from .y_axis_face_side_strategy import YAxisFaceSideStrategy
@@ -9,11 +9,11 @@ class FaceSideStrategyFactory:
 
     @staticmethod
     def create(axis_orientation):
-        if axis_orientation == Axis.X:
+        if axis_orientation == CoordinateAxis.X:
             return XAxisFaceSideStrategy()
-        elif axis_orientation == Axis.Y:
+        elif axis_orientation == CoordinateAxis.Y:
             return YAxisFaceSideStrategy()
-        elif axis_orientation == Axis.Z:
+        elif axis_orientation == CoordinateAxis.Z:
             return ZAxisFaceSideStrategy()
         else:
             raise ValueError(

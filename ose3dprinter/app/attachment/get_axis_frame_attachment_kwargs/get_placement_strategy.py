@@ -1,7 +1,7 @@
 from FreeCAD import Console, Placement, Units, Vector
-from ose3dprinter.app.three_dimensional_space_enums import Axis, Side
-from ose3dprinter.app.model import AxisModel
 from ose3dprinter.app.model.frame.angle_frame_connector import AxisSideMount
+from ose3dprinter.app.part import Axis
+from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
 def get_placement_strategy(face_side):
@@ -39,7 +39,7 @@ def _get_placement_for_left_face_on_frame(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-1, 0, -1),
-        'orientation': Axis.Y,
+        'orientation': CoordinateAxis.Y,
         'length': frame.Size
     }
 
@@ -57,7 +57,7 @@ def _get_placement_for_left_face_on_frame_with_corners(frame_with_corners):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-1, 0, -1),
-        'orientation': Axis.Y,
+        'orientation': CoordinateAxis.Y,
         'length': _convert_value_to_quantity(length)
     }
 
@@ -72,7 +72,7 @@ def _get_placement_for_right_face_on_frame(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(0, 0, -1),
-        'orientation': Axis.Y,
+        'orientation': CoordinateAxis.Y,
         'length': frame.Size
     }
 
@@ -90,7 +90,7 @@ def _get_placement_for_right_face_on_frame_with_corners(frame_with_corners):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(0, 0, -1),
-        'orientation': Axis.Y,
+        'orientation': CoordinateAxis.Y,
         'length': _convert_value_to_quantity(length)
     }
 
@@ -98,7 +98,7 @@ def _get_placement_for_right_face_on_frame_with_corners(frame_with_corners):
 def _calculate_y_of_y_axis_for_frame_with_corners(frame_with_corners):
     return (
         frame_with_corners.Shape.BoundBox.YMin -
-        (AxisModel.idler_box_width / 2) +
+        (Axis.idler_box_width / 2) +
         AxisSideMount.distance_between_hole_and_outer_edge
     )
 
@@ -106,15 +106,15 @@ def _calculate_y_of_y_axis_for_frame_with_corners(frame_with_corners):
 def _calculate_z_of_y_axis_for_frame_with_corners(frame_with_corners):
     return (
         frame_with_corners.Shape.BoundBox.ZMax + (
-            (AxisModel.idler_box_length - AxisSideMount.height) / 2)
+            (Axis.idler_box_length - AxisSideMount.height) / 2)
     )
 
 
 def _calculate_y_axis_length_for_frame_with_corners(frame_with_corners):
     return (
         frame_with_corners.Proxy.distance_between_axis_side_mount_holes +
-        AxisModel.distance_between_inner_motor_side_holes_and_outer_edge() +
-        AxisModel.distance_between_idler_side_holes_and_outer_edge()
+        Axis.distance_between_inner_motor_side_holes_and_outer_edge() +
+        Axis.distance_between_idler_side_holes_and_outer_edge()
     )
 
 
@@ -127,7 +127,7 @@ def _get_placement_for_front_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-0.5, -1, 0),
-        'orientation': Axis.Z,
+        'orientation': CoordinateAxis.Z,
         'length': frame.Size,
         'carriage_position': 90
     }
@@ -142,7 +142,7 @@ def _get_placement_for_rear_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': Vector(-0.5, 0, 0),
-        'orientation': Axis.Z,
+        'orientation': CoordinateAxis.Z,
         'length': frame.Size,
         'carriage_position': 90
     }
@@ -155,7 +155,7 @@ def _get_placement_for_bottom_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset,
-        'orientation': Axis.X,
+        'orientation': CoordinateAxis.X,
         'length': frame.Size
     }
 
@@ -170,7 +170,7 @@ def _get_placement_for_top_face(frame):
     return {
         'placement': placement,
         'origin_translation_offset': origin_translation_offset,
-        'orientation': Axis.X,
+        'orientation': CoordinateAxis.X,
         'length': frame.Size
     }
 

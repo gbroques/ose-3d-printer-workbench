@@ -24,3 +24,4 @@ See Also:
     https://wiki.freecadweb.org/Topological_data_scripting
 """
 from .place_shape import place_shape, place_shapes
+from .move_parts import move_parts
