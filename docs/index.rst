@@ -45,6 +45,7 @@ A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://w
 
    pages/app_gui_architecture
    pages/command_registry_and_collection_pattern
+   pages/workbench_components
 
 .. toctree::
    :maxdepth: 2

@@ -1,0 +1,32 @@
+@startuml
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+
+actor User
+
+box "gui"
+participant Command
+participant "Part Creation Function"
+end box
+box "app"
+participant Model
+end box
+User -> Command: Performs action
+note over User
+Clicks toolbar button
+or selects menu option
+end note
+note over Command: Activated()
+Command -> "Part Creation Function": **active** document & name
+note over "Part Creation Function"
+Adds object to __document__ with given __name__
+end note
+"Part Creation Function" -> Model: object
+note over Model: constructor()
+Model -> "Part Creation Function"
+"Part Creation Function" -> Command
+note over Command: calls **recompute()** on document
+Command -> Model
+note over Model: execute()
+Model -> User: User sees part on screen
+@enduml

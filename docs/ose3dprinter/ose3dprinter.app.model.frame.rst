@@ -28,8 +28,6 @@ ose3dprinter.app.model.frame
 
       ose3dprinter.app.model.frame.frame_model
 
-      ose3dprinter.app.model.frame.rotate_and_translate_part
-
 
 angle_frame_connector
 ---------------------
@@ -90,14 +88,6 @@ corner
 frame_model
 -----------
 .. automodule:: ose3dprinter.app.model.frame.frame_model
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-rotate_and_translate_part
--------------------------
-.. automodule:: ose3dprinter.app.model.frame.rotate_and_translate_part
    :members:
    :undoc-members:
    :show-inheritance:

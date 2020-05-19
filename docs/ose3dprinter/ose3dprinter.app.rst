@@ -8,25 +8,14 @@ ose3dprinter.app
    ose3dprinter.app.attachment
    ose3dprinter.app.cut_list
    ose3dprinter.app.model
+   ose3dprinter.app.shape
 
 
 
 .. autosummary::
-      ose3dprinter.app.enums
-
       ose3dprinter.app.future
 
-      ose3dprinter.app.is_edge_parallel_to_axis
-
-      ose3dprinter.app.is_face_parallel_to_plane
-
-
-enums
------
-.. automodule:: ose3dprinter.app.enums
-   :members:
-   :undoc-members:
-   :show-inheritance:
+      ose3dprinter.app.three_dimensional_space_enums
 
 
 future
@@ -37,17 +26,9 @@ future
    :show-inheritance:
 
 
-is_edge_parallel_to_axis
-------------------------
-.. automodule:: ose3dprinter.app.is_edge_parallel_to_axis
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-is_face_parallel_to_plane
--------------------------
-.. automodule:: ose3dprinter.app.is_face_parallel_to_plane
+three_dimensional_space_enums
+-----------------------------
+.. automodule:: ose3dprinter.app.three_dimensional_space_enums
    :members:
    :undoc-members:
    :show-inheritance:

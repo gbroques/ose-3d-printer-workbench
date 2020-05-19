@@ -6,7 +6,7 @@ ose3dprinter.gui
    :maxdepth: 1
 
    ose3dprinter.gui.command
-   ose3dprinter.gui.cut_list
+   ose3dprinter.gui.create_cut_list_task_panel
    ose3dprinter.gui.icon
    ose3dprinter.gui.part
 

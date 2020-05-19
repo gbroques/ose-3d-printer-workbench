@@ -1,0 +1,26 @@
+@startuml
+
+package "app" {
+  folder "model" {
+      [Model]
+  }
+  folder "attachment" {
+      [Attachment Function]
+  }
+}
+
+package "gui" {
+  folder "command" {
+      [Command]
+  }
+  folder "part" {
+      [Part Creation Function]
+  }
+  folder "icon" {
+      [Icon]
+  }
+  [Command Registry]
+  [Workbench Class]
+}
+
+@enduml
