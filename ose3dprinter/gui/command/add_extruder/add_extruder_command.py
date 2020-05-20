@@ -4,8 +4,8 @@ from FreeCAD import Console
 from ose3dprinter.app.attachment import (AttachmentError,
                                          get_extruder_axis_attachment_kwargs)
 from ose3dprinter.app.model import AxisModel
+from ose3dprinter.gui.create_part import create_extruder
 from ose3dprinter.gui.icon import get_icon_path
-from ose3dprinter.gui.part import create_extruder
 from ose3dprinter.gui.selection_object import (find_face_in_selection_object,
                                                find_selection_object_by_type)
 
