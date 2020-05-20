@@ -5,7 +5,7 @@ from ose3dprinter.app.attachment import (AttachmentError,
                                          get_axis_frame_attachment_kwargs,
                                          get_default_axis_creation_kwargs)
 from ose3dprinter.app.model import FrameModel
-from ose3dprinter.gui.create_part import create_axis
+from ose3dprinter.gui.create_part_feature import create_axis
 from ose3dprinter.gui.selection_object import (find_face_in_selection_object,
                                                find_selection_object_by_type)
 

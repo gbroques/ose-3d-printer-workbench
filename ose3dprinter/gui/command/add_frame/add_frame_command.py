@@ -1,5 +1,5 @@
 import FreeCAD as App
-from ose3dprinter.gui.create_part import create_frame
+from ose3dprinter.gui.create_part_feature import create_frame
 from ose3dprinter.gui.icon import get_icon_path
 
 
