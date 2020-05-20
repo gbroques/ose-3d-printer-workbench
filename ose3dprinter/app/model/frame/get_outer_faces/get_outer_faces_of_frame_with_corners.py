@@ -1,5 +1,5 @@
 
-from ose3dprinter.app.future import isclose
+from ose3dprinter.app.future.python import isclose
 from ose3dprinter.app.part import AngleFrameConnector
 
 from .sort_faces_by_area_descending import sort_faces_by_area_descending
