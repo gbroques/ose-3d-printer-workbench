@@ -1,5 +1,5 @@
 import Part
-from ose3dprinter.app.shape import move_parts
+from osecore.app.shape import move_parts
 
 
 class HeatedBed:

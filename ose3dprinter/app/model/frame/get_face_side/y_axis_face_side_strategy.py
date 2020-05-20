@@ -1,6 +1,6 @@
 
 from ose3dprinter.app.part import AngleFrameConnector
-from ose3dprinter.app.three_dimensional_space_enums import Side
+from osecore.app.three_dimensional_space_enums import Side
 
 from .between_bounds import between_bounds
 from .face_side_strategy import FaceSideStrategy

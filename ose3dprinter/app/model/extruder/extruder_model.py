@@ -1,9 +1,9 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.model.base_model import BaseModel
 from ose3dprinter.app.part import Extruder
+from osecore.app.model import Model
 
 
-class ExtruderModel(BaseModel):
+class ExtruderModel(Model):
     """
     Encapsulates the data (i.e. topography and shape) for a Extruder,
     and is separate from the "view" or GUI representation.

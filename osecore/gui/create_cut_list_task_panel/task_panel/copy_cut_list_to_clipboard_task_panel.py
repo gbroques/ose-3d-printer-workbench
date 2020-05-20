@@ -1,7 +1,7 @@
 import FreeCADGui
 from FreeCAD import Console
-from ose3dprinter.app.cut_list import (convert_dict_list_to_wiki_list_markup,
-                                       convert_dict_list_to_wiki_table_markup)
+from osecore.app.cut_list import (convert_dict_list_to_wiki_list_markup,
+                                  convert_dict_list_to_wiki_table_markup)
 from PySide import QtGui
 
 from .cut_list_task_panel_base import CutListTaskPanelBase

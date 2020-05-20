@@ -1,8 +1,9 @@
 import Part
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.app.shape import move_parts, place_shapes
-from ose3dprinter.app.shape.edge import is_edge_parallel_to_z_axis
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
+from osecore.app.shape import move_parts, place_shapes
+from osecore.app.shape.edge import is_edge_parallel_to_z_axis
+from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
+
 
 class Axis:
     motor_box_width = 59.5

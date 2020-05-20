@@ -2,7 +2,7 @@ from functools import reduce
 
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.shape.face import make_face_from_vectors
+from osecore.app.shape.face import make_face_from_vectors
 
 
 class MainExtruderPart:

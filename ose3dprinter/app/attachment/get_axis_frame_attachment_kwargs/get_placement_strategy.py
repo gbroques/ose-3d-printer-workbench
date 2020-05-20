@@ -1,7 +1,7 @@
 from FreeCAD import Console, Placement, Units, Vector
-from ose3dprinter.app.model.frame.angle_frame_connector import AxisSideMount
+from ose3dprinter.app.part.frame.angle_frame_connector import AxisSideMount
 from ose3dprinter.app.part import Axis
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
+from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
 def get_placement_strategy(face_side):

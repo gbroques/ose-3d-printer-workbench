@@ -1,10 +1,10 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.model.base_model import BaseModel
 from ose3dprinter.app.part import Axis
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
+from osecore.app.model import Model
+from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
-class AxisModel(BaseModel):
+class AxisModel(Model):
     """
     Encapsulates the data (i.e. topography and shape) for a Axis,
     and is separate from the "view" or GUI representation.

@@ -4,7 +4,7 @@ import FreeCAD as App
 from FreeCAD import Console
 from ose3dprinter.app.model import AxisModel, FrameModel
 from ose3dprinter.app.part import AngleFrameConnector
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis
+from osecore.app.three_dimensional_space_enums import CoordinateAxis
 
 
 def build_cut_list():

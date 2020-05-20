@@ -1,6 +1,6 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Side
 from ose3dprinter.app.model import AxisModel
+from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
 def create_axis(document,

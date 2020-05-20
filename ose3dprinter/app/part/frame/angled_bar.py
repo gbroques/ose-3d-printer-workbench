@@ -2,9 +2,9 @@ from functools import reduce
 
 import Part
 from FreeCAD import Placement, Rotation, Vector
+from osecore.app.shape import place_shape
 
 from .angled_bar_orientation import AngledBarOrientation
-from ose3dprinter.app.shape import place_shape
 
 
 class AngledBar:

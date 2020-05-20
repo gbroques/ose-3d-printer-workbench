@@ -1,15 +1,14 @@
-import Part
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.model.base_model import BaseModel
 from ose3dprinter.app.part import (AngledBarFrame, AngleFrameConnector,
                                    CNCCutFrame)
+from osecore.app.model import Model
 
 from .get_face_side import get_face_side
 from .get_faces_for_side import get_faces_for_side
 from .get_outer_faces import get_outer_faces
 
 
-class FrameModel(BaseModel):
+class FrameModel(Model):
     """
     Encapsulates the data (i.e. topography and shape) for a Frame,
     and is separate from the "view" or GUI representation.

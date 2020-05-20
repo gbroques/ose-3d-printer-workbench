@@ -2,7 +2,7 @@ import os
 
 import FreeCADGui
 from FreeCAD import Console
-from ose3dprinter.app.cut_list import write_dict_list_to_csv
+from osecore.app.cut_list import write_dict_list_to_csv
 from PySide import QtGui
 
 from .cut_list_task_panel_base import CutListTaskPanelBase

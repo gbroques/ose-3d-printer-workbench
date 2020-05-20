@@ -1,5 +1,5 @@
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis
 from ose3dprinter.gui.icon import get_icon_path
+from osecore.app.three_dimensional_space_enums import CoordinateAxis
 
 from .handle_add_axis_command_activation import \
     handle_add_axis_command_activation

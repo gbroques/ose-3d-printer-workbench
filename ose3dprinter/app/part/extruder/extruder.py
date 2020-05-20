@@ -2,8 +2,8 @@ from functools import reduce
 
 import Part
 from FreeCAD import Vector
-from ose3dprinter.app.shape import move_parts
-from ose3dprinter.app.shape.edge import is_edge_parallel_to_y_axis
+from osecore.app.shape import move_parts
+from osecore.app.shape.edge import is_edge_parallel_to_y_axis
 
 from .cooling_and_sensor_mount import CoolingAndSensorMount
 from .main_extruder_part import MainExtruderPart

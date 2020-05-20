@@ -1,4 +1,4 @@
-class BaseModel(object):
+class Model(object):
     """
     Base class for models that encapsulate the data (i.e. topography and shape)
     for a part, and is separate from the "view" or GUI representation.

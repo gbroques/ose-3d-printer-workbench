@@ -1,11 +1,11 @@
 import unittest
 
 import FreeCAD as App
-from ose3dprinter.app.three_dimensional_space_enums import Side
 from ose3dprinter.app.model import FrameModel
-from ose3dprinter.app.shape.face import (is_face_parallel_to_xy_plane,
-                                         is_face_parallel_to_xz_plane,
-                                         is_face_parallel_to_yz_plane)
+from osecore.app.shape.face import (is_face_parallel_to_xy_plane,
+                                    is_face_parallel_to_xz_plane,
+                                    is_face_parallel_to_yz_plane)
+from osecore.app.three_dimensional_space_enums import Side
 
 from .freecad_test_case import FreeCADTestCase
 

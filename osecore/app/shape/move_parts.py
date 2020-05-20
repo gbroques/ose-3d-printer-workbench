@@ -2,10 +2,10 @@ from math import degrees
 
 import Part
 from FreeCAD import Console, Rotation, Vector
-from ose3dprinter.app.shape.edge import (find_edges_connected_to_vertex,
-                                         is_edge_parallel_to_x_axis,
-                                         is_edge_parallel_to_y_axis,
-                                         is_edge_parallel_to_z_axis)
+from osecore.app.shape.edge import (find_edges_connected_to_vertex,
+                                    is_edge_parallel_to_x_axis,
+                                    is_edge_parallel_to_y_axis,
+                                    is_edge_parallel_to_z_axis)
 
 
 def move_parts(parts,

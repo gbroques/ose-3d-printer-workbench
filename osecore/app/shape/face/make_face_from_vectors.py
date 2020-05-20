@@ -8,7 +8,7 @@ except ImportError:
 from itertools import tee
 
 import Part
-from ose3dprinter.app.future.freecad import LineSegment
+from osecore.app.future.freecad import LineSegment
 
 
 def make_face_from_vectors(*vectors_list):

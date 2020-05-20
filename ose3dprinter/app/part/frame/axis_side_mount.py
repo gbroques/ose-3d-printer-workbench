@@ -1,8 +1,8 @@
 import Part
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.part import Axis
-from ose3dprinter.app.shape import place_shape
-from ose3dprinter.app.shape.face import make_face_from_vectors
+from osecore.app.shape import place_shape
+from osecore.app.shape.face import make_face_from_vectors
 
 from .corner import Corner, is_top_corner
 

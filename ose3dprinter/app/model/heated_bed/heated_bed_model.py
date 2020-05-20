@@ -1,9 +1,9 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.app.model.base_model import BaseModel
 from ose3dprinter.app.part import HeatedBed
+from osecore.app.model import Model
 
 
-class HeatedBedModel(BaseModel):
+class HeatedBedModel(Model):
     """
     Encapsulates the data (i.e. topography and shape) for a Heated Bed,
     and is separate from the "view" or GUI representation.

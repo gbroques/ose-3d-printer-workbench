@@ -1,4 +1,5 @@
-from ose3dprinter.app.three_dimensional_space_enums import CoordinateAxis, Plane, Side
+from osecore.app.three_dimensional_space_enums import (CoordinateAxis, Plane,
+                                                       Side)
 
 from .filter_faces_parallel_to_plane import filter_faces_parallel_to_plane
 

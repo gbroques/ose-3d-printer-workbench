@@ -1,5 +1,5 @@
-from ose3dprinter.app.cut_list import (convert_cut_list_to_ordered_dicts,
-                                       merge_cut_list_items_by_length)
+from osecore.app.cut_list import (convert_cut_list_to_ordered_dicts,
+                                  merge_cut_list_items_by_length)
 
 from .cut_list_task_type import CutListTaskType
 from .task_panel import (CopyCutListToClipboardTaskPanel,
