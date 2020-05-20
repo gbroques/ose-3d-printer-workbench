@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 import Part
 from FreeCAD import Console
-from ose3dprinter.app.future import ABC
+from ose3dprinter.app.future.python import ABC
 
 
 class FaceSideStrategy(ABC):

@@ -1,4 +1,4 @@
-from ose3dprinter.app.future import isclose
+from ose3dprinter.app.future.python import isclose
 
 
 def between_bounds(value, lower_bound, upper_bound):

@@ -7,8 +7,8 @@ except ImportError:
 
 from itertools import tee
 
-import FreeCAD
 import Part
+from ose3dprinter.app.future.freecad import LineSegment
 
 
 def make_face_from_vectors(*vectors_list):
@@ -47,36 +47,3 @@ def _pair_wise(iterable):
     a, b = tee(iterable)
     next(b, None)
     return zip(a, b)
-
-
-def LineSegment(*args):
-    """Call Part.Line or Part.LineSegment with args
-    depending upon version of FreeCAD.
-
-    In FreeCAD 0.16 Part.Line is used,
-    for FreeCAD 0.17 Part.LineSegment has to be used.
-
-    TODO: Should this be moved to a freecad_future module?
-
-    .. seealso::
-        https://www.freecadweb.org/wiki/Topological_data_scripting#Line
-
-    :return: Part.Line or Part.LineSegment
-    :rtype: Part.Line or Part.LineSegment
-    """
-    freecad_version = get_freecad_version()
-    if freecad_version <= 16:
-        return Part.Line(*args)
-    else:
-        return Part.LineSegment(*args)
-
-
-def get_freecad_version():
-    """Get FreeCAD Version as an integer.
-
-    TODO: Should this be moved to a freecad_future module?
-
-    :return: FreeCAD minor version (e.g. 16, 17, 18)
-    :rtype: int
-    """
-    return int(FreeCAD.Version()[1])
