@@ -4,8 +4,8 @@ python:
 services:
     - docker
 install:
-    - docker build . -f test.Dockerfile -t ose3dprinter-test-i
-    - docker run --name ose3dprinter-test --detach ose3dprinter-test-i
+    - docker build -f test.Dockerfile https://github.com/gbroques/ose-workbench-platform.git#master -t oseworkbench-test-image
+    - docker run --name ose3dprinter-test --detach -v $(pwd):/var/app oseworkbench-test-image
 script:
     - docker exec -it ose3dprinter-test pytest --cov ose3dprinter/app test/
 after_success:
