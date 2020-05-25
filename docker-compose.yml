@@ -3,18 +3,18 @@ services:
   test:
     container_name: ose3dprinter-test
     image: oseworkbench-test-image
-    build: 
-      context: https://github.com/gbroques/ose-workbench-platform.git#master
+    build:
+      context: https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a5
       dockerfile: test.Dockerfile
     volumes:
-      -  ./:/var/app
+      - ./:/var/app
     network_mode: bridge
   docs:
     container_name: ose3dprinter-docs
     image: oseworkbench-docs-image
     build:
-      context: https://github.com/gbroques/ose-workbench-platform.git#master
+      context: https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a5
       dockerfile: docs.Dockerfile
     volumes:
-      -  ./:/var/app
+      - ./:/var/app
     network_mode: bridge
