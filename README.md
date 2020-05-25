@@ -65,7 +65,7 @@ The `-d` flag or "detached mode" is to run the container in the background.
 ### Make Documentation
 Run from root of repository:
 
-    docker exec -it ose3dprinter-docs make html
+    docker exec --workdir /var/app/docs -it ose3dprinter-docs make html
 
 ### Update Property Tables
 
@@ -87,13 +87,11 @@ Run from root of repository:
 The `-d` flag or "detached mode" is to run the container in the background.
 
 ### Run Tests
-Run from root of repository:
+Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
 
-    docker exec -it ose3dprinter-test pytest test/
+To run all tests, run:
 
-A shell script for the above command has been included for convenience:
-
-    ./run_tests.sh
+    osewb test
 
 To generate coverage data in `.coverage`, run:
 
