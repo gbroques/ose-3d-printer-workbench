@@ -6,14 +6,25 @@
 
 # -- Path setup --------------------------------------------------------------
 
+import json
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 import os
 import sys
 
+from osewb.docs import conf
+
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
+
+# Shared base configuration for OSE workbench documentation.
+# https://github.com/gbroques/ose-workbench-platform/blob/master/osewb/docs/conf.py
+print("============================================")
+print("             SPHINX BASE CONFIG             ")
+print("============================================")
+print(json.dumps(conf, indent=4))
+print("============================================")
 
 
 def run_apidoc(app):
@@ -49,14 +60,7 @@ release = '0.1.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.apidoc',
-    'sphinx.ext.autosummary',
-    # Helps with having many external links that point to the OSE Wiki.
-    # https://www.sphinx-doc.org/en/master/usage/extensions/extlinks.html
-    'sphinx.ext.extlinks'
-]
+extensions = conf['extensions']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -69,22 +73,17 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # A boolean that decides whether module names are prepended to all object names
 # (for object types where a “module” of some kind is defined),
 # e.g. for py:function directives. Default is True.
-add_module_names = False
+add_module_names = conf['add_module_names']
 
 # -- Auto-doc Options --------------------------------------------------------
-autodoc_mock_imports = [
-    'FreeCAD',
-    'FreeCADGui',
-    'Part',
-    'PySide'
-]
+autodoc_mock_imports = conf['ext']['autodoc']['autodoc_mock_imports']
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = conf['html_theme']
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -93,12 +92,9 @@ html_static_path = ['_static']
 
 html_context = {
     'css_files': [
-        '_static/theme_overrides.css',  # overrides for wide tables in RTD theme
-    ],
+        # overrides for wide tables in RTD theme
+        '_static/theme_overrides.css'
+    ]
 }
 
-extlinks = {
-    'osewikipage': (
-        'https://wiki.opensourceecology.org/wiki/%s', ''
-    )
-}
+extlinks = conf['ext']['extlinks']['extlinks']

@@ -63,9 +63,11 @@ Run from root of repository:
 The `-d` flag or "detached mode" is to run the container in the background.
 
 ### Make Documentation
-Run from root of repository:
+Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
 
-    docker exec --workdir /var/app/docs -it ose3dprinter-docs make html
+To make the documentation, run:
+
+    osewb docs
 
 ### Update Property Tables
 
