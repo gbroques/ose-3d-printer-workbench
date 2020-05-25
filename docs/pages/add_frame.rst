@@ -13,7 +13,7 @@ You can use this to begin designing a :osewikipage:`D3D Pro` printer of any size
 Custom Properties
 -----------------
 .. csv-table::
-   :file: FrameModelPropertyTable.csv
+   :file: ../property_table/FrameModelPropertyTable.csv
    :header-rows: 1
 
 Attaching Axes to the Frame

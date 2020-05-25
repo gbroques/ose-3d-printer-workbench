@@ -1,4 +1,4 @@
-# OSE 3D Printer FreeCAD Workbench
+# OSE 3D Printer Workbench
 [![Build Status](https://travis-ci.org/gbroques/ose-3d-printer-workbench.svg?branch=master)](https://travis-ci.org/gbroques/ose-3d-printer-workbench) [![Documentation Status](https://readthedocs.org/projects/ose-3d-printer-workbench/badge/?version=latest)](https://ose-3d-printer-workbench.readthedocs.io/en/latest/?badge=latest)
  [![Coverage Status](https://coveralls.io/repos/github/gbroques/ose-3d-printer-workbench/badge.svg)](https://coveralls.io/github/gbroques/ose-3d-printer-workbench)
 
@@ -10,7 +10,6 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
   * [FreeCAD 17+](#freecad-17+)
   * [FreeCAD 16](#freecad-16)
 * [Documentation](#documentation)
-* [Tests](#tests)
 * [Contributing](#contributing)
 * [License](#license)
 * [Limitations](#limitations)
@@ -49,59 +48,6 @@ Additionally, there are installation walk-through videos on YouTube featuring in
 Documentation is located within the `/docs` directory of this repository, and hosted at the following URL with [Read the Docs](https://readthedocs.org/):
 
 https://ose-3d-printer-workbench.readthedocs.io/en/latest/
-
-To simplify execution, we use Docker to create a virtualized environment with the requisite dependencies for generating documentation in Python.
-
-### Pre-Requisites
-Install Docker and [Docker Compose](https://docs.docker.com/compose/install/).
-
-### Build & Run the Docs Container
-Run from root of repository:
-
-    docker-compose up -d
-
-The `-d` flag or "detached mode" is to run the container in the background.
-
-### Make Documentation
-Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
-
-To make the documentation, run:
-
-    osewb docs
-
-### Update Property Tables
-
-    docker exec -it ose3dprinter-test python docs/generate_property_tables.py
-
-## Tests
-Unit tests are located within the `/test` directory of this repository.
-
-To simplify execution, we use Docker to create a virtualized FreeCAD 0.16 environment with the requisite dependencies for running unit tests in Python with features like [coverage reports](https://en.wikipedia.org/wiki/Code_coverage).
-
-### Pre-Requisites
-Install Docker and [Docker Compose](https://docs.docker.com/compose/install/).
-
-### Build & Run the Test Container
-Run from root of repository:
-
-    docker-compose up -d
-
-The `-d` flag or "detached mode" is to run the container in the background.
-
-### Run Tests
-Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
-
-To run all tests, run:
-
-    osewb test
-
-To generate coverage data in `.coverage`, run:
-
-    docker exec -it ose3dprinter-test pytest --cov ose3dprinter/app test/
-
-To generate a coverage report from the coverage data in `htmlcov/`, run:
-
-    docker exec -it ose3dprinter-test coverage html
 
 ## Contributing
 

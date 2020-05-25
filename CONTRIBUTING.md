@@ -3,6 +3,9 @@ The following sections are meant as contributing *guidelines*, or **best-practic
 
 Are you a potential first-time contributor? Look for issues tagged with <a href="https://github.com/gbroques/ose-3d-printer-workbench/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22" style="height: 20px; padding: .15em 4px; font-weight: 600; line-height: 15px; border-radius: 2px; box-shadow: inset 0 -1px 0 rgba(27,31,35,.12); font-size: 12px;background-color: #7057ff; color: white">good first issue</a>.
 
+## Pre-Requisites
+Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
+
 ## Code Style Guide
 Code should follow the official [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/).
 
@@ -13,14 +16,18 @@ It's expected that you fix any changes you make that break existing tests.
 
 Pull requests will not be merged if tests are failing.
 
-We currently don't have end-to-end or integration tests, but are interested in exploring these in the future.
+To execute all unit tests, run:
+
+    osewb test
 
 ## Documentation
 Improving the docstring on packages, modules, classes, functions, and other symbols throughout the codebase is encouraged.
 
 We use the [Sphinx docstring format](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html) which is the standard docstring format used with [Sphinx](https://www.sphinx-doc.org/en/master/).
 
-For details on building the docs, see the [README](./README.md) and [docs/README](./docs/README.rst).
+To build the docs, run:
+
+    osewb docs
 
 ## Philosophy
 We generally subscribe to the philosophy provided by [The Zen of Python](https://www.python.org/dev/peps/pep-0020/).

@@ -25,7 +25,7 @@ There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universa
 Custom Properties
 -----------------
 .. csv-table::
-   :file: AxisModelPropertyTable.csv
+   :file: ../property_table/AxisModelPropertyTable.csv
    :header-rows: 1
 
 Attaching Axes to the Frame
