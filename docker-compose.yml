@@ -4,7 +4,7 @@ services:
     container_name: ose3dprinter-test
     image: oseworkbench-test-image
     build:
-      context: https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a6
+      context: https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a7
       dockerfile: test.Dockerfile
     volumes:
       - ./:/var/app
@@ -13,7 +13,7 @@ services:
     container_name: ose3dprinter-docs
     image: oseworkbench-docs-image
     build:
-      context: https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a6
+      context: https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a7
       dockerfile: docs.Dockerfile
     volumes:
       - ./:/var/app
