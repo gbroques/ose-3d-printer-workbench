@@ -6,6 +6,8 @@ Are you a potential first-time contributor? Look for issues tagged with <a href=
 ## Pre-Requisites
 Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
 
+    pip install ose-workbench-platform==0.1.0a9
+
 ## Code Style Guide
 Code should follow the official [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/).
 
