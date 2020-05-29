@@ -58,3 +58,20 @@ If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 ```
+
+## Upgrading OSE Workbench Platform
+There's three references to the version of `ose-workbench-platform` that this workbench depends on.
+
+When updating this version, ensure you update **ALL** references.
+
+1. Inside `.travis.yml`:
+
+>     - docker build -t ose-workbench-platform https://github.com/gbroques/ose-workbench-platform.git#<version>:osewb
+
+2. Inside `docs/requirements.txt`:
+
+>     ose-workbench-platform==<version>
+
+3. Under [Pre-Requisites](#pre-requisites) in this document:
+
+>     pip install ose-workbench-platform==<version>
