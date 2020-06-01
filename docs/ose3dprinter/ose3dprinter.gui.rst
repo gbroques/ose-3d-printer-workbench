@@ -6,8 +6,8 @@ ose3dprinter.gui
    :maxdepth: 1
 
    ose3dprinter.gui.command
-   ose3dprinter.gui.create_part_feature
    ose3dprinter.gui.icon
+   ose3dprinter.gui.part_feature
 
 
 
