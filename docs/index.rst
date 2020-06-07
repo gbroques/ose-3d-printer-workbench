@@ -16,6 +16,8 @@
 
 A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://www.opensourceecology.org/>`_ for `Distributive Enterprise <https://wiki.opensourceecology.org/wiki/Distributive_Enterprise>`_.
 
+For more information on codebase conventions and patterns, see the `OSE Workbench Platform <https://ose-workbench-platform.readthedocs.io/en/latest/>`_.
+
 .. toctree::
    :caption: Main Toolbar
    :maxdepth: 1
@@ -24,7 +26,6 @@ A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://w
    pages/add_axis
    pages/add_heated_bed
    pages/add_extruder
-
 
 .. toctree::
    :caption: Main Menu
@@ -40,15 +41,8 @@ A FreeCAD workbench for designing 3D printers by `Open Source Ecology <https://w
    pages/including_move_and_rotate_tools
 
 .. toctree::
-   :caption: Codebase Conventions & Patterns
-   :maxdepth: 1
-
-   pages/app_gui_architecture
-   pages/command_registry_and_collection_pattern
-
-.. toctree::
    :maxdepth: 2
-   :caption: OSE 3D Printer Package
+   :caption: Base Package
 
    ose3dprinter/ose3dprinter
 
