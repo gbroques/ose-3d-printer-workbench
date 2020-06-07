@@ -13,9 +13,6 @@ class Axis:
     idler_box_width = 26
     idler_box_length = 66
 
-    # Motor side, idler side, and carriage boxes share same height
-    box_height = 24
-
     hole_radius = 3.39
 
     # y_distance_between_holes
@@ -25,22 +22,25 @@ class Axis:
 
     @classmethod
     def make(cls,
-             rod_length,
-             rod_radius,
-             carriage_position,
-             orientation,
-             side,
-             initial_placement,
-             origin_translation_offset):
+             rod_length: float,
+             rod_radius: float,
+             carriage_position: int,
+             orientation: str,
+             side: str,
+             initial_placement: Placement,
+             origin_translation_offset: Vector) -> 'Part.Compound':
+        # Motor side, idler side, and carriage boxes share same height
+        box_height = 24
+
         # Define dimensions of motor side box
         motor_box_length = 66
         motor_side_box_dimensions = (
-            cls.motor_box_width, motor_box_length, cls.box_height)
+            cls.motor_box_width, motor_box_length, box_height)
 
         # Make motor side box
         motor_side_box = Part.makeBox(*motor_side_box_dimensions)
         motor_side_box_with_holes = cls.cut_holes_in_motor_side_box(
-            motor_side_box, cls.box_height, motor_box_length)
+            motor_side_box, box_height, motor_box_length)
 
         # Motor
         motor_side = 37.8
@@ -55,7 +55,7 @@ class Axis:
         motor.translate(Vector(
             half_motor_box_width - half_motor_side,
             half_motor_box_length - half_motor_side,
-            cls.box_height
+            box_height
         ))
         motor.rotate(Vector(half_motor_box_width,
                             half_motor_box_length, 0), Vector(0, 0, 1), 45)
@@ -66,7 +66,7 @@ class Axis:
         # Define dimensions of carriage box
         carriage_box_length = 74
         carriage_box_dimensions = (
-            cls.carriage_box_width, carriage_box_length, cls.box_height)
+            cls.carriage_box_width, carriage_box_length, box_height)
 
         # Make carriage
         carriage_box = Part.makeBox(*carriage_box_dimensions)
@@ -78,11 +78,11 @@ class Axis:
 
         # Define dimensions of idler side box
         idler_side_box_dimensions = (
-            cls.idler_box_width, cls.idler_box_length, cls.box_height)
+            cls.idler_box_width, cls.idler_box_length, box_height)
 
         distance_between_hole_and_idler_side = (
             cls.idler_box_length - (cls.distance_between_holes + (cls.hole_radius * 2))) / 2
-        front_cylinder = Part.makeCylinder(cls.hole_radius, cls.box_height)
+        front_cylinder = Part.makeCylinder(cls.hole_radius, box_height)
         rear_cylinder = front_cylinder.copy()
         front_cylinder.translate(Vector(
             cls.idler_box_width / 2,
@@ -106,7 +106,7 @@ class Axis:
             Vector(rod_length - cls.idler_box_width, 0, 0))
 
         space_between_rod_and_box_edge = 10
-        half_box_height = cls.box_height / 2
+        half_box_height = box_height / 2
 
         rod1_y_position = cls.idler_box_length - space_between_rod_and_box_edge
 
@@ -130,12 +130,12 @@ class Axis:
 
         placement = get_placement(orientation,
                                   side,
-                                  cls.box_height,
+                                  box_height,
                                   rod_length,
                                   motor_box_length)
         place_shapes(parts, placement)
 
-        reference_dimensions = (rod_length, motor_box_length, cls.box_height)
+        reference_dimensions = (rod_length, motor_box_length, box_height)
         move_parts(parts,
                    initial_placement,
                    origin_translation_offset,

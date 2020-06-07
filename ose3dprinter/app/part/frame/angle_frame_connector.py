@@ -164,9 +164,13 @@ def make_tri_bracket(width,
 
     inner_vectors = get_inner_points(width, thickness)
 
-    face = make_face_from_vectors(outer_vectors, inner_vectors)
+    inner_face = make_face_from_vectors(inner_vectors)
+    outer_face = make_face_from_vectors(outer_vectors)
 
-    bracket = face.extrude(Vector(0, 0, height))
+    inner_solid = inner_face.extrude(Vector(0, 0, height))
+    outer_solid = outer_face.extrude(Vector(0, 0, height))
+
+    bracket = outer_solid.cut(inner_solid)
 
     if with_set_screw:
         bracket = cut_screw_screw(bracket,

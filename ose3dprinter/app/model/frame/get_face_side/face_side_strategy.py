@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 import Part
 from FreeCAD import Console
-from osecore.app.future.python import ABC
+from abc import ABC
 
 
 class FaceSideStrategy(ABC):

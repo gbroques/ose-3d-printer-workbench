@@ -1,7 +1,7 @@
 from PySide import QtCore, QtGui
 
 
-class CutListTaskPanelBase(object):
+class CutListTaskPanelBase:
     """Base class for cut list task panels.
 
     Handles building cut list table and initializing layout.

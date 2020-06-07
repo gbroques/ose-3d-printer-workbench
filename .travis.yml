@@ -1,12 +1,27 @@
 language: python
 python:
-  - '2.7'
+  - '3.6'
 services:
     - docker
 install:
-    - docker build -t ose-workbench-platform https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a9:osewb
-    - docker run --name ose3dprinter --detach --volume $(pwd):/var/app ose-workbench-platform
+    - >
+      docker build --tag ose-workbench-platform
+      --build-arg USER=$USER
+      --build-arg UID=$(id -u)
+      --build-arg GID=$(id -g)
+      https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a14:osewb
+    - >
+      docker run --name ose3dprinter
+      --detach
+      --volume $(pwd):/var/app
+      ose-workbench-platform
 script:
     - docker exec -it ose3dprinter pytest --cov ose3dprinter/app test/
 after_success:
-    - docker exec -e TRAVIS="$TRAVIS" -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" -e TRAVIS_PULL_REQUEST="$TRAVIS_PULL_REQUEST" ose3dprinter coveralls
+    - >
+      docker exec
+      -e TRAVIS="$TRAVIS"
+      -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID"
+      -e TRAVIS_BRANCH="$TRAVIS_BRANCH"
+      -e TRAVIS_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
+      ose3dprinter coveralls

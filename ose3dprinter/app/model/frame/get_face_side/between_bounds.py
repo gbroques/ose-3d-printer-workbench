@@ -1,4 +1,4 @@
-from osecore.app.future.python import isclose
+from math import isclose
 
 
 def between_bounds(value, lower_bound, upper_bound):

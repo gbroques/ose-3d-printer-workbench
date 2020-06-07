@@ -1,5 +1,6 @@
 
-from osecore.app.future.python import isclose
+from math import isclose
+
 from ose3dprinter.app.part import AngleFrameConnector
 
 from .sort_faces_by_area_descending import sort_faces_by_area_descending
