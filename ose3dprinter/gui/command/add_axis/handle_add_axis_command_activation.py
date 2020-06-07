@@ -5,9 +5,9 @@ from ose3dprinter.app.attachment import (get_axis_frame_attachment_kwargs,
                                          get_default_axis_creation_kwargs)
 from ose3dprinter.app.model import FrameModel
 from ose3dprinter.gui.part_feature import create_axis
-from osecore.app.attachment_error import AttachmentError
-from osecore.gui.selection_object import (find_face_in_selection_object,
-                                          find_selection_object_by_type)
+from osecore.app.attachment import AttachmentError
+from osecore.gui.selection import (find_face_in_selection_object,
+                                   find_selection_object_by_type)
 
 
 def handle_add_axis_command_activation(axis_orientation):

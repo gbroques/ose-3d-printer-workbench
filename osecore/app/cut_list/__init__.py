@@ -1,3 +1,5 @@
+"""Package for code relating to building a cut list.
+"""
 from .convert_cut_list_to_ordered_dicts import \
     convert_cut_list_to_ordered_dicts
 from .convert_dict_list_to_wiki_list_markup import \

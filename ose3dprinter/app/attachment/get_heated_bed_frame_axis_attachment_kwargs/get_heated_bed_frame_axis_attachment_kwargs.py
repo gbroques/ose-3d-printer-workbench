@@ -1,6 +1,6 @@
 from FreeCAD import Placement, Rotation, Vector
 from ose3dprinter.app.model import AxisModel, FrameModel
-from osecore.app.attachment_error import AttachmentError
+from osecore.app.attachment import AttachmentError
 
 
 def get_heated_bed_frame_axis_attachment_kwargs(frame, axis):

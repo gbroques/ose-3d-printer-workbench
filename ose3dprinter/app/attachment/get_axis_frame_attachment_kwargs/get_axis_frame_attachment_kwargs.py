@@ -1,6 +1,6 @@
 from FreeCAD import Vector
 from ose3dprinter.app.model import FrameModel
-from osecore.app.attachment_error import AttachmentError
+from osecore.app.attachment import AttachmentError
 from osecore.app.shape.face import (is_face_parallel_to_xy_plane,
                                     is_face_parallel_to_xz_plane,
                                     is_face_parallel_to_yz_plane)
