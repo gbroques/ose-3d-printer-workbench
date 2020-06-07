@@ -1,10 +1,10 @@
 
 ose3dprinter.app.model.axis
 ===========================
-
-
-.. autosummary::
-      ose3dprinter.app.model.axis.axis_model
+.. automodule:: ose3dprinter.app.model.axis
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 axis_model

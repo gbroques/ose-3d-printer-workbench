@@ -20,11 +20,9 @@ class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
         """
         Executed when FreeCAD starts
         """
-        from importlib import import_module
-        ose_3d_printer = import_module(
-            '.OSE-3D-Printer', package='ose3dprinter.gui')
+        import ose3dprinter.gui.OSE_3D_Printer as registry
 
-        main_toolbar, main_menu = ose_3d_printer.register_commands()
+        main_toolbar, main_menu = registry.register_commands()
 
         self.appendToolbar('OSE 3D Printer', main_toolbar)
         self.appendMenu('OSE 3D Printer', main_menu)

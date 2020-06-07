@@ -1,3 +1,5 @@
+"""Command Registry Module
+"""
 import FreeCADGui as Gui
 
 from .command.add_axis import AddXAxisCommand, AddYAxisCommand, AddZAxisCommand
@@ -8,7 +10,7 @@ from .command.cut_list import (CopyCutListToClipboardCommand,
                                SaveCutListAsCsvCommand)
 from .command.make_angle_frame_connector import MakeAngleFrameConnectorCommand
 
-#: Command Namespace: Must be unique to all FreeCAD workbenches.
+#: Command Namespace
 command_namespace = 'OSE3DP'
 
 
@@ -17,18 +19,18 @@ def register_commands():
     Register all workbench commands,
     and associate them to toolbars, menus, sub-menus, and context menu.
     """
-    add_frame_key = register(AddFrameCommand.NAME, AddFrameCommand())
-    add_x_axis_key = register(AddXAxisCommand.NAME, AddXAxisCommand())
-    add_y_axis_key = register(AddYAxisCommand.NAME, AddYAxisCommand())
-    add_z_axis_key = register(AddZAxisCommand.NAME, AddZAxisCommand())
-    add_heated_bed_key = register(
+    add_frame_key = _register(AddFrameCommand.NAME, AddFrameCommand())
+    add_x_axis_key = _register(AddXAxisCommand.NAME, AddXAxisCommand())
+    add_y_axis_key = _register(AddYAxisCommand.NAME, AddYAxisCommand())
+    add_z_axis_key = _register(AddZAxisCommand.NAME, AddZAxisCommand())
+    add_heated_bed_key = _register(
         AddHeatedBedCommand.NAME, AddHeatedBedCommand())
-    add_extruder_key = register(AddExtruderCommand.NAME, AddExtruderCommand())
-    copy_cut_list_to_clipboard_key = register(
+    add_extruder_key = _register(AddExtruderCommand.NAME, AddExtruderCommand())
+    copy_cut_list_to_clipboard_key = _register(
         CopyCutListToClipboardCommand.NAME, CopyCutListToClipboardCommand())
-    save_cut_list_as_csv_key = register(
+    save_cut_list_as_csv_key = _register(
         SaveCutListAsCsvCommand.NAME, SaveCutListAsCsvCommand())
-    make_angle_frame_connector_key = register(
+    make_angle_frame_connector_key = _register(
         MakeAngleFrameConnectorCommand.NAME, MakeAngleFrameConnectorCommand())
 
     #: Main Toolbar Commands
@@ -50,16 +52,16 @@ def register_commands():
     return main_toolbar_commands, main_menu_commands
 
 
-def register(name, command):
+def _register(name, command):
     """Register a command via Gui.addCommand.
 
     FreeCAD uses the filename where Gui.addCommand is executed as a category
     to group commands together in it's UI.
     """
-    key = from_command_name_to_key(name)
+    key = _from_command_name_to_key(name)
     Gui.addCommand(key, command)
     return key
 
 
-def from_command_name_to_key(command_name):
+def _from_command_name_to_key(command_name):
     return '{}_{}'.format(command_namespace, command_name)

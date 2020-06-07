@@ -1,22 +1,10 @@
 
 ose3dprinter.app.part.frame
 ===========================
-
-
-.. autosummary::
-      ose3dprinter.app.part.frame.angle_frame_connector
-
-      ose3dprinter.app.part.frame.angled_bar
-
-      ose3dprinter.app.part.frame.angled_bar_frame
-
-      ose3dprinter.app.part.frame.angled_bar_orientation
-
-      ose3dprinter.app.part.frame.axis_side_mount
-
-      ose3dprinter.app.part.frame.cnc_cut_frame
-
-      ose3dprinter.app.part.frame.corner
+.. automodule:: ose3dprinter.app.part.frame
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 angle_frame_connector

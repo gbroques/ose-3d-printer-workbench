@@ -1,16 +1,10 @@
 
 ose3dprinter.app.model.frame.get_outer_faces
 ============================================
-
-
-.. autosummary::
-      ose3dprinter.app.model.frame.get_outer_faces.get_outer_faces
-
-      ose3dprinter.app.model.frame.get_outer_faces.get_outer_faces_of_cnc_cut_frame
-
-      ose3dprinter.app.model.frame.get_outer_faces.get_outer_faces_of_frame_with_corners
-
-      ose3dprinter.app.model.frame.get_outer_faces.sort_faces_by_area_descending
+.. automodule:: ose3dprinter.app.model.frame.get_outer_faces
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 get_outer_faces

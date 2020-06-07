@@ -1,14 +1,10 @@
 
 ose3dprinter.app.attachment.get_axis_frame_attachment_kwargs
 ============================================================
-
-
-.. autosummary::
-      ose3dprinter.app.attachment.get_axis_frame_attachment_kwargs.get_axis_frame_attachment_kwargs
-
-      ose3dprinter.app.attachment.get_axis_frame_attachment_kwargs.get_default_axis_creation_kwargs
-
-      ose3dprinter.app.attachment.get_axis_frame_attachment_kwargs.get_placement_strategy
+.. automodule:: ose3dprinter.app.attachment.get_axis_frame_attachment_kwargs
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 get_axis_frame_attachment_kwargs

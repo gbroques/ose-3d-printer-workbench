@@ -1,10 +1,10 @@
 
 ose3dprinter.gui.part_feature.axis
 ==================================
-
-
-.. autosummary::
-      ose3dprinter.gui.part_feature.axis.create_axis
+.. automodule:: ose3dprinter.gui.part_feature.axis
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 create_axis

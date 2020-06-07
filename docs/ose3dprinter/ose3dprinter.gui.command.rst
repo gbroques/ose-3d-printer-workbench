@@ -1,6 +1,10 @@
 
 ose3dprinter.gui.command
 ========================
+.. automodule:: ose3dprinter.gui.command
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. toctree::
    :maxdepth: 1
@@ -11,4 +15,3 @@ ose3dprinter.gui.command
    ose3dprinter.gui.command.add_heated_bed
    ose3dprinter.gui.command.cut_list
    ose3dprinter.gui.command.make_angle_frame_connector
-

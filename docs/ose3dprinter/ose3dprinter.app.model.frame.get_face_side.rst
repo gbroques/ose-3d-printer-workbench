@@ -1,22 +1,10 @@
 
 ose3dprinter.app.model.frame.get_face_side
 ==========================================
-
-
-.. autosummary::
-      ose3dprinter.app.model.frame.get_face_side.between_bounds
-
-      ose3dprinter.app.model.frame.get_face_side.face_side_strategy
-
-      ose3dprinter.app.model.frame.get_face_side.face_side_strategy_factory
-
-      ose3dprinter.app.model.frame.get_face_side.get_face_side
-
-      ose3dprinter.app.model.frame.get_face_side.x_axis_face_side_strategy
-
-      ose3dprinter.app.model.frame.get_face_side.y_axis_face_side_strategy
-
-      ose3dprinter.app.model.frame.get_face_side.z_axis_face_side_strategy
+.. automodule:: ose3dprinter.app.model.frame.get_face_side
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 between_bounds

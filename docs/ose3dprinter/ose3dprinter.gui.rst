@@ -1,6 +1,10 @@
 
 ose3dprinter.gui
 ================
+.. automodule:: ose3dprinter.gui
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. toctree::
    :maxdepth: 1
@@ -10,16 +14,9 @@ ose3dprinter.gui
    ose3dprinter.gui.part_feature
 
 
-
-.. autosummary::
-      ose3dprinter.gui.OSE-3D-Printer
-
-      ose3dprinter.gui.three_dimensional_printer_workbench
-
-
-OSE-3D-Printer
+OSE_3D_Printer
 --------------
-.. automodule:: ose3dprinter.gui.OSE-3D-Printer
+.. automodule:: ose3dprinter.gui.OSE_3D_Printer
    :members:
    :undoc-members:
    :show-inheritance:

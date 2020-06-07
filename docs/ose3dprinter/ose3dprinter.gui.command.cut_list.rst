@@ -1,16 +1,10 @@
 
 ose3dprinter.gui.command.cut_list
 =================================
-
-
-.. autosummary::
-      ose3dprinter.gui.command.cut_list.build_cut_list
-
-      ose3dprinter.gui.command.cut_list.copy_cut_list_to_clipboard_command
-
-      ose3dprinter.gui.command.cut_list.handle_cut_list_command_activation
-
-      ose3dprinter.gui.command.cut_list.save_cut_list_as_csv_command
+.. automodule:: ose3dprinter.gui.command.cut_list
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 build_cut_list

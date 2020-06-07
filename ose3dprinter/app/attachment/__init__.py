@@ -1,3 +1,5 @@
+"""Attachment functions to make 3D Printer parts appear attached to each other.
+"""
 from .get_axis_frame_attachment_kwargs import (
     get_axis_frame_attachment_kwargs, get_default_axis_creation_kwargs)
 from .get_extruder_axis_attachment_kwargs import \
