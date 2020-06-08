@@ -7,8 +7,6 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [Main Toolbar](#main-toolbar)
 * [Main Menu](#main-menu)
 * [Installation](#installation)
-  * [FreeCAD 17+](#freecad-17+)
-  * [FreeCAD 16](#freecad-16)
 * [Documentation](#documentation)
 * [Contributing](#contributing)
 * [License](#license)
@@ -29,12 +27,6 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
 * [<img alt="Make Angle Frame Connector" src="ose3dprinter/gui/icon/Std_CoordinateSystem.svg" width="32" height="32" /> Make Angle Frame Connector](https://ose-3d-printer-workbench.readthedocs.io/en/latest/pages/make_angle_frame_connector.html)
 
 ## Installation
-### FreeCAD 17+
-**WARNING:** Not yet available via the **Addon Manager**, but we plan to make it available there eventually. Until then, manually install as you would any other workbench.
-
-1. Download via the [Addon Manager](https://wiki.freecadweb.org/Std_AddonMgr).
-
-### FreeCAD 16
 1. Identify where you need to manually download and install the workbench.
     * Common locations for various operating systems can be found on "[Installing more workbenches](https://wiki.freecadweb.org/Installing_more_workbenches)" in the FreeCAD wiki.
     * You can also execute `FreeCAD.getUserAppDataDir()` within the **Python console** in FreeCAD for this location. Workbenches will always go into the `Mod` directory in the user's application data directory.
@@ -63,4 +55,4 @@ This is the same license as [FreeCAD](https://wiki.freecadweb.org/Licence) to en
 * Attaching axes to rotated frame is not supported.
 
 ## Supported FreeCAD Versions
-This workbench supports FreeCAD 16 or greater.
+This workbench supports FreeCAD 18.4.
