@@ -23,10 +23,7 @@ There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universa
    :alt: Add Z Axis Icon
 
 Custom Properties
------------------
-.. csv-table::
-   :file: ../property_table/AxisModelPropertyTable.csv
-   :header-rows: 1
+   :py:class:`~ose3dprinter.app.model.axis.axis_model.AxisModel`
 
 Attaching Axes to the Frame
 ---------------------------

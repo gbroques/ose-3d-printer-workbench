@@ -9,10 +9,8 @@
 The **Add Heated Bed** tool adds a heated bed to the **active** document.
 
 Custom Properties
------------------
-.. csv-table::
-   :file: ../property_table/HeatedBedModelPropertyTable.csv
-   :header-rows: 1
+   :py:class:`~ose3dprinter.app.model.heated_bed.heated_bed_model.HeatedBedModel`
+
 
 Centering Heated Bed to Frame & Elevating to Z Axes
 ---------------------------------------------------

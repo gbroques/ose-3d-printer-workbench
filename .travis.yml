@@ -9,7 +9,7 @@ install:
       --build-arg USER=$USER
       --build-arg UID=$(id -u)
       --build-arg GID=$(id -g)
-      https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a14:osewb
+      https://github.com/gbroques/ose-workbench-platform.git#v0.1.0a17:osewb
     - >
       docker run --name ose3dprinter
       --detach
