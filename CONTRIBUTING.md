@@ -12,7 +12,7 @@ Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platf
 Code should follow the official [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/).
 
 ## Tests
-Unit tests are encouraged for complex non-trivial logic (e.g. attaching axes to the frame), and can be found in the `test/` directory within the root of this repository.
+Unit tests are encouraged for complex non-trivial logic (e.g. attaching axes to the frame), and can be found in the `tests/` directory within the root of this repository.
 
 It's expected that you fix any changes you make that break existing tests.
 
@@ -66,7 +66,7 @@ When updating this version, ensure you update **ALL** references.
 
 1. Inside `.travis.yml`:
 
->     - docker build -t ose-workbench-platform https://github.com/gbroques/ose-workbench-platform.git#<version>:osewb
+> https://github.com/gbroques/ose-workbench-platform.git#<version>:osewb
 
 2. Inside `docs/requirements.txt`:
 
