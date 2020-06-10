@@ -1,7 +1,7 @@
 |Extruder Icon| Add Extruder
 ============================
 
-.. |Extruder Icon| image:: /../ose3dprinter/gui/icon/Extruder.svg
+.. |Extruder Icon| image:: /../freecad/ose3dprinter/icon/Extruder.svg
    :height: 32px
    :width: 32px
    :alt: Add Extruder Command

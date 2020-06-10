@@ -1,7 +1,7 @@
 |Heated Bed Icon| Add Heated Bed
 ================================
 
-.. |Heated Bed Icon| image:: /../ose3dprinter/gui/icon/HeatedBed.svg
+.. |Heated Bed Icon| image:: /../freecad/ose3dprinter/icon/HeatedBed.svg
    :height: 32px
    :width: 32px
    :alt: Add Heated Bed Command
@@ -9,7 +9,7 @@
 The **Add Heated Bed** tool adds a heated bed to the **active** document.
 
 Custom Properties
-   :py:class:`~ose3dprinter.app.model.heated_bed.heated_bed_model.HeatedBedModel`
+   :py:class:`~ose3dprinter.model.heated_bed.heated_bed_model.HeatedBedModel`
 
 
 Centering Heated Bed to Frame & Elevating to Z Axes

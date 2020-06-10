@@ -1,7 +1,7 @@
 import unittest
 
 import FreeCAD as App
-from ose3dprinter.app.model import FrameModel
+from ose3dprinter.model import FrameModel
 from osecore.app.shape.face import (is_face_parallel_to_xy_plane,
                                     is_face_parallel_to_xz_plane,
                                     is_face_parallel_to_yz_plane)

@@ -7,23 +7,23 @@ There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universa
 2. |Y Axis Icon| Add Y Axis
 3. |Z Axis Icon| Add Z Axis
 
-.. |X Axis Icon| image:: /../ose3dprinter/gui/icon/XAxis.svg
+.. |X Axis Icon| image:: /../freecad/ose3dprinter/icon/XAxis.svg
    :height: 32px
    :width: 32px
    :alt: Add X Axis Icon
 
-.. |Y Axis Icon| image:: /../ose3dprinter/gui/icon/YAxis.svg
+.. |Y Axis Icon| image:: /../freecad/ose3dprinter/icon/YAxis.svg
    :height: 32px
    :width: 32px
    :alt: Add Y Axis Icon
 
-.. |Z Axis Icon| image:: /../ose3dprinter/gui/icon/ZAxis.svg
+.. |Z Axis Icon| image:: /../freecad/ose3dprinter/icon/ZAxis.svg
    :height: 32px
    :width: 32px
    :alt: Add Z Axis Icon
 
 Custom Properties
-   :py:class:`~ose3dprinter.app.model.axis.axis_model.AxisModel`
+   :py:class:`~ose3dprinter.model.axis.axis_model.AxisModel`
 
 Attaching Axes to the Frame
 ---------------------------

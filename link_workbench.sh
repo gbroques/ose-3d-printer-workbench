@@ -9,7 +9,7 @@ set -e  # Exit shell script upon non-zero status code (error) of command
 # Create temporary python script to find user's FreeCAD Mod directory
 touch find_mod_dir.py
 echo "import FreeCAD" >> find_mod_dir.py
-echo "print App.getUserAppDataDir() + '/Mod'" >> find_mod_dir.py
+echo "print App.getUserAppDataDir() + 'Mod'" >> find_mod_dir.py
 echo "exit(0)" >> find_mod_dir.py
 
 # TODO: Check if freecad command is available before executing

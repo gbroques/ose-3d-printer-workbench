@@ -7,7 +7,7 @@
 |Frame Icon| OSE 3D Printer Workbench Documentation
 ===================================================
 
-.. |Frame Icon| image:: /../ose3dprinter/gui/icon/Frame.svg
+.. |Frame Icon| image:: /../freecad/ose3dprinter/icon/Frame.svg
    :height: 32px
    :width: 32px
    :alt: Workbench Icon
@@ -42,7 +42,7 @@ For more information on codebase conventions and patterns, see the `OSE Workbenc
 
 .. toctree::
    :maxdepth: 2
-   :caption: Base Package
+   :caption: OSE 3D Printer Package
 
    ose3dprinter/ose3dprinter
 

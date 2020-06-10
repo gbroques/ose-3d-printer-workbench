@@ -16,7 +16,7 @@ install:
       --volume $(pwd):/var/app
       ose-workbench-platform
 script:
-    - docker exec -it ose3dprinter pytest --cov ose3dprinter/app test/
+    - docker exec -it ose3dprinter pytest --cov ose3dprinter test/
 after_success:
     - >
       docker exec
