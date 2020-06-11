@@ -1,0 +1,5 @@
+name: ose-3d-printer-workbench
+channels:
+    - conda-forge
+dependencies:
+    - freecad=0.18.4
