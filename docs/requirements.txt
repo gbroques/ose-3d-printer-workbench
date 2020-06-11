@@ -1,1 +1,1 @@
-ose-workbench-platform==0.1.0a17
+ose-workbench-platform==0.1.0a18
