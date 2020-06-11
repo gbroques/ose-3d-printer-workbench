@@ -1,11 +1,5 @@
-|Frame Icon| Add Frame
-======================
-
-.. |Frame Icon| image:: /../freecad/ose3dprinter/icon/Frame.svg
-   :height: 32px
-   :width: 32px
-   :alt: Add Frame Command
-
+:fcicon:`Add Frame Command (md) <Frame.svg>` Add Frame
+======================================================
 The **Add Frame** tool adds a Frame to the **active** document.
 
 You can use this to begin designing a :osewikipage:`D3D Pro` printer of any size or axis configuration.
@@ -21,5 +15,4 @@ See `Add Axis <add_axis.html>`_ for details on how to attach axes to the frame.
 
 See Also
 --------
-
 * :osewikipage:`D3D Frame`

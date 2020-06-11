@@ -1,11 +1,5 @@
-|Angle Frame Connector Icon| Make Angle Frame Connector
-=======================================================
-
-.. |Angle Frame Connector Icon| image:: /../freecad/ose3dprinter/icon/Std_CoordinateSystem.svg
-   :height: 32px
-   :width: 32px
-   :alt: Make Angle Frame Connecto Command
-
+:fcicon:`Make Angle Frame Connecto Command (md) <Std_CoordinateSystem.svg>` Make Angle Frame Connector
+======================================================================================================
 The **Make Angle Frame Connector** tool makes a 3D-printable :osewikipage:`Angle Frame Connector` with the specified **parameters** entered from the Task Panel.
 
 .. image:: /_static/make-angle-frame-connector.png
@@ -13,7 +7,6 @@ The **Make Angle Frame Connector** tool makes a 3D-printable :osewikipage:`Angle
 
 Parameters
 ----------
-
 :Slot Width: Width of three inner slots.
 :Slot Thickness: Thickness of three inner slots.
 :Orientation: One of eight possible corners of the frame.
@@ -28,5 +21,4 @@ Parameters
 
 See Also
 --------
-
 * `FreeCAD Wiki - Export to STL or OBJ <https://wiki.freecadweb.org/Export_to_STL_or_OBJ>`_

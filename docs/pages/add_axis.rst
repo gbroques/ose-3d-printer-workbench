@@ -1,26 +1,10 @@
-|X Axis Icon| Add Axis
-==========================================
-
+:fcicon:`Add X Axis Command (md) <XAxis.svg>` Add Axis
+======================================================
 There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universal Axis` object in different orientations to the **active** document:
 
-1. |X Axis Icon| Add X Axis
-2. |Y Axis Icon| Add Y Axis
-3. |Z Axis Icon| Add Z Axis
-
-.. |X Axis Icon| image:: /../freecad/ose3dprinter/icon/XAxis.svg
-   :height: 32px
-   :width: 32px
-   :alt: Add X Axis Icon
-
-.. |Y Axis Icon| image:: /../freecad/ose3dprinter/icon/YAxis.svg
-   :height: 32px
-   :width: 32px
-   :alt: Add Y Axis Icon
-
-.. |Z Axis Icon| image:: /../freecad/ose3dprinter/icon/ZAxis.svg
-   :height: 32px
-   :width: 32px
-   :alt: Add Z Axis Icon
+1. :fcicon:`X Axis Icon (md) <XAxis.svg>` Add X Axis
+2. :fcicon:`Y Axis Icon (md) <YAxis.svg>` Add Y Axis
+3. :fcicon:`Z Axis Icon (md) <ZAxis.svg>` Add Z Axis
 
 Custom Properties
    :py:class:`~ose3dprinter.model.axis.axis_model.AxisModel`

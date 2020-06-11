@@ -1,11 +1,5 @@
-|Heated Bed Icon| Add Heated Bed
-================================
-
-.. |Heated Bed Icon| image:: /../freecad/ose3dprinter/icon/HeatedBed.svg
-   :height: 32px
-   :width: 32px
-   :alt: Add Heated Bed Command
-
+:fcicon:`Add Heated Bed Command (md) <HeatedBed.svg>`  Add Heated Bed
+=====================================================================
 The **Add Heated Bed** tool adds a heated bed to the **active** document.
 
 Custom Properties

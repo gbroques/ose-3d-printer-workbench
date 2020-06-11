@@ -1,20 +1,9 @@
 Generate Cut List
 =================
-
 There are two options in the main menu to generate a cut list:
 
-1. |Copy Icon| Copy Cut List to Clipboard
-2. |Save Icon| Save Cut List as CSV
-
-.. |Copy Icon| image:: /../freecad/ose3dprinter/icon/edit-copy.svg
-   :height: 32px
-   :width: 32px
-   :alt: Copy Cut List to Clipboard Command
-
-.. |Save Icon| image:: /../freecad/ose3dprinter/icon/document-save-as.svg
-   :height: 32px
-   :width: 32px
-   :alt: Save Cut List as CSV
+1. :fcicon:`Copy Cut List to Clipboard Command (md) <edit-copy.svg>` Copy Cut List to Clipboard
+2. :fcicon:`Save Cut List as CSV Command (md) <document-save-as.svg>` Save Cut List as CSV
 
 Both options generate a cut list with the following:
 
@@ -35,7 +24,6 @@ Determining Rod Quantity
 
 Determining Rod Length
 ^^^^^^^^^^^^^^^^^^^^^^
-
 * X Axis Rod Length is adjusted by **adding 4 inches**
 * Y Axis Rod Length corresponds with ``Length`` of the axis in the document
 * Z Axis Rod Length is adjusted by **subtracting 1 inch**
@@ -45,7 +33,6 @@ Determining Rod Length
 Determining Angled Bar Quantity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * **12** Angled Bars are added based on the existence of a Frame object
-
 
 Determining Angled Bar Length
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

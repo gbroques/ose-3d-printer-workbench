@@ -1,11 +1,5 @@
-|Extruder Icon| Add Extruder
-============================
-
-.. |Extruder Icon| image:: /../freecad/ose3dprinter/icon/Extruder.svg
-   :height: 32px
-   :width: 32px
-   :alt: Add Extruder Command
-
+:fcicon:`Add Extruder Command (md) <Extruder.svg>` Add Extruder
+===============================================================
 The **Add Extruder** tool adds an extruder to the **active** document.
 
 Attaching Extruder to X Axis Carriage
@@ -16,7 +10,6 @@ An extruder can be attached to the carriage of the top X axis by selecting the t
 
 See Also
 --------
-
 * :osewikipage:`D3D Extruder`
 * :osewikipage:`File:Simpleextruderassy.fcstd`
 * :osewikipage:`File:Finalextruder.png`

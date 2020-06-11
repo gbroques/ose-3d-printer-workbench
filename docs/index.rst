@@ -1,16 +1,5 @@
-.. OSE 3D Printer Workbench documentation master file, created by
-   sphinx-quickstart on Wed Feb 19 00:49:48 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-
-|Frame Icon| OSE 3D Printer Workbench Documentation
-===================================================
-
-.. |Frame Icon| image:: /../freecad/ose3dprinter/icon/Frame.svg
-   :height: 32px
-   :width: 32px
-   :alt: Workbench Icon
+:fcicon:`Workbench Icon (md) <Frame.svg>` OSE 3D Printer Workbench Documentation
+================================================================================
 
 .. image:: /_static/ose-3d-printer-workbench-demo.gif
 
