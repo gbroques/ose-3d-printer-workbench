@@ -5,7 +5,8 @@ The **Add Frame** tool adds a Frame to the **active** document.
 You can use this to begin designing a :osewikipage:`D3D Pro` printer of any size or axis configuration.
 
 Custom Properties
-   :py:class:`~ose3dprinter.model.frame.frame_model.FrameModel`
+-----------------
+.. fc-custom-property-table:: ose3dprinter.model.frame.frame_model.FrameModel
 
 Attaching Axes to the Frame
 ---------------------------

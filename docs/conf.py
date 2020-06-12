@@ -16,7 +16,6 @@ import sys
 from osewb.docs import conf
 
 sys.path.insert(0, os.path.abspath('.'))
-sys.path.append(os.path.abspath("./ext"))
 sys.path.insert(0, os.path.abspath('../'))
 
 # Shared base configuration for OSE workbench documentation.
@@ -42,14 +41,8 @@ def run_apidoc(app):
     ])
 
 
-def process_docstring(app, what, name, obj, options, lines):
-    if what == 'class' and name.endswith('Model'):
-        lines.append('.. model-property-table::')
-
-
 def setup(app):
     app.connect('builder-inited', run_apidoc)
-    app.connect('autodoc-process-docstring', process_docstring)
 
 # -- Project information -----------------------------------------------------
 
@@ -67,10 +60,7 @@ release = '0.1.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = conf['extensions'] + [
-    'osewb.docs.ext.model_property_table',
-    'ext.fcicon'
-]
+extensions = conf['extensions']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -87,6 +77,10 @@ add_module_names = conf['add_module_names']
 
 # -- Auto-doc Options --------------------------------------------------------
 autodoc_mock_imports = conf['ext']['autodoc']['autodoc_mock_imports']
+
+# -- FreeCAD Custom Property Table Options -----------------------------------
+remove_app_property_prefix_from_type = conf['ext']['extlinks'][
+    'freecad_custom_property_table']['remove_app_property_prefix_from_type']
 
 # -- FreeCAD Icon Extension Options ------------------------------------------
 # Relative to docs source

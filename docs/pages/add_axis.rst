@@ -7,7 +7,8 @@ There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universa
 3. :fcicon:`Z Axis Icon (md) <ZAxis.svg>` Add Z Axis
 
 Custom Properties
-   :py:class:`~ose3dprinter.model.axis.axis_model.AxisModel`
+-----------------
+.. fc-custom-property-table:: ose3dprinter.model.axis.axis_model.AxisModel
 
 Attaching Axes to the Frame
 ---------------------------

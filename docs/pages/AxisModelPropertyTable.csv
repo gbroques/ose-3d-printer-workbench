@@ -1,6 +1,0 @@
-Name,Type,Default Value,Description
-**Carriage Position**,``Percent``,50,Position of carriage relative to available rod.
-**Length**,``Length``,304.8 mm,Length of axis corresponds to rod length.
-**Orientation**,``String``,x,"Orientation of axis: X, Y, or Z."
-**Rod Diameter**,``Length``,8 mm,Diameter of rod.
-**Side**,``String``,top,Which side the bottom of the axis faces.
