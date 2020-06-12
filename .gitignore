@@ -3,3 +3,4 @@
 .coverage
 htmlcov/
 _build/
+docs/ose3dprinter/
