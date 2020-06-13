@@ -3,5 +3,4 @@ channels:
   - conda-forge
   - gbroques
 dependencies:
-  - freecad=0.18.4
   - ose-workbench-platform==0.1.0a19
