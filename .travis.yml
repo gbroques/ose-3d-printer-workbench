@@ -8,11 +8,8 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda info --all
-  # - conda install --channel defaults conda-build=3.18.11 conda-verify=3.1.1
-  # - conda config --add channels conda-forge
-  # - conda build .
-  - conda create --channel gbroques --name ose-workbench-platform ose-workbench-platform==0.1.0a19
-  - conda activate ose-workbench-platform
+  - conda env create --file environment.yml
+  - conda activate ose3dprinter
   - export PYTHONPATH=$PYTHONPATH:$CONDA_PREFIX/lib
 script:
     - pytest --cov ose3dprinter/ tests/
