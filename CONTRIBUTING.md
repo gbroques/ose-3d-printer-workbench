@@ -4,9 +4,17 @@ The following sections are meant as contributing *guidelines*, or **best-practic
 Are you a potential first-time contributor? Look for issues tagged with <a href="https://github.com/gbroques/ose-3d-printer-workbench/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22" style="height: 20px; padding: .15em 4px; font-weight: 600; line-height: 15px; border-radius: 2px; box-shadow: inset 0 -1px 0 rgba(27,31,35,.12); font-size: 12px;background-color: #7057ff; color: white">good first issue</a>.
 
 ## Pre-Requisites
-Install [OSE Workbench Platform](https://github.com/gbroques/ose-workbench-platform).
+Create a conda environment:
 
-    pip install ose-workbench-platform==0.1.0a19
+    conda env create --file environment.yml
+
+Active environment:
+
+    conda activate ose3dprinter
+
+Bootstrap activated environment:
+
+    osewb env bootstrap
 
 ## Code Style Guide
 Code should follow the official [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/).
@@ -58,20 +66,3 @@ If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 ```
-
-## Upgrading OSE Workbench Platform
-There's three references to the version of `ose-workbench-platform` that this workbench depends on.
-
-When updating this version, ensure you update **ALL** references.
-
-1. Inside `.travis.yml`:
-
-> https://github.com/gbroques/ose-workbench-platform.git#<version>:osewb
-
-2. Inside `docs/requirements.txt`:
-
->     ose-workbench-platform==<version>
-
-3. Under [Pre-Requisites](#pre-requisites) in this document:
-
->     pip install ose-workbench-platform==<version>
