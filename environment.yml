@@ -1,4 +1,4 @@
-name: ose-3d-printer-workbench
+name: ose3dprinter
 channels:
   - conda-forge
   - gbroques
