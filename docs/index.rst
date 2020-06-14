@@ -31,7 +31,7 @@ For more information on codebase conventions and patterns, see the `OSE Workbenc
 
 .. toctree::
    :maxdepth: 2
-   :caption: OSE 3D Printer Package
+   :caption: Library Package
 
    ose3dprinter/ose3dprinter
 
