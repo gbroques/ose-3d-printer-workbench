@@ -13,5 +13,10 @@ setup(
     url='https://github.com/gbroques/ose-3d-printer-workbench',
     description='A FreeCAD workbench for designing 3D printers by Open Source Ecology (OSE) for Distributive Enterprise',
     install_requires=[],
-    include_package_data=True
+    include_package_data=True,
+    classifiers=[
+        # Full List: https://pypi.org/pypi?%3Aaction=list_classifiers
+        'License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)',
+        'Programming Language :: Python :: 3 :: Only'
+    ]
 )
