@@ -79,7 +79,7 @@ add_module_names = conf['add_module_names']
 autodoc_mock_imports = conf['ext']['autodoc']['autodoc_mock_imports']
 
 # -- FreeCAD Custom Property Table Options -----------------------------------
-remove_app_property_prefix_from_type = conf['ext']['extlinks'][
+remove_app_property_prefix_from_type = conf['ext'][
     'freecad_custom_property_table']['remove_app_property_prefix_from_type']
 
 # -- FreeCAD Icon Extension Options ------------------------------------------
@@ -92,16 +92,13 @@ freecad_icon_directory = '../freecad/ose3dprinter/icon'
 # a list of builtin themes.
 html_theme = conf['html_theme']
 
+html_logo = './_static/ose-sticker-logo.svg'
+
+html_css_files = ['https://ose-workbench-platform.readthedocs.io/en/latest/_static/theme_overrides.css']
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
-html_context = {
-    'css_files': [
-        # overrides for wide tables in RTD theme
-        '_static/theme_overrides.css'
-    ]
-}
 
 extlinks = conf['ext']['extlinks']['extlinks']
