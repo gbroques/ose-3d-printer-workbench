@@ -4,3 +4,4 @@
 htmlcov/
 _build/
 docs/ose3dprinter/
+*.egg-info

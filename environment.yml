@@ -4,3 +4,4 @@ channels:
   - gbroques
 dependencies:
   - ose-workbench-platform==0.1.0a21
+  - ose-workbench-core==0.1.0a3
