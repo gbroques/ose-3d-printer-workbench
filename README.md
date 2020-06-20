@@ -54,4 +54,4 @@ This is the same license as [FreeCAD](https://wiki.freecadweb.org/Licence) to en
 * Attaching axes to rotated frame is not supported.
 
 ## Supported FreeCAD Versions
-This workbench supports FreeCAD 18.4.
+This workbench supports FreeCAD 19.
