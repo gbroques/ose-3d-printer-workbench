@@ -37,7 +37,7 @@ Additionally, there are installation walk-through videos on YouTube featuring in
 * [Installation for Beginners Video](https://youtu.be/C3W3fNzsydo)
 
 ## Documentation
-Documentation is located within the `/docs` directory of this repository, and hosted at the following URL with [Read the Docs](https://readthedocs.org/):
+Documentation is hosted at the following URL:
 
 https://ose-3d-printer-workbench.readthedocs.io/en/latest/
 
