@@ -12,7 +12,7 @@ setup(
     url='https://github.com/gbroques/ose-3d-printer-workbench',
     description='A FreeCAD workbench for designing 3D printers by Open Source Ecology (OSE) for Distributive Enterprise',
     install_requires=[
-        'ose-workbench-core==0.1.0a3'
+        'ose-workbench-core==0.1.0a4'  # Also in environment.yml
     ],
     include_package_data=True,
     classifiers=[
