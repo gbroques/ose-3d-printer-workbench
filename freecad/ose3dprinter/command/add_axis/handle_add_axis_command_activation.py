@@ -1,10 +1,10 @@
+import FreeCAD as App
+import FreeCADGui as Gui
+from FreeCAD import Console
 from osecore.app.attachment import AttachmentError
 from osecore.gui.selection import (find_face_in_selection_object,
                                    find_selection_object_by_type)
 
-import FreeCAD as App
-import FreeCADGui as Gui
-from FreeCAD import Console
 from freecad.ose3dprinter.part_feature import create_axis
 from ose3dprinter.attachment import (get_axis_frame_attachment_kwargs,
                                      get_default_axis_creation_kwargs)

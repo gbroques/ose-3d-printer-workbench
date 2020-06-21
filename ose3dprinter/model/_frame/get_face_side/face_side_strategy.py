@@ -1,8 +1,7 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 
 import Part
 from FreeCAD import Console
-from abc import ABC
 
 
 class FaceSideStrategy(ABC):

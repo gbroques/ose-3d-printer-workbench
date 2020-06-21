@@ -1,5 +1,6 @@
-from freecad.ose3dprinter.icon import get_icon_path
 from osecore.gui.cut_list import create_save_cut_list_to_file_task_panel
+
+from freecad.ose3dprinter.icon import get_icon_path
 
 from .handle_cut_list_command_activation import \
     handle_cut_list_command_activation

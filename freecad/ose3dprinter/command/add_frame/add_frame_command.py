@@ -1,6 +1,7 @@
 import FreeCAD as App
-from freecad.ose3dprinter.part_feature import create_frame
+
 from freecad.ose3dprinter.icon import get_icon_path
+from freecad.ose3dprinter.part_feature import create_frame
 
 
 class AddFrameCommand:

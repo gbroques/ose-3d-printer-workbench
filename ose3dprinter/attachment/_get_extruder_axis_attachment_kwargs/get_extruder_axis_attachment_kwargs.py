@@ -1,8 +1,9 @@
 from FreeCAD import Placement, Rotation, Vector
-from ose3dprinter.model import AxisModel
 from osecore.app.attachment import AttachmentError
 from osecore.app.shape.face import is_face_parallel_to_xy_plane
 from Part import Face
+
+from ose3dprinter.model import AxisModel
 
 
 def get_extruder_axis_attachment_kwargs(axis, selected_axis_face):

@@ -1,13 +1,13 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 from FreeCAD import Console
-from ose3dprinter.attachment import \
-    get_heated_bed_frame_axis_attachment_kwargs
-from ose3dprinter.model import AxisModel, FrameModel
-from freecad.ose3dprinter.icon import get_icon_path
-from freecad.ose3dprinter.part_feature import create_heated_bed
 from osecore.app.attachment import AttachmentError
 from osecore.gui.selection import find_selection_object_by_type
+
+from freecad.ose3dprinter.icon import get_icon_path
+from freecad.ose3dprinter.part_feature import create_heated_bed
+from ose3dprinter.attachment import get_heated_bed_frame_axis_attachment_kwargs
+from ose3dprinter.model import AxisModel, FrameModel
 
 
 class AddHeatedBedCommand:

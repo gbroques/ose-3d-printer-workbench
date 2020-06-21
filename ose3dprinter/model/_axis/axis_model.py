@@ -1,7 +1,8 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.part import Axis
 from osecore.app.model import Model
 from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
+
+from ose3dprinter.part import Axis
 
 
 class AxisModel(Model):

@@ -1,6 +1,6 @@
+from FreeCAD import Console, Placement, Units, Vector
 from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
-from FreeCAD import Console, Placement, Units, Vector
 from ose3dprinter.part import Axis
 from ose3dprinter.part._frame.angle_frame_connector import AxisSideMount
 

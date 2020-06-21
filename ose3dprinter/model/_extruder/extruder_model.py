@@ -1,6 +1,7 @@
 from FreeCAD import Placement, Vector
-from ose3dprinter.part import Extruder
 from osecore.app.model import Model
+
+from ose3dprinter.part import Extruder
 
 
 class ExtruderModel(Model):

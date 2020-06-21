@@ -1,3 +1,5 @@
+from typing import List
+
 import Part
 from FreeCAD import Placement, Rotation, Vector
 from osecore.app.shape import move_parts, place_shapes
@@ -59,7 +61,7 @@ class Axis:
         ))
         motor.rotate(Vector(half_motor_box_width,
                             half_motor_box_length, 0), Vector(0, 0, 1), 45)
-        vertical_edges = list(
+        vertical_edges: List = list(
             filter(is_edge_parallel_to_z_axis, motor.Edges))
         chamfered_motor = motor.makeChamfer(5, vertical_edges)
 

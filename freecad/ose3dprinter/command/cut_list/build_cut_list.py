@@ -2,9 +2,10 @@ from collections import OrderedDict
 
 import FreeCAD as App
 from FreeCAD import Console
+from osecore.app.three_dimensional_space_enums import CoordinateAxis
+
 from ose3dprinter.model import AxisModel, FrameModel
 from ose3dprinter.part import AngleFrameConnector
-from osecore.app.three_dimensional_space_enums import CoordinateAxis
 
 
 def build_cut_list():

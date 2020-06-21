@@ -1,7 +1,8 @@
 import unittest
 
-from ose3dprinter.attachment import get_default_axis_creation_kwargs
 from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
+
+from ose3dprinter.attachment import get_default_axis_creation_kwargs
 
 from .freecad_test_case import FreeCADTestCase
 

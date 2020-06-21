@@ -2,11 +2,12 @@ import unittest
 
 import FreeCAD as App
 from FreeCAD import Placement, Rotation, Vector
+from osecore.app.attachment import AttachmentError
+from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
+
 from ose3dprinter.attachment import get_axis_frame_attachment_kwargs
 from ose3dprinter.model import FrameModel
 from ose3dprinter.part import AngleFrameConnector
-from osecore.app.attachment import AttachmentError
-from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 from .freecad_test_case import FreeCADTestCase
 

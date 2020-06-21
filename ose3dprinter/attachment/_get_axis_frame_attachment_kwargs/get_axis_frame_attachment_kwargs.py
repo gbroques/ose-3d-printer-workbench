@@ -1,11 +1,12 @@
 from FreeCAD import Vector
-from ose3dprinter.model import FrameModel
 from osecore.app.attachment import AttachmentError
 from osecore.app.shape.face import (is_face_parallel_to_xy_plane,
                                     is_face_parallel_to_xz_plane,
                                     is_face_parallel_to_yz_plane)
 from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 from Part import Face
+
+from ose3dprinter.model import FrameModel
 
 from .get_placement_strategy import get_placement_strategy
 
