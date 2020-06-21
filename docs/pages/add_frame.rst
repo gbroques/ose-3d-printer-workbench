@@ -6,7 +6,7 @@ You can use this to begin designing a :osewikipage:`D3D Pro` printer of any size
 
 Custom Properties
 -----------------
-.. fc-custom-property-table:: ose3dprinter.model.frame.frame_model.FrameModel
+.. fc-custom-property-table:: ose3dprinter.model._frame.frame_model.FrameModel
 
 Attaching Axes to the Frame
 ---------------------------

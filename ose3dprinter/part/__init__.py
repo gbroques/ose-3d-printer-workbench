@@ -1,6 +1,15 @@
 """Parts for 3D Printer.
 """
-from .axis import Axis
-from .extruder import Extruder
-from .frame import AngledBarFrame, AngleFrameConnector, CNCCutFrame
-from .heated_bed import HeatedBed
+from ._axis import Axis
+from ._extruder import Extruder
+from ._frame import AngledBarFrame, AngleFrameConnector, CNCCutFrame
+from ._heated_bed import HeatedBed
+
+__all__ = [
+    'Axis',
+    'Extruder',
+    'AngledBarFrame',
+    'AngleFrameConnector',
+    'CNCCutFrame',
+    'HeatedBed'
+]

@@ -15,7 +15,14 @@ and how they respond to certain graphical interactions such as selection.
 See Also:
     https://wiki.freecadweb.org/Viewprovider
 """
-from .axis import create_axis
-from .extruder import create_extruder
-from .frame import create_frame
-from .heated_bed import create_heated_bed
+from ._axis import create_axis
+from ._extruder import create_extruder
+from ._frame import create_frame
+from ._heated_bed import create_heated_bed
+
+__all__ = [
+    'create_axis',
+    'create_extruder',
+    'create_frame',
+    'create_heated_bed'
+]

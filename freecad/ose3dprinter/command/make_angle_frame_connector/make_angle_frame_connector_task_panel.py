@@ -2,7 +2,7 @@ import FreeCAD as App
 import FreeCADGui as Gui
 import Part
 from ose3dprinter.part import AngleFrameConnector
-from ose3dprinter.part.frame.corner import Corner
+from ose3dprinter.part._frame.corner import Corner
 from PySide import QtGui
 
 

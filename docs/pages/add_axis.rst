@@ -8,7 +8,7 @@ There a three tools in the main toolbar to add a Axis, or :osewikipage:`Universa
 
 Custom Properties
 -----------------
-.. fc-custom-property-table:: ose3dprinter.model.axis.axis_model.AxisModel
+.. fc-custom-property-table:: ose3dprinter.model._axis.axis_model.AxisModel
 
 Attaching Axes to the Frame
 ---------------------------
