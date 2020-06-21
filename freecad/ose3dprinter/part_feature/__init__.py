@@ -1,4 +1,4 @@
-"""Exposes functions to create Part::FeaturePython objects.
+"""Exposes functions to create ``Part::FeaturePython`` objects.
 
 Minimally, these objects are custom, parameteric,
 and have a Shape for viewing in three dimensions.

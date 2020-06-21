@@ -1,3 +1,4 @@
+"""Imported when FreeCAD starts up to add workbench to GUI."""
 import FreeCAD as App
 import FreeCADGui as Gui
 

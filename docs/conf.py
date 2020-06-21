@@ -31,14 +31,17 @@ def run_apidoc(app):
     """Generate API documentation"""
     from sphinx.ext import apidoc
     max_depth = '1'
-    apidoc.main([
-        '../ose3dprinter',
-        '-o', 'ose3dprinter',
-        '-d', max_depth,
-        '--templatedir=_templates/',
-        '--force',
-        '--no-toc'
-    ])
+    packages = ['ose3dprinter', 'freecad']
+    for package in packages:
+        apidoc.main([
+            '../{}'.format(package),
+            '-o', package,
+            '-d', max_depth,
+            '--templatedir=_templates/',
+            '--force',
+            '--no-toc',
+            '--implicit-namespaces'
+        ])
 
 
 def setup(app):

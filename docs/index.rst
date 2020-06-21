@@ -35,6 +35,12 @@ For more information on codebase conventions and patterns, see the `OSE Workbenc
 
    ose3dprinter/ose3dprinter
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Workbench Package
+
+   freecad/freecad.ose3dprinter
+
 
 Indices and tables
 ==================
