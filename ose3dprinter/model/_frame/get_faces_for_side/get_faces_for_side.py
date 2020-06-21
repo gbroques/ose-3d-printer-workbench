@@ -3,6 +3,7 @@ from .get_faces_for_side_of_cnc_cut_frame import \
 from .get_faces_for_side_of_frame_with_corners import \
     get_faces_for_side_of_frame_with_corners
 
+
 def get_faces_for_side(frame, side):
     """Gets a dictionary of outer faces of the frame by their Side.
 

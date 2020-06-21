@@ -1,7 +1,7 @@
-from FreeCAD import Placement, Vector
-from ose3dprinter.part import (AngledBarFrame, AngleFrameConnector,
-                                   CNCCutFrame)
 from osecore.app.model import Model
+
+from FreeCAD import Placement, Vector
+from ose3dprinter.part import AngledBarFrame, AngleFrameConnector, CNCCutFrame
 
 from .get_face_side import get_face_side
 from .get_faces_for_side import get_faces_for_side

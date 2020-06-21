@@ -1,13 +1,14 @@
-import FreeCAD as App
-import FreeCADGui as Gui
-from FreeCAD import Console
-from ose3dprinter.attachment import (get_axis_frame_attachment_kwargs,
-                                         get_default_axis_creation_kwargs)
-from ose3dprinter.model import FrameModel
-from freecad.ose3dprinter.part_feature import create_axis
 from osecore.app.attachment import AttachmentError
 from osecore.gui.selection import (find_face_in_selection_object,
                                    find_selection_object_by_type)
+
+import FreeCAD as App
+import FreeCADGui as Gui
+from FreeCAD import Console
+from freecad.ose3dprinter.part_feature import create_axis
+from ose3dprinter.attachment import (get_axis_frame_attachment_kwargs,
+                                     get_default_axis_creation_kwargs)
+from ose3dprinter.model import FrameModel
 
 
 def handle_add_axis_command_activation(axis_orientation):

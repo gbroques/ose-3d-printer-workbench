@@ -88,7 +88,7 @@ class CoolingAndSensorMount:
 
 
 def make_cooling_and_sensor_slanted_side(thickness, length):
-    """
+    r"""
           20
        ---------
        |        \
@@ -132,7 +132,7 @@ def make_cooling_and_sensor_slanted_side(thickness, length):
 
 def make_sensor_and_sensor_holder(sensor_holder_box_width,
                                   sensor_holder_box_height):
-    """
+    r"""
     /-------
     | O    |
     \-------
