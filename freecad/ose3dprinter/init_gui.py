@@ -2,7 +2,7 @@ import FreeCAD as App
 import FreeCADGui as Gui
 
 from .icon import get_icon_path
-from .register_commands import register_commands
+from .OSE_3D_Printer import register_commands
 
 
 class ThreeDimensionalPrinterWorkbench(Gui.Workbench):
