@@ -12,7 +12,7 @@ install:
   - conda activate ose3dprinter
   - export PYTHONPATH=$PYTHONPATH:$CONDA_PREFIX/lib
 script:
-    - osewb test
+    - osewb test --coverage
     - osewb lint
     - osewb docs
 after_success:
