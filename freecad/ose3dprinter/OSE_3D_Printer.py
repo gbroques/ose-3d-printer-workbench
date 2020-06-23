@@ -2,13 +2,7 @@
 """
 import FreeCADGui as Gui
 
-from .command.add_axis import AddXAxisCommand, AddYAxisCommand, AddZAxisCommand
-from .command.add_extruder import AddExtruderCommand
-from .command.add_frame import AddFrameCommand
-from .command.add_heated_bed import AddHeatedBedCommand
-from .command.cut_list import (CopyCutListToClipboardCommand,
-                               SaveCutListAsCsvCommand)
-from .command.make_angle_frame_connector import MakeAngleFrameConnectorCommand
+from .command import *
 
 #: Command Namespace
 command_namespace = 'OSE3DP'
