@@ -6,6 +6,7 @@
 
 # -- Path setup --------------------------------------------------------------
 
+import inspect
 import json
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -44,8 +45,40 @@ def run_apidoc(app):
         ])
 
 
+def process_docstring(app, what, name, obj, options, lines):
+    if what == 'module':
+        public_members = []
+        if hasattr(obj, '__all__'):
+            public_members = obj.__all__
+        all_members = inspect.getmembers(obj)
+        members = [
+            (
+                name + '.' + member[0],
+                get_summary_line(inspect.getdoc(member[1]))
+            )
+            for member in all_members
+            if not member[0].startswith('_')
+            and member[0] in public_members
+            and not inspect.isbuiltin(member[1])
+            and (inspect.isclass(member[1]) or inspect.isfunction(member[1]))
+        ]
+        for member, summary in members:
+            print(obj.__doc__)
+            line = '  * :mod:`~{}`'.format(member)
+            if summary:
+                line += ' - ' + summary
+            lines.append(line)
+
+
+def get_summary_line(docstring):
+    if docstring is None:
+        return None
+    return docstring.splitlines()[0]
+
+
 def setup(app):
     app.connect('builder-inited', run_apidoc)
+    app.connect('autodoc-process-docstring', process_docstring)
 
 # -- Project information -----------------------------------------------------
 

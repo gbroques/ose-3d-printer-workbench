@@ -8,7 +8,7 @@ from .handle_cut_list_command_activation import \
 
 class CopyCutListToClipboardCommand:
     """
-    Command to copy cut-list to clipboard
+    Command to copy cut-list to clipboard.
     """
 
     NAME = 'CopyCutListToClipboard'

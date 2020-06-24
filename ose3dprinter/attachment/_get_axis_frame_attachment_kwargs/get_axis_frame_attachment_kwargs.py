@@ -14,9 +14,10 @@ from .get_placement_strategy import get_placement_strategy
 def get_axis_frame_attachment_kwargs(frame,
                                      selected_frame_face,
                                      axis_orientation):
-    """
-    Get the length, placement, and origin translation offset for
-    creating a axis object attached to a selected frame face.
+    """Get a dictionary describing how to attach an axis to a frame.
+
+    Keys include length, placement, and origin translation offset for
+    making an axis object appear attached to a selected frame face.
     """
     _validate_frame(frame)
     _validate_selected_face(frame, selected_frame_face, axis_orientation)

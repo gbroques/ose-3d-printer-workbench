@@ -2,7 +2,10 @@
 """
 import FreeCADGui as Gui
 
-from .command import *
+from .command import (AddExtruderCommand, AddFrameCommand, AddHeatedBedCommand,
+                      AddXAxisCommand, AddYAxisCommand, AddZAxisCommand,
+                      CopyCutListToClipboardCommand,
+                      MakeAngleFrameConnectorCommand, SaveCutListAsCsvCommand)
 
 #: Command Namespace
 command_namespace = 'OSE3DP'
@@ -50,3 +53,6 @@ def _register(name, command):
     key = '{}_{}'.format(command_namespace, name)
     Gui.addCommand(key, command)
     return key
+
+
+__all__ = ['register_commands']

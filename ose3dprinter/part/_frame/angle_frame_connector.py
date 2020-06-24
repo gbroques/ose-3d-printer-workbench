@@ -11,10 +11,7 @@ from .corner import Corner, is_top_corner
 
 
 class AngleFrameConnector:
-    """
-    Encapsulates the data (i.e. topography and shape)
-    for an Angle Frame Connector,
-    and is separate from the "view" or GUI representation.
+    """Encapsulates the shape for an Angle Frame Connector.
 
     An angle frame connector is made up of three brackets.
     """
