@@ -1,0 +1,25 @@
+/* override table width restrictions */
+
+.wy-table-responsive table td {
+    /* !important prevents the common CSS stylesheets from overriding
+        this as on RTD they are loaded after this stylesheet */
+    white-space: normal !important;
+}
+
+.wy-table-responsive {
+    overflow: visible !important;
+}
+
+.wy-table-responsive table {
+    width: 100%;
+}
+
+html.writer-html5 .rst-content table.docutils td > p {
+    line-height: 1.5rem;
+}
+
+/**
+ Auto-size tables to fit content
+ https://stackoverflow.com/questions/21027105/how-can-i-have-sphinx-tables-fit-to-width
+*/
+colgroup { display: none; }

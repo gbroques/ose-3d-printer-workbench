@@ -1,5 +1,4 @@
-"""Command Registry Module
-"""
+"""Command Registry Module"""
 import FreeCADGui as Gui
 
 from .command import (AddExtruderCommand, AddFrameCommand, AddHeatedBedCommand,

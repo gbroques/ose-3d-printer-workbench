@@ -62,12 +62,27 @@ def process_docstring(app, what, name, obj, options, lines):
             and not inspect.isbuiltin(member[1])
             and (inspect.isclass(member[1]) or inspect.isfunction(member[1]))
         ]
+        if len(members):
+            lines.append('')
+            lines.append('API')
+            lines.append('~~~')
+            lines.append('.. list-table::')
+            lines.append('   :header-rows: 1')
+            lines.append('')
+            lines.append('   * - Name')
+            lines.append('     - Description')
+            lines.append('')
         for member, summary in members:
-            print(obj.__doc__)
-            line = '  * :mod:`~{}`'.format(member)
+            lines.append('   * - :mod:`~{}`'.format(member))
             if summary:
-                line += ' - ' + summary
-            lines.append(line)
+                lines.append('     - ' + summary)
+            else:
+                lines.append('     - None')
+            lines.append('')
+        if len(members):
+            lines.append('')
+            lines.append('----')
+            lines.append('')
 
 
 def get_summary_line(docstring):
@@ -131,7 +146,7 @@ html_theme = conf['html_theme']
 
 html_logo = './_static/ose-sticker-logo.svg'
 
-html_css_files = conf['html_css_files']
+html_css_files =  ['theme_overrides.css'] + conf['html_css_files']
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
