@@ -64,8 +64,6 @@ def process_docstring(app, what, name, obj, options, lines):
         ]
         if len(members):
             lines.append('')
-            lines.append('API')
-            lines.append('~~~')
             lines.append('.. list-table::')
             lines.append('   :header-rows: 1')
             lines.append('')
