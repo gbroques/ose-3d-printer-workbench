@@ -12,4 +12,5 @@ def get_icon_path(icon_filename: str) -> str:
     """
     return os.path.join(os.path.dirname(__file__), icon_filename)
 
+
 __all__ = ['get_icon_path']
