@@ -96,7 +96,7 @@ freecad_icon_directory = '../freecad/ose3dprinter/icon'
 # a list of builtin themes.
 html_theme = conf['html_theme']
 
-html_logo = './_static/ose-sticker-logo.svg'
+html_logo = conf['html_logo']
 
 html_css_files = conf['html_css_files']
 
