@@ -37,7 +37,7 @@ def run_apidoc(app):
             '../{}'.format(package),
             '-o', package,
             '-d', max_depth,
-            '--templatedir=_templates/',
+            '--templatedir={}'.format(conf['templates_path']),
             '--force',
             '--no-toc',
             '--implicit-namespaces'
@@ -67,7 +67,7 @@ version = '0.1.0'
 extensions = conf['extensions']
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = [conf['templates_path']]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
