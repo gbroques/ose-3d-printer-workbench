@@ -1,7 +1,7 @@
 from functools import reduce
 
 import Part
-from FreeCAD import Vector
+from FreeCAD import Placement, Vector
 from osecore.app.shape import move_parts
 from osecore.app.shape.edge import is_edge_parallel_to_y_axis
 
@@ -10,9 +10,15 @@ from .main_extruder_part import MainExtruderPart
 
 
 class Extruder:
+    """Extruder for extruding heated-plastic.
+
+    .. image:: /_static/screenshot/Extruder.png
+        :alt: Extruder
+    """
 
     @staticmethod
-    def make(placement, origin_translation_offset):
+    def make(placement: Placement = Placement(),
+             origin_translation_offset: Vector = Vector()):
         main_part_width = 50
         main_part_length = 87
         main_part_bottom_base_overhang_width = 5

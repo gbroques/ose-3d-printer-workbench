@@ -8,10 +8,16 @@ from .corner import Corner
 
 
 class AngledBarFrame:
-    """Frame made from 12 angled bars connected by angle frame connectors."""
+    """Frame made from 12 angled bars connected by angle frame connectors.
+
+    .. image:: /_static/screenshot/AngledBarFrame.png
+        :alt: Angled Bar Frame
+    """
 
     @staticmethod
-    def make(side, width, thickness):
+    def make(side: float = 304.8,  # 12 inches
+             width: float = 38.1,  # 1.5 inches
+             thickness: float = 3.175) -> Part.Shape:  # 3.175 = 1/8 inch
         """Make a frame from from 12 angled bars connected by angle frame connectors.
         No welding or epoxy required, and the frame can be disassembled.
 

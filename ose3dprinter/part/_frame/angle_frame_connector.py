@@ -11,9 +11,12 @@ from .corner import Corner, is_top_corner
 
 
 class AngleFrameConnector:
-    """Encapsulates the shape for an Angle Frame Connector.
+    """Connects angled bars together in a cubic frame.
 
     An angle frame connector is made up of three brackets.
+
+    .. image:: /_static/screenshot/AngleFrameConnector.png
+        :alt: Angle Frame Connector
     """
 
     axis_side_mount_width = 5
@@ -21,8 +24,8 @@ class AngleFrameConnector:
 
     @classmethod
     def make(cls,
-             width,
-             thickness,
+             width: float = 38.1,  # 1.5 inches
+             thickness: float = 3.175,  # 1/8 inch
              corner=Corner.BOTTOM_LEFT_FRONT,
              with_set_screw=False,
              with_filleting=False):

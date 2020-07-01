@@ -1,5 +1,4 @@
-"""Commands users can perform in FreeCAD's GUI.
-"""
+"""Commands users can perform in FreeCAD's GUI."""
 from ._add_axis import AddXAxisCommand, AddYAxisCommand, AddZAxisCommand
 from ._add_extruder import AddExtruderCommand
 from ._add_frame import AddFrameCommand

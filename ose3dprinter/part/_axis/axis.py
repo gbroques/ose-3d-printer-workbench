@@ -8,6 +8,11 @@ from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
 class Axis:
+    """Modular and scalable CNC axis for creating cartesian CNC machines.
+
+    .. image:: /_static/screenshot/Axis.png
+        :alt: Axis
+    """
     motor_box_width = 59.5
 
     carriage_box_width = 52
@@ -24,13 +29,13 @@ class Axis:
 
     @classmethod
     def make(cls,
-             rod_length: float,
-             rod_radius: float,
-             carriage_position: int,
-             orientation: str,
-             side: str,
-             initial_placement: Placement,
-             origin_translation_offset: Vector) -> 'Part.Compound':
+             rod_length: float = 304.80,
+             rod_radius: float = 4.0,
+             carriage_position: int = 50,
+             orientation: str = CoordinateAxis.X,
+             side: str = Side.TOP,
+             initial_placement: Placement = Placement(),
+             origin_translation_offset: Vector = Vector()) -> Part.Compound:
         # Motor side, idler side, and carriage boxes share same height
         box_height = 24
 

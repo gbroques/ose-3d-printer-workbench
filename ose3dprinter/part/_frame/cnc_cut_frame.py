@@ -5,9 +5,16 @@ from FreeCAD import Vector
 
 
 class CNCCutFrame:
+    """Frame made from flat sheets cut by a CNC machine.
+
+    .. image:: /_static/screenshot/CNCCutFrame.png
+        :alt: CNC Cut Frame
+    """
 
     @staticmethod
-    def make(side, width, sheet_thickness):
+    def make(side: float = 304.8,  # 12 inches
+             width: float = 38.1,  # 1.5 inches
+             sheet_thickness: float = 3.175) -> Part.Shape:  # 3.175 = 1/8 inch
         """Make a frame from flat sheets cut by a CNC machine,
         then welded or epoxied together.
 
