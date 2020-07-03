@@ -1,5 +1,4 @@
-"""Models for 3D Printer parts.
-"""
+"""Models for 3D Printer parts."""
 from ._axis import AxisModel
 from ._extruder import ExtruderModel
 from ._frame import FrameModel
