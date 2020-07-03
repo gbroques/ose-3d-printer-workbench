@@ -13,7 +13,7 @@ from ose3dprinter.part import (AngledBarFrame, AngleFrameConnector, Axis,
                                CNCCutFrame, Extruder, HeatedBed)
 
 parts = [
-    AngledBarFrame, AngleFrameConnector, Axis,
+    AngleFrameConnector, AngledBarFrame, Axis,
     CNCCutFrame, Extruder, HeatedBed
 ]
 
