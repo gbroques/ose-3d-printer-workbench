@@ -2,20 +2,21 @@
 
 Run with freecad -c part_screenshot.py when ose3dprinter conda environment is activated.
 """
+import importlib
+import inspect
 from pathlib import Path
 
 import FreeCAD as App
 import FreeCADGui as Gui
+import ose3dprinter.part as ose3dprinter_parts
 import Part
 
-import ose3dprinter.part as ose3dprinter_parts
-from ose3dprinter.part import (AngledBarFrame, AngleFrameConnector, Axis,
-                               CNCCutFrame, Extruder, HeatedBed)
 
-parts = [
-    AngleFrameConnector, AngledBarFrame, Axis,
-    CNCCutFrame, Extruder, HeatedBed
-]
+def is_part_class(x) -> bool:
+    return inspect.isclass(x) and not inspect.isbuiltin(x)
+
+
+members = inspect.getmembers(ose3dprinter_parts, is_part_class)
 
 document = App.newDocument()
 
@@ -27,7 +28,7 @@ main_window.hide()
 screenshot_path = Path('./_static/screenshot')
 screenshot_path.mkdir(parents=True, exist_ok=True)
 
-for (name, part) in zip(ose3dprinter_parts.__all__, parts):
+for (name, part) in members:
     made_part = part.make()
     Part.show(made_part)
 
