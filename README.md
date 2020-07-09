@@ -55,3 +55,10 @@ This is the same license as [FreeCAD](https://wiki.freecadweb.org/Licence) to en
 
 ## Supported FreeCAD Versions
 This workbench supports FreeCAD 19.
+
+### FreeCAD 16 - 18
+If you'd like to use this workbench with an older version of FreeCAD like 16, 17, or 18, then you can checkout `v0.1.0` of the workbench.
+
+After cloning the repository, from within the repository, run:
+
+    git checkout v0.1.0
