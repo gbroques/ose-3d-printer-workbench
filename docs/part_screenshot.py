@@ -2,14 +2,14 @@
 
 Run with freecad -c part_screenshot.py when ose3dprinter conda environment is activated.
 """
-import importlib
 import inspect
 from pathlib import Path
 
 import FreeCAD as App
 import FreeCADGui as Gui
-import ose3dprinter.part as ose3dprinter_parts
 import Part
+
+import ose3dprinter.part as ose3dprinter_parts
 
 
 def is_part_class(x) -> bool:
