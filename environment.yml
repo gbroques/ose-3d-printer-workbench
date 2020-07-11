@@ -3,5 +3,5 @@ channels:
   - conda-forge
   - gbroques
 dependencies:
-  - ose-workbench-platform==0.1.0a30
+  - ose-workbench-platform==0.1.0a31
   - ose-workbench-core==0.1.0a4  # Also in setup.py
