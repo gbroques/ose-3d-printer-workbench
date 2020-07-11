@@ -14,9 +14,6 @@ class AngleFrameConnector:
     """Connects angled bars together in a cubic frame.
 
     An angle frame connector is made up of three brackets.
-
-    .. image:: /_static/screenshot/AngleFrameConnector.png
-        :alt: Angle Frame Connector
     """
 
     axis_side_mount_width = 5

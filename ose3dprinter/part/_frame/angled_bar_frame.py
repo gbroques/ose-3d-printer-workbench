@@ -8,11 +8,7 @@ from .corner import Corner
 
 
 class AngledBarFrame:
-    """Frame made from 12 angled bars connected by angle frame connectors.
-
-    .. image:: /_static/screenshot/AngledBarFrame.png
-        :alt: Angled Bar Frame
-    """
+    """Frame made from 12 angled bars connected by angle frame connectors."""
 
     @staticmethod
     def make(side: float = 304.8,  # 12 inches

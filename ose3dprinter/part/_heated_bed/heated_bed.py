@@ -9,9 +9,6 @@ class HeatedBed:
     See Also:
         * https://wiki.opensourceecology.org/wiki/Heated_Bed
         * https://reprap.org/wiki/Heated_Bed
-
-    .. image:: /_static/screenshot/HeatedBed.png
-        :alt: Heated Bed
     """
 
     @staticmethod

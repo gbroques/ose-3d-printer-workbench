@@ -10,11 +10,7 @@ from .main_extruder_part import MainExtruderPart
 
 
 class Extruder:
-    """Extruder for extruding heated-plastic.
-
-    .. image:: /_static/screenshot/Extruder.png
-        :alt: Extruder
-    """
+    """Extruder for extruding heated-plastic."""
 
     @staticmethod
     def make(placement: Placement = Placement(),

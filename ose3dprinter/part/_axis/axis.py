@@ -8,11 +8,7 @@ from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 
 class Axis:
-    """Modular and scalable CNC axis for creating cartesian CNC machines.
-
-    .. image:: /_static/screenshot/Axis.png
-        :alt: Axis
-    """
+    """Modular and scalable CNC axis for creating cartesian CNC machines."""
     motor_box_width = 59.5
 
     carriage_box_width = 52

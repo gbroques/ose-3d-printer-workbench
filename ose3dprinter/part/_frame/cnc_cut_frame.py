@@ -5,11 +5,7 @@ from FreeCAD import Vector
 
 
 class CNCCutFrame:
-    """Frame made from flat sheets cut by a CNC machine.
-
-    .. image:: /_static/screenshot/CNCCutFrame.png
-        :alt: CNC Cut Frame
-    """
+    """Frame made from flat sheets cut by a CNC machine."""
 
     @staticmethod
     def make(side: float = 304.8,  # 12 inches

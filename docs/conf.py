@@ -11,6 +11,7 @@ import json
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 import os
+import re
 import sys
 
 from osewb.docs import conf
@@ -44,8 +45,20 @@ def run_apidoc(app):
         ])
 
 
+part_class_pattern = re.compile(r'ose[A-Za-z0-9]+\.part\.[A-Z][a-z]+')
+
+
+def process_docstring(app, what, name, obj, options, lines):
+    if what == 'class' and part_class_pattern.match(name):
+        class_name = obj.__name__
+        lines.append(
+            '.. image:: /_static/screenshot/{}.png'.format(class_name))
+        lines.append('   :alt: {}'.format(class_name))
+
+
 def setup(app):
     app.connect('builder-inited', run_apidoc)
+    app.connect('autodoc-process-docstring', process_docstring)
 
 # -- Project information -----------------------------------------------------
 
