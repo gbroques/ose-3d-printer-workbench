@@ -32,6 +32,7 @@ A FreeCAD workbench for designing 3D printers by [Open Source Ecology](https://w
     * Common locations for various operating systems can be found on "[Installing more workbenches](https://wiki.freecadweb.org/Installing_more_workbenches)" in the FreeCAD wiki.
     * You can also execute `FreeCAD.getUserAppDataDir()` within the **Python console** in FreeCAD for this location. Workbenches will always go into the `Mod` directory in the user's application data directory.
 2. Download the workbench as a **ZIP** archive and extract, or use command-line `git` to `clone` the repository into the correct location (e.g. `~/.FreeCAD/Mod/ose-3d-printer-workbench`)
+3. Follow step **2** for [ose-workbench-core](https://github.com/gbroques/ose-workbench-core) by downloading or cloning into the same directory (e.g. `~/.FreeCAD/Mod/ose-workbench-core`).
 
 Additionally, there are installation walk-through videos on YouTube featuring instructions with and without the command-line:
 * [Command Line Installation Video](https://youtu.be/PtBoIBTPNv4)
