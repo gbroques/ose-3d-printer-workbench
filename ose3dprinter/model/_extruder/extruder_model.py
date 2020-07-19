@@ -1,3 +1,5 @@
+from typing import Union
+
 from FreeCAD import Placement, Vector
 from osecore.app.model import Model
 
@@ -27,15 +29,27 @@ class ExtruderModel(Model):
         self.origin_translation_offset = origin_translation_offset
 
     def execute(self, obj):
-        """
-        Called on document recompute
-        """
+        """Execute on document recompute."""
         obj.Shape = Extruder.make(
             self.placement, self.origin_translation_offset)
 
-    def __getstate__(self):
+    def __getstate__(self) -> Union[str, tuple]:
+        """Execute when serializing and persisting the object.
+
+        See Also:
+            https://docs.python.org/3/library/pickle.html#object.__getstate__
+
+        :return: state
+        """
         return self.Type
 
-    def __setstate__(self, state):
+    def __setstate__(self, state: str) -> None:
+        """Execute when deserializing the object.
+
+        See Also:
+            https://docs.python.org/3/library/pickle.html#object.__setstate__
+
+        :param state: state, in this case type of object.
+        """
         if state:
             self.Type = state

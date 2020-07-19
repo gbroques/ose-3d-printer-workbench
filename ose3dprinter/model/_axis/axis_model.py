@@ -1,3 +1,6 @@
+"""Module for axis model class."""
+from typing import Union
+
 from FreeCAD import Placement, Vector
 from osecore.app.model import Model
 from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
@@ -65,9 +68,7 @@ class AxisModel(Model):
         obj.Side = side
 
     def execute(self, obj):
-        """
-        Called on document recompute
-        """
+        """Execute on document recompute."""
         # Get rod dimensions
         rod_length = obj.Length.Value
         rod_radius = obj.RodDiameter.Value / 2
@@ -79,13 +80,6 @@ class AxisModel(Model):
                               obj.Side,
                               self.placement,
                               self.origin_translation_offset)
-
-    def __getstate__(self):
-        return self.Type
-
-    def __setstate__(self, state):
-        if state:
-            self.Type = state
 
     def calculate_carriage_box_x(self):
         obj = self.Object
@@ -103,41 +97,59 @@ class AxisModel(Model):
             )
         )
 
-    def is_x(self):
+    def is_x(self) -> bool:
         """Return whether or not this axis is a X axis.
 
         This assumes the axis is parallel to the XY, YZ, or XZ planes,
         and not rotated in a weird diagonal or skewed way.
 
         :return: Whether this axis is a X axis.
-        :rtype: bool
         """
         axis = self.Object
         return _is_oriented_in(axis, CoordinateAxis.X)
 
-    def is_y(self):
+    def is_y(self) -> bool:
         """Return whether or not this axis is a Y axis.
 
         This assumes the axis is parallel to the XY, YZ, or XZ planes,
         and not rotated in a weird diagonal or skewed way.
 
         :return: Whether this axis is a Y axis.
-        :rtype: bool
         """
         axis = self.Object
         return _is_oriented_in(axis, CoordinateAxis.Y)
 
-    def is_z(self):
+    def is_z(self) -> bool:
         """Return whether or not this axis is a Z axis.
 
         This assumes the axis is parallel to the XY, YZ, or XZ planes,
         and not rotated in a weird diagonal or skewed way.
 
         :return: Whether this axis is a Z axis.
-        :rtype: bool
         """
         axis = self.Object
         return _is_oriented_in(axis, CoordinateAxis.Z)
+
+    def __getstate__(self) -> Union[str, tuple]:
+        """Execute when serializing and persisting the object.
+
+        See Also:
+            https://docs.python.org/3/library/pickle.html#object.__getstate__
+
+        :return: state
+        """
+        return self.Type
+
+    def __setstate__(self, state: str) -> None:
+        """Execute when deserializing the object.
+
+        See Also:
+            https://docs.python.org/3/library/pickle.html#object.__setstate__
+
+        :param state: state, in this case type of object.
+        """
+        if state:
+            self.Type = state
 
 
 def _is_oriented_in(axis, axis_orientation):

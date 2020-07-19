@@ -13,8 +13,14 @@ class Extruder:
     """Extruder for extruding heated-plastic."""
 
     @staticmethod
-    def make(placement: Placement = Placement(),
+    def make(initial_placement: Placement = Placement(),
              origin_translation_offset: Vector = Vector()):
+        """Make an extruder.
+
+        :param initial_placement: Initial placement for part.
+        :param origin_translation_offset: Offset part from origin.
+        :return: Extruder object.
+        """
         main_part_width = 50
         main_part_length = 87
         main_part_bottom_base_overhang_width = 5
@@ -77,7 +83,7 @@ class Extruder:
         dimensions = (main_part_width, main_part_length,
                       MainExtruderPart.base_height)
         move_parts(parts,
-                   placement,
+                   initial_placement,
                    origin_translation_offset,
                    dimensions)
 
@@ -97,3 +103,6 @@ def make_motor():
         filter(is_edge_parallel_to_y_axis, motor.Edges))
     chamfered_motor = motor.makeChamfer(5, edges_parallel_to_y_axis)
     return chamfered_motor
+
+
+__all__ = ['Extruder']

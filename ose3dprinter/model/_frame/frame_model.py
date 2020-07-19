@@ -1,5 +1,8 @@
+from typing import List, Union
+
 from FreeCAD import Placement, Vector
 from osecore.app.model import Model
+from Part import Face
 
 from ose3dprinter.part import AngledBarFrame, AngleFrameConnector, CNCCutFrame
 
@@ -52,9 +55,7 @@ class FrameModel(Model):
         obj.HasCorners = has_corners
 
     def execute(self, obj):
-        """
-        Called on document recompute
-        """
+        """Execute on document recompute."""
         side = obj.Size.Value
         # Width of 12" (304.8 mm) frame is 1" (25.4 mm)
         width = obj.Width.Value
@@ -70,7 +71,7 @@ class FrameModel(Model):
         return self.Object.Size.Value + (d * 2)
 
     @property
-    def XMin(self):
+    def XMin(self) -> float:
         x_min = self.Object.Shape.BoundBox.XMin
         if self.Object.HasCorners:
             return x_min + AngleFrameConnector.axis_side_mount_width
@@ -78,7 +79,7 @@ class FrameModel(Model):
             return x_min
 
     @property
-    def XMax(self):
+    def XMax(self) -> float:
         x_min = self.Object.Shape.BoundBox.XMax
         if self.Object.HasCorners:
             return x_min - AngleFrameConnector.axis_side_mount_width
@@ -86,7 +87,7 @@ class FrameModel(Model):
             return x_min
 
     @property
-    def YMin(self):
+    def YMin(self) -> float:
         y_min = self.Object.Shape.BoundBox.YMin
         if self.Object.HasCorners:
             return y_min + \
@@ -95,7 +96,7 @@ class FrameModel(Model):
             return y_min
 
     @property
-    def YMax(self):
+    def YMax(self) -> float:
         y_max = self.Object.Shape.BoundBox.YMax
         if self.Object.HasCorners:
             return y_max - \
@@ -104,25 +105,54 @@ class FrameModel(Model):
             return y_max
 
     @property
-    def ZMin(self):
+    def ZMin(self) -> float:
         return self.Object.Shape.BoundBox.ZMin
 
     @property
-    def ZMax(self):
+    def ZMax(self) -> float:
         return self.Object.Shape.BoundBox.ZMax
 
-    def get_face_side(self, face, axis_orientation):
+    def get_face_side(self, face: Face, axis_orientation: str) -> str:
+        """Get the side of a frame corresponding to a given face and axis orientation.
+
+        :param face: Face of frame to get the corresponding side for.
+        :param axis_orientation: Orientation of axis.
+        :return: Side of frame for the given ``face`` and ``axis_orientation``.
+        """
         return get_face_side(self.Object, face, axis_orientation)
 
-    def get_faces_for_side(self, side):
+    def get_faces_for_side(self, side: str) -> List[Face]:
+        """Get a list of face objects for a given side of the frame.
+
+        :param side: Side of frame to get the faces for.
+        :return: List of faces objects corresponding to ``side``.
+        """
         return get_faces_for_side(self.Object, side)
 
-    def get_outer_faces(self):
+    def get_outer_faces(self) -> List[Face]:
+        """Get a list of face objects corresponding to the outer-most faces of the frame.
+
+        :return: List of outer frame face objects.
+        """
         return get_outer_faces(self.Object)
 
-    def __getstate__(self):
+    def __getstate__(self) -> Union[str, tuple]:
+        """Execute when serializing and persisting the object.
+
+        See Also:
+            https://docs.python.org/3/library/pickle.html#object.__getstate__
+
+        :return: state
+        """
         return self.Type
 
-    def __setstate__(self, state):
+    def __setstate__(self, state: str) -> None:
+        """Execute when deserializing the object.
+
+        See Also:
+            https://docs.python.org/3/library/pickle.html#object.__setstate__
+
+        :param state: state, in this case type of object.
+        """
         if state:
             self.Type = state

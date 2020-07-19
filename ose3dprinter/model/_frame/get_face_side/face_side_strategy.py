@@ -31,25 +31,21 @@ class FaceSideStrategy(ABC):
         pass
 
     @abstractmethod
-    def _is_between_lower_bounds(self, face, frame):
+    def _is_between_lower_bounds(self, face: Part.Face, frame):
         """Determine whether the face is between the bounds of the "lower side"
         closest to the origin.
 
         :param face: Face to check whether it's between lower bounds.
-        :type face: Part.Face
         :param frame: Frame object
-        :type frame: App::DocumentObject
         """
         pass
 
     @abstractmethod
-    def _is_between_upper_bounds(self, face, frame):
+    def _is_between_upper_bounds(self, face: Part.Face, frame):
         """Determine whether the face is between the bounds of the "upper side"
         farthest from the origin.
 
         :param face: Face to check whether it's between upper bounds.
-        :type face: Part.Face
         :param frame: Frame object
-        :type frame: App::DocumentObject
         """
         pass

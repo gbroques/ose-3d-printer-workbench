@@ -1,3 +1,4 @@
+"""Module for Axis part class."""
 from typing import List
 
 import Part
@@ -9,6 +10,7 @@ from osecore.app.three_dimensional_space_enums import CoordinateAxis, Side
 
 class Axis:
     """Modular and scalable CNC axis for creating cartesian CNC machines."""
+
     motor_box_width = 59.5
 
     carriage_box_width = 52
@@ -32,6 +34,17 @@ class Axis:
              side: str = Side.TOP,
              initial_placement: Placement = Placement(),
              origin_translation_offset: Vector = Vector()) -> Part.Compound:
+        """Make a universal CNC axis.
+
+        :param rod_length: Length of rods.
+        :param rod_radius: Radius of rods.
+        :param carriage_position: Position of carriage as percentage (0 - 100).
+        :param orientation: Default orientation of axis (x, y, or z).
+        :param side: Default side axis faces.
+        :param initial_placement: Initial placement for part.
+        :param origin_translation_offset: Offset part from origin.
+        :return: Axis object.
+        """
         # Motor side, idler side, and carriage boxes share same height
         box_height = 24
 
@@ -42,7 +55,7 @@ class Axis:
 
         # Make motor side box
         motor_side_box = Part.makeBox(*motor_side_box_dimensions)
-        motor_side_box_with_holes = cls.cut_holes_in_motor_side_box(
+        motor_side_box_with_holes = cls._cut_holes_in_motor_side_box(
             motor_side_box, box_height, motor_box_length)
 
         # Motor
@@ -148,10 +161,10 @@ class Axis:
         return Part.makeCompound(parts)
 
     @classmethod
-    def cut_holes_in_motor_side_box(cls,
-                                    motor_side_box,
-                                    box_height,
-                                    motor_box_length):
+    def _cut_holes_in_motor_side_box(cls,
+                                     motor_side_box,
+                                     box_height,
+                                     motor_box_length):
         front_right_cylinder = Part.makeCylinder(cls.hole_radius, box_height)
         rear_right_cylinder = front_right_cylinder.copy()
         front_left_cylinder = front_right_cylinder.copy()
@@ -192,18 +205,78 @@ class Axis:
         return motor_side_box_with_holes
 
     @classmethod
-    def distance_between_inner_motor_side_holes_and_outer_edge(cls):
+    def distance_between_inner_motor_side_holes_and_outer_edge(cls) -> float:
+        """Calculate distance between inner motor side holes and outer edge.
+
+        Below is an ASCII depiction of a top-side view of the motor-side of an axis.
+
+        ::
+
+                   outer edge  ^
+                  +---------+  |
+                  |         |  |
+                  |  O   O  |  | distance
+                  |         |  |
+            inner |  O   O  |  |
+            holes |         |  v
+                  +--+---+--+
+                     |   |
+                     |   |
+
+        :return: Distance between inner motor side holes and outer edge.
+        """
         return (
             cls.motor_box_width -
             cls.distance_between_hole_and_inner_motor_side
         )
 
     @classmethod
-    def distance_between_idler_side_holes_and_outer_edge(cls):
+    def distance_between_idler_side_holes_and_outer_edge(cls) -> float:
+        """Calculate distance between idler side holes and outer edge.
+
+        Below is an ASCII depiction of a top-side view of the idler-side of an axis.
+
+        ::
+
+               |   |
+               |   |
+            +--+---+--+
+            |         | ^
+            |  O   O  | |
+            |         | | distance
+            +---------+ |
+            outer edge  v
+
+        :return: Distance between idler side holes and outer edge.
+        """
         return cls.idler_box_width / 2
 
     @classmethod
-    def calculate_carriage_box_x(cls, rod_length, carriage_position):
+    def calculate_carriage_box_x(cls, rod_length: float, carriage_position: int) -> float:
+        """Calculate x position of carriage box.
+
+        Below is an ASCII depiction of a top-side view of an axis.
+
+        ::
+
+            x position of carriage box
+
+              <-------------------->
+
+               +---------+        +------+        +---+
+               |         |        |      |        |   |
+               |  O   O  +--------+      +--------+ O |
+               |         |        |      |        |   |
+               |  O   O  +--------+      +--------+ O |
+               |         |        |      |        |   |
+               +---------+        +------+        +---+
+
+               motor-side       carriage box      idler
+
+        :param rod_length: Length of axis rods.
+        :param carriage_position: Position of carriage (0 - 100).
+        :return: X position of carriage box.
+        """
         available_rod_length = (
             rod_length -
             cls.motor_box_width -
@@ -252,3 +325,6 @@ def get_placement(orientation,
     except KeyError:
         message = 'Invalid combination of orientation "{}" and side "{}" passed.'
         raise ValueError(message.format(orientation, side))
+
+
+__all__ = ['Axis']

@@ -1,8 +1,10 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""
+Configuration file for the Sphinx documentation builder.
+
+This file only contains a selection of the most common options.
+For a full list see the documentation:
+    https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""
 
 # -- Path setup --------------------------------------------------------------
 
@@ -14,6 +16,7 @@ import os
 import sys
 
 from osewb.docs import conf
+from sphinx.application import Sphinx
 
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
@@ -27,8 +30,7 @@ print(json.dumps(conf, indent=4))
 print("============================================")
 
 
-def run_apidoc(app):
-    """Generate API documentation"""
+def _run_apidoc(app):
     from sphinx.ext import apidoc
     max_depth = '1'
     packages = ['ose3dprinter', 'freecad']
@@ -44,8 +46,16 @@ def run_apidoc(app):
         ])
 
 
-def setup(app):
-    app.connect('builder-inited', run_apidoc)
+def setup(app: Sphinx) -> None:
+    """Build and setup docs.
+
+    :param app: application object controlling high-level functionality,
+                such as the setup of extensions, event dispatching, and logging.
+
+                See Also:
+                    https://www.sphinx-doc.org/en/master/extdev/appapi.html#sphinx.application.Sphinx
+    """
+    app.connect('builder-inited', _run_apidoc)
 
 # -- Project information -----------------------------------------------------
 
@@ -64,7 +74,8 @@ version = '0.1.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = conf['extensions']
+extensions = conf['extensions'] + ['sphinx.ext.intersphinx']
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = [conf['templates_path']]
@@ -81,6 +92,8 @@ add_module_names = conf['add_module_names']
 
 # -- Auto-doc Options --------------------------------------------------------
 autodoc_mock_imports = conf['ext']['autodoc']['autodoc_mock_imports']
+
+autodoc_typehints = 'description'
 
 # -- FreeCAD Custom Property Table Options -----------------------------------
 remove_app_property_prefix_from_type = conf['ext'][

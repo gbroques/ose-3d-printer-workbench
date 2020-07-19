@@ -13,14 +13,21 @@ class HeatedBed:
 
     @staticmethod
     def make(size: float = 203.2,  # 8 inches
-             placement: Placement = Placement(),
+             initial_placement: Placement = Placement(),
              origin_translation_offset: Vector = Vector()) -> Part.Compound:
+        """Make heated bed.
+
+        :param size: [description]
+        :param initial_placement: Initial placement for part.
+        :param origin_translation_offset: Offset part from origin.
+        :return: Heated bed object.
+        """
         dimensions = (size, size, 50.8)  # 50.8 mm = 2 inches
         bed = Part.makeBox(*dimensions)
 
         parts = [bed]
         move_parts(parts,
-                   placement,
+                   initial_placement,
                    origin_translation_offset,
                    dimensions)
 

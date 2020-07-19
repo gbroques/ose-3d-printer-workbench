@@ -6,7 +6,13 @@ from Part import Face
 from ose3dprinter.model import AxisModel
 
 
-def get_extruder_axis_attachment_kwargs(axis, selected_axis_face):
+def get_extruder_axis_attachment_kwargs(axis, selected_axis_face: Face) -> dict:
+    """Get a dictionary describing how to attach an extruder to an axis.
+
+    :param axis: Axis object to attach extruder to.
+    :param selected_axis_face: Selected face of axis to attach extruder to.
+    :return: Dictionary describing how to attach an extruder to an axis.
+    """
     _validate_axis_and_face(axis, selected_axis_face)
     x = (
         axis.Shape.BoundBox.XMin +

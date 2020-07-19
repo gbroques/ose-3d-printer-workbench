@@ -4,8 +4,7 @@ from .get_outer_faces_of_frame_with_corners import \
 
 
 def get_outer_faces(frame):
-    """Get outer faces of a frame.
-    """
+    """Get outer faces of a frame."""
     if frame.HasCorners:
         return get_outer_faces_of_frame_with_corners(frame)
     else:

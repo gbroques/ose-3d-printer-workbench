@@ -11,8 +11,9 @@ class CNCCutFrame:
     def make(side: float = 304.8,  # 12 inches
              width: float = 38.1,  # 1.5 inches
              sheet_thickness: float = 3.175) -> Part.Shape:  # 3.175 = 1/8 inch
-        """Make a frame from flat sheets cut by a CNC machine,
-        then welded or epoxied together.
+        """Make a frame from flat sheets cut by a CNC machine.
+
+        These flat sheets are then welded or epoxied together.
 
         This approach works best with welding.
 
@@ -20,14 +21,10 @@ class CNCCutFrame:
             https://wiki.opensourceecology.org/wiki/D3D_Frame
 
         :param side: Dimension of one side of a cubic sheet.
-        :type side: float
         :param width: Width of outer sheet,
                     after an inner sheet is cut out of the center.
-        :type width: float
         :param sheet_thickness: Thickness of each sheet.
-        :type sheet_thickness: float
         :return: A frame "welded" together from eight CNC cut sheets.
-        :rtype: Part.Shape
         """
         bottom_frame = make_sheet(side, width, sheet_thickness)
 
@@ -63,30 +60,29 @@ class CNCCutFrame:
         return frame.removeSplitter()
 
 
-def make_sheet(side, width, thickness):
+def make_sheet(side: float, width: float, thickness) -> Part.Solid:
     """Make one side of the frame or "sheet".
 
     See the following 2-dimensional ASCII rendering of a sheet below.
-    ______________
-    | __________ |
-    | |        | |
-    | |        | |
-    | |________| |
-    |____________|
+
+    ::
+
+        ______________
+        | __________ |
+        | |        | |
+        | |        | |
+        | |________| |
+        |____________|
 
     A sheet is a cubic plane of metal with dimensions specified by `side`,
     thickness specified by `thickness`, and inner sheet cut out of the center,
     leaving the outer width with a dimension specified by `width`.
 
     :param side: Dimension of one side of the cubic sheet.
-    :type side: float
     :param width: Width of outer sheet,
                   after an inner sheet is cut out of the center.
-    :type width: float
     :param thickness: Thickness of the sheet.
-    :type thickness: float
     :return: A sheet, or one side of a frame.
-    :rtype: Part.Shape
     """
     sheet = Part.makeBox(side, side, thickness)
 

@@ -12,12 +12,17 @@ from .get_placement_strategy import get_placement_strategy
 
 
 def get_axis_frame_attachment_kwargs(frame,
-                                     selected_frame_face,
-                                     axis_orientation):
+                                     selected_frame_face: Face,
+                                     axis_orientation: str) -> dict:
     """Get a dictionary describing how to attach an axis to a frame.
 
     Keys include length, placement, and origin translation offset for
     making an axis object appear attached to a selected frame face.
+
+    :param frame: Frame object to attach axis to.
+    :param selected_frame_face: Selected face of frame to attach axis to.
+    :param axis_orientation: Orientation of axis.
+    :return: Dictionary describing how to attach an axis to a frame.
     """
     _validate_frame(frame)
     _validate_selected_face(frame, selected_frame_face, axis_orientation)

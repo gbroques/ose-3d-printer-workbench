@@ -1,3 +1,4 @@
+"""Module for angled bar frame part class."""
 import Part
 from FreeCAD import Vector
 
@@ -15,18 +16,15 @@ class AngledBarFrame:
              width: float = 38.1,  # 1.5 inches
              thickness: float = 3.175) -> Part.Shape:  # 3.175 = 1/8 inch
         """Make a frame from from 12 angled bars connected by angle frame connectors.
+
         No welding or epoxy required, and the frame can be disassembled.
 
         :param side: Side or dimension of frame
                      from one corner to the opposite corner.
-        :type side: float
         :param width: Width of angled bar.
-        :type width: float
         :param thickness: Thickness of each angled bar.
-        :type thickness: float
         :return: A frame made up of angled bars,
                  connected by angle frame connectors.
-        :rtype: Part.Shape
         """
         bracket_length = AngleFrameConnector.calculate_bracket_length(
             width, thickness)

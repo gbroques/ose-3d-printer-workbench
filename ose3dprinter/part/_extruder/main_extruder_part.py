@@ -1,3 +1,4 @@
+"""Module for main extruder sub-part."""
 from functools import reduce
 
 import Part
@@ -6,7 +7,7 @@ from osecore.app.shape.face import make_face_from_vectors
 
 
 class MainExtruderPart:
-    """Main extruder part
+    """Main extruder part.
 
     Based on:
         https://wiki.opensourceecology.org/wiki/File:Mainextruderpart.fcstd
@@ -18,7 +19,17 @@ class MainExtruderPart:
     base_height = 7
 
     @classmethod
-    def make(cls, width, length, bottom_base_overhang_width):
+    def make(cls,
+             width: float,
+             length: float,
+             bottom_base_overhang_width: float) -> Part.Solid:
+        """Make main sub-part of extruder.
+
+        :param width: Width of main extruder part.
+        :param length: Length of main extruder part.
+        :param bottom_base_overhang_width: Width of bottom-base overhang.
+        :return: Main extruder part.
+        """
         # Base
         # ----
         main_part_base = Part.makeBox(width, length, cls.base_height)
@@ -61,19 +72,23 @@ class MainExtruderPart:
         return reduce(lambda union, part: union.fuse(part), parts)
 
 
-def make_slanted_side(width_or_thickness, height):
+def make_slanted_side(width_or_thickness: float, height: float) -> Part.Solid:
     """
-            25.25
-       --------------
-       |             \
-       |              \
-       |               \
-    50 |                \
-       |                |
-       |                |  28.27
-       |                |
-       ------------------
-             51.10
+    Make slanted side of main extruder part.
+
+    ::
+
+                25.25
+           --------------
+           |             \
+           |              \
+           |               \
+        50 |                \
+           |                |
+           |                |  28.27
+           |                |
+           ------------------
+                 51.10
     """
     top = 25.25
     right = 28.27

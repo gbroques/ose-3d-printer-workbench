@@ -1,6 +1,9 @@
+"""Module for angled bar orientation enum."""
+
+
 class AngledBarOrientation:
-    """Represents the orientation for one edge of an angled bar frame.
-    """
+    """Represents the orientation for one edge of an angled bar frame."""
+
     BOTTOM_FRONT_FLAT = 'bottom_front_flat'
     BOTTOM_LEFT_FLAT = 'bottom_left_flat'
     BOTTOM_REAR_FLAT = 'bottom_rear_flat'

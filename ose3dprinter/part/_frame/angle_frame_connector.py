@@ -1,5 +1,7 @@
+"""Module for angle frame connector part class."""
 from functools import reduce
 from math import cos, radians, tan
+from typing import Dict
 
 import Part
 from FreeCAD import Placement, Rotation, Vector
@@ -23,24 +25,18 @@ class AngleFrameConnector:
     def make(cls,
              width: float = 38.1,  # 1.5 inches
              thickness: float = 3.175,  # 1/8 inch
-             corner=Corner.BOTTOM_LEFT_FRONT,
-             with_set_screw=False,
-             with_filleting=False):
+             corner: str = Corner.BOTTOM_LEFT_FRONT,
+             with_set_screw: bool = False,
+             with_filleting: bool = False) -> Part.Solid:
         """Make an angle frame connector.
 
         :param width: Width of the angled frame.
-        :type width: float
         :param thickness: Thickness of the angled frame.
-        :type thickness: float
         :param corner: Which corner to orient the angle frame connector to.
                        Defaults to bottom left front corner.
-        :type corner: str, optional
-        :return: an angle frame connector
         :param with_set_screw: Whether to include set screw mechanism.
-        :type with_set_screw: bool
         :param with_filleting: Whether to include filleting.
-        :type with_filleting: bool
-        :rtype: Part.Shape
+        :return: Angle frame connector object.
         """
         bracket_length = cls.calculate_bracket_length(width, thickness)
         length = bracket_length + width
@@ -53,7 +49,7 @@ class AngleFrameConnector:
                                                                 with_set_screw,
                                                                 with_filleting)
 
-        placement = get_angle_frame_connector_placement(corner, length)
+        placement = _get_angle_frame_connector_placement(corner, length)
         place_shape(angle_frame_connector, placement)
 
         return angle_frame_connector
@@ -67,9 +63,9 @@ class AngleFrameConnector:
                                     corner,
                                     with_set_screw,
                                     with_filleting):
-        bracket_width = cls.calculate_bracket_width(thickness)
+        bracket_width = cls._calculate_bracket_width(thickness)
 
-        angle_connector_corner = make_angle_connector_corner(
+        angle_connector_corner = _make_angle_connector_corner(
             bracket_length, bracket_width)
 
         tri_bracket = make_tri_bracket(
@@ -114,52 +110,63 @@ class AngleFrameConnector:
         return angle_frame_connector.removeSplitter()
 
     @classmethod
-    def calculate_bracket_length(cls, width, thickness):
+    def calculate_bracket_length(cls, width: float, thickness: float) -> float:
+        """Calculate the length of the bracket.
+
+        :param width: Width of the angled frame.
+        :param thickness: Thickness of the angled frame.
+        :return: Length of one of the three brackets that make up an
+                 angle frame connector.
+        """
         return width + (thickness * 2)
 
     @classmethod
-    def calculate_bracket_width(cls, thickness):
+    def _calculate_bracket_width(cls, thickness: float) -> float:
         return thickness * 3
 
     @classmethod
-    def distance_between_axis_side_mount_holes_and_frame(cls):
+    def distance_between_axis_side_mount_holes_and_frame(cls) -> float:
+        """Calculate distance between the axis side mount holes and frame.
+
+        :return: Distance between the axis side mount holes and frame.
+        """
         return AxisSideMount.calculate_distance_between_holes_and_connector(
             cls.axis_side_mount_length)
 
     @classmethod
-    def calculate_y_axis_overhang_distance(cls):
+    def calculate_y_axis_overhang_distance(cls) -> float:
+        """Calculate distance of y axis over-hang.
+
+        :return: Distance of y axis over-hang.
+        """
         return AxisSideMount.calculate_overhang_distance(
             cls.axis_side_mount_length)
 
 
-def make_tri_bracket(width,
-                     height,
-                     thickness,
-                     with_set_screw=False,
-                     with_filleting=False):
+def make_tri_bracket(width: float,
+                     height: float,
+                     thickness: float,
+                     with_set_screw: bool = False,
+                     with_filleting: bool = False) -> Part.Solid:
     """Make tri-bracket.
 
     Three tri-brackets make up the angle frame connector.
 
     :param width: Width of bracket.
-    :type width: float
     :param height: Height of bracket.
-    :type height: float
     :param thickness: Thickness of bracket
-    :type thickness: float
     :param with_set_screw: Whether to include set screw mechanism.
-    :type with_set_screw: bool
     :param with_filleting: Whether to include filleting.
-    :type with_filleting: bool
+    :return: Tri-bracket object.
     """
     set_screw_block_width = 20
 
-    outer_vectors = get_outer_points(width,
-                                     thickness,
-                                     set_screw_block_width,
-                                     with_set_screw)
+    outer_vectors = _get_outer_points(width,
+                                      thickness,
+                                      set_screw_block_width,
+                                      with_set_screw)
 
-    inner_vectors = get_inner_points(width, thickness)
+    inner_vectors = _get_inner_points(width, thickness)
 
     inner_face = make_face_from_vectors(inner_vectors)
     outer_face = make_face_from_vectors(outer_vectors)
@@ -170,20 +177,20 @@ def make_tri_bracket(width,
     bracket = outer_solid.cut(inner_solid)
 
     if with_set_screw:
-        bracket = cut_screw_screw(bracket,
-                                  width,
-                                  height,
-                                  thickness,
-                                  set_screw_block_width)
+        bracket = _cut_screw_screw(bracket,
+                                   width,
+                                   height,
+                                   thickness,
+                                   set_screw_block_width)
 
     if with_filleting:
-        return fillet_bracket(bracket, height)
+        return _fillet_bracket(bracket, height)
     else:
         return bracket
 
 
-def fillet_bracket(bracket, height):
-    top_wires_parallel_to_xy_plane = find_top_wires_parallel_to_xy_plane(
+def _fillet_bracket(bracket, height):
+    top_wires_parallel_to_xy_plane = _find_top_wires_parallel_to_xy_plane(
         bracket, height)
     return reduce(
         lambda b, wire: b.makeFillet(1.0, wire.Edges),
@@ -191,26 +198,26 @@ def fillet_bracket(bracket, height):
         bracket)
 
 
-def find_top_wires_parallel_to_xy_plane(bracket, height):
+def _find_top_wires_parallel_to_xy_plane(bracket, height):
     wires_parallel_to_xy_plane = filter(
-        is_wire_parallel_to_xy_plane, bracket.Wires)
-    is_top_shape = get_is_top_shape(height)
+        _is_wire_parallel_to_xy_plane, bracket.Wires)
+    is_top_shape = _get_is_top_shape(height)
     return filter(
         is_top_shape, wires_parallel_to_xy_plane)
 
 
-def get_is_top_shape(height):
+def _get_is_top_shape(height):
     return lambda shape: shape.BoundBox.ZMax == height
 
 
-def is_wire_parallel_to_xy_plane(wire):
+def _is_wire_parallel_to_xy_plane(wire):
     return wire.BoundBox.ZMin == wire.BoundBox.ZMax
 
 
-def get_outer_points(width,
-                     thickness,
-                     set_screw_block_width,
-                     with_set_screw):
+def _get_outer_points(width,
+                      thickness,
+                      set_screw_block_width,
+                      with_set_screw):
     side = thickness * 3
     bottom_left = Vector(0, 0, 0)
     top_left = Vector(0, width, 0)
@@ -241,7 +248,7 @@ def get_outer_points(width,
     return outer_points
 
 
-def get_inner_points(width, thickness):
+def _get_inner_points(width, thickness):
     length = width - thickness
     side = thickness * 2
     bottom_left_inner = Vector(thickness, thickness, 0)
@@ -261,11 +268,11 @@ def get_inner_points(width, thickness):
     ]
 
 
-def cut_screw_screw(bracket,
-                    width,
-                    height,
-                    thickness,
-                    set_screw_block_width):
+def _cut_screw_screw(bracket,
+                     width,
+                     height,
+                     thickness,
+                     set_screw_block_width):
     # M6 Hex Socket Set Screw specifications:
     # https://www.bolts-library.org/en/parts/names/HexSocketSetScrew.html
     screw_diameter = 6  # Diameter of M6 hex socket set screw
@@ -283,29 +290,30 @@ def cut_screw_screw(bracket,
 
     wiggle_room = 1  # Space between nut and cutout
     set_screw_cutout_length = nut_diameter + wiggle_room
-    set_screw_cutout = make_set_screw_cutout(
+    set_screw_cutout = _make_set_screw_cutout(
         set_screw_cutout_length, nut_height, set_screw_cutout_height)
     z = height - set_screw_cutout_height
     set_screw_cutout.translate(Vector(thickness * 2, thickness * 2, z))
     bracket = bracket.cut(set_screw_cutout)
 
-    cylinder = make_cylinder(screw_radius, set_screw_block_width)
-    bracket_with_hole = cut_set_screw_hole(
+    cylinder = _make_cylinder(screw_radius, set_screw_block_width)
+    bracket_with_hole = _cut_set_screw_hole(
         bracket, height, thickness, cylinder)
 
     ramp_height = height - set_screw_cutout_height
-    bracket = fuse_nut_ramps_to_bracket(bracket_with_hole,
-                                        thickness,
-                                        set_screw_cutout_length,
-                                        nut_height,
-                                        ramp_height)
+    bracket = _fuse_nut_ramps_to_bracket(bracket_with_hole,
+                                         thickness,
+                                         set_screw_cutout_length,
+                                         nut_height,
+                                         ramp_height)
 
     return bracket
 
 
-def make_set_screw_cutout(length, nut_height, height):
-    """Make set screw cutout in the shape of a pentagon,
-    or home plate in baseball.
+def _make_set_screw_cutout(length: float, nut_height: float, height: float):
+    """Make set screw cutout.
+
+    Set screw cutout is in the shape of a pentagon or home plate in baseball.
     """
     box = Part.makeBox(length, nut_height, height)
     rotation = 45
@@ -328,17 +336,17 @@ def make_set_screw_cutout(length, nut_height, height):
     return box.fuse(right_triangle)
 
 
-def cut_set_screw_hole(bracket,
-                       height,
-                       thickness,
-                       cylinder):
+def _cut_set_screw_hole(bracket,
+                        height,
+                        thickness,
+                        cylinder):
     translation = thickness * 3
     z = height / 2.0
     cylinder.translate(Vector(translation, translation, z))
     return bracket.cut(cylinder)
 
 
-def make_cylinder(radius, height):
+def _make_cylinder(radius, height):
     cylinder = Part.makeCylinder(
         radius, height, Vector(), Vector(1, 0, 0))
     rotation = 45
@@ -348,23 +356,24 @@ def make_cylinder(radius, height):
     return cylinder
 
 
-def fuse_nut_ramps_to_bracket(bracket,
-                              thickness,
-                              set_screw_cutout_length,
-                              set_screw_cutout_width,
-                              ramp_height):
+def _fuse_nut_ramps_to_bracket(bracket: Part.Solid,
+                               thickness: float,
+                               set_screw_cutout_length: float,
+                               set_screw_cutout_width: float,
+                               ramp_height: float) -> Part.Solid:
     """Fuse nut ramps to bracket so nut doesn't spin when tightening screw.
 
-    |\
-    | \
-    |__\
+    ::
+
+        |\
+        | \
+        |__\
 
     :param bracket: Bracket
-    :type bracket: Part.Shape
+    :param thickness: Thickness
     :param set_screw_cutout_length: Length of set screw cutout
-    :type set_screw_cutout_length: float
     :param set_screw_cutout_width: Width of set screw cutout
-    :type set_screw_cutout_width: float
+    :param ramp_height: Height of ramp.
     """
     ramp_length = set_screw_cutout_length / 2.0
     ramp_angle = (180 - 120) / 2  # Hexagonal nuts have 120 degree angles
@@ -404,7 +413,7 @@ def fuse_nut_ramps_to_bracket(bracket,
     return bracket.fuse(right_ramp)
 
 
-def make_angle_connector_corner(bracket_length, bracket_width):
+def _make_angle_connector_corner(bracket_length, bracket_width):
     box = Part.makeBox(bracket_length, bracket_length, bracket_length)
 
     inner_box = box.copy()
@@ -413,12 +422,12 @@ def make_angle_connector_corner(bracket_length, bracket_width):
     return box.cut(inner_box)
 
 
-def get_angle_frame_connector_placement(corner, length):
-    d = get_placement_by_corner(length)
+def _get_angle_frame_connector_placement(corner: str, length: float) -> Placement:
+    d = _get_placement_by_corner(length)
     return d[corner]
 
 
-def get_placement_by_corner(length):
+def _get_placement_by_corner(length: float) -> Dict[str, Placement]:
     return {
         Corner.BOTTOM_LEFT_FRONT: Placement(),
         Corner.BOTTOM_LEFT_REAR: Placement(

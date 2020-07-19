@@ -1,3 +1,4 @@
+"""Module for angled bar part class."""
 from functools import reduce
 
 import Part
@@ -8,53 +9,49 @@ from .angled_bar_orientation import AngledBarOrientation
 
 
 class AngledBar:
+    """Angled bar of metal."""
 
     @staticmethod
-    def make(length,
-             width,
-             thickness,
-             orientation=AngledBarOrientation.BOTTOM_FRONT_FLAT):
-        """Make an angled bar with bottom-left-most corner in the origin (0, 0, 0)
+    def make(length: float,
+             width: float,
+             thickness: float,
+             orientation: str = AngledBarOrientation.BOTTOM_FRONT_FLAT) -> Part.Solid:
+        """Make an angled bar of metal.
 
         :param length: Length of angled bar.
-        :type length: float
         :param width: Width of angled bar.
                     after an inner sheet is cut out of the center.
-        :type width: float
         :param thickness: Thickness of angled bar.
-        :type thickness: float
         :param orientation: Orientation of angled bar.
                             Must be one of AngledBarOrientation.
                             Defaults to AngledBarOrientation.BOTTOM_FRONT_FLAT.
-        :type orientation: str
-        :return: An angled bar.
-        :rtype: Part.Shape
+        :return: An angled bar object.
         """
         bottom_side = Part.makeBox(length, width, thickness)
         front_side = bottom_side.copy()
         front_side.rotate(Vector(0, 0, 0), Vector(-1, 0, 0), 90)
         front_side.translate(Vector(0, 0, width))
-        angled_bar = fuse_parts(bottom_side, front_side).removeSplitter()
+        angled_bar = _fuse_parts(bottom_side, front_side).removeSplitter()
 
         # removeSplitter() refines shape
         refined_angled_bar = angled_bar.removeSplitter()
 
-        placement = get_angled_bar_placement(orientation, length, width)
+        placement = _get_angled_bar_placement(orientation, length, width)
         place_shape(refined_angled_bar, placement)
 
         return refined_angled_bar
 
 
-def fuse_parts(*parts):
+def _fuse_parts(*parts):
     return reduce(lambda union, part: union.fuse(part), parts)
 
 
-def get_angled_bar_placement(orientation, length, width):
-    d = get_placement_by_orientation(length, width)
+def _get_angled_bar_placement(orientation, length, width):
+    d = _get_placement_by_orientation(length, width)
     return d[orientation]
 
 
-def get_placement_by_orientation(length, width):
+def _get_placement_by_orientation(length, width):
     return {
         AngledBarOrientation.BOTTOM_FRONT_FLAT: Placement(
             Vector(),

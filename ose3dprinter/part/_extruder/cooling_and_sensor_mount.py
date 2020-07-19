@@ -1,4 +1,6 @@
+"""Module for cooling and sensor mount sub-part of extruder."""
 from functools import reduce
+from typing import Tuple
 
 import Part
 from FreeCAD import Vector
@@ -22,9 +24,16 @@ class CoolingAndSensorMount:
 
     @classmethod
     def make(cls,
-             slanted_side_width,
-             main_part_length,
-             main_part_bottom_base_overhang_width):
+             slanted_side_width: float,
+             main_part_length: float,
+             main_part_bottom_base_overhang_width: float) -> Part.Solid:
+        """Make cooling and sensor mount component.
+
+        :param slanted_side_width: Width of slanted side.
+        :param main_part_length: Length of main extruder part.
+        :param main_part_bottom_base_overhang_width: Width of bottom base overhang.
+        :return: Cooling and sensor mount object.
+        """
         slanted_side = make_cooling_and_sensor_slanted_side(
             slanted_side_width, main_part_length)
         slanted_side.translate(
@@ -87,19 +96,23 @@ class CoolingAndSensorMount:
         return reduce(lambda union, part: union.fuse(part), parts)
 
 
-def make_cooling_and_sensor_slanted_side(thickness, length):
+def make_cooling_and_sensor_slanted_side(thickness: float, length: float) -> Part.Solid:
     r"""
-          20
-       ---------
-       |        \
-       |         \
-       |          \
-    55 |           \
-       |            \  19
-       |             -------
-       |                   | 7
-       ---------------------
-             87
+    Make slanted side of cooling and sensor mount.
+
+    ::
+
+              20
+           ---------
+           |        \
+           |         \
+           |          \
+        55 |           \
+           |            \  19
+           |             -------
+           |                   | 7
+           ---------------------
+                 87
     """
     top = 20
     middle = 19
@@ -130,12 +143,16 @@ def make_cooling_and_sensor_slanted_side(thickness, length):
     return face.extrude(Vector(thickness, 0, 0))
 
 
-def make_sensor_and_sensor_holder(sensor_holder_box_width,
-                                  sensor_holder_box_height):
+def make_sensor_and_sensor_holder(sensor_holder_box_width: float,
+                                  sensor_holder_box_height: float) -> Tuple[Part.Solid, Part.Solid]:
     r"""
-    /-------
-    | O    |
-    \-------
+    Make sensor and sensor holder.
+
+    ::
+
+        /-------
+        | O    |
+        \-------
     """
     sensor_holder_cylinder_radius = sensor_holder_box_width / 2
     sensor_holder_thickness = 2

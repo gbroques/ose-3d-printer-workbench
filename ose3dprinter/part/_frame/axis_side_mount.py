@@ -1,3 +1,6 @@
+"""Module for axis side mount part class."""
+from typing import Dict
+
 import Part
 from FreeCAD import Placement, Rotation, Vector
 from osecore.app.shape import place_shape
@@ -7,28 +10,26 @@ from ose3dprinter.part import Axis
 
 from .corner import Corner, is_top_corner
 
+# TODO: Rename to TopAngleFrameConnectorTab?
+
 
 class AxisSideMount:
-    """
-    TODO: Rename to TopAngleFrameConnectorTab?
-    """
+    """Tab on angle frame connector for mounting axis to on side of frame."""
+
     hole_radius = 3.39
     height = 65.2
     distance_between_hole_and_outer_edge = hole_radius + 5.99554
     attachment_overlap = 10.22
 
     @classmethod
-    def make(cls, width, length, top_corner):
-        """Returns which side of the angle frame connector to add the axis mount to.
+    def make(cls, width: float, length: float, top_corner: str) -> Part.Solid:
+        """Make tab for top angle frame connector.
 
         :param width: Width of axis side mount.
-        :type width: float
         :param top_corner: A top corner:
                         top left front, top right front,
                         top left rear, or top right rear.
-        :type top_corner: str
         :return: Axis side mount
-        :rtype: Part.Shape
         """
         if not is_top_corner(top_corner):
             raise ValueError('Corner {} must be one of {}, {}, {}, or {}.'.format(
@@ -45,7 +46,7 @@ class AxisSideMount:
             raise ValueError(
                 'Length {} must be greater than attachment overlap of {}.'
                 .format(length, cls.attachment_overlap))
-        box = cls.make_trapezoid_tab(width, length, cls.attachment_overlap)
+        box = cls._make_trapezoid_tab(width, length, cls.attachment_overlap)
 
         top_hole = Part.makeCylinder(
             cls.hole_radius, width, Vector(), Vector(0, 0, 1))
@@ -63,28 +64,39 @@ class AxisSideMount:
             0))
         box = box.cut(bottom_hole)
 
-        placement = get_placement(
+        placement = _get_placement(
             top_corner, cls.height, cls.attachment_overlap)
         place_shape(box, placement)
 
         return box
 
     @classmethod
-    def calculate_distance_between_holes_and_connector(cls, length):
+    def calculate_distance_between_holes_and_connector(cls, length: float) -> float:
         return length - cls.distance_between_hole_and_outer_edge - cls.attachment_overlap
 
     @classmethod
-    def calculate_overhang_distance(cls, length):
+    def calculate_overhang_distance(cls, length: float) -> float:
+        """Calculate overhang distance.
+
+        :param length:
+        :return: Overhang distance.
+        """
         return length - cls.attachment_overlap
 
     @classmethod
-    def make_trapezoid_tab(cls, width, length, attachment_overlap):
-        """
-           -------------
-          /             \
-         /               \
-        /                 \
-        |_________________|
+    def _make_trapezoid_tab(cls,
+                            width: float,
+                            length: float,
+                            attachment_overlap: float) -> Part.Solid:
+        """Make trapezoid tab shape.
+
+        ::
+
+               -------------
+              /             \
+             /               \
+            /                 \
+            |_________________|
         """
         distance_between_rear_point_and_side = 11.21
         slanted_edge_distance = 5.87
@@ -118,11 +130,15 @@ class AxisSideMount:
 
     @classmethod
     def make_slanted_edge(cls, slanted_edge_distance, width):
-        """
-        |\
-        | \
-        |  \
-        |___\
+        r"""
+        Make slanted edge.
+
+        ::
+
+            |\
+            | \
+            |  \
+            |___\
         """
         a = Vector(0, slanted_edge_distance, 0)
         b = Vector(0, 0, 0)
@@ -132,12 +148,13 @@ class AxisSideMount:
         return face.extrude(Vector(cls.height, 0, 0))
 
 
-def get_placement(top_corner, height, attachment_overlap):
-    d = get_placement_by_top_corner(height, attachment_overlap)
+def _get_placement(top_corner: str, height: float, attachment_overlap: float) -> Placement:
+    d = _get_placement_by_top_corner(height, attachment_overlap)
     return d[top_corner]
 
 
-def get_placement_by_top_corner(height, attachment_overlap):
+def _get_placement_by_top_corner(height: float,
+                                 attachment_overlap: float) -> Dict[str, Placement]:
     return {
         Corner.TOP_LEFT_FRONT: Placement(
             Vector(0, attachment_overlap, 0),

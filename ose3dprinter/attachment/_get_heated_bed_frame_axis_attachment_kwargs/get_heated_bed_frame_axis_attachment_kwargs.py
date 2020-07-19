@@ -4,7 +4,13 @@ from osecore.app.attachment import AttachmentError
 from ose3dprinter.model import AxisModel, FrameModel
 
 
-def get_heated_bed_frame_axis_attachment_kwargs(frame, axis):
+def get_heated_bed_frame_axis_attachment_kwargs(frame, axis) -> dict:
+    """Get a dictionary describing how to attach a heated bed to a frame and axis.
+
+    :param frame: Frame object to attach heated bed to.
+    :param axis: Axis object to attach heated bed to.
+    :return: Dictionary describing how to attach a heated bed to a frame and axis.
+    """
     _validate_frame(frame)
     _validate_axis(axis)
     x = frame.Shape.BoundBox.Center.x
