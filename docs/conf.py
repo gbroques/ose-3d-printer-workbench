@@ -74,8 +74,7 @@ version = '0.1.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = conf['extensions'] + ['sphinx.ext.intersphinx']
-intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
+extensions = conf['extensions']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = [conf['templates_path']]
@@ -93,7 +92,10 @@ add_module_names = conf['add_module_names']
 # -- Auto-doc Options --------------------------------------------------------
 autodoc_mock_imports = conf['ext']['autodoc']['autodoc_mock_imports']
 
-autodoc_typehints = 'description'
+autodoc_typehints = conf['ext']['autodoc']['autodoc_typehints']
+
+# -- Intersphinx Options -----------------------------------------------------
+intersphinx_mapping = conf['ext']['intersphinx']['intersphinx_mapping']
 
 # -- FreeCAD Custom Property Table Options -----------------------------------
 remove_app_property_prefix_from_type = conf['ext'][
