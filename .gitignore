@@ -1,5 +1,6 @@
 *.pyc
 .vscode/
+!.vscode/extensions.json
 .coverage
 htmlcov/
 _build/
