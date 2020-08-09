@@ -1,7 +1,14 @@
+# Travis CI Build Configuration File
+#
+# Reference:
+#   https://docs.travis-ci.com/user/customizing-the-build/
+#
 language: python
 python:
   - '3.8'
 install:
+  # Using conda with Travis CI
+  # https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
   - wget https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - source "$HOME/miniconda/etc/profile.d/conda.sh"
