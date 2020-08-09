@@ -1,1 +1,4 @@
+# Include extra files in Python package distribution.
+# https://packaging.python.org/guides/using-manifest-in/
+
 recursive-include freecad/ose3dprinter/icon *
