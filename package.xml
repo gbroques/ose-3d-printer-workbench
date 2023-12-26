@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>OSE 3D Printer Workbench</name>
+  <description>A FreeCAD workbench for designing 3D printers by Open Source Ecology for Distributive Enterprise.</description>
+  <version>0.1.0</version>
+  <date>2020-06-08</date>
+  <maintainer email="groques360@gmail.com">G Roques</maintainer>
+  <license file="LICENSE">LGPLv2.1</license>
+  <url type="repository" branch="main">https://github.com/chennes/FreeCAD-Package</url>
+  <url type="website">https://github.com/gbroques/ose-3d-printer-workbench/</url>
+  <url type="bugtracker">https://github.com/gbroques/ose-3d-printer-workbench/issues</url>
+  <icon>freecad/ose3dprinter/icon/Frame.svg</icon>
+
+  <content>
+    <workbench>
+      <classname>OSE 3D Printer Workbench</classname>
+      <subdirectory>./</subdirectory>
+    </workbench>
+  </content>
+
+</package>
