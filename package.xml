@@ -5,7 +5,7 @@
   <version>0.1.0</version>
   <date>2020-06-08</date>
   <maintainer email="groques360@gmail.com">G Roques</maintainer>
-  <license file="LICENSE">LGPLv2.1</license>
+  <license file="LICENSE">LGPL-2.1-or-later</license>
   <url type="repository" branch="main">https://github.com/chennes/FreeCAD-Package</url>
   <url type="website">https://github.com/gbroques/ose-3d-printer-workbench/</url>
   <url type="bugtracker">https://github.com/gbroques/ose-3d-printer-workbench/issues</url>
